@@ -20,6 +20,7 @@ body
   top: 0;
   left: 0;
   right: 0;
+  z-index: 1000;
 
   height: 100px;
   align-items: center;
@@ -50,18 +51,36 @@ body
 {
   margin: 20px;
   padding: 10px 20px;
-  background-color: #C4E1F6;
-  height: 110px;
+  background-color: #c4e1f69e;
   border-radius: 10px;
   display: inline;
+  position: relative;
+}
+.contact-VC-name
+{
+  color:rgb(255, 0, 0);
+}
+.contact-VC-designation
+{
+  color:rgba(0, 0, 0, 0.6);
 }
 .contact-VC-phonecolor
 {
-  color:#FF8A8A;
+  color: rgba(0, 0, 0, 0.6);
 }
 .contact-VC-rolecolor
 {
-  color:#FF8A8A;
+  color:rgba(0, 0, 0, 0.6);
+}
+.contact-VC-img
+{
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  border-radius: 25px;
 }
 
 h1
