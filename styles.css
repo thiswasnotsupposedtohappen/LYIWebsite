@@ -1,14 +1,25 @@
-* 
+body
 {
   margin:0;
   padding:0;
   border: 0;
+
+  padding-top: 120px;
+  padding-left: 50px;
+  padding-right: 50px;
+
+  font-family:Arial, Helvetica, sans-serif;
 }
 
-#TopRibbon
+.TopRibbon
 {
   display: flex;
   flex-direction: row;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 
   height: 100px;
   align-items: center;
@@ -17,12 +28,87 @@
   background-color: #FFFFFF;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
-#TopRibbonText
-{
-  font-family:Arial, Helvetica, sans-serif;
+.TopRibbonText
+{  
   text-decoration: none;
   font-size: 25px;
   font-weight: 600;
   text-align: center;
   color: #1a1a1a;
+}
+
+.contact-personnels
+{
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 1000px;
+}
+
+.contact-VC
+{
+  margin: 20px;
+  padding: 10px 20px;
+  background-color: #C4E1F6;
+  height: 110px;
+  border-radius: 10px;
+  display: inline;
+}
+.contact-VC-phonecolor
+{
+  color:#FF8A8A;
+}
+.contact-VC-rolecolor
+{
+  color:#FF8A8A;
+}
+
+h1
+{
+  font-size: 15px;
+  line-height: 25px;
+  display: inline;
+}
+h2
+{
+  font-size: 20px;
+  line-height: 30px;
+  display: inline;
+}
+h3
+{
+  font-size: 25px;
+  line-height: 35px;
+  display: inline;
+}
+h4
+{
+  font-size: 30px;
+  line-height: 40px;
+  display: inline;
+}
+h5
+{
+  font-size: 35px;
+  line-height: 45px;
+  display: inline;
+}
+h6
+{
+  font-size: 40px;
+  line-height: 50px;
+  display: inline;
+}
+h7
+{
+  font-size: 45px;
+  line-height: 55px;
+  display: inline;
+}
+h8
+{
+  font-size: 50px;
+  line-height: 60px;
+  display: inline;
 }
