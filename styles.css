@@ -96,6 +96,26 @@ h8
   border-width: 3px;
   border-color: #1a1a1a;
 }
+.shop-menu-items
+{
+  text-align: center;
+  background-color: rgb(244, 250, 255);
+  padding: 20px;
+  border-radius: 20px;
+}
+.shop-menu-items:hover
+{
+  background-color: rgb(221, 240, 255);
+}
+.shop-menu-items-img
+{
+  height: 400px;
+  width: 300px;
+  object-fit: cover;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #1a1a1a;
+}
 
 .TopRibbon
 {
