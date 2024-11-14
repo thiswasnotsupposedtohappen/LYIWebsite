@@ -4,7 +4,7 @@ for(var i=1;i<=46;i++)
 {
     shop_menu_innerhtml += `
     <div class="shop-menu-items">
-      <a href="shop-doors.html"><img class="shop-menu-items-img" src="images/doors/`+i+`.jpg"></a><br>
+      <a href="shop-doors.html"><img class="shop-menu-items-img" src="images/Doors/`+i+`.jpg"></a><br>
       <h2>Door LYI-`+i+`</h2>
     </div>
     `;
