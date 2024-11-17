@@ -148,7 +148,8 @@ h8
 {
   background-color: rgb(245, 245, 255);
   margin: 0px;
-  padding: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 30px;
