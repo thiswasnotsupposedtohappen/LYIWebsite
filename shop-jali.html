@@ -8,7 +8,6 @@
   <link rel="icon" type="image/x-icon" href="images/titleicon.png" />
 </head>
 
-<script src="scriptstart.js"></script>
 <body class="Body">
 
   <div class="TopRibbon">    
@@ -20,12 +19,49 @@
     <div><a class="TopRibbonText" href="cart.html"><span class="material-symbols-outlined" style="width: 100px; font-size: 50px;">shopping_cart</span></a></div>
   </div>
 
-  <div class="shop-menu">
+  <div class="shop-jaliconfig" style="display: none;">
+  <!--<div class="shop-jaliconfig">-->
+
+    <div style="text-align: end;"><h3>Construction:</h3></div>   
+    <div>
+      <button class="shop-jaliconfig-button" onclick="OnClickJaliBackSupported(false)"><h2>Standalone</h2></button>
+      <button class="shop-jaliconfig-button" onclick="OnClickJaliBackSupported(true )"><h2>Back-supported</h2></button>
+    </div>
+
+    <div style="text-align: end;"><h3>Supplied:</h3></div>   
+    <div>
+      <button class="shop-jaliconfig-button"><h2>LightYear</h2></button>
+      <button class="shop-jaliconfig-button"><h2>Customer</h2></button>
+    </div>
+
+    <div style="text-align: end;"><h3>Front Material:</h3></div>   
+    <div>
+      <button class="shop-jaliconfig-button"><h2>Acrylic</h2></button>
+      <button class="shop-jaliconfig-button"><h2>Corian</h2></button>
+      <button class="shop-jaliconfig-button"><h2>ACP</h2></button>
+      <button class="shop-jaliconfig-button"><h2>Laminated Plywood</h2></button>
+      <button class="shop-jaliconfig-button"><h2>MDF</h2></button>
+      <button class="shop-jaliconfig-button"><h2>WPC/PVC/Foam</h2></button>
+      <button class="shop-jaliconfig-button"><h2>Cement Sheet</h2></button>
+    </div>
+
+    <div style="text-align: end;" class="shop-jaliconfig-show_when_backsupported"><h3>Support Material:</h3></div>   
+    <div class="shop-jaliconfig-show_when_backsupported">
+      <button class="shop-jaliconfig-button"><h2>Acrylic</h2></button>
+      <button class="shop-jaliconfig-button"><h2>Corian</h2></button>
+      <button class="shop-jaliconfig-button"><h2>ACP</h2></button>
+      <button class="shop-jaliconfig-button"><h2>Laminated Plywood</h2></button>
+      <button class="shop-jaliconfig-button"><h2>MDF</h2></button>
+      <button class="shop-jaliconfig-button"><h2>WPC/PVC/Foam</h2></button>
+      <button class="shop-jaliconfig-button"><h2>Cement Sheet</h2></button>
+    </div>
 
   </div>
 
+  <div class="shop-menu">
+  </div>
+
 </body>
-<script src="scriptend.js"></script>
 
 <script src="scriptjali.js"></script>
 </html>

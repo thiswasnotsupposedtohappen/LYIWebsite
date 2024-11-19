@@ -1,3 +1,4 @@
+/*Common*/
 body
 {
   margin:0;
@@ -112,7 +113,9 @@ h8
 {
   background-color: rgb(202, 202, 202);
 }
+/*------*/
 
+/*-Home-*/
 .home-poster
 {
   background-color: rgb(255, 255, 245);
@@ -184,58 +187,6 @@ h8
   border-width: 2px;
   border-color: #1a1a1a;
 }
-.shop-menu
-{
-  margin-top: 50px;
-  display: grid;
-  grid-template-columns: 1fr;
-  row-gap: 30px;
-  column-gap: 30px;
-  justify-content: center;
-
-  @media (min-width: 1px) and (max-width: 817px){grid-template-columns: 1fr;}
-  @media (min-width: 818px) and (max-width: 1191px){grid-template-columns: 1fr 1fr;}
-  @media (min-width: 1192px) and (max-width: 1565px){grid-template-columns: 1fr 1fr 1fr;}
-  @media (min-width: 1566px) and (max-width: 1939px){grid-template-columns: 1fr 1fr 1fr 1fr;}
-  @media (min-width: 1940px) and (max-width: 2313px){grid-template-columns: 1fr 1fr 1fr 1fr 1fr;}
-  @media (min-width: 2314px) and (max-width: 2687px){grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;}
-  @media (min-width: 2688px) and (max-width: 3061px){grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;}
-  @media (min-width: 3062px) and (max-width: 3435px){grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;}
-  @media (min-width: 3436px) and (max-width: 3809px){grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;}
-  @media (min-width: 3810px){grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;}
-}
-.home-menutitle
-{
-  background-color: rgb(255, 245, 255);
-  margin: 0px;
-  margin-top: 100px;
-  padding-top: 50px;
-  padding-bottom: 20px;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-}
-.shop-menu-items
-{
-  text-align: center;
-  background-color: rgb(244, 250, 255);
-  padding: 20px;
-  padding-top: 30px;
-  border-radius: 20px;
-}
-.shop-menu-items:hover
-{
-  background-color: rgb(221, 240, 255);
-}
-.shop-menu-items-img
-{
-  height: 500px;
-  width: 300px;
-  object-fit: cover;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #1a1a1a;
-}
 .home-projects
 {
   background-color: rgb(245, 245, 255);
@@ -281,7 +232,92 @@ h8
   border-width: 2px;
   border-color: #1a1a1a;
 }
+/*------*/
 
+/*-Shop-*/
+.shop-menu
+{
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 30px;
+  column-gap: 30px;
+  justify-content: center;
+
+  @media (min-width: 1px) and (max-width: 817px){grid-template-columns: 1fr;}
+  @media (min-width: 818px) and (max-width: 1191px){grid-template-columns: 1fr 1fr;}
+  @media (min-width: 1192px) and (max-width: 1565px){grid-template-columns: 1fr 1fr 1fr;}
+  @media (min-width: 1566px) and (max-width: 1939px){grid-template-columns: 1fr 1fr 1fr 1fr;}
+  @media (min-width: 1940px) and (max-width: 2313px){grid-template-columns: 1fr 1fr 1fr 1fr 1fr;}
+  @media (min-width: 2314px) and (max-width: 2687px){grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;}
+  @media (min-width: 2688px) and (max-width: 3061px){grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;}
+  @media (min-width: 3062px) and (max-width: 3435px){grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;}
+  @media (min-width: 3436px) and (max-width: 3809px){grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;}
+  @media (min-width: 3810px){grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;}
+}
+.shop-menu-items
+{
+  text-align: center;
+  background-color: rgb(244, 250, 255);
+  padding: 20px;
+  padding-top: 30px;
+  border-radius: 20px;
+}
+.shop-menu-items:hover
+{
+  background-color: rgb(221, 240, 255);
+}
+.shop-menu-items-img
+{
+  height: 500px;
+  width: 300px;
+  object-fit:fill;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #1a1a1a;
+}
+.shop-jaliconfig
+{
+  background-color: aliceblue;
+  border-radius: 30px;
+  padding: 30px;
+
+  display: grid;
+  grid-template-columns:max-content max-content;
+  row-gap: 20px;
+  column-gap: 20px;
+
+  align-items: center;
+}
+.shop-jaliconfig-button
+{
+  display:inline-block;
+  width: 200px;
+  background-color: rgb(146, 228, 255);
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  display: inline;
+}
+.shop-jaliconfig-button:hover
+{
+  background-color: rgb(0, 191, 255);
+}
+.shop-jaliconfig-button:active
+{
+  background-color: rgb(255, 153, 0);
+}
+.shop-jaliconfig-button:disabled
+{
+  background-color: rgb(227, 227, 227);
+}
+.shop-jaliconfig-show_when_backsupported
+{
+  display: none;
+}
+/*------*/
+
+/*Career*/
 .career-opennings
 {
   margin-top: 10px;
@@ -293,7 +329,9 @@ h8
   row-gap: 20px;
   column-gap: 10px;
 }
+/*------*/
 
+/*Contact*/
 .contact-personnels
 {
   margin-top: 10px;
@@ -337,12 +375,15 @@ h8
   right: 12px;
   border-radius: 25px;
 }
+/*------*/
 
+/*-Cart-*/
 .cart
 {
   display: flex;
   margin: auto;
-  padding-top: 500px;
+  padding-top: 300px;
   justify-content: center;
   text-align: center;
 }
+/*------*/
