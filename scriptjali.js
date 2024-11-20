@@ -2,41 +2,65 @@ class JaliSpecifications
 {
   constructor()
   {
-    this.construction = "Standalone";
-    this.supplier = "LYI";
-    this.size = "1x1"
-    this.process = "L";
-    this.materialfront = "Acrylic";
-    this.materialback = "Acrylic";
-    this.thicknessfront = "2";
-    this.thicknessback = "2";
+    this.construction = undefined;
+    this.supplier = undefined;
+    this.size = undefined;
+    this.process = undefined;
+    this.materialfront = undefined;
+    this.materialback = undefined;
+    this.thicknessfront = undefined;
+    this.thicknessback = undefined;
   }
 }
 var jalispecifications = new JaliSpecifications();
 
 
-function OnClickConstruction(type)
+function OnClickConstruction(div, type)
 {
   if(type=='Standalone')
   {
-    document.querySelectorAll(".shop-jaliconfig-materialfront")[0].style.display="grid"
-    document.querySelectorAll(".shop-jaliconfig-materialback")[0].style.display="none"
-    document.querySelectorAll(".shop-jaliconfig-materialhalfdepth")[0].style.display="none"
+    jalispecifications.construction = 'Standalone';
+    document.querySelector(".shop-jaliconfig-materialfront").style.display="grid"
+    document.querySelector(".shop-jaliconfig-materialback").style.display="none"
+    document.querySelector(".shop-jaliconfig-materialhalfdepth").style.display="none"
+    div.querySelectorAll(".shop-jaliconfig-button").forEach(element => {element.style.backgroundColor="rgb(146, 228, 255)";});
+    div.querySelectorAll(".shop-jaliconfig-button")[0].style.backgroundColor="rgb(255, 153, 0)";
   }
-  else if(type=='Back-Supported')
+  if(type=='Back-Supported')
   {
-    document.querySelectorAll(".shop-jaliconfig-materialfront")[0].style.display="grid"
-    document.querySelectorAll(".shop-jaliconfig-materialback")[0].style.display="grid"
-    document.querySelectorAll(".shop-jaliconfig-materialhalfdepth")[0].style.display="none"
+    jalispecifications.construction = 'Back-Supported';
+    document.querySelector(".shop-jaliconfig-materialfront").style.display="grid"
+    document.querySelector(".shop-jaliconfig-materialback").style.display="grid"
+    document.querySelector(".shop-jaliconfig-materialhalfdepth").style.display="none"
+    div.querySelectorAll(".shop-jaliconfig-button").forEach(element => {element.style.backgroundColor="rgb(146, 228, 255)";});
+    div.querySelectorAll(".shop-jaliconfig-button")[1].style.backgroundColor="rgb(255, 153, 0)";
 }
-  else if(type=='Half-Depth')
+  if(type=='Half-Depth')
   {
-    document.querySelectorAll(".shop-jaliconfig-materialfront")[0].style.display="none"
-    document.querySelectorAll(".shop-jaliconfig-materialback")[0].style.display="none"
-    document.querySelectorAll(".shop-jaliconfig-materialhalfdepth")[0].style.display="grid"
+    jalispecifications.construction = 'Half-Depth';
+    document.querySelector(".shop-jaliconfig-materialfront").style.display="none"
+    document.querySelector(".shop-jaliconfig-materialback").style.display="none"
+    document.querySelector(".shop-jaliconfig-materialhalfdepth").style.display="grid"
+    div.querySelectorAll(".shop-jaliconfig-button").forEach(element => {element.style.backgroundColor="rgb(146, 228, 255)";});
+    div.querySelectorAll(".shop-jaliconfig-button")[2].style.backgroundColor="rgb(255, 153, 0)";
   }
 }
-OnClickConstruction(jalispecifications.construction);
+
+function OnClickSupplier(div, type)
+{
+  if(type=='LightYear')
+  {
+    jalispecifications.supplier = 'LightYear';
+    div.querySelectorAll(".shop-jaliconfig-button").forEach(element => {element.style.backgroundColor="rgb(146, 228, 255)";});
+    div.querySelectorAll(".shop-jaliconfig-button")[0].style.backgroundColor="rgb(255, 153, 0)";
+  }
+  if(type=='Customer')
+  {
+    jalispecifications.supplier = 'Customer';
+    div.querySelectorAll(".shop-jaliconfig-button").forEach(element => {element.style.backgroundColor="rgb(146, 228, 255)";});
+    div.querySelectorAll(".shop-jaliconfig-button")[1].style.backgroundColor="rgb(255, 153, 0)";
+  }
+}
 
 var shop_menu_innerhtml = document.querySelector(".shop-menu").innerHTML;
 for(var i=1;i<=30;i++)
