@@ -19,43 +19,245 @@
     <div><a class="TopRibbonText" href="cart.html"><span class="material-symbols-outlined" style="width: 100px; font-size: 50px;">shopping_cart</span></a></div>
   </div>
 
-  <div class="shop-jaliconfig" style="display: none;">
-  <!--<div class="shop-jaliconfig">-->
+  <div class="shop-jalispecification">
 
-    <div style="text-align: end;"><h3>Construction:</h3></div>   
-    <div>
-      <button class="shop-jaliconfig-button" onclick="OnClickJaliBackSupported(false)"><h2>Standalone</h2></button>
-      <button class="shop-jaliconfig-button" onclick="OnClickJaliBackSupported(true )"><h2>Back-supported</h2></button>
+    <div  class="shop-jaliconfig">
+      <div style="text-align: end;"><h3>Construction:</h3></div>   
+      <div class="shop-jaliconfig-options">
+        <button class="shop-jaliconfig-button" onclick="OnClickConstruction('Standalone')"    ><h2>Standalone</h2></button>
+        <button class="shop-jaliconfig-button" onclick="OnClickConstruction('Back-Supported')"><h2>Back-supported</h2></button>
+        <button class="shop-jaliconfig-button" onclick="OnClickConstruction('Half-Depth')"    ><h2>Half-Depth</h2></button>
+      </div>
+
+      <div style="height: 30px;"></div><div></div>
+      <div style="text-align: end;"><b>Standalone:</b></div><div>One-Piece of Raw Material having through cut design</div>
+      <div style="height: 10px;"></div><div></div>
+      <div style="text-align: end;"><b>Back-Supported:</b></div><div>Two Pieces of Material pasted togther front having the design cut-out and back material is just a rectanglar piece. This type is generally used so that back material can hold some cut-outs of top material which would other wise fall of, for example while having letter 'D' in design, the inner part of 'D' will fall off. This type is also generally used for backlit mandirs where top material can be acrylic and bottom material can be 040 acrylic so that when LED is lit at the back it gives an illuminated effect. </div>
+      <div style="height: 10px;"></div><div></div>
+      <div style="text-align: end;"><b>Half-Depth:</b></div><div>One-Piece of Raw Material having design cut till only a defined depth and not cut all the way through</div>      
     </div>
 
-    <div style="text-align: end;"><h3>Supplied:</h3></div>   
-    <div>
-      <button class="shop-jaliconfig-button"><h2>LightYear</h2></button>
-      <button class="shop-jaliconfig-button"><h2>Customer</h2></button>
+    <div class="shop-jaliconfig">
+      <div style="text-align: end;"><h3>Raw-Material by:</h3></div>   
+      <div class="shop-jaliconfig-options">
+        <button class="shop-jaliconfig-button"><h2>LightYear</h2></button>
+        <button class="shop-jaliconfig-button"><h2>Customer</h2></button>
+      </div>
+
+      <div style="height: 30px;"></div><div></div>
+      <div style="text-align: end;"><b>LightYear:</b></div><div>Raw material is pruchased by LightYear Industries</div>
+      <div style="height: 10px;"></div><div></div>
+      <div style="text-align: end;"><b>Customer:</b></div><div>Raw material is provided by customer</div>
+
     </div>
 
-    <div style="text-align: end;"><h3>Front Material:</h3></div>   
-    <div>
-      <button class="shop-jaliconfig-button"><h2>Acrylic</h2></button>
-      <button class="shop-jaliconfig-button"><h2>Corian</h2></button>
-      <button class="shop-jaliconfig-button"><h2>ACP</h2></button>
-      <button class="shop-jaliconfig-button"><h2>Laminated Plywood</h2></button>
-      <button class="shop-jaliconfig-button"><h2>MDF</h2></button>
-      <button class="shop-jaliconfig-button"><h2>WPC/PVC/Foam</h2></button>
-      <button class="shop-jaliconfig-button"><h2>Cement Sheet</h2></button>
+    <div class="shop-jaliconfig">
+      <div style="text-align: end;"><h3>Size-Option:</h3></div>   
+      <div class="shop-jaliconfig-options">
+        <button class="shop-jaliconfig-button"><h2>1ft x 1ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-jaliconfig-button"><h2>2ft x 1ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-jaliconfig-button"><h2>4ft x 1ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-jaliconfig-button"><h2>2ft x 2ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-jaliconfig-button"><h2>4ft x 2ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-jaliconfig-button"><h2>4ft x 3ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-jaliconfig-button"><h2>4ft x 4ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-jaliconfig-button"><h2>5ft x 2ft <span style="color: red  ;">N</span></h2></button>
+        <button class="shop-jaliconfig-button"><h2>5ft x 4ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-jaliconfig-button"><h2>6ft x 2ft <span style="color: red  ;">N</span></h2></button>
+        <button class="shop-jaliconfig-button"><h2>6ft x 4ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-jaliconfig-button"><h2>8ft x 4ft <span style="color: green;">S</span></h2></button>
+      </div>
+
+      <div style="height: 30px;"></div><div></div>
+      <div style="text-align: end;"><b>Size selection:</b></div><div>Choose the smallest size-option in which your design would fit, example if your size is 500mm x 300mm which translates to 1.64ft x 0.98ft the closest size-option will be 2ftx1ft</div>
+      <div style="height: 10px;"></div><div></div>
+      <div style="text-align: end;"><b>S-variant:</b></div><div>Standard size variant. Nominal cost for raw material is used</div>
+      <div style="height: 10px;"></div><div></div>
+      <div style="text-align: end;"><b>N-variant:</b></div><div>Non-Standard size variant. An additional cost above Nominal cost is added because of the remaining material from the entire sheet it is cut from has low order requirment and harder to use else-where</div>      
+    
     </div>
 
-    <div style="text-align: end;" class="shop-jaliconfig-show_when_backsupported"><h3>Support Material:</h3></div>   
-    <div class="shop-jaliconfig-show_when_backsupported">
-      <button class="shop-jaliconfig-button"><h2>Acrylic</h2></button>
-      <button class="shop-jaliconfig-button"><h2>Corian</h2></button>
-      <button class="shop-jaliconfig-button"><h2>ACP</h2></button>
-      <button class="shop-jaliconfig-button"><h2>Laminated Plywood</h2></button>
-      <button class="shop-jaliconfig-button"><h2>MDF</h2></button>
-      <button class="shop-jaliconfig-button"><h2>WPC/PVC/Foam</h2></button>
-      <button class="shop-jaliconfig-button"><h2>Cement Sheet</h2></button>
+    <div class="shop-jaliconfig">
+      <div style="text-align: end;"><h3>Process:</h3></div>   
+      <div class="shop-jaliconfig-options">
+        <button class="shop-jaliconfig-button"><h2>CNC Laser 0.5mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>CNC Router 3mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>CNC Router 4mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>CNC Router 6mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>CNC Router 8mm</h2></button>
+      </div>
+
+      <div style="height: 30px;"></div><div></div>
+      <div style="text-align: end;"><b>CNC Laser:</b></div><div>Manufactured using CNC Laser cutting. Pros are Low cost, can cut very detailed geometrey, geometrey sizes can be as small as 0.5mm and many times even smaller. Cons the cutting accuracy is dependent upon thickness and edge finish is dependent on material. This process is good for cutting Acrylic, Corian and other hard plastics</div>
+      <div style="height: 10px;"></div><div></div>
+      <div style="text-align: end;"><b>CNC Router:</b></div><div>Manufactured using CNC Router. Pros can cut almost any material with good edge finish and acuracy. Cons cannot cut small/thin geometrey, minimum cutting radius of geometrey is dependent on tool diameter. An example 4mm tool can cut geometrey with minimum radium of 2mm. Smaller the diameter sharper geometrey can be cut. Example when cutting a square slot, the corners will be round with radius of half the tool diameter. Lower the tool disameter, slower the machining speed will be higher will be the cost</div>
     </div>
 
+    <div class="shop-jaliconfig shop-jaliconfig-materialfront">
+      <div style="text-align: end;"><h3>Front Material:</h3></div>   
+      <div class="shop-jaliconfig-options">
+        <button class="shop-jaliconfig-button"><h2>Acrylic</h2></button>
+        <button class="shop-jaliconfig-button"><h2>Corian</h2></button>
+        <button class="shop-jaliconfig-button"><h2>ACP</h2></button>
+        <button class="shop-jaliconfig-button"><h2>Laminated Plywood</h2></button>
+        <button class="shop-jaliconfig-button"><h2>MDF</h2></button>
+        <button class="shop-jaliconfig-button"><h2>WPC/PVC/Foam</h2></button>
+        <button class="shop-jaliconfig-button"><h2>Cement Sheet</h2></button>
+      </div>
+
+      <div style="height: 30px;"></div><div></div>
+
+      <div style="text-align: end;"><h3>Thickness:</h3></div>   
+      <div class="shop-jaliconfig-options">
+        <button class="shop-jaliconfig-button"><h2>1mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>2mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>3mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>4mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>5mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>6mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>8mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>10mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>12mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>15mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>18mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>20mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>25mm</h2></button>
+      </div>
+
+      <div style="height: 30px;"></div><div></div>
+
+      <div style="text-align: end;"><h3>Color:</h3></div>   
+      <div class="shop-jaliconfig-options">
+        <button class="shop-jaliconfig-button"><h2>White</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: white;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Black</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: black;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Red</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: red;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Green</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: green;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Blue</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: blue;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Oragne</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: orange;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Brown</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: brown;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Yellow</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: yellow;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Transparent</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: transparent;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>White 60% (040)</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: rgba(255, 255, 255, 0.4);"></div></button>
+      </div>
+    </div>
+
+    <div class="shop-jaliconfig shop-jaliconfig-materialback">
+      <div style="text-align: end;"><h3>Back Material:</h3></div>   
+      <div class="shop-jaliconfig-options">
+        <button class="shop-jaliconfig-button"><h2>Acrylic</h2></button>
+        <button class="shop-jaliconfig-button"><h2>Corian</h2></button>
+        <button class="shop-jaliconfig-button"><h2>ACP</h2></button>
+        <button class="shop-jaliconfig-button"><h2>Laminated Plywood</h2></button>
+        <button class="shop-jaliconfig-button"><h2>MDF</h2></button>
+        <button class="shop-jaliconfig-button"><h2>WPC/PVC/Foam</h2></button>
+        <button class="shop-jaliconfig-button"><h2>Cement Sheet</h2></button>
+      </div>
+
+      <div style="height: 30px;"></div><div></div>
+
+      <div style="text-align: end;"><h3>Thickness:</h3></div>   
+      <div class="shop-jaliconfig-options">
+        <button class="shop-jaliconfig-button"><h2>1mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>2mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>3mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>4mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>5mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>6mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>8mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>10mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>12mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>15mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>18mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>20mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>25mm</h2></button>
+      </div>
+
+      <div style="height: 30px;"></div><div></div>
+
+      <div style="text-align: end;"><h3>Color:</h3></div>   
+      <div class="shop-jaliconfig-options">
+        <button class="shop-jaliconfig-button"><h2>White</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: white;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Black</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: black;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Red</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: red;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Green</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: green;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Blue</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: blue;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Oragne</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: orange;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Brown</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: brown;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Yellow</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: yellow;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Transparent</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: transparent;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>White 60% (040)</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: rgba(255, 255, 255, 0.4);"></div></button>
+      </div>
+    </div>
+
+    <div class="shop-jaliconfig shop-jaliconfig-materialhalfdepth">
+      <div style="text-align: end;"><h3>Material:</h3></div>   
+      <div class="shop-jaliconfig-options">
+        <button class="shop-jaliconfig-button"><h2>Acrylic</h2></button>
+        <button class="shop-jaliconfig-button"><h2>Corian</h2></button>
+        <button class="shop-jaliconfig-button"><h2>ACP</h2></button>
+        <button class="shop-jaliconfig-button"><h2>Laminated Plywood</h2></button>
+        <button class="shop-jaliconfig-button"><h2>MDF</h2></button>
+        <button class="shop-jaliconfig-button"><h2>WPC/PVC/Foam</h2></button>
+        <button class="shop-jaliconfig-button"><h2>Cement Sheet</h2></button>
+      </div>
+
+      <div style="height: 30px;"></div><div></div>
+
+      <div style="text-align: end;"><h3>Cutting Thickness:</h3></div>   
+      <div class="shop-jaliconfig-options">
+        <button class="shop-jaliconfig-button"><h2>1mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>2mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>3mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>4mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>5mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>6mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>8mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>10mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>12mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>15mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>18mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>20mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>25mm</h2></button>
+      </div>
+
+      <div style="height: 30px;"></div><div></div>
+
+      <div style="text-align: end;"><h3>Support Thickness:</h3></div>   
+      <div class="shop-jaliconfig-options">
+        <button class="shop-jaliconfig-button"><h2>1mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>2mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>3mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>4mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>5mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>6mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>8mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>10mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>12mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>15mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>20mm</h2></button>
+        <button class="shop-jaliconfig-button"><h2>25mm</h2></button>
+      </div>
+
+      <div style="height: 30px;"></div><div></div>
+
+      <div style="text-align: end;"><h3>Color:</h3></div>   
+      <div class="shop-jaliconfig-options">
+        <button class="shop-jaliconfig-button"><h2>White</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: white;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Black</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: black;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Red</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: red;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Green</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: green;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Blue</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: blue;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Oragne</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: orange;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Brown</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: brown;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Yellow</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: yellow;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>Transparent</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: transparent;"></div></button>
+        <button class="shop-jaliconfig-button"><h2>White 60% (040)</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: rgba(255, 255, 255, 0.4);"></div></button>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 50px; text-align: center;">
+    <h3>Select Design to Continue</h3>
   </div>
 
   <div class="shop-menu">
