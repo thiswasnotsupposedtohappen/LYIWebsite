@@ -48,24 +48,23 @@
       <div style="text-align: end;"><b>LightYear:</b></div><div>Raw material is pruchased by LightYear Industries</div>
       <div style="height: 10px;"></div><div></div>
       <div style="text-align: end;"><b>Customer:</b></div><div>Raw material is provided by customer</div>
-
     </div>
 
     <div class="shop-jaliconfig">
       <div style="text-align: end;"><h3>Size-Option:</h3></div>   
       <div class="shop-jaliconfig-options">
-        <button class="shop-jaliconfig-button unselected"><h2>1ft x 1ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>2ft x 1ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>4ft x 1ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>2ft x 2ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>4ft x 2ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>4ft x 3ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>4ft x 4ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>5ft x 2ft <span style="color: red  ;">N</span></h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>5ft x 4ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>6ft x 2ft <span style="color: red  ;">N</span></h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>6ft x 4ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>8ft x 4ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickSize(this.closest('.shop-jaliconfig-options'), '1ft x 1ft')"><h2>1ft x 1ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickSize(this.closest('.shop-jaliconfig-options'), '2ft x 1ft')"><h2>2ft x 1ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickSize(this.closest('.shop-jaliconfig-options'), '2ft x 2ft')"><h2>2ft x 2ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickSize(this.closest('.shop-jaliconfig-options'), '4ft x 1ft')"><h2>4ft x 1ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickSize(this.closest('.shop-jaliconfig-options'), '4ft x 2ft')"><h2>4ft x 2ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickSize(this.closest('.shop-jaliconfig-options'), '4ft x 3ft')"><h2>4ft x 3ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickSize(this.closest('.shop-jaliconfig-options'), '4ft x 4ft')"><h2>4ft x 4ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickSize(this.closest('.shop-jaliconfig-options'), '5ft x 2ft')"><h2>5ft x 2ft <span style="color: red  ;">N</span></h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickSize(this.closest('.shop-jaliconfig-options'), '5ft x 4ft')"><h2>5ft x 4ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickSize(this.closest('.shop-jaliconfig-options'), '6ft x 2ft')"><h2>6ft x 2ft <span style="color: red  ;">N</span></h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickSize(this.closest('.shop-jaliconfig-options'), '6ft x 4ft')"><h2>6ft x 4ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickSize(this.closest('.shop-jaliconfig-options'), '8ft x 4ft')"><h2>8ft x 4ft <span style="color: green;">S</span></h2></button>
       </div>
 
       <div style="height: 30px;"></div><div></div>
@@ -73,18 +72,17 @@
       <div style="height: 10px;"></div><div></div>
       <div style="text-align: end;"><b>S-variant:</b></div><div>Standard size variant. Nominal cost for raw material is used</div>
       <div style="height: 10px;"></div><div></div>
-      <div style="text-align: end;"><b>N-variant:</b></div><div>Non-Standard size variant. An additional cost above Nominal cost is added because of the remaining material from the entire sheet it is cut from has low order requirment and harder to use else-where</div>      
-    
+      <div style="text-align: end;"><b>N-variant:</b></div><div>Non-Standard size variant. An additional cost above Nominal cost is added because of the remaining material from the entire sheet it is cut from has low order requirment and harder to use else-where</div>    
     </div>
 
     <div class="shop-jaliconfig">
       <div style="text-align: end;"><h3>Process:</h3></div>   
       <div class="shop-jaliconfig-options">
-        <button class="shop-jaliconfig-button unselected"><h2>CNC Laser 0.5mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>CNC Router 3mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>CNC Router 4mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>CNC Router 6mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>CNC Router 8mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickProcess(this.closest('.shop-jaliconfig-options'), 'CNC Laser 0.5mm')"><h2>CNC Laser 0.5mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickProcess(this.closest('.shop-jaliconfig-options'), 'CNC Router 3mm')"><h2>CNC Router 3mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickProcess(this.closest('.shop-jaliconfig-options'), 'CNC Router 4mm')"><h2>CNC Router 4mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickProcess(this.closest('.shop-jaliconfig-options'), 'CNC Router 6mm')"><h2>CNC Router 6mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickProcess(this.closest('.shop-jaliconfig-options'), 'CNC Router 8mm')"><h2>CNC Router 8mm</h2></button>
       </div>
 
       <div style="height: 30px;"></div><div></div>
@@ -96,162 +94,163 @@
     <div class="shop-jaliconfig shop-jaliconfig-materialfront">
       <div style="text-align: end;"><h3>Front Material:</h3></div>   
       <div class="shop-jaliconfig-options">
-        <button class="shop-jaliconfig-button unselected"><h2>Acrylic</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Corian</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>ACP</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Laminated Plywood</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>MDF</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>WPC/PVC/Foam</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Cement Sheet</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialFront(this.closest('.shop-jaliconfig-options'), 'Acrylic')"><h2>Acrylic</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialFront(this.closest('.shop-jaliconfig-options'), 'Corian')"><h2>Corian</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialFront(this.closest('.shop-jaliconfig-options'), 'ACP')"><h2>ACP</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialFront(this.closest('.shop-jaliconfig-options'), 'Laminated Plywood')"><h2>Laminated Plywood</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialFront(this.closest('.shop-jaliconfig-options'), 'MDF')"><h2>MDF</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialFront(this.closest('.shop-jaliconfig-options'), 'WPC/PVC/Foam')"><h2>WPC/PVC/Foam</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialFront(this.closest('.shop-jaliconfig-options'), 'Cement Sheet')"><h2>Cement Sheet</h2></button>
       </div>
 
       <div style="height: 30px;"></div><div></div>
 
       <div style="text-align: end;"><h3>Thickness:</h3></div>   
       <div class="shop-jaliconfig-options">
-        <button class="shop-jaliconfig-button unselected"><h2>1mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>2mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>3mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>4mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>5mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>6mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>8mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>10mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>12mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>15mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>18mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>20mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>25mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '1mm')"><h2>1mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '2mm')"><h2>2mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '3mm')"><h2>3mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '4mm')"><h2>4mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '5mm')"><h2>5mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '6mm')"><h2>6mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '8mm')"><h2>8mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '10mm')"><h2>10mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '12mm')"><h2>12mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '15mm')"><h2>15mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '18mm')"><h2>18mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '20mm')"><h2>20mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '25mm')"><h2>25mm</h2></button>
       </div>
 
       <div style="height: 30px;"></div><div></div>
 
       <div style="text-align: end;"><h3>Color:</h3></div>   
       <div class="shop-jaliconfig-options">
-        <button class="shop-jaliconfig-button unselected"><h2>White</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: white;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Black</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: black;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Red</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: red;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Green</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: green;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Blue</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: blue;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Oragne</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: orange;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Brown</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: brown;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Yellow</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: yellow;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Transparent</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: transparent;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>White 60% (040)</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: rgba(255, 255, 255, 0.4);"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'White')"><h2>White</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: white;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'Black')"><h2>Black</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: black;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'Red')"><h2>Red</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: red;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'Green')"><h2>Green</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: green;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'Blue')"><h2>Blue</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: blue;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'Oragne')"><h2>Oragne</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: orange;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'Brown')"><h2>Brown</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: brown;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'Yellow')"><h2>Yellow</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: yellow;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'Transparent')"><h2>Transparent</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: transparent;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'White 60% (040)')"><h2>White 60% (040)</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: rgba(255, 255, 255, 0.4);"></div></button>
       </div>
     </div>
 
     <div class="shop-jaliconfig shop-jaliconfig-materialback">
       <div style="text-align: end;"><h3>Back Material:</h3></div>   
       <div class="shop-jaliconfig-options">
-        <button class="shop-jaliconfig-button unselected"><h2>Acrylic</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Corian</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>ACP</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Laminated Plywood</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>MDF</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>WPC/PVC/Foam</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Cement Sheet</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialBack(this.closest('.shop-jaliconfig-options'), 'Acrylic')"><h2>Acrylic</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialBack(this.closest('.shop-jaliconfig-options'), 'Corian')"><h2>Corian</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialBack(this.closest('.shop-jaliconfig-options'), 'ACP')"><h2>ACP</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialBack(this.closest('.shop-jaliconfig-options'), 'Laminated Plywood')"><h2>Laminated Plywood</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialBack(this.closest('.shop-jaliconfig-options'), 'MDF')"><h2>MDF</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialBack(this.closest('.shop-jaliconfig-options'), 'WPC/PVC/Foam')"><h2>WPC/PVC/Foam</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialBack(this.closest('.shop-jaliconfig-options'), 'Cement Sheet')"><h2>Cement Sheet</h2></button>
       </div>
 
       <div style="height: 30px;"></div><div></div>
 
       <div style="text-align: end;"><h3>Thickness:</h3></div>   
       <div class="shop-jaliconfig-options">
-        <button class="shop-jaliconfig-button unselected"><h2>1mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>2mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>3mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>4mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>5mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>6mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>8mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>10mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>12mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>15mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>18mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>20mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>25mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '1mm')"><h2>1mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '2mm')"><h2>2mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '3mm')"><h2>3mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '4mm')"><h2>4mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '5mm')"><h2>5mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '6mm')"><h2>6mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '8mm')"><h2>8mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '10mm')"><h2>10mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '12mm')"><h2>12mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '15mm')"><h2>15mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '18mm')"><h2>18mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '20mm')"><h2>20mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '25mm')"><h2>25mm</h2></button>
       </div>
 
       <div style="height: 30px;"></div><div></div>
 
       <div style="text-align: end;"><h3>Color:</h3></div>   
       <div class="shop-jaliconfig-options">
-        <button class="shop-jaliconfig-button unselected"><h2>White</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: white;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Black</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: black;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Red</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: red;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Green</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: green;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Blue</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: blue;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Oragne</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: orange;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Brown</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: brown;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Yellow</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: yellow;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Transparent</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: transparent;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>White 60% (040)</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: rgba(255, 255, 255, 0.4);"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'White')"><h2>White</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: white;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'Black')"><h2>Black</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: black;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'Red')"><h2>Red</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: red;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'Green')"><h2>Green</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: green;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'Blue')"><h2>Blue</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: blue;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'Oragne')"><h2>Oragne</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: orange;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'Brown')"><h2>Brown</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: brown;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'Yellow')"><h2>Yellow</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: yellow;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'Transparent')"><h2>Transparent</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: transparent;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'White 60% (040)')"><h2>White 60% (040)</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: rgba(255, 255, 255, 0.4);"></div></button>
       </div>
     </div>
 
     <div class="shop-jaliconfig shop-jaliconfig-materialhalfdepth">
       <div style="text-align: end;"><h3>Material:</h3></div>   
       <div class="shop-jaliconfig-options">
-        <button class="shop-jaliconfig-button unselected"><h2>Acrylic</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Corian</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>ACP</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Laminated Plywood</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>MDF</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>WPC/PVC/Foam</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Cement Sheet</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialFront(this.closest('.shop-jaliconfig-options'), 'Acrylic');OnClickMaterialBack(this.closest('.shop-jaliconfig-options'), 'Acrylic');"><h2>Acrylic</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialFront(this.closest('.shop-jaliconfig-options'), 'Corian');OnClickMaterialBack(this.closest('.shop-jaliconfig-options'), 'Corian');""><h2>Corian</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialFront(this.closest('.shop-jaliconfig-options'), 'ACP');OnClickMaterialBack(this.closest('.shop-jaliconfig-options'), 'ACP');""><h2>ACP</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialFront(this.closest('.shop-jaliconfig-options'), 'Laminated Plywood');OnClickMaterialBack(this.closest('.shop-jaliconfig-options'), 'Laminated Plywood');""><h2>Laminated Plywood</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialFront(this.closest('.shop-jaliconfig-options'), 'MDF');OnClickMaterialBack(this.closest('.shop-jaliconfig-options'), 'MDF');""><h2>MDF</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialFront(this.closest('.shop-jaliconfig-options'), 'WPC/PVC/Foam');OnClickMaterialBack(this.closest('.shop-jaliconfig-options'), 'WPC/PVC/Foam');""><h2>WPC/PVC/Foam</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickMaterialFront(this.closest('.shop-jaliconfig-options'), 'Cement Sheet');OnClickMaterialBack(this.closest('.shop-jaliconfig-options'), 'Cement Sheet');""><h2>Cement Sheet</h2></button>
       </div>
 
       <div style="height: 30px;"></div><div></div>
 
       <div style="text-align: end;"><h3>Cutting Thickness:</h3></div>   
       <div class="shop-jaliconfig-options">
-        <button class="shop-jaliconfig-button unselected"><h2>1mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>2mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>3mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>4mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>5mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>6mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>8mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>10mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>12mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>15mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>18mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>20mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>25mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '1mm')"><h2>1mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '2mm')"><h2>2mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '3mm')"><h2>3mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '4mm')"><h2>4mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '5mm')"><h2>5mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '6mm')"><h2>6mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '8mm')"><h2>8mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '10mm')"><h2>10mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '12mm')"><h2>12mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '15mm')"><h2>15mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '18mm')"><h2>18mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '20mm')"><h2>20mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessFront(this.closest('.shop-jaliconfig-options'), '25mm')"><h2>25mm</h2></button>
       </div>
 
       <div style="height: 30px;"></div><div></div>
 
       <div style="text-align: end;"><h3>Support Thickness:</h3></div>   
       <div class="shop-jaliconfig-options">
-        <button class="shop-jaliconfig-button unselected"><h2>1mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>2mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>3mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>4mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>5mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>6mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>8mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>10mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>12mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>15mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>20mm</h2></button>
-        <button class="shop-jaliconfig-button unselected"><h2>25mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '1mm')"><h2>1mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '2mm')"><h2>2mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '3mm')"><h2>3mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '4mm')"><h2>4mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '5mm')"><h2>5mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '6mm')"><h2>6mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '8mm')"><h2>8mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '10mm')"><h2>10mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '12mm')"><h2>12mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '15mm')"><h2>15mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '18mm')"><h2>18mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '20mm')"><h2>20mm</h2></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickThicknessBack(this.closest('.shop-jaliconfig-options'), '25mm')"><h2>25mm</h2></button>
       </div>
 
       <div style="height: 30px;"></div><div></div>
 
       <div style="text-align: end;"><h3>Color:</h3></div>   
       <div class="shop-jaliconfig-options">
-        <button class="shop-jaliconfig-button unselected"><h2>White</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: white;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Black</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: black;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Red</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: red;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Green</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: green;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Blue</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: blue;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Oragne</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: orange;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Brown</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: brown;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Yellow</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: yellow;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>Transparent</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: transparent;"></div></button>
-        <button class="shop-jaliconfig-button unselected"><h2>White 60% (040)</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: rgba(255, 255, 255, 0.4);"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'White');OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'White');"><h2>White</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: white;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'Black');OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'Black');"><h2>Black</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: black;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'Red');OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'Red');"><h2>Red</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: red;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'Green');OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'Green');"><h2>Green</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: green;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'Blue');OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'Blue');"><h2>Blue</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: blue;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'Oragne');OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'Oragne');"><h2>Oragne</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: orange;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'Brown');OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'Brown');"><h2>Brown</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: brown;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'Yellow');OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'Yellow');"><h2>Yellow</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: yellow;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'Transparent');OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'Transparent');"><h2>Transparent</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: transparent;"></div></button>
+        <button class="shop-jaliconfig-button unselected" onclick="OnClickColorFront(this.closest('.shop-jaliconfig-options'), 'White 60% (040)');OnClickColorBack(this.closest('.shop-jaliconfig-options'), 'White 60% (040)');"><h2>White 60% (040)</h2><div class="shop-jaliconfig-button-colorpatch" style="background-color: rgba(255, 255, 255, 0.4);"></div></button>
       </div>
     </div>
   </div>

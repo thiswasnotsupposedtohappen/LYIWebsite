@@ -337,9 +337,17 @@ h8
 {
   background-color: rgb(146, 228, 255);
 }
+.unselected:hover
+{
+  background-color: rgb(0, 191, 255);
+}
 .selected
 {
-  background-color: rgb(255, 153, 0)"
+  background-color: rgb(255, 153, 0);
+}
+.selected:hover
+{
+  background-color: rgb(255, 115, 0);
 }
 /*------*/
 
