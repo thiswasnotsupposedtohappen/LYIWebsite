@@ -303,11 +303,22 @@ h8
   flex-wrap: wrap;
   gap: 10px;
 }
+.shop-jaliconfig-input
+{
+  width: 213px;
+  height: 50px;
+  text-align: center;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: black;
+
+  font-size: 20px;
+}
 .shop-jaliconfig-button
 {
-  display:inline-block;
   width: 220px;
-  /*background-color: rgb(146, 228, 255);*/
+  height: 50px;
   text-align: center;
   border-style: solid;
   border-width: 2px;
@@ -323,11 +334,11 @@ h8
 .shop-jaliconfig-button-colorpatch
 {
   position: absolute;
-  top: 6px;
+  top: 8px;
   right: 6px;
 
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 30px;
   border-style: solid;
   border-width: 1px;
   border-radius: 5px;
@@ -348,6 +359,12 @@ h8
 .selected:hover
 {
   background-color: rgb(255, 115, 0);
+}
+.disabled
+{
+  opacity: 0.5;;
+  background-color: gray;
+  cursor: not-allowed;
 }
 /*------*/
 
