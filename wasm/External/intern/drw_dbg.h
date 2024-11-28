@@ -19,21 +19,21 @@
 #include "../drw_base.h"
 //#include <iomanip>
 
-//#define DRW_DBGSL(a) DRW_dbg::getInstance()->setLevel(a)
-//#define DRW_DBGGL DRW_dbg::getInstance()->getLevel()
-//#define DRW_DBG(a) DRW_dbg::getInstance()->print(a)
-//#define DRW_DBGH(a) DRW_dbg::getInstance()->printH(a)
-//#define DRW_DBGB(a) DRW_dbg::getInstance()->printB(a)
-//#define DRW_DBGHL(a, b, c) DRW_dbg::getInstance()->printHL(a, b ,c)
-//#define DRW_DBGPT(a, b, c) DRW_dbg::getInstance()->printPT(a, b, c)
-
 #define DRW_DBGSL(a) DRW_dbg::getInstance()->setLevel(a)
 #define DRW_DBGGL DRW_dbg::getInstance()->getLevel()
-#define DRW_DBG(a) std::cout<<a
-#define DRW_DBGH(a) std::cout<<a
-#define DRW_DBGB(a) std::cout<<a
+#define DRW_DBG(a) DRW_dbg::getInstance()->print(a)
+#define DRW_DBGH(a) DRW_dbg::getInstance()->printH(a)
+#define DRW_DBGB(a) DRW_dbg::getInstance()->printB(a)
 #define DRW_DBGHL(a, b, c) DRW_dbg::getInstance()->printHL(a, b ,c)
 #define DRW_DBGPT(a, b, c) DRW_dbg::getInstance()->printPT(a, b, c)
+
+//#define DRW_DBGSL(a) DRW_dbg::getInstance()->setLevel(a)
+//#define DRW_DBGGL DRW_dbg::getInstance()->getLevel()
+//#define DRW_DBG(a) std::cout<<a
+//#define DRW_DBGH(a) std::cout<<a
+//#define DRW_DBGB(a) std::cout<<a
+//#define DRW_DBGHL(a, b, c) DRW_dbg::getInstance()->printHL(a, b ,c)
+//#define DRW_DBGPT(a, b, c) DRW_dbg::getInstance()->printPT(a, b, c)
 
 class DRW_dbg {
 public:

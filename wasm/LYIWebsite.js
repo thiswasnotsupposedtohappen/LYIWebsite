@@ -4342,10 +4342,8 @@ var wasmImports = {
 var wasmExports = createWasm();
 var ___wasm_call_ctors = createExportWrapper('__wasm_call_ctors', 0);
 var ___original_main = Module['___original_main'] = createExportWrapper('__original_main', 0);
-var __Z7LoadDXFPc = Module['__Z7LoadDXFPc'] = createExportWrapper('_Z7LoadDXFPc', 1);
-var __Z8TestDatajPh = Module['__Z8TestDatajPh'] = createExportWrapper('_Z8TestDatajPh', 2);
-var _LoadDXFExport = Module['_LoadDXFExport'] = createExportWrapper('LoadDXFExport', 0);
-var _TestDataExport = Module['_TestDataExport'] = createExportWrapper('TestDataExport', 2);
+var __Z7LoadDXFPcj = Module['__Z7LoadDXFPcj'] = createExportWrapper('_Z7LoadDXFPcj', 2);
+var _LoadDXFExport = Module['_LoadDXFExport'] = createExportWrapper('LoadDXFExport', 2);
 var _main = Module['_main'] = createExportWrapper('main', 2);
 var _fflush = createExportWrapper('fflush', 1);
 var _strerror = createExportWrapper('strerror', 1);

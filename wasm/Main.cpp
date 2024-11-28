@@ -1,18 +1,14 @@
 ﻿#include <emscripten.h>
 #include <iostream>
 #include <fstream>
-extern "C"
-{
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-}
 using namespace std;
 #include "PoDefinition.h"
 #include "PoUtilities.h"
 #include "PoMath.h"
 #include "libdxfrw.h"
-#include "intern/drw_dbg.h"
 #pragma comment (lib, "dxfrw.lib")
 
 EMSCRIPTEN_KEEPALIVE
@@ -23,10 +19,16 @@ int main()
 }
 
 EMSCRIPTEN_KEEPALIVE
-uint32 LoadDXF(char* filepath)
+int32 LoadDXF(char* file, uint32 length)
 {
 	cout << "LoadDXF In" << endl;
-	uint32 entities = 0;
+
+	fstream filestream;
+	filestream.open("intermediated.txt", ios::out);
+	for (uint32 i = 0; i < length; i++)
+		filestream << file[i];
+	filestream.close();
+
 	class DXFReader : public DRW_Interface
 	{
 		float64 test = 0;
@@ -244,52 +246,22 @@ uint32 LoadDXF(char* filepath)
 			test++;
 		}
 	};
-
 	DXFReader reader;
-	dxfRW dxf(filepath);
-	dxf.setDebug(DRW::DebugLevel::Debug);
-	if (!dxf.read(&reader, false))
-	{
-		cout << "Failed load: " << filepath << endl;
-		return -1;
-	}
-	entities = reader.CopyData();
-	cout << entities << endl;
+	dxfRW dxf("intermediated.txt");
+	if (!dxf.read(&reader, false)) { return -1; }
+	uint32 entities = reader.CopyData();
+	cout << "Entities Read "<< entities << endl;
 	cout << "LoadDXF Out" << endl;
-	return entities;
+	return 0;
 }
-
-EMSCRIPTEN_KEEPALIVE
-uint32 TestData(uint32 length, uint8* data)
-{
-	cout << "TestData In" << endl;
-	for (uint32 i = 0; i < length; i++)
-	{
-		cout << data[i];
-	}
-	cout << endl;
-	cout << "TestData Out" << endl;
-	return length;
-}
-
 
 extern "C"
 {
-	EMSCRIPTEN_KEEPALIVE uint32 LoadDXFExport()
+	EMSCRIPTEN_KEEPALIVE int32 LoadDXFExport(char* file,uint32 length)
 	{
 		cout << "LoadDXFExport In" << endl;
-		uint32 entities = LoadDXF((char*)"/input.dxf");		
+		int32 status = LoadDXF(file,length);
 		cout << "LoadDXFExport Out" << endl;
-		return entities;
-	}
-
-	EMSCRIPTEN_KEEPALIVE uint32 TestDataExport(uint32 length, uint8* data)
-	{
-		cout << "TestDataExport In" << endl;
-		uint32 entities = TestData(length, data);
-		cout << "TestDataExport Out" << endl;
-		return entities;
+		return status;
 	}
 }
-
-//-s NO_EXIT_RUNTIME=1 -s EXPORTED_RUNTIME_METHODS=ccall,cwrap --preload-file Test.dxf 

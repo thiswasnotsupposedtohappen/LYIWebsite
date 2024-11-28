@@ -38,13 +38,15 @@
         var data = new Uint8Array(new TextEncoder().encode(stringdata));
         var memory = _malloc(data.length);
         HEAPU8.set(data, memory);
-        console.log(_TestDataExport(data.length, memory));
+        console.log(_LoadDXFExport(memory,data.length));
         console.log(memory);
         console.log(Module);
         _free(memory);
       };
       reader.readAsText(file);
-    } else {
+    } 
+    else 
+    {
       console.log("No file selected");
     }
   }
