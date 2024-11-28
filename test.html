@@ -25,16 +25,28 @@
 
 <script src="wasm/LYIWebsite.js"></script>  
 <script>  
-  function OnClickLoadDXF()
+  function OnClickLoadDXF() 
   {
-    var stringdata="Mic Testing Mic TEsting Hallo";
-    var data = new Uint8Array(new TextEncoder().encode(stringdata));
-    var memory = _malloc(data.length);
-    HEAPU8.set(data, memory);
-    console.log(_TestDataExport(data.length, memory));
-    console.log(memory);
-    console.log(Module);
-    _free(memory);
+    var fileInput = document.getElementById('fileInput');
+    var file = fileInput.files[0];
+    if (file) 
+    {
+      var reader = new FileReader();
+      reader.onload = function(e) 
+      {
+        var stringdata = e.target.result;
+        var data = new Uint8Array(new TextEncoder().encode(stringdata));
+        var memory = _malloc(data.length);
+        HEAPU8.set(data, memory);
+        console.log(_TestDataExport(data.length, memory));
+        console.log(memory);
+        console.log(Module);
+        _free(memory);
+      };
+      reader.readAsText(file);
+    } else {
+      console.log("No file selected");
+    }
   }
 </script>
 
