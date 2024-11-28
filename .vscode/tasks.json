@@ -1,0 +1,20 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start",
+            "type": "process",
+            "command": "C:\\Users\\Abhimanyu\\Documents\\LYIWebsite\\wasm\\emsdk activate",
+            "options": {"env": {"PATH": "C:\\Users\\Abhimanyu\\Documents\\emscripten\\emsdk-main"},},
+            
+            "group": {"kind": "build","isDefault": true}
+        },
+        {
+            "label": "Compile with Emscripten",
+            "type": "process",
+            "command": "C:\\Users\\Abhimanyu\\Documents\\LYIWebsite\\wasm\\emcc main.cpp -o main.js",
+            "options": {"env": {"PATH": "C:\\Users\\Abhimanyu\\Documents\\emscripten\\emsdk-main"},},            
+            "group": {"kind": "build","isDefault": true}
+        }
+    ]
+}

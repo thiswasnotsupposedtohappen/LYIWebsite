@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Emscripten">
+      <Configuration>Debug</Configuration>
+      <Platform>Emscripten</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Emscripten">
+      <Configuration>Release</Configuration>
+      <Platform>Emscripten</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{19ff9033-141f-438f-b1d4-951a3e726be1}</ProjectGuid>
+    <RootNamespace>LYIWebsite</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Emscripten'">
+    <ConfigurationType>JSApplication</ConfigurationType>
+    <PlatformToolset>emcc</PlatformToolset>
+    <EmscriptenDir>C:\Users\Abhimanyu\Documents\emscripten\emsdk-main\upstream\emscripten</EmscriptenDir>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Emscripten'">
+    <ConfigurationType>HTMLPage</ConfigurationType>
+    <PlatformToolset>emcc</PlatformToolset>
+    <EmscriptenDir>$(EMSDK)\upstream\emscripten\</EmscriptenDir>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Emscripten'">
+    <OutDir>$(SolutionDir)\</OutDir>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Emscripten'">
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+    <Link />
+    <ClCompile>
+      <VerboseOutput>NoVerboseOutput</VerboseOutput>
+      <EchoCommandLines>false</EchoCommandLines>
+      <AdditionalIncludeDirectories>C:\Users\Abhimanyu\Documents\LYIWebsite\wasm\Headers;C:\Users\Abhimanyu\Documents\LYIWebsite\wasm\External;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <EchoCommandLines>true</EchoCommandLines>
+      <AdditionalDependencies>
+      </AdditionalDependencies>
+      <AdditionalOptions>-s EXIT_RUNTIME=0 -s EXPORTED_RUNTIME_METHODS=ccall,cwrap -s EXPORTED_FUNCTIONS="_main","_malloc","_free" %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="External\drw_base.cpp" />
+    <ClCompile Include="External\drw_classes.cpp" />
+    <ClCompile Include="External\drw_entities.cpp" />
+    <ClCompile Include="External\drw_header.cpp" />
+    <ClCompile Include="External\drw_objects.cpp" />
+    <ClCompile Include="External\intern\drw_dbg.cpp" />
+    <ClCompile Include="External\intern\drw_textcodec.cpp" />
+    <ClCompile Include="External\intern\dwgbuffer.cpp" />
+    <ClCompile Include="External\intern\dwgreader.cpp" />
+    <ClCompile Include="External\intern\dwgreader15.cpp" />
+    <ClCompile Include="External\intern\dwgreader18.cpp" />
+    <ClCompile Include="External\intern\dwgreader21.cpp" />
+    <ClCompile Include="External\intern\dwgreader24.cpp" />
+    <ClCompile Include="External\intern\dwgreader27.cpp" />
+    <ClCompile Include="External\intern\dwgutil.cpp" />
+    <ClCompile Include="External\intern\dxfreader.cpp" />
+    <ClCompile Include="External\intern\dxfwriter.cpp" />
+    <ClCompile Include="External\intern\rscodec.cpp" />
+    <ClCompile Include="External\libdwgr.cpp" />
+    <ClCompile Include="External\libdxfrw.cpp" />
+    <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="External\drw_base.h" />
+    <ClInclude Include="External\drw_classes.h" />
+    <ClInclude Include="External\drw_entities.h" />
+    <ClInclude Include="External\drw_header.h" />
+    <ClInclude Include="External\drw_interface.h" />
+    <ClInclude Include="External\drw_objects.h" />
+    <ClInclude Include="External\intern\drw_cptable932.h" />
+    <ClInclude Include="External\intern\drw_cptable936.h" />
+    <ClInclude Include="External\intern\drw_cptable949.h" />
+    <ClInclude Include="External\intern\drw_cptable950.h" />
+    <ClInclude Include="External\intern\drw_cptables.h" />
+    <ClInclude Include="External\intern\drw_dbg.h" />
+    <ClInclude Include="External\intern\drw_reserve.h" />
+    <ClInclude Include="External\intern\drw_textcodec.h" />
+    <ClInclude Include="External\intern\dwgbuffer.h" />
+    <ClInclude Include="External\intern\dwgreader.h" />
+    <ClInclude Include="External\intern\dwgreader15.h" />
+    <ClInclude Include="External\intern\dwgreader18.h" />
+    <ClInclude Include="External\intern\dwgreader21.h" />
+    <ClInclude Include="External\intern\dwgreader24.h" />
+    <ClInclude Include="External\intern\dwgreader27.h" />
+    <ClInclude Include="External\intern\dwgreader32.h" />
+    <ClInclude Include="External\intern\dwgutil.h" />
+    <ClInclude Include="External\intern\dxfreader.h" />
+    <ClInclude Include="External\intern\dxfwriter.h" />
+    <ClInclude Include="External\intern\rscodec.h" />
+    <ClInclude Include="External\libdwgr.h" />
+    <ClInclude Include="External\libdxfrw.h" />
+    <ClInclude Include="External\main_doc.h" />
+    <ClInclude Include="Headers\PoDefinition.h" />
+    <ClInclude Include="Headers\PoMath.h" />
+    <ClInclude Include="Headers\PoUtilities.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

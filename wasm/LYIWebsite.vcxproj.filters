@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="External\drw_base.cpp">
+      <Filter>External</Filter>
+    </ClCompile>
+    <ClCompile Include="External\drw_classes.cpp">
+      <Filter>External</Filter>
+    </ClCompile>
+    <ClCompile Include="External\drw_entities.cpp">
+      <Filter>External</Filter>
+    </ClCompile>
+    <ClCompile Include="External\drw_header.cpp">
+      <Filter>External</Filter>
+    </ClCompile>
+    <ClCompile Include="External\drw_objects.cpp">
+      <Filter>External</Filter>
+    </ClCompile>
+    <ClCompile Include="External\libdwgr.cpp">
+      <Filter>External</Filter>
+    </ClCompile>
+    <ClCompile Include="External\libdxfrw.cpp">
+      <Filter>External</Filter>
+    </ClCompile>
+    <ClCompile Include="External\intern\drw_dbg.cpp">
+      <Filter>External\intern</Filter>
+    </ClCompile>
+    <ClCompile Include="External\intern\drw_textcodec.cpp">
+      <Filter>External\intern</Filter>
+    </ClCompile>
+    <ClCompile Include="External\intern\dwgbuffer.cpp">
+      <Filter>External\intern</Filter>
+    </ClCompile>
+    <ClCompile Include="External\intern\dwgreader.cpp">
+      <Filter>External\intern</Filter>
+    </ClCompile>
+    <ClCompile Include="External\intern\dwgreader15.cpp">
+      <Filter>External\intern</Filter>
+    </ClCompile>
+    <ClCompile Include="External\intern\dwgreader18.cpp">
+      <Filter>External\intern</Filter>
+    </ClCompile>
+    <ClCompile Include="External\intern\dwgreader21.cpp">
+      <Filter>External\intern</Filter>
+    </ClCompile>
+    <ClCompile Include="External\intern\dwgreader24.cpp">
+      <Filter>External\intern</Filter>
+    </ClCompile>
+    <ClCompile Include="External\intern\dwgreader27.cpp">
+      <Filter>External\intern</Filter>
+    </ClCompile>
+    <ClCompile Include="External\intern\dwgutil.cpp">
+      <Filter>External\intern</Filter>
+    </ClCompile>
+    <ClCompile Include="External\intern\dxfreader.cpp">
+      <Filter>External\intern</Filter>
+    </ClCompile>
+    <ClCompile Include="External\intern\dxfwriter.cpp">
+      <Filter>External\intern</Filter>
+    </ClCompile>
+    <ClCompile Include="External\intern\rscodec.cpp">
+      <Filter>External\intern</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{67e01f3c-49b3-4d2b-bbb6-7ce48e5e0ecf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External">
+      <UniqueIdentifier>{a951d004-f869-4a1b-9ec0-7bf44c13f9f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="External\intern">
+      <UniqueIdentifier>{d85bcb84-1aaa-4c3f-a5c5-029c735c6d74}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Headers\PoDefinition.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\PoMath.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\PoUtilities.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="External\drw_base.h">
+      <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="External\drw_classes.h">
+      <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="External\drw_entities.h">
+      <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="External\drw_header.h">
+      <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="External\drw_interface.h">
+      <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="External\drw_objects.h">
+      <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="External\libdwgr.h">
+      <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="External\libdxfrw.h">
+      <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="External\main_doc.h">
+      <Filter>External</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\drw_cptable932.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\drw_cptable936.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\drw_cptable949.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\drw_cptable950.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\drw_cptables.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\drw_dbg.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\drw_reserve.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\drw_textcodec.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\dwgbuffer.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\dwgreader.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\dwgreader15.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\dwgreader18.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\dwgreader21.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\dwgreader24.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\dwgreader27.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\dwgreader32.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\dwgutil.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\dxfreader.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\dxfwriter.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+    <ClInclude Include="External\intern\rscodec.h">
+      <Filter>External\intern</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

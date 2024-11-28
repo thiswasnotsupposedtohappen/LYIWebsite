@@ -271,12 +271,12 @@ h8
 {
   height: 500px;
   width: 300px;
-  object-fit:fill;
+  object-fit:cover;
   border-style: solid;
   border-width: 2px;
   border-color: #1a1a1a;
 }
-.shop-jalispecification
+.shop-manufacturingspecification
 {
   background-color: aliceblue;
   border-radius: 30px;
@@ -284,7 +284,7 @@ h8
   padding-top: 10px;
   padding-bottom: 10px;
 }
-.shop-jaliconfig
+.shop-manufacturingconfig
 {
   background-color: rgb(195, 227, 255);
   border-radius: 10px;
@@ -297,13 +297,13 @@ h8
 
   align-items: baseline;
 }
-.shop-jaliconfig-options
+.shop-manufacturingconfig-options
 {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
-.shop-jaliconfig-input
+.shop-manufacturingconfig-input
 {
   width: 213px;
   height: 50px;
@@ -315,7 +315,7 @@ h8
 
   font-size: 20px;
 }
-.shop-jaliconfig-button
+.shop-manufacturingconfig-button
 {
   width: 220px;
   height: 50px;
@@ -327,11 +327,11 @@ h8
 
   position: relative;
 }
-.shop-jaliconfig-button:hover
+.shop-manufacturingconfig-button:hover
 {
   background-color: rgb(0, 191, 255);
 }
-.shop-jaliconfig-button-colorpatch
+.shop-manufacturingconfig-button-colorpatch
 {
   position: absolute;
   top: 8px;
