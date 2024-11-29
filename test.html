@@ -25,31 +25,115 @@
 
 <script src="wasm/LYIWebsite.js"></script>  
 <script>  
-  function OnClickLoadDXF() 
+class Drawing
+{
+  constructor()
   {
-    var fileInput = document.getElementById('fileInput');
-    var file = fileInput.files[0];
-    if (file) 
-    {
-      var reader = new FileReader();
-      reader.onload = function(e) 
-      {
-        var stringdata = e.target.result;
-        var data = new Uint8Array(new TextEncoder().encode(stringdata));
-        var memory = _malloc(data.length);
-        HEAPU8.set(data, memory);
-        console.log(_LoadDXFExport(memory,data.length));
-        console.log(memory);
-        console.log(Module);
-        _free(memory);
-      };
-      reader.readAsText(file);
-    } 
-    else 
-    {
-      console.log("No file selected");
-    }
+    this.type = undefined;
+    this.geometrey = undefined;
   }
+}
+class Point
+{
+  constructor()
+  {
+    this.x=undefined;
+    this.y=undefined;
+  }
+};
+class Line
+{
+  constructor()
+  {
+    this.x1=undefined;
+    this.y1=undefined;
+    this.x2=undefined;
+    this.y2=undefined;        
+  }
+};
+class Arc
+{
+  constructor()
+  {
+    this.x=undefined;
+    this.y=undefined;
+    this.r=undefined;
+    this.t1=undefined;        
+    this.t2=undefined;        
+  }
+};
+class Elliplse
+{
+};
+class Spline
+{
+};
+var drawing;
+var drawinglength;
+
+console.log("System Ready");
+function OnClickLoadDXF() 
+{
+  var fileInput = document.getElementById('fileInput');
+  var file = fileInput.files[0];
+  if (file) 
+  {
+    var reader = new FileReader();
+    reader.onload = function(e) 
+    {
+      var stringdata = e.target.result;
+      var data = new Uint8Array(new TextEncoder().encode(stringdata));
+      var memory = _malloc(data.length);
+      HEAPU8.set(data, memory);
+      console.log("return = " + _LoadDXFExport(memory,data.length));
+      console.log("drawing = " +_GETdrawing());
+      console.log("drawinglength = "+_GETdrawinglength());
+      
+      var address = _GETdrawing();
+      drawinglength =  _GETdrawinglength();
+      drawing = new Array(_GETdrawinglength());//.fill(null).map(() => new Drawing());
+      for(var i=0;i<drawinglength;i++)
+      {
+        drawing[i] = new Drawing;
+        drawing[i].type = HEAPU32[address/4];
+        switch(drawing[i].type)
+        {
+          case 1:
+          {
+            drawing[i].geometrey = new Point;
+            drawing[i].geometrey.x = HEAPF64[address/8 + 1];
+            drawing[i].geometrey.y = HEAPF64[address/8 + 2];
+          }break;
+          case 2:
+          {
+            drawing[i].geometrey = new Line;
+            drawing[i].geometrey.x1 = HEAPF64[address/8 + 1];
+            drawing[i].geometrey.y1 = HEAPF64[address/8 + 2];
+            drawing[i].geometrey.x2 = HEAPF64[address/8 + 3];
+            drawing[i].geometrey.y2 = HEAPF64[address/8 + 4];
+          }break;
+          case 3:
+          {
+            drawing[i].geometrey = new Arc;
+            drawing[i].geometrey.x = HEAPF64[address/8 + 1];
+            drawing[i].geometrey.y = HEAPF64[address/8 + 2];
+            drawing[i].geometrey.r = HEAPF64[address/8 + 3];
+            drawing[i].geometrey.t1 = HEAPF64[address/8 + 4];
+            drawing[i].geometrey.t2 = HEAPF64[address/8 + 5];
+          }break;
+        }
+        address += 64;
+      }
+      console.log(drawing);
+      _free(memory);
+    };
+    reader.readAsText(file);
+  } 
+  else 
+  {
+    console.log("No file selected");
+  }
+}
 </script>
 
 </html>

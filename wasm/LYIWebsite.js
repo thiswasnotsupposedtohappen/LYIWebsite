@@ -4343,12 +4343,14 @@ var wasmExports = createWasm();
 var ___wasm_call_ctors = createExportWrapper('__wasm_call_ctors', 0);
 var ___original_main = Module['___original_main'] = createExportWrapper('__original_main', 0);
 var __Z7LoadDXFPcj = Module['__Z7LoadDXFPcj'] = createExportWrapper('_Z7LoadDXFPcj', 2);
+var _free = Module['_free'] = createExportWrapper('free', 1);
+var _malloc = Module['_malloc'] = createExportWrapper('malloc', 1);
 var _LoadDXFExport = Module['_LoadDXFExport'] = createExportWrapper('LoadDXFExport', 2);
+var _GETdrawing = Module['_GETdrawing'] = createExportWrapper('GETdrawing', 0);
+var _GETdrawinglength = Module['_GETdrawinglength'] = createExportWrapper('GETdrawinglength', 0);
 var _main = Module['_main'] = createExportWrapper('main', 2);
 var _fflush = createExportWrapper('fflush', 1);
 var _strerror = createExportWrapper('strerror', 1);
-var _malloc = Module['_malloc'] = createExportWrapper('malloc', 1);
-var _free = Module['_free'] = createExportWrapper('free', 1);
 var _emscripten_stack_init = () => (_emscripten_stack_init = wasmExports['emscripten_stack_init'])();
 var _emscripten_stack_get_free = () => (_emscripten_stack_get_free = wasmExports['emscripten_stack_get_free'])();
 var _emscripten_stack_get_base = () => (_emscripten_stack_get_base = wasmExports['emscripten_stack_get_base'])();
@@ -4365,7 +4367,8 @@ var dynCall_viijii = Module['dynCall_viijii'] = createExportWrapper('dynCall_vii
 var dynCall_iiiiij = Module['dynCall_iiiiij'] = createExportWrapper('dynCall_iiiiij', 7);
 var dynCall_iiiiijj = Module['dynCall_iiiiijj'] = createExportWrapper('dynCall_iiiiijj', 9);
 var dynCall_iiiiiijj = Module['dynCall_iiiiiijj'] = createExportWrapper('dynCall_iiiiiijj', 10);
-
+var _drawing = Module['_drawing'] = 592996;
+var _drawinglength = Module['_drawinglength'] = 593000;
 
 // include: postamble.js
 // === Auto-generated postamble setup entry stuff ===

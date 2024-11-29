@@ -616,7 +616,7 @@ struct File
 	{
 		return file.eof();
 	}
-	void  operator>>(char* _in)
+	void  operator>>(void* _in)
 	{
 		file >> _in;
 	}
