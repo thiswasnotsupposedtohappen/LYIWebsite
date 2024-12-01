@@ -195,16 +195,42 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 			{
 				float64 Basis(int32 ci, int32 degree, float64 u, float64* knots)
 				{
-					if (degree == 0)
+					//if (degree == 0)
+					//{
+					//	return (knots[ci] <= u && u < knots[ci + 1]) ? 1.0 : 0.0;
+					//}
+					//else 
+					//{
+					//	float64 left = (knots[ci + degree] - knots[ci]) != 0 ? (u - knots[ci]) / (knots[ci + degree] - knots[ci]) : 0;
+					//	float64 right = (knots[ci + degree + 1] - knots[ci + 1]) != 0 ? (knots[ci + degree + 1] - u) / (knots[ci + degree + 1] - knots[ci + 1]) : 0;
+					//	return left * Basis(ci, degree - 1, u, knots) + right * Basis(ci + 1, degree - 1, u, knots);
+					//}
+
+					float64 N[4] = { 0.0, 0.0, 0.0, 0.0 };
+
+					for (int i = 0; i <= degree; i++)
 					{
-						return (knots[ci] <= u && u < knots[ci + 1]) ? 1.0 : 0.0;
+						if (knots[ci + i] <= u && u < knots[ci + i + 1])
+							N[i] = 1.0;
+						else
+							N[i] = 0.0;
 					}
-					else 
+
+					for (int i = 1; i <= degree; i++)
 					{
-						float64 left = (knots[ci + degree] - knots[ci]) != 0 ? (u - knots[ci]) / (knots[ci + degree] - knots[ci]) : 0;
-						float64 right = (knots[ci + degree + 1] - knots[ci + 1]) != 0 ? (knots[ci + degree + 1] - u) / (knots[ci + degree + 1] - knots[ci + 1]) : 0;
-						return left * Basis(ci, degree - 1, u, knots) + right * Basis(ci + 1, degree - 1, u, knots);
+						for (int j = 0; j <= degree - i; j++)
+						{
+							float64 leftDenom = knots[ci + j + i] - knots[ci + j];
+							float64 left = (leftDenom != 0.0) ? ((u - knots[ci + j]) / leftDenom) * N[j] : 0.0;
+
+							float64 rightDenom = knots[ci + j + i + 1] - knots[ci + j + 1];
+							float64 right = (rightDenom != 0.0) ? ((knots[ci + j + i + 1] - u) / rightDenom) * N[j + 1] : 0.0;
+
+							N[j] = left + right;
+						}
 					}
+
+					return N[0];
 				}
 
 				float64x2 InterpolateSpline(float64 u, int32 degree, float64x2* controlpoints,uint32 controlpointscount, float64* knots)
@@ -237,6 +263,28 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 
 			Heap<Line> _drawing;
 			Line __drawing;
+
+			float64x2 p;
+			float64x2 q;
+			p = spline.InterpolateSpline(0, degree, controlpoints, data->ncontrol, knots);
+			for (float64 u = 0; u < 1; u+=0.001)
+			{
+				q = spline.InterpolateSpline(u, degree, controlpoints, data->ncontrol, knots);
+				if (Distance(p, q) < 0.1)
+					continue;
+				__drawing.p0 = p;
+				__drawing.p1 = q;
+				_drawing << __drawing;
+				p = q;
+			}
+			drawing.Append(_drawing.data, _drawing.size);
+			drawing[drawing.size - 1].p1.x = controlpoints[data->ncontrol - 1].x;
+			drawing[drawing.size - 1].p1.y = controlpoints[data->ncontrol - 1].y;
+			cout << "Spline" << endl;
+			return;
+			/*
+						Heap<Line> _drawing;
+			Line __drawing;
 			float64 us = 0;
 			float64 ue = 0;
 			uint32 ks = 0;
@@ -251,39 +299,50 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 					{
 						ke = k;
 						if (knots[ks] == knots[ke])
-							continue;
+							continue;		
 						break;
 					}					
 				}
 				us = knots[ks];
 				ue = knots[ke];
 				
-
-				p = spline.InterpolateSpline(us, degree, controlpoints, data->ncontrol, knots);
-				float64 inc = (ue - us) / 20;
-				for (float64 u = us; u < ue; u+= inc)
+				if (knots[ke - 1] == knots[ks])
 				{
-					float64x2 q = spline.InterpolateSpline(u, degree, controlpoints, data->ncontrol, knots);
-					if (p == q)
-						continue;
-					__drawing.p0.x = p.x;
-					__drawing.p0.y = p.y;
-					__drawing.p1.x = q.x;
-					__drawing.p1.y = q.y;
+					p = spline.InterpolateSpline(us, degree, controlpoints, data->ncontrol, knots);
+					q = spline.InterpolateSpline(ue, degree, controlpoints, data->ncontrol, knots);
+					__drawing.p0 = p;
+					__drawing.p1 = q;
 					_drawing << __drawing;
-
-					p = q;
 				}
-				q = spline.InterpolateSpline(ue, degree, controlpoints, data->ncontrol, knots);
-				_drawing[_drawing.size - 1].p1.x = q.x;
-				_drawing[_drawing.size - 1].p1.y = q.y;
+				else
+				{
+					p = spline.InterpolateSpline(us, degree, controlpoints, data->ncontrol, knots);
+					float64 inc = (ue - us) / 100;
+					for (float64 u = us; u < ue; u += inc)
+					{
+						float64x2 q = spline.InterpolateSpline(u, degree, controlpoints, data->ncontrol, knots);
+						if (p == q)
+							continue;
+						__drawing.p0.x = p.x;
+						__drawing.p0.y = p.y;
+						__drawing.p1.x = q.x;
+						__drawing.p1.y = q.y;
+						_drawing << __drawing;
+
+						p = q;
+					}
+					q = spline.InterpolateSpline(ue, degree, controlpoints, data->ncontrol, knots);
+					_drawing[_drawing.size - 1].p1.x = q.x;
+					_drawing[_drawing.size - 1].p1.y = q.y;
+				}
 				us = ue;
 				ks = ke;
 			}
 			drawing.Append(_drawing.data, _drawing.size);
 			drawing[drawing.size - 1].p1.x = controlpoints[data->ncontrol - 1].x;
 			drawing[drawing.size - 1].p1.y = controlpoints[data->ncontrol - 1].y;
-			return;
+			*/
+			
 		}
 		void addKnot(const DRW_Entity& data) override
 		{
@@ -425,8 +484,8 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 
 	dxfRW dxf("intermediated.txt");
 #else
-	dxfRW dxf("Om Jali.dxf");
-	//dxfRW dxf("spline.dxf");
+	//dxfRW dxf("Om Jali.dxf");
+	dxfRW dxf("spline.dxf");
 	//dxfRW dxf("TEST.dxf");
 #endif
 	if (!dxf.read(&reader, false)) { return -1; }

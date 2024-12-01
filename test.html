@@ -91,7 +91,6 @@ canvas.addEventListener('wheel', function(event)
   zoom -= event.deltaY/1000;
   if(zoom < 0.1)
     zoom = 0.1;
-  console.log(zoom);
   DrawDXF();
 });
 canvas.addEventListener('mousedown', function(event) 
@@ -128,9 +127,20 @@ function DrawDXF()
   ctx.lineTo(mousex,(canvas.height/2));    
   ctx.stroke();
 
-  ctx.strokeStyle = "black";
+  ctx.strokeStyle = "blue";
+  var toggle = 0
   for(var i=0;i<drawinglength;i++)
   {
+    if(toggle == 0)
+    {
+      ctx.strokeStyle = "blue";
+      toggle = 1;
+    }
+    else
+    {
+      ctx.strokeStyle = "green";
+      toggle = 0;
+    }
     ctx.beginPath();
     ctx.moveTo((drawing[i].p0.x * zoom + mousex),(drawing[i].p0.y * zoom + mousey));
     ctx.lineTo((drawing[i].p1.x * zoom + mousex),(drawing[i].p1.y * zoom + mousey));   
@@ -151,7 +161,8 @@ function OnClickLoadDXF()
       var data = new Uint8Array(new TextEncoder().encode(stringdata));
       var memory = _malloc(data.length);
       HEAPU8.set(data, memory);
-      console.log("return = " + _LoadDXF(memory,data.length));
+
+      console.log("return = " + _LoadDXF(memory, data.length));
       _free(memory);
 
       var address = _GETdrawing();
@@ -168,15 +179,6 @@ function OnClickLoadDXF()
         drawing[i].p1.y = HEAPF64[address/8 + 3];
         address += 32;
       }
-      // console.log(drawing);      
-
-      // document.querySelector(".consoleoutput").innerHTML = "";
-      // for(var i=0;i<drawinglength;i++)
-      // {
-      //   var string = "Line " + i + " : " + drawing[i].p0.x + " " + drawing[i].p0.y + " " + drawing[i].p1.x + " " + drawing[i].p1.y;
-      //   document.querySelector(".consoleoutput").innerHTML += string + "<br>";
-      // }
-
       DrawDXF();
     };
     reader.readAsText(file);
@@ -189,58 +191,3 @@ function OnClickLoadDXF()
 </script>
 
 </html>
-
-<!--
-BACKUP CODE
-function InitVideo()
-{
-  canvas.width = viewer.clientWidth;
-  canvas.height = viewer.clientHeight;
-  var status = _InitizalizeVideo(canvas.width,canvas.height);
-  if(status == 0)
-  {    
-    videobufferwasm = _GETvideo();
-    videobufferjs = new Uint8ClampedArray(canvas.width*canvas.height*4);
-    videobufferjs.set(HEAPU8.subarray(videobufferwasm,videobufferwasm+canvas.width*canvas.height*4));
-    
-    ctx.putImageData(new ImageData(videobufferjs,canvas.width,canvas.height),0,0);
-
-    console.log(videobufferjs);
-    console.log("Video Initialized");
-  }
-  else
-  {
-    console.log("Video Initialization Failed");
-  }
-}
-
-BACKUP CODE
-
-var ctx = canvas.getContext("2d");
-ctx.translate(canvas.width/2,canvas.height/2);
-ctx.scale(1,-1);
-ctx.lineWidth = 2;
-ctx.strokeStyle = "green";
-
-Render();
-
-function Render()
-{
-  ctx.clearRect(-canvas.width/2,-canvas.height/2,canvas.width,canvas.height);
-  ctx.beginPath();
-  ctx.moveTo(0,0);
-  ctx.lineTo(0,canvas.width/2);
-  ctx.moveTo(0,0);
-  ctx.lineTo(canvas.height/2,0);
-  ctx.stroke();
-}
-
-addEventListener("resize", function() 
-{
-  canvas.width = viewer.clientWidth;
-  canvas.height = viewer.clientHeight;
-  console.log(viewer.clientWidth + " " + viewer.clientHeight);
-  Render();
-});
--->
-

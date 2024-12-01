@@ -66,12 +66,14 @@
       <EchoCommandLines>false</EchoCommandLines>
       <AdditionalIncludeDirectories>C:\Users\Abhimanyu\Documents\LYIWebsite\wasm\Headers;C:\Users\Abhimanyu\Documents\LYIWebsite\wasm\External;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>EMS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <OptimizationLevel>O3</OptimizationLevel>
     </ClCompile>
     <Link>
       <EchoCommandLines>true</EchoCommandLines>
       <AdditionalDependencies>
       </AdditionalDependencies>
       <AdditionalOptions>-s EXIT_RUNTIME=0 -s EXPORTED_RUNTIME_METHODS=ccall,cwrap -s EXPORTED_FUNCTIONS="_main","_malloc","_free" %(AdditionalOptions)</AdditionalOptions>
+      <LinkerOptimizationLevel>O3</LinkerOptimizationLevel>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
