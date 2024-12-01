@@ -72,8 +72,12 @@
       <EchoCommandLines>true</EchoCommandLines>
       <AdditionalDependencies>
       </AdditionalDependencies>
-      <AdditionalOptions>-s EXIT_RUNTIME=0 -s EXPORTED_RUNTIME_METHODS=ccall,cwrap -s EXPORTED_FUNCTIONS="_main","_malloc","_free" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-s EXIT_RUNTIME=0 -s EXPORTED_RUNTIME_METHODS=ccall,cwrap -s EXPORTED_FUNCTIONS="_main","_malloc","_free" -sASSERTIONS %(AdditionalOptions)</AdditionalOptions>
       <LinkerOptimizationLevel>O3</LinkerOptimizationLevel>
+      <HeapMaximumSize>
+      </HeapMaximumSize>
+      <EnableMemoryGrowth>false</EnableMemoryGrowth>
+      <HeapInitialSize>1073741824</HeapInitialSize>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

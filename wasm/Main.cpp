@@ -206,6 +206,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 					//	return left * Basis(ci, degree - 1, u, knots) + right * Basis(ci + 1, degree - 1, u, knots);
 					//}
 
+					/*
 					float64 N[4] = { 0.0, 0.0, 0.0, 0.0 };
 
 					for (int i = 0; i <= degree; i++)
@@ -231,6 +232,79 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 					}
 
 					return N[0];
+					*/
+
+					// Since degree is always 3, we can unroll the loops for optimization
+					// Initialize N0 to N3
+					float64 N0 = (knots[ci + 0] <= u && u < knots[ci + 1]) ? 1.0 : 0.0;
+					float64 N1 = (knots[ci + 1] <= u && u < knots[ci + 2]) ? 1.0 : 0.0;
+					float64 N2 = (knots[ci + 2] <= u && u < knots[ci + 3]) ? 1.0 : 0.0;
+					float64 N3 = (knots[ci + 3] <= u && u < knots[ci + 4]) ? 1.0 : 0.0;
+
+					// First iteration (i = 1)
+					{
+						// Update N0
+						float64 leftDenom = knots[ci + 1] - knots[ci + 0];
+						float64 left = (leftDenom != 0.0) ? ((u - knots[ci + 0]) / leftDenom) * N0 : 0.0;
+
+						float64 rightDenom = knots[ci + 2] - knots[ci + 1];
+						float64 right = (rightDenom != 0.0) ? ((knots[ci + 2] - u) / rightDenom) * N1 : 0.0;
+
+						N0 = left + right;
+
+						// Update N1
+						leftDenom = knots[ci + 2] - knots[ci + 1];
+						left = (leftDenom != 0.0) ? ((u - knots[ci + 1]) / leftDenom) * N1 : 0.0;
+
+						rightDenom = knots[ci + 3] - knots[ci + 2];
+						right = (rightDenom != 0.0) ? ((knots[ci + 3] - u) / rightDenom) * N2 : 0.0;
+
+						N1 = left + right;
+
+						// Update N2
+						leftDenom = knots[ci + 3] - knots[ci + 2];
+						left = (leftDenom != 0.0) ? ((u - knots[ci + 2]) / leftDenom) * N2 : 0.0;
+
+						rightDenom = knots[ci + 4] - knots[ci + 3];
+						right = (rightDenom != 0.0) ? ((knots[ci + 4] - u) / rightDenom) * N3 : 0.0;
+
+						N2 = left + right;
+					}
+
+					// Second iteration (i = 2)
+					{
+						// Update N0
+						float64 leftDenom = knots[ci + 2] - knots[ci + 0];
+						float64 left = (leftDenom != 0.0) ? ((u - knots[ci + 0]) / leftDenom) * N0 : 0.0;
+
+						float64 rightDenom = knots[ci + 3] - knots[ci + 1];
+						float64 right = (rightDenom != 0.0) ? ((knots[ci + 3] - u) / rightDenom) * N1 : 0.0;
+
+						N0 = left + right;
+
+						// Update N1
+						leftDenom = knots[ci + 3] - knots[ci + 1];
+						left = (leftDenom != 0.0) ? ((u - knots[ci + 1]) / leftDenom) * N1 : 0.0;
+
+						rightDenom = knots[ci + 4] - knots[ci + 2];
+						right = (rightDenom != 0.0) ? ((knots[ci + 4] - u) / rightDenom) * N2 : 0.0;
+
+						N1 = left + right;
+					}
+
+					// Third iteration (i = 3)
+					{
+						// Update N0
+						float64 leftDenom = knots[ci + 3] - knots[ci + 0];
+						float64 left = (leftDenom != 0.0) ? ((u - knots[ci + 0]) / leftDenom) * N0 : 0.0;
+
+						float64 rightDenom = knots[ci + 4] - knots[ci + 1];
+						float64 right = (rightDenom != 0.0) ? ((knots[ci + 4] - u) / rightDenom) * N1 : 0.0;
+
+						N0 = left + right;
+					}
+
+					return N0;
 				}
 
 				float64x2 InterpolateSpline(float64 u, int32 degree, float64x2* controlpoints,uint32 controlpointscount, float64* knots)
