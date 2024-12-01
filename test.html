@@ -26,6 +26,9 @@
     <canvas></canvas>
   </div>
 
+  <div>    
+    <br>DXF Output:<br>
+  </div>
   <div class="consoleoutput">    
   </div>
   
@@ -33,14 +36,6 @@
 
 <script src="wasm/LYIWebsite.js"></script>  
 <script>  
-class Drawing
-{
-  constructor()
-  {
-    this.type = undefined;
-    this.geometrey = undefined;
-  }
-}
 class Point
 {
   constructor()
@@ -53,88 +48,95 @@ class Line
 {
   constructor()
   {
-    this.x1=undefined;
-    this.y1=undefined;
-    this.x2=undefined;
-    this.y2=undefined;        
+    this.p0=undefined;
+    this.p1=undefined;
   }
-};
-class Arc
-{
-  constructor()
-  {
-    this.x=undefined;
-    this.y=undefined;
-    this.r=undefined;
-    this.t1=undefined;        
-    this.t2=undefined;        
-  }
-};
-class Elliplse
-{
-};
-class Spline
-{
 };
 var drawing = undefined;
 var drawinglength = undefined;
 
+var zoom = 1;
+var buttonleftmousedown = false;
+var mousex = 0, mousey = 0;
 var viewer = document.getElementById("viewer");
 var canvas = document.querySelector("canvas");
 canvas.width = viewer.clientWidth;
 canvas.height = viewer.clientHeight;
 var ctx = canvas.getContext("2d");
-var videobufferjs;
-var videobufferwasm;
+ctx.resetTransform();
+ctx.translate(canvas.width/2,canvas.height/2);
+ctx.scale(1,-1);
+
+ctx.strokeStyle = "red";
+ctx.beginPath();
+ctx.moveTo(0,0);
+ctx.lineTo((canvas.width/2),0);
+ctx.moveTo(0,0);
+ctx.lineTo(0,(canvas.height/2));    
+ctx.stroke();
 
 Module.onRuntimeInitialized = function() 
 {
   console.log("WASM Loaded");
-  InitVideo();  
 };
 addEventListener("resize", function() 
 {
-  InitVideo();
+  canvas.width = viewer.clientWidth;
+  canvas.height = viewer.clientHeight;
+  DrawDXF();
+});
+canvas.addEventListener('wheel', function(event) 
+{
+  event.preventDefault();
+  zoom -= event.deltaY/1000;
+  if(zoom < 0.1)
+    zoom = 0.1;
+  console.log(zoom);
+  DrawDXF();
+});
+canvas.addEventListener('mousedown', function(event) 
+{
+  if (event.button === 0) 
+    buttonleftmousedown = true;
+});
+canvas.addEventListener('mouseup', function(event) 
+{
+  if (event.button === 0) 
+    buttonleftmousedown = false;
+});
+canvas.addEventListener('mousemove', function(event) 
+{
+  if (buttonleftmousedown) 
+  {
+    mousex += event.movementX;
+    mousey -= event.movementY;
+    DrawDXF();
+  }
 });
 
 console.log("System Ready");
 
-function InitVideo()
+function DrawDXF()
 {
-  canvas.width = viewer.clientWidth;
-  canvas.height = viewer.clientHeight;
-  var status = _InitizalizeVideo(canvas.width,canvas.height);
-  if(status == 0)
-  {    
-    videobufferwasm = _GETvideo();
-    videobufferjs = new Uint8ClampedArray(canvas.width*canvas.height*4);
-    videobufferjs.set(HEAPU8.subarray(videobufferwasm,videobufferwasm+canvas.width*canvas.height*4));
-    
-    ctx.putImageData(new ImageData(videobufferjs,canvas.width,canvas.height),0,0);
+  ctx.clearRect(-canvas.width/2,-canvas.height/2,canvas.width,canvas.height);
 
-    console.log(videobufferjs);
-    console.log("Video Initialized");
-    document.querySelector(".consoleoutput").innerHTML = "Video Initialized" + "<br>";
-  }
-  else
+  ctx.strokeStyle = "red";
+  ctx.beginPath();
+  ctx.moveTo(mousex,mousey);
+  ctx.lineTo((canvas.width/2),mousey);
+  ctx.moveTo(mousex,mousey);
+  ctx.lineTo(mousex,(canvas.height/2));    
+  ctx.stroke();
+
+  ctx.strokeStyle = "black";
+  for(var i=0;i<drawinglength;i++)
   {
-    console.log("Video Initialization Failed");
-    document.querySelector(".consoleoutput").innerHTML = "Video Initialization Failed" + "<br>";
+    ctx.beginPath();
+    ctx.moveTo((drawing[i].p0.x * zoom + mousex),(drawing[i].p0.y * zoom + mousey));
+    ctx.lineTo((drawing[i].p1.x * zoom + mousex),(drawing[i].p1.y * zoom + mousey));   
+    ctx.stroke();
   }
-}
-
-function GetVideo()
-{
-  videobufferwasm = _GETvideo();
-  videobufferjs = new Uint8ClampedArray(canvas.width*canvas.height*4);
-  videobufferjs.set(HEAPU8.subarray(videobufferwasm,videobufferwasm+canvas.width*canvas.height*4));
-  
-  ctx.putImageData(new ImageData(videobufferjs,canvas.width,canvas.height),0,0);
-
-  console.log(videobufferjs);
-  console.log("Video Buffer Updated");
-  document.querySelector(".consoleoutput").innerHTML += "Video Buffer Updated" + "<br>";
-}
+} 
 
 function OnClickLoadDXF() 
 {
@@ -150,74 +152,32 @@ function OnClickLoadDXF()
       var memory = _malloc(data.length);
       HEAPU8.set(data, memory);
       console.log("return = " + _LoadDXF(memory,data.length));
-      console.log("drawing = " +_GETdrawing());
-      console.log("drawinglength = "+_GETdrawinglength());
-      
-      var address = _GETdrawing();
-      drawinglength =  _GETdrawinglength();
-      drawing = new Array(_GETdrawinglength());//.fill(null).map(() => new Drawing());
-      for(var i=0;i<drawinglength;i++)
-      {
-        drawing[i] = new Drawing;
-        drawing[i].type = HEAPU32[address/4];
-        switch(drawing[i].type)
-        {
-          case 1:
-          {
-            drawing[i].geometrey = new Point;
-            drawing[i].geometrey.x = HEAPF64[address/8 + 1];
-            drawing[i].geometrey.y = HEAPF64[address/8 + 2];
-          }break;
-          case 2:
-          {
-            drawing[i].geometrey = new Line;
-            drawing[i].geometrey.x1 = HEAPF64[address/8 + 1];
-            drawing[i].geometrey.y1 = HEAPF64[address/8 + 2];
-            drawing[i].geometrey.x2 = HEAPF64[address/8 + 3];
-            drawing[i].geometrey.y2 = HEAPF64[address/8 + 4];
-          }break;
-          case 3:
-          {
-            drawing[i].geometrey = new Arc;
-            drawing[i].geometrey.x = HEAPF64[address/8 + 1];
-            drawing[i].geometrey.y = HEAPF64[address/8 + 2];
-            drawing[i].geometrey.r = HEAPF64[address/8 + 3];
-            drawing[i].geometrey.t1 = HEAPF64[address/8 + 4];
-            drawing[i].geometrey.t2 = HEAPF64[address/8 + 5];
-          }break;
-        }
-        address += 64;
-      }
-      console.log(drawing);
       _free(memory);
 
+      var address = _GETdrawing();
+      drawinglength =  _GETdrawinglength();
+      drawing = new Array(drawinglength);
       for(var i=0;i<drawinglength;i++)
       {
-        var string = "Type:" + drawing[i].type + " ";
-        switch(drawing[i].type)
-        {
-          case 1:
-          {
-            string += "Point: x=" + drawing[i].geometrey.x + " y=" + drawing[i].geometrey.y;
-          }break;
-          case 2:
-          {
-            string += "Line: x1=" + drawing[i].geometrey.x1 + " y1=" + drawing[i].geometrey.y1 + " x2=" + drawing[i].geometrey.x2 + " y2=" + drawing[i].geometrey.y2;
-          }break;
-          case 3:
-          {
-            string += "Arc: x=" + drawing[i].geometrey.x + " y=" + drawing[i].geometrey.y + " r=" + drawing[i].geometrey.r + " t1=" + drawing[i].geometrey.t1 + " t2=" + drawing[i].geometrey.t2;
-          }break;
-        }
-        document.querySelector(".consoleoutput").innerHTML += string + "<br>";
+        drawing[i] = new Line;
+        drawing[i].p0 = new Point;
+        drawing[i].p1 = new Point;
+        drawing[i].p0.x = HEAPF64[address/8 + 0];
+        drawing[i].p0.y = HEAPF64[address/8 + 1];
+        drawing[i].p1.x = HEAPF64[address/8 + 2];
+        drawing[i].p1.y = HEAPF64[address/8 + 3];
+        address += 32;
       }
-    
-      if(_PaintDrawingToVideo())
-        console.log("Drawing Paint Failed");
-      else
-        console.log("Drawing Painted");
+      // console.log(drawing);      
 
-      GetVideo();
+      // document.querySelector(".consoleoutput").innerHTML = "";
+      // for(var i=0;i<drawinglength;i++)
+      // {
+      //   var string = "Line " + i + " : " + drawing[i].p0.x + " " + drawing[i].p0.y + " " + drawing[i].p1.x + " " + drawing[i].p1.y;
+      //   document.querySelector(".consoleoutput").innerHTML += string + "<br>";
+      // }
+
+      DrawDXF();
     };
     reader.readAsText(file);
   } 

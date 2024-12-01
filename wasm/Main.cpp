@@ -16,187 +16,20 @@ using namespace std;
 #include "PoMath.h"
 #include "libdxfrw.h"
 
-struct VideoBuffer
+struct Line
 {
-	uint8 r;
-	uint8 g;
-	uint8 b;
-	uint8 a;
-
-	VideoBuffer()
-	{
-		ZeroMemory(this, sizeof(VideoBuffer));
-	}
-	VideoBuffer(uint8 r, uint8 g, uint8 b, uint8 a)
-	{
-		this->r = r;
-		this->g = g;
-		this->b = b;
-		this->a = a;
-	}
-	~VideoBuffer()
-	{
-		ZeroMemory(this, sizeof(VideoBuffer));
-	}
-	VideoBuffer(VideoBuffer& video)
-	{
-		MemoryCopy(this, &video, sizeof(VideoBuffer));
-	}
-	void operator=(VideoBuffer& video)
-	{
-		MemoryCopy(this, &video, sizeof(VideoBuffer));
-	}
-	bool operator==(VideoBuffer& video)
-	{
-		if (r != video.r)return false;
-		if (g != video.g)return false;
-		if (b != video.b)return false;
-		if (a != video.a)return false;
-		return true;
-	}
+	float64x2 p0;
+	float64x2 p1;
 };
-VideoBuffer* video = 0;
-uint32 videowidth = 0;
-uint32 videoheight = 0;
-
-struct Drawing
-{
-	enum Type
-	{
-		EMPTY = 0,
-		POINT = 1,
-		LINE = 2,
-		ARC = 3,
-		ELLIPSE = 4,
-		SPLINE = 5,
-		MAX = 0xFFFFFFF
-	};
-	union Geometrey
-	{
-		struct Point
-		{
-			float64 x;
-			float64 y;
-		}point;
-		struct Line
-		{
-			float64 x1;
-			float64 y1;
-			float64 x2;
-			float64 y2;
-		}line;
-		struct Arc
-		{
-			float64 x;
-			float64 y;
-			float64 r;
-			float64 t1;
-			float64 t2;
-		}arc;
-		struct Elliplse
-		{
-			float64 x;
-			float64 y;
-			float64 r1;
-			float64 r2;
-			float64 t1;
-			float64 t2;
-		}ellipse;
-		struct Spline
-		{
-
-		}spline;
-		struct Empty
-		{
-
-		}empty;
-	};
-	Type type;
-	Geometrey geometrey;
-	uint32 padding;
-
-	Drawing()
-	{
-		type = EMPTY;
-		ZeroMemory(&geometrey, sizeof(Geometrey));
-	}
-	~Drawing()
-	{
-		ZeroMemory(&geometrey, sizeof(Geometrey));
-	}
-	Drawing(Drawing& drawing)
-	{
-		type = drawing.type;
-		MemoryCopy(&geometrey, &drawing.geometrey, sizeof(Geometrey));
-	}
-	void operator=(Drawing& drawing)
-	{
-		type = drawing.type;
-		MemoryCopy(&geometrey, &drawing.geometrey, sizeof(Geometrey));
-	}
-	bool operator==(Drawing& drawing)
-	{
-		if (type != drawing.type)return false;
-		if (type == EMPTY)return true;
-		if (type == POINT)
-		{
-			if (geometrey.point.x != drawing.geometrey.point.x)return false;
-			if (geometrey.point.y != drawing.geometrey.point.y)return false;
-		}
-		else if (type == LINE)
-		{
-			if (geometrey.line.x1 != drawing.geometrey.line.x1)return false;
-			if (geometrey.line.y1 != drawing.geometrey.line.y1)return false;
-			if (geometrey.line.x2 != drawing.geometrey.line.x2)return false;
-			if (geometrey.line.y2 != drawing.geometrey.line.y2)return false;
-		}
-		else if (type == ARC)
-		{
-			if (geometrey.arc.x != drawing.geometrey.arc.x)return false;
-			if (geometrey.arc.y != drawing.geometrey.arc.y)return false;
-			if (geometrey.arc.r != drawing.geometrey.arc.r)return false;
-			if (geometrey.arc.t1 != drawing.geometrey.arc.t1)return false;
-			if (geometrey.arc.t2 != drawing.geometrey.arc.t2)return false;
-		}
-		else if (type == ELLIPSE)
-		{
-			if (geometrey.ellipse.x != drawing.geometrey.ellipse.x)return false;
-			if (geometrey.ellipse.y != drawing.geometrey.ellipse.y)return false;
-			if (geometrey.ellipse.r1 != drawing.geometrey.ellipse.r1)return false;
-			if (geometrey.ellipse.r2 != drawing.geometrey.ellipse.r2)return false;
-			if (geometrey.ellipse.t1 != drawing.geometrey.ellipse.t1)return false;
-			if (geometrey.ellipse.t2 != drawing.geometrey.ellipse.t2)return false;
-		}
-		else if (type == SPLINE)
-		{
-			return true;
-		}
-		else if (type == EMPTY)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-		return true;
-	}
-};
-Heap<Drawing> drawing;
+Heap<Line> drawing;
 
 EMSCRIPTEN_KEEPALIVE int32 main()
 {
 	cout << "Hello World" << endl;
-	cout << "Size of Drawing: " << sizeof(Drawing) << endl;
-	video = 0;
-	videowidth = 0;
-	videoheight = 0;
 
 #ifndef EMS
 	int32 LoadDXF(char* file, uint32 length);
-	int32 InitizalizeVideo(uint32 width, uint32 height);
 	LoadDXF((char*)"intermediated.txt", 0);
-	InitizalizeVideo(500,500);
 #endif
 	return 0;
 }
@@ -204,15 +37,6 @@ EMSCRIPTEN_KEEPALIVE int32 main()
 EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 {
 	cout << "LoadDXF In" << endl;
-
-#ifdef EMS
-	fstream filestream;
-	filestream.open("intermediated.txt", ios::out);
-	for (uint32 i = 0; i < length; i++)
-		filestream << file[i];
-	filestream.close();
-#endif
-
 	drawing.Release();
 
 	class DXFReader : public DRW_Interface
@@ -269,12 +93,11 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 		}
 		void addLine(const DRW_Line& data) override
 		{
-			Drawing _drawing;
-			_drawing.type = Drawing::LINE;
-			_drawing.geometrey.line.x1 = data.basePoint.x;
-			_drawing.geometrey.line.y1 = data.basePoint.y;
-			_drawing.geometrey.line.x2 = data.secPoint.x;
-			_drawing.geometrey.line.y2 = data.secPoint.y;
+			Line _drawing;
+			_drawing.p0.x = data.basePoint.x;
+			_drawing.p0.y = data.basePoint.y;
+			_drawing.p1.x = data.secPoint.x;
+			_drawing.p1.y = data.secPoint.y;
 			drawing << _drawing;
 		}
 		void addRay(const DRW_Ray& data) override
@@ -287,25 +110,41 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 		}
 		void addArc(const DRW_Arc& data) override
 		{
-			Drawing _drawing;
-			_drawing.type = Drawing::ARC;
-			_drawing.geometrey.arc.x = data.basePoint.x;
-			_drawing.geometrey.arc.y = data.basePoint.y;
-			_drawing.geometrey.arc.r = data.radious;
-			_drawing.geometrey.arc.t1 = data.staangle;
-			_drawing.geometrey.arc.t2 = data.endangle;
-			drawing << _drawing;
+			Heap<Line> _drawing;
+			Line __drawing;
+			__drawing.p0.x = data.basePoint.x + data.radious * cos(data.staangle);
+			__drawing.p0.y = data.basePoint.y + data.radious * sin(data.staangle);
+			float64 inc = 10 / data.radious;
+			for (float64 i = inc; i < data.endangle; i += inc)
+			{
+				__drawing.p1.x = data.basePoint.x + data.radious * cos((i));
+				__drawing.p1.y = data.basePoint.y + data.radious * sin((i));
+				_drawing << __drawing;
+				__drawing.p0 = __drawing.p1;
+			}
+			drawing.Append(_drawing.data, _drawing.size);
+			drawing[drawing.size - 1].p1.x = data.basePoint.x + data.radious * cos(data.endangle);
+			drawing[drawing.size - 1].p1.y = data.basePoint.y + data.radious * sin(data.endangle);
+			return;
 		}
 		void addCircle(const DRW_Circle& data) override
 		{
-			Drawing _drawing;
-			_drawing.type = Drawing::ARC;
-			_drawing.geometrey.arc.x = data.basePoint.x;
-			_drawing.geometrey.arc.y = data.basePoint.y;
-			_drawing.geometrey.arc.r = data.radious;
-			_drawing.geometrey.arc.t1 = 0;
-			_drawing.geometrey.arc.t2 = 0;
-			drawing << _drawing;
+			Heap<Line> _drawing;
+			Line __drawing;
+			__drawing.p0.x = data.basePoint.x + data.radious * cos(0);
+			__drawing.p0.y = data.basePoint.y + data.radious * sin(0);
+			float64 inc = 10 / data.radious;
+			for (float64 i = inc; i < 2 * pi; i += inc)
+			{
+				__drawing.p1.x = data.basePoint.x + data.radious * cos((i));
+				__drawing.p1.y = data.basePoint.y + data.radious * sin((i));
+				_drawing << __drawing;
+				__drawing.p0 = __drawing.p1;
+			}
+			drawing.Append(_drawing.data, _drawing.size);
+			drawing[drawing.size - 1].p1.x = data.basePoint.x + data.radious * cos(2 * pi);
+			drawing[drawing.size - 1].p1.y = data.basePoint.y + data.radious * sin(2 * pi);
+			return;
 		}
 		void addEllipse(const DRW_Ellipse& data) override
 		{
@@ -313,43 +152,39 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 		}
 		void addLWPolyline(const DRW_LWPolyline& data) override
 		{
-			Heap<Drawing> _drawing;
-			Drawing __drawing;
-			__drawing.type = Drawing::LINE;
-			__drawing.geometrey.line.x1 = data.vertex->x;
-			__drawing.geometrey.line.y1 = data.vertex->y;
-			__drawing.geometrey.line.x2 = data.vertlist[0]->x;
-			__drawing.geometrey.line.y2 = data.vertlist[0]->y;
+			Heap<Line> _drawing;
+			Line __drawing;
+			__drawing.p0.x = data.vertex->x;
+			__drawing.p0.y = data.vertex->y;
+			__drawing.p1.x = data.vertlist[0]->x;
+			__drawing.p1.y = data.vertlist[0]->y;
 			_drawing << __drawing;
 
 			for (uint32 i = 1; i < data.vertexnum; i++)
 			{
-				__drawing.type = Drawing::LINE;
-				__drawing.geometrey.line.x1 = data.vertlist[i - 1]->x;
-				__drawing.geometrey.line.y1 = data.vertlist[i - 1]->y;
-				__drawing.geometrey.line.x2 = data.vertlist[i - 0]->x;
-				__drawing.geometrey.line.y2 = data.vertlist[i - 0]->y;
+				__drawing.p0.x = data.vertlist[i - 1]->x;
+				__drawing.p0.y = data.vertlist[i - 1]->y;
+				__drawing.p1.x = data.vertlist[i - 0]->x;
+				__drawing.p1.y = data.vertlist[i - 0]->y;
 				_drawing << __drawing;
 			}
 			drawing.Append(_drawing.data, _drawing.size);
 		}
 		void addPolyline(const DRW_Polyline& data) override
 		{
-			Heap<Drawing> _drawing;
-			Drawing __drawing;
-			__drawing.type = Drawing::LINE;
-			__drawing.geometrey.line.x1 = data.basePoint.x;
-			__drawing.geometrey.line.y1 = data.basePoint.y;
-			__drawing.geometrey.line.x2 = data.vertlist[0]->basePoint.x;
-			__drawing.geometrey.line.y2 = data.vertlist[0]->basePoint.y;
+			Heap<Line> _drawing;
+			Line __drawing;
+			__drawing.p0.x = data.basePoint.x;
+			__drawing.p0.y = data.basePoint.y;
+			__drawing.p1.x = data.vertlist[0]->basePoint.x;
+			__drawing.p1.y = data.vertlist[0]->basePoint.y;
 			_drawing << __drawing;
 			for (uint32 i = 1; i < data.vertexcount; i++)
 			{
-				__drawing.type = Drawing::LINE;
-				__drawing.geometrey.line.x1 = data.vertlist[i - 1]->basePoint.x;
-				__drawing.geometrey.line.y1 = data.vertlist[i - 1]->basePoint.y;
-				__drawing.geometrey.line.x2 = data.vertlist[i - 0]->basePoint.x;
-				__drawing.geometrey.line.y2 = data.vertlist[i - 0]->basePoint.y;
+				__drawing.p0.x = data.vertlist[i - 1]->basePoint.x;
+				__drawing.p0.y = data.vertlist[i - 1]->basePoint.y;
+				__drawing.p1.x = data.vertlist[i - 0]->basePoint.x;
+				__drawing.p1.y = data.vertlist[i - 0]->basePoint.y;
 				_drawing << __drawing;
 			}
 			drawing.Append(_drawing.data, _drawing.size);
@@ -400,8 +235,8 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 				knots[i] = data->knotslist[i] / data->knotslist[data->nknots - 1];
 			}
 
-			Heap<Drawing> _drawing;
-			Drawing __drawing;
+			Heap<Line> _drawing;
+			Line __drawing;
 			float64 us = 0;
 			float64 ue = 0;
 			uint32 ks = 0;
@@ -425,29 +260,29 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 				
 
 				p = spline.InterpolateSpline(us, degree, controlpoints, data->ncontrol, knots);
-				for (float64 u = us; u < ue; u+=0.1)
+				float64 inc = (ue - us) / 20;
+				for (float64 u = us; u < ue; u+= inc)
 				{
 					float64x2 q = spline.InterpolateSpline(u, degree, controlpoints, data->ncontrol, knots);
 					if (p == q)
 						continue;
-					__drawing.type = Drawing::LINE;
-					__drawing.geometrey.line.x1 = p.x;
-					__drawing.geometrey.line.y1 = p.y;
-					__drawing.geometrey.line.x2 = q.x;
-					__drawing.geometrey.line.y2 = q.y;
+					__drawing.p0.x = p.x;
+					__drawing.p0.y = p.y;
+					__drawing.p1.x = q.x;
+					__drawing.p1.y = q.y;
 					_drawing << __drawing;
 
 					p = q;
 				}
 				q = spline.InterpolateSpline(ue, degree, controlpoints, data->ncontrol, knots);
-				_drawing[_drawing.size - 1].geometrey.line.x2 = q.x;
-				_drawing[_drawing.size - 1].geometrey.line.y2 = q.y;
+				_drawing[_drawing.size - 1].p1.x = q.x;
+				_drawing[_drawing.size - 1].p1.y = q.y;
 				us = ue;
 				ks = ke;
 			}
 			drawing.Append(_drawing.data, _drawing.size);
-			drawing[drawing.size - 1].geometrey.line.x2 = controlpoints[data->ncontrol - 1].x;
-			drawing[drawing.size - 1].geometrey.line.y2 = controlpoints[data->ncontrol - 1].y;
+			drawing[drawing.size - 1].p1.x = controlpoints[data->ncontrol - 1].x;
+			drawing[drawing.size - 1].p1.y = controlpoints[data->ncontrol - 1].y;
 			return;
 		}
 		void addKnot(const DRW_Entity& data) override
@@ -580,10 +415,20 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 		}
 	};
 	DXFReader reader;
-	//dxfRW dxf("Om Jali.dxf");
+
+#ifdef EMS
+	fstream filestream;
+	filestream.open("intermediated.txt", ios::out);
+	for (uint32 i = 0; i < length; i++)
+		filestream << file[i];
+	filestream.close();
+
+	dxfRW dxf("intermediated.txt");
+#else
+	dxfRW dxf("Om Jali.dxf");
 	//dxfRW dxf("spline.dxf");
-	dxfRW dxf("TEST.dxf");
-	//dxfRW dxf("intermediated.txt");
+	//dxfRW dxf("TEST.dxf");
+#endif
 	if (!dxf.read(&reader, false)) { return -1; }
 	cout << "drawing = " << (uint32)(void*)drawing.data << endl;
 	cout << "drawinglength = "<< drawing.size << endl;
@@ -602,29 +447,6 @@ EMSATTRIBUTE int32 Generate3DHalfDepth()
 {
 	if (drawing.size == 0)return -1;
 	return 0;
-}
-
-EMSATTRIBUTE int32 InitizalizeVideo(uint32 width, uint32 height)
-{
-	if (video)delete[] video;
-
-	if (width <= 1 || height <= 1)return -1;
-
-	videowidth = width;
-	videoheight = height;
-	video = new VideoBuffer[videowidth * videoheight];
-
-	VideoBuffer clear(0, 0, 0, 255);
-	for (uint32 h = 0; h < videoheight; h++)
-		for (uint32 w = 0; w < videowidth; w++)
-			video[h * videowidth + w] = clear;
-
-	return 0;
-}
-
-EMSATTRIBUTE void* GETvideo()
-{
-	return (void*)video;
 }
 
 EMSATTRIBUTE void* GETdrawing()

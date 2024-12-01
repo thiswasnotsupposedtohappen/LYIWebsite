@@ -4345,8 +4345,6 @@ var ___original_main = Module['___original_main'] = createExportWrapper('__origi
 var _LoadDXF = Module['_LoadDXF'] = createExportWrapper('LoadDXF', 2);
 var _ConvertToLineDrawing = Module['_ConvertToLineDrawing'] = createExportWrapper('ConvertToLineDrawing', 0);
 var _Generate3DHalfDepth = Module['_Generate3DHalfDepth'] = createExportWrapper('Generate3DHalfDepth', 0);
-var _InitizalizeVideo = Module['_InitizalizeVideo'] = createExportWrapper('InitizalizeVideo', 2);
-var _GETvideo = Module['_GETvideo'] = createExportWrapper('GETvideo', 0);
 var _GETdrawing = Module['_GETdrawing'] = createExportWrapper('GETdrawing', 0);
 var _GETdrawinglength = Module['_GETdrawinglength'] = createExportWrapper('GETdrawinglength', 0);
 var _main = Module['_main'] = createExportWrapper('main', 2);
