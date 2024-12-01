@@ -1,7 +1,9 @@
 ﻿#ifdef EMS
 #include <emscripten.h>
+#define EMSATTRIBUTE extern "C" EMSCRIPTEN_KEEPALIVE
 #else
 #define EMSCRIPTEN_KEEPALIVE
+#define EMSATTRIBUTE
 #endif
 #include <iostream>
 #include <fstream>
@@ -13,6 +15,49 @@ using namespace std;
 #include "PoUtilities.h"
 #include "PoMath.h"
 #include "libdxfrw.h"
+
+struct VideoBuffer
+{
+	uint8 r;
+	uint8 g;
+	uint8 b;
+	uint8 a;
+
+	VideoBuffer()
+	{
+		ZeroMemory(this, sizeof(VideoBuffer));
+	}
+	VideoBuffer(uint8 r, uint8 g, uint8 b, uint8 a)
+	{
+		this->r = r;
+		this->g = g;
+		this->b = b;
+		this->a = a;
+	}
+	~VideoBuffer()
+	{
+		ZeroMemory(this, sizeof(VideoBuffer));
+	}
+	VideoBuffer(VideoBuffer& video)
+	{
+		MemoryCopy(this, &video, sizeof(VideoBuffer));
+	}
+	void operator=(VideoBuffer& video)
+	{
+		MemoryCopy(this, &video, sizeof(VideoBuffer));
+	}
+	bool operator==(VideoBuffer& video)
+	{
+		if (r != video.r)return false;
+		if (g != video.g)return false;
+		if (b != video.b)return false;
+		if (a != video.a)return false;
+		return true;
+	}
+};
+VideoBuffer* video = 0;
+uint32 videowidth = 0;
+uint32 videoheight = 0;
 
 struct Drawing
 {
@@ -137,23 +182,26 @@ struct Drawing
 		return true;
 	}
 };
-EMSCRIPTEN_KEEPALIVE Drawing* drawing = 0;
-EMSCRIPTEN_KEEPALIVE uint32 drawinglength = 0;
-uint32 drawingindex = 0;
+Heap<Drawing> drawing;
 
-int32 EMSCRIPTEN_KEEPALIVE main()
+EMSCRIPTEN_KEEPALIVE int32 main()
 {
 	cout << "Hello World" << endl;
 	cout << "Size of Drawing: " << sizeof(Drawing) << endl;
+	video = 0;
+	videowidth = 0;
+	videoheight = 0;
 
 #ifndef EMS
 	int32 LoadDXF(char* file, uint32 length);
+	int32 InitizalizeVideo(uint32 width, uint32 height);
 	LoadDXF((char*)"intermediated.txt", 0);
+	InitizalizeVideo(500,500);
 #endif
 	return 0;
 }
 
-int32 EMSCRIPTEN_KEEPALIVE LoadDXF(char* file, uint32 length)
+EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 {
 	cout << "LoadDXF In" << endl;
 
@@ -165,223 +213,8 @@ int32 EMSCRIPTEN_KEEPALIVE LoadDXF(char* file, uint32 length)
 	filestream.close();
 #endif
 
-	if (drawing)free(drawing);
-	drawinglength = 0;
-	drawingindex = 0;
+	drawing.Release();
 
-	class DXFCounter : public DRW_Interface
-	{
-		float64 test = 0;
-	public:
-		void addHeader(const DRW_Header* data) override
-		{
-			test++;
-		}
-		void addLType(const DRW_LType& data) override
-		{
-			test++;
-		}
-		void addLayer(const DRW_Layer& data) override
-		{
-			test++;
-		}
-		void addDimStyle(const DRW_Dimstyle& data) override
-		{
-			test++;
-		}
-		void addVport(const DRW_Vport& data) override
-		{
-			test++;
-		}
-		void addTextStyle(const DRW_Textstyle& data) override
-		{
-			test++;
-		}
-		void addAppId(const DRW_AppId& data) override
-		{
-			test++;
-		}
-		void addBlock(const DRW_Block& data) override
-		{
-			test++;
-		}
-		void setBlock(const int handle) override
-		{
-			test++;
-		}
-		void endBlock() override
-		{
-			test++;
-		}
-		void addPoint(const DRW_Point& data) override
-		{
-			drawinglength++;
-		}
-		void addLine(const DRW_Line& data) override
-		{
-			drawinglength++;
-		}
-		void addRay(const DRW_Ray& data) override
-		{
-			drawinglength++;
-		}
-		void addXline(const DRW_Xline& data) override
-		{
-			drawinglength++;
-		}
-		void addArc(const DRW_Arc& data) override
-		{
-			drawinglength++;
-		}
-		void addCircle(const DRW_Circle& data) override
-		{
-			drawinglength++;
-		}
-		void addEllipse(const DRW_Ellipse& data) override
-		{
-			drawinglength++;
-		}
-		void addLWPolyline(const DRW_LWPolyline& data) override
-		{
-			drawinglength+= data.vertexnum;
-		}
-		void addPolyline(const DRW_Polyline& data) override
-		{
-			drawinglength+= data.vertexcount;
-		}
-		void addSpline(const DRW_Spline* data) override
-		{
-			test++;
-		}
-		void addKnot(const DRW_Entity& data) override
-		{
-			test++;
-		}
-		void addInsert(const DRW_Insert& data) override
-		{
-			test++;
-		}
-		void addTrace(const DRW_Trace& data) override
-		{
-			test++;
-		}
-		void add3dFace(const DRW_3Dface& data) override
-		{
-			test++;
-		}
-		void addSolid(const DRW_Solid& data) override
-		{
-			test++;
-		}
-		void addMText(const DRW_MText& data) override
-		{
-			test++;
-		}
-		void addText(const DRW_Text& data) override
-		{
-			test++;
-		}
-		void addDimAlign(const DRW_DimAligned* data) override
-		{
-			test++;
-		}
-		void addDimLinear(const DRW_DimLinear* data) override
-		{
-			test++;
-		}
-		void addDimRadial(const DRW_DimRadial* data) override
-		{
-			test++;
-		}
-		void addDimDiametric(const DRW_DimDiametric* data) override
-		{
-			test++;
-		}
-		void addDimAngular(const DRW_DimAngular* data) override
-		{
-			test++;
-		}
-		void addDimAngular3P(const DRW_DimAngular3p* data) override
-		{
-			test++;
-		}
-		void addDimOrdinate(const DRW_DimOrdinate* data) override
-		{
-			test++;
-		}
-		void addLeader(const DRW_Leader* data) override
-		{
-			test++;
-		}
-		void addHatch(const DRW_Hatch* data) override
-		{
-			test++;
-		}
-		void addViewport(const DRW_Viewport& data) override
-		{
-			test++;
-		}
-		void addImage(const DRW_Image* data) override
-		{
-			test++;
-		}
-		void linkImage(const DRW_ImageDef* data) override
-		{
-			test++;
-		}
-		void addComment(const char* comment) override
-		{
-			test++;
-		}
-		void addPlotSettings(const DRW_PlotSettings* data) override
-		{
-			test++;
-		}
-		void writeHeader(DRW_Header& data) override
-		{
-			test++;
-		}
-		void writeBlocks() override
-		{
-			test++;
-		}
-		void writeBlockRecords() override
-		{
-			test++;
-		}
-		void writeEntities() override
-		{
-			test++;
-		}
-		void writeLTypes() override
-		{
-			test++;
-		}
-		void writeLayers() override
-		{
-			test++;
-		}
-		void writeTextstyles() override
-		{
-			test++;
-		}
-		void writeVports() override
-		{
-			test++;
-		}
-		void writeDimstyles() override
-		{
-			test++;
-		}
-		void writeObjects() override
-		{
-			test++;
-		}
-		void writeAppId() override
-		{
-			test++;
-		}
-	};
 	class DXFReader : public DRW_Interface
 	{
 		float64 test = 0;
@@ -436,12 +269,13 @@ int32 EMSCRIPTEN_KEEPALIVE LoadDXF(char* file, uint32 length)
 		}
 		void addLine(const DRW_Line& data) override
 		{
-			drawing[drawingindex].type = Drawing::LINE;
-			drawing[drawingindex].geometrey.line.x1 = data.basePoint.x;
-			drawing[drawingindex].geometrey.line.y1 = data.basePoint.y;
-			drawing[drawingindex].geometrey.line.x2 = data.secPoint.x;
-			drawing[drawingindex].geometrey.line.y2 = data.secPoint.y;
-			drawingindex++;
+			Drawing _drawing;
+			_drawing.type = Drawing::LINE;
+			_drawing.geometrey.line.x1 = data.basePoint.x;
+			_drawing.geometrey.line.y1 = data.basePoint.y;
+			_drawing.geometrey.line.x2 = data.secPoint.x;
+			_drawing.geometrey.line.y2 = data.secPoint.y;
+			drawing << _drawing;
 		}
 		void addRay(const DRW_Ray& data) override
 		{
@@ -453,23 +287,25 @@ int32 EMSCRIPTEN_KEEPALIVE LoadDXF(char* file, uint32 length)
 		}
 		void addArc(const DRW_Arc& data) override
 		{
-			drawing[drawingindex].type = Drawing::ARC;
-			drawing[drawingindex].geometrey.arc.x = data.basePoint.x;
-			drawing[drawingindex].geometrey.arc.y = data.basePoint.y;
-			drawing[drawingindex].geometrey.arc.r = data.radious;
-			drawing[drawingindex].geometrey.arc.t1 = data.staangle;
-			drawing[drawingindex].geometrey.arc.t2 = data.endangle;
-			drawingindex++;
+			Drawing _drawing;
+			_drawing.type = Drawing::ARC;
+			_drawing.geometrey.arc.x = data.basePoint.x;
+			_drawing.geometrey.arc.y = data.basePoint.y;
+			_drawing.geometrey.arc.r = data.radious;
+			_drawing.geometrey.arc.t1 = data.staangle;
+			_drawing.geometrey.arc.t2 = data.endangle;
+			drawing << _drawing;
 		}
 		void addCircle(const DRW_Circle& data) override
 		{
-			drawing[drawingindex].type = Drawing::ARC;
-			drawing[drawingindex].geometrey.arc.x = data.basePoint.x;
-			drawing[drawingindex].geometrey.arc.y = data.basePoint.y;
-			drawing[drawingindex].geometrey.arc.r = data.radious;
-			drawing[drawingindex].geometrey.arc.t1 = 0;
-			drawing[drawingindex].geometrey.arc.t2 = 0;
-			drawingindex++;
+			Drawing _drawing;
+			_drawing.type = Drawing::ARC;
+			_drawing.geometrey.arc.x = data.basePoint.x;
+			_drawing.geometrey.arc.y = data.basePoint.y;
+			_drawing.geometrey.arc.r = data.radious;
+			_drawing.geometrey.arc.t1 = 0;
+			_drawing.geometrey.arc.t2 = 0;
+			drawing << _drawing;
 		}
 		void addEllipse(const DRW_Ellipse& data) override
 		{
@@ -477,45 +313,142 @@ int32 EMSCRIPTEN_KEEPALIVE LoadDXF(char* file, uint32 length)
 		}
 		void addLWPolyline(const DRW_LWPolyline& data) override
 		{
-			drawing[drawingindex].type = Drawing::LINE;
-			drawing[drawingindex].geometrey.line.x1 = data.vertex->x;
-			drawing[drawingindex].geometrey.line.y1 = data.vertex->y;
-			drawing[drawingindex].geometrey.line.x2 = data.vertlist[0]->x;
-			drawing[drawingindex].geometrey.line.y2 = data.vertlist[0]->y;
-			drawingindex++;
+			Heap<Drawing> _drawing;
+			Drawing __drawing;
+			__drawing.type = Drawing::LINE;
+			__drawing.geometrey.line.x1 = data.vertex->x;
+			__drawing.geometrey.line.y1 = data.vertex->y;
+			__drawing.geometrey.line.x2 = data.vertlist[0]->x;
+			__drawing.geometrey.line.y2 = data.vertlist[0]->y;
+			_drawing << __drawing;
 
 			for (uint32 i = 1; i < data.vertexnum; i++)
 			{
-				drawing[drawingindex].type = Drawing::LINE;
-				drawing[drawingindex].geometrey.line.x1 = data.vertlist[i - 1]->x;
-				drawing[drawingindex].geometrey.line.y1 = data.vertlist[i - 1]->y;
-				drawing[drawingindex].geometrey.line.x2 = data.vertlist[i - 0]->x;
-				drawing[drawingindex].geometrey.line.y2 = data.vertlist[i - 0]->y;
-				drawingindex++;
+				__drawing.type = Drawing::LINE;
+				__drawing.geometrey.line.x1 = data.vertlist[i - 1]->x;
+				__drawing.geometrey.line.y1 = data.vertlist[i - 1]->y;
+				__drawing.geometrey.line.x2 = data.vertlist[i - 0]->x;
+				__drawing.geometrey.line.y2 = data.vertlist[i - 0]->y;
+				_drawing << __drawing;
 			}
+			drawing.Append(_drawing.data, _drawing.size);
 		}
 		void addPolyline(const DRW_Polyline& data) override
 		{
-			drawing[drawingindex].type = Drawing::LINE;
-			drawing[drawingindex].geometrey.line.x1 = data.basePoint.x;
-			drawing[drawingindex].geometrey.line.y1 = data.basePoint.y;
-			drawing[drawingindex].geometrey.line.x2 = data.vertlist[0]->basePoint.x;
-			drawing[drawingindex].geometrey.line.y2 = data.vertlist[0]->basePoint.y;
-			drawingindex++;
-
+			Heap<Drawing> _drawing;
+			Drawing __drawing;
+			__drawing.type = Drawing::LINE;
+			__drawing.geometrey.line.x1 = data.basePoint.x;
+			__drawing.geometrey.line.y1 = data.basePoint.y;
+			__drawing.geometrey.line.x2 = data.vertlist[0]->basePoint.x;
+			__drawing.geometrey.line.y2 = data.vertlist[0]->basePoint.y;
+			_drawing << __drawing;
 			for (uint32 i = 1; i < data.vertexcount; i++)
 			{
-				drawing[drawingindex].type = Drawing::LINE;
-				drawing[drawingindex].geometrey.line.x1 = data.vertlist[i - 1]->basePoint.x;
-				drawing[drawingindex].geometrey.line.y1 = data.vertlist[i - 1]->basePoint.y;
-				drawing[drawingindex].geometrey.line.x2 = data.vertlist[i - 0]->basePoint.x;
-				drawing[drawingindex].geometrey.line.y2 = data.vertlist[i - 0]->basePoint.y;
-				drawingindex++;
+				__drawing.type = Drawing::LINE;
+				__drawing.geometrey.line.x1 = data.vertlist[i - 1]->basePoint.x;
+				__drawing.geometrey.line.y1 = data.vertlist[i - 1]->basePoint.y;
+				__drawing.geometrey.line.x2 = data.vertlist[i - 0]->basePoint.x;
+				__drawing.geometrey.line.y2 = data.vertlist[i - 0]->basePoint.y;
+				_drawing << __drawing;
 			}
+			drawing.Append(_drawing.data, _drawing.size);
 		}
 		void addSpline(const DRW_Spline* data) override
 		{
-			test++;
+			struct SplineInterpolatorByGPT4o_EntireCodeWasWrittenByGPTItDidNotWorkTheFirstTimeSoIAskedGPTToFixItAndItDid_IHaveNoClueHowThisCodeWorksAndHonestlyIDontCare_GodThisShitIsAmazing_ItSavedMeAtLeast2DaysOfWork
+			{
+				float64 Basis(int32 ci, int32 degree, float64 u, float64* knots)
+				{
+					if (degree == 0)
+					{
+						return (knots[ci] <= u && u < knots[ci + 1]) ? 1.0 : 0.0;
+					}
+					else 
+					{
+						float64 left = (knots[ci + degree] - knots[ci]) != 0 ? (u - knots[ci]) / (knots[ci + degree] - knots[ci]) : 0;
+						float64 right = (knots[ci + degree + 1] - knots[ci + 1]) != 0 ? (knots[ci + degree + 1] - u) / (knots[ci + degree + 1] - knots[ci + 1]) : 0;
+						return left * Basis(ci, degree - 1, u, knots) + right * Basis(ci + 1, degree - 1, u, knots);
+					}
+				}
+
+				float64x2 InterpolateSpline(float64 u, int32 degree, float64x2* controlpoints,uint32 controlpointscount, float64* knots)
+				{
+					float64x2 result;
+					for (uint32 ci = 0; ci < controlpointscount; ci++)
+					{
+						float64 b = Basis(ci, degree, u, knots);
+						result.x += b * controlpoints[ci].x;
+						result.y += b * controlpoints[ci].y;
+					}
+					return result;
+				}
+			}spline;
+
+			float64x2* controlpoints = new float64x2[data->ncontrol];
+			float64* knots = new float64[data->nknots];
+			int32 degree = data->degree;
+
+			for (uint32 i = 0; i < data->ncontrol; i++)
+			{
+				controlpoints[i].x = data->controllist[i]->x;
+				controlpoints[i].y = data->controllist[i]->y;
+			}
+
+			for (uint32 i = 0; i < data->nknots; i++)
+			{
+				knots[i] = data->knotslist[i] / data->knotslist[data->nknots - 1];
+			}
+
+			Heap<Drawing> _drawing;
+			Drawing __drawing;
+			float64 us = 0;
+			float64 ue = 0;
+			uint32 ks = 0;
+			uint32 ke = 0;
+			float64x2 p;
+			float64x2 q;
+			while (ue < 1)
+			{
+				for (uint32 k = ks; k < data->nknots; k++)
+				{
+					if ((knots[k + 0] == knots[k + 1]) && (knots[k + 1] == knots[k + 2]))
+					{
+						ke = k;
+						if (knots[ks] == knots[ke])
+							continue;
+						break;
+					}					
+				}
+				us = knots[ks];
+				ue = knots[ke];
+				
+
+				p = spline.InterpolateSpline(us, degree, controlpoints, data->ncontrol, knots);
+				for (float64 u = us; u < ue; u+=0.1)
+				{
+					float64x2 q = spline.InterpolateSpline(u, degree, controlpoints, data->ncontrol, knots);
+					if (p == q)
+						continue;
+					__drawing.type = Drawing::LINE;
+					__drawing.geometrey.line.x1 = p.x;
+					__drawing.geometrey.line.y1 = p.y;
+					__drawing.geometrey.line.x2 = q.x;
+					__drawing.geometrey.line.y2 = q.y;
+					_drawing << __drawing;
+
+					p = q;
+				}
+				q = spline.InterpolateSpline(ue, degree, controlpoints, data->ncontrol, knots);
+				_drawing[_drawing.size - 1].geometrey.line.x2 = q.x;
+				_drawing[_drawing.size - 1].geometrey.line.y2 = q.y;
+				us = ue;
+				ks = ke;
+			}
+			drawing.Append(_drawing.data, _drawing.size);
+			drawing[drawing.size - 1].geometrey.line.x2 = controlpoints[data->ncontrol - 1].x;
+			drawing[drawing.size - 1].geometrey.line.y2 = controlpoints[data->ncontrol - 1].y;
+			return;
 		}
 		void addKnot(const DRW_Entity& data) override
 		{
@@ -646,33 +579,60 @@ int32 EMSCRIPTEN_KEEPALIVE LoadDXF(char* file, uint32 length)
 			test++;
 		}
 	};
-	DXFCounter counter;
 	DXFReader reader;
-	dxfRW dxf("intermediated.txt");
-	if (!dxf.read(&counter, false)) { return -1; }
-	drawing = (Drawing*)malloc(sizeof(Drawing) * drawinglength);
-	
+	//dxfRW dxf("Om Jali.dxf");
+	//dxfRW dxf("spline.dxf");
+	dxfRW dxf("TEST.dxf");
+	//dxfRW dxf("intermediated.txt");
 	if (!dxf.read(&reader, false)) { return -1; }
-
-	cout << "drawing = " << (uint32)(void*)drawing << endl;
-	cout << "drawinglength = "<< drawinglength << endl;
+	cout << "drawing = " << (uint32)(void*)drawing.data << endl;
+	cout << "drawinglength = "<< drawing.size << endl;
 	cout << "LoadDXF Out" << endl;
 	return 0;
 }
 
-extern "C"
+EMSATTRIBUTE int32 ConvertToLineDrawing()
 {
-	int32 EMSCRIPTEN_KEEPALIVE LoadDXFExport(char* file,uint32 length)
-	{
-		return LoadDXF(file,length);
-	}
+	if (drawing.size == 0)return -1;
 
-	uint32 EMSCRIPTEN_KEEPALIVE GETdrawing()
-	{
-		return (uint32)drawing;
-	}
-	uint32 EMSCRIPTEN_KEEPALIVE GETdrawinglength()
-	{
-		return drawinglength;
-	}	
+	return 0;
 }
+
+EMSATTRIBUTE int32 Generate3DHalfDepth()
+{
+	if (drawing.size == 0)return -1;
+	return 0;
+}
+
+EMSATTRIBUTE int32 InitizalizeVideo(uint32 width, uint32 height)
+{
+	if (video)delete[] video;
+
+	if (width <= 1 || height <= 1)return -1;
+
+	videowidth = width;
+	videoheight = height;
+	video = new VideoBuffer[videowidth * videoheight];
+
+	VideoBuffer clear(0, 0, 0, 255);
+	for (uint32 h = 0; h < videoheight; h++)
+		for (uint32 w = 0; w < videowidth; w++)
+			video[h * videowidth + w] = clear;
+
+	return 0;
+}
+
+EMSATTRIBUTE void* GETvideo()
+{
+	return (void*)video;
+}
+
+EMSATTRIBUTE void* GETdrawing()
+{
+	return (void*)drawing.data;
+}
+
+EMSATTRIBUTE uint32 GETdrawinglength()
+{
+	return drawing.size;
+}	

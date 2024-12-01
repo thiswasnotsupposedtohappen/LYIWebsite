@@ -974,6 +974,12 @@ struct float64x2
 		x = f.x;
 		y = f.y;
 	}
+	bool operator == (const float64x2 f)
+	{
+		if (x != f.x)return false;
+		if (y != f.y)return false;
+		return true;
+	}
 
 	float64x2 operator+(const float64x2 f)
 	{
@@ -1391,10 +1397,14 @@ float64 Distance(float64x4 vector1, float64x4 vector2)
 
 float64 DistanceOfaPointFromLine(float64x2 P, float64x2 L1, float64x2 L2)
 {
-	float64 A = -((L2.y - L1.y));
-	float64 B = -((L2.x - L1.x));
-	float64 C = -(L1.x * (L2.y - L1.y)) - (L1.y * (L2.x - L1.x));
-	return abs((A * P.x + B * P.y + C) / sqrt(A * A + B * B));
+	float64 A = L2.y - L1.y;
+	float64 B = L1.x - L2.x;
+	float64 C = L2.x * L1.y - L1.x * L2.y;
+	return abs(A * P.x + B * P.y + C) / sqrt(A * A + B * B);
+	//float64 A = -((L2.y - L1.y));
+	//float64 B = -((L2.x - L1.x));
+	//float64 C = -(L1.x * (L2.y - L1.y)) - (L1.y * (L2.x - L1.x));
+	//return abs((A * P.x + B * P.y + C) / sqrt(A * A + B * B));
 }
 float64 DistanceOfaPointFromLine(float64x3 P, float64x3 L1, float64x3 L2)
 {

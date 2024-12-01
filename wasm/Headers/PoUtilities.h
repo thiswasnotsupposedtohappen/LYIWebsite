@@ -580,6 +580,65 @@ struct LinkedListAppend
 	}
 };
 
+template <typename DataType>
+struct Heap
+{
+	DataType* data;
+	uint32 size;
+	Heap()
+	{
+		ZeroMemory(this, sizeof(Heap));
+	}
+	~Heap()
+	{
+		delete[] data;
+		ZeroMemory(this, sizeof(Heap));
+	};
+	Heap(const Heap& _heap)
+	{
+		data = new DataType[_heap.size];
+		MemoryCopy(data, _heap.data, sizeof(DataType) * _heap.size);
+		size = _heap.size;
+	}
+	void operator = (const Heap& _heap)
+	{
+		delete[] data;
+		data = new DataType[_heap.size];
+		MemoryCopy(data, _heap.data, sizeof(DataType) * _heap.size);
+		size = _heap.size;
+	}
+	void operator << (DataType _data)
+	{
+		DataType* newdata = new DataType[size + 1];
+		MemoryCopy(newdata, data, sizeof(DataType) * size);
+		newdata[size] = _data;
+		delete[] data;
+		data = newdata;
+		size++;
+	}
+	void Append(DataType* _data, uint32 _size)
+	{
+		DataType* newdata = new DataType[size + _size];
+		MemoryCopy(newdata, data, sizeof(DataType) * size);
+		MemoryCopy(&newdata[size], _data, sizeof(DataType) * _size);
+		delete[] data;
+		data = newdata;
+		size += _size;
+	}
+	DataType& operator[](uint32 index)
+	{
+		return data[index];
+	}
+	const DataType& operator[](uint32 index) const
+	{
+		return data[index];
+	}
+	void Release()
+	{
+		delete[] data;
+		ZeroMemory(this, sizeof(Heap));
+	}
+};
 
 struct File
 {
