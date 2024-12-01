@@ -340,16 +340,22 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 
 			float64x2 p;
 			float64x2 q;
+			float64x2 w;
+			float64 previousu = 0;
 			p = spline.InterpolateSpline(0, degree, controlpoints, data->ncontrol, knots);
-			for (float64 u = 0; u < 1; u+=0.001)
+			for (float64 u = 0; u <= 1.001; u+=0.001)
 			{
 				q = spline.InterpolateSpline(u, degree, controlpoints, data->ncontrol, knots);
-				if (Distance(p, q) < 0.1)
+				if (p == q)
+					continue;
+				w = spline.InterpolateSpline((previousu + u)/2, degree, controlpoints, data->ncontrol, knots);
+				if (DistanceOfaPointFromLine(w,p,q) < 0.1)
 					continue;
 				__drawing.p0 = p;
 				__drawing.p1 = q;
 				_drawing << __drawing;
 				p = q;
+				previousu = u;
 			}
 			drawing.Append(_drawing.data, _drawing.size);
 			drawing[drawing.size - 1].p1.x = controlpoints[data->ncontrol - 1].x;
@@ -558,8 +564,8 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 
 	dxfRW dxf("intermediated.txt");
 #else
-	//dxfRW dxf("Om Jali.dxf");
-	dxfRW dxf("spline.dxf");
+	dxfRW dxf("Om Jali.dxf");
+	//dxfRW dxf("spline.dxf");
 	//dxfRW dxf("TEST.dxf");
 #endif
 	if (!dxf.read(&reader, false)) { return -1; }
