@@ -22,12 +22,12 @@
 
   <input type="file" id="fileInput" style="padding-left: 50px;"></input><br>
 
-  <div id = "viewer" style="height: 500px; margin-top: 50px; border-style: solid; border-width: 2px; border-color: black;">
+  <div id = "viewer" style="height: 800px; margin-top: 50px; border-style: solid; border-width: 2px; border-color: black;">
     <canvas></canvas>
   </div>
 
   <div>    
-    <br>DXF Output:<br>
+    <br>Console:<br>
   </div>
   <div class="consoleoutput">    
   </div>
@@ -58,6 +58,8 @@ var drawinglength = undefined;
 var zoom = 1;
 var buttonleftmousedown = false;
 var mousex = 0, mousey = 0;
+var touchxp = 0, touchyp = 0;
+var squeeze = 0;
 var viewer = document.getElementById("viewer");
 var canvas = document.querySelector("canvas");
 canvas.width = viewer.clientWidth;
@@ -83,6 +85,9 @@ addEventListener("resize", function()
 {
   canvas.width = viewer.clientWidth;
   canvas.height = viewer.clientHeight;
+  ctx.resetTransform();
+  ctx.translate(canvas.width/2,canvas.height/2);
+  ctx.scale(1,-1);
   DrawDXF();
 });
 canvas.addEventListener('wheel', function(event) 
@@ -95,21 +100,76 @@ canvas.addEventListener('wheel', function(event)
 });
 canvas.addEventListener('mousedown', function(event) 
 {
+  event.preventDefault();
   if (event.button === 0) 
     buttonleftmousedown = true;
 });
-canvas.addEventListener('mouseup', function(event) 
+document.addEventListener('mouseup', function(event) 
 {
   if (event.button === 0) 
     buttonleftmousedown = false;
 });
-canvas.addEventListener('mousemove', function(event) 
+document.addEventListener('mousemove', function(event) 
 {
   if (buttonleftmousedown) 
   {
     mousex += event.movementX;
     mousey -= event.movementY;
     DrawDXF();
+  }
+});
+
+canvas.addEventListener('touchstart', function(event) 
+{
+  event.preventDefault();
+  if (event.touches.length === 1) 
+  {
+    buttonleftmousedown = true;
+    touchxp = event.touches[0].clientX;
+    touchyp = event.touches[0].clientY;
+  }    
+  if (event.touches.length === 2) 
+  {
+    var touchx0 = event.touches[0].clientX;
+    var touchy0 = event.touches[0].clientY;
+    var touchx1 = event.touches[1].clientX;
+    var touchy1 = event.touches[1].clientY;
+
+    squeeze = Math.sqrt((touchx1-touchx0)*(touchx1-touchx0) + (touchy1-touchy0)*(touchy1-touchy0));
+  }    
+});
+document.addEventListener('touchend', function(event) 
+{
+  buttonleftmousedown = false;    
+});
+document.addEventListener('touchmove', function(event) 
+{
+  if (buttonleftmousedown && event.touches.length === 1) 
+  {
+    mousex += event.touches[0].clientX - touchxp;
+    mousey -= event.touches[0].clientY - touchyp;
+    touchxp = event.touches[0].clientX;
+    touchyp = event.touches[0].clientY;
+    DrawDXF();
+
+    document.querySelector(".consoleoutput").innerHTML = "mousex = " + mousex + " mousey = " + mousey;    
+  }
+
+  if (event.touches.length === 2) 
+  {
+    var touchx0 = event.touches[0].clientX;
+    var touchy0 = event.touches[0].clientY;
+    var touchx1 = event.touches[1].clientX;
+    var touchy1 = event.touches[1].clientY;
+
+    var newsqueeze = Math.sqrt((touchx1-touchx0)*(touchx1-touchx0) + (touchy1-touchy0)*(touchy1-touchy0));
+    zoom += (newsqueeze - squeeze)/1000;
+    if(zoom < 0.1)
+      zoom = 0.1;
+    DrawDXF();
+    squeeze = newsqueeze;
+
+    document.querySelector(".consoleoutput").innerHTML = "squeeze = " + squeeze + " newsqueeze = " + newsqueeze;
   }
 });
 

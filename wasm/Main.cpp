@@ -133,7 +133,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 			Line __drawing;
 			__drawing.p0.x = data.basePoint.x + data.radious * cos(0);
 			__drawing.p0.y = data.basePoint.y + data.radious * sin(0);
-			float64 inc = 10 / data.radious;
+			float64 inc = 1 / data.radious;
 			for (float64 i = inc; i < 2 * pi; i += inc)
 			{
 				__drawing.p1.x = data.basePoint.x + data.radious * cos((i));
@@ -564,7 +564,8 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 
 	dxfRW dxf("intermediated.txt");
 #else
-	dxfRW dxf("Om Jali.dxf");
+	dxfRW dxf("Lasercutting Cargo 2mm MS with material.dxf");
+	//dxfRW dxf("Om Jali.dxf");
 	//dxfRW dxf("spline.dxf");
 	//dxfRW dxf("TEST.dxf");
 #endif
