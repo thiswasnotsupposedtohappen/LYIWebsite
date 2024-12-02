@@ -51,9 +51,18 @@ struct String
 	}
 	void operator=(const String &_string)
 	{
+		if (string)delete[] string;
 		length = _string.length;
 		string = new char[length];
 		memcpy(string, _string.string, sizeof(char)*length);
+	}
+	void operator=(std::string _string)
+	{
+		if (string)delete[] string;
+		length = _string.length() + 1;
+		string = new char[length];
+		for (uint32 i = 0; i < length; i++)
+			string[i] = _string[i];
 	}
 	bool operator==(char *_string)
 	{
@@ -591,8 +600,9 @@ struct Heap
 	}
 	~Heap()
 	{
-		delete[] data;
-		ZeroMemory(this, sizeof(Heap));
+		//if(size)
+		//	delete[] data;
+		//ZeroMemory(this, sizeof(Heap));
 	};
 	Heap(const Heap& _heap)
 	{
@@ -635,7 +645,8 @@ struct Heap
 	}
 	void Release()
 	{
-		delete[] data;
+		if (size)
+			delete[] data;
 		ZeroMemory(this, sizeof(Heap));
 	}
 };

@@ -93,7 +93,7 @@ addEventListener("resize", function()
 canvas.addEventListener('wheel', function(event) 
 {
   event.preventDefault();
-  zoom -= event.deltaY/1000;
+  zoom -= (event.deltaY/1000) * zoom;
   if(zoom < 0.1)
     zoom = 0.1;
   DrawDXF();
