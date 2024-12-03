@@ -191,25 +191,220 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 		}
 		void addEllipse(const DRW_Ellipse& data) override
 		{
-			test++;
+			Heap<Line> _drawing;
+			Line _line;
+			float64x2 centre;
+			float64x2 startpoint;
+			float64 radius;
+			float64 ratio;
+			float64 angle;
+			float64 anglestart = data.staparam;
+			float64 angleend = data.endparam;
+			
+			centre.x = data.basePoint.x;
+			centre.y = data.basePoint.y;
+			startpoint.x = data.secPoint.x;
+			startpoint.y = data.secPoint.y;
+			radius = Distance(float64x2(0,0), startpoint);
+			ratio = data.ratio;
+			angle = atan2(startpoint.y, startpoint.x);
+			anglestart = data.staparam;
+			angleend = data.endparam;
+			float64 inc = 0.5 / radius;
+			if (anglestart > 2 * pi)anglestart -= 2 * pi;
+			if (angleend > 2 * pi)angleend -= 2 * pi;
+
+			if (data.isccw)
+			{
+				inc *= +1;
+				if (anglestart > angleend)
+					anglestart -= 2 * pi;
+			}
+			else
+			{
+				inc *= -1;
+				if (anglestart < angleend)
+					anglestart += 2 * pi;
+			}
+
+			for (float64 i = (anglestart + inc); i <= angleend; i += inc)
+			{
+				_line.p0.x = radius * cos((i - inc));
+				_line.p0.y = radius * sin((i - inc)) * ratio;
+				_line.p1.x = radius * cos((i));
+				_line.p1.y = radius * sin((i)) * ratio;
+
+				float64 p0x = _line.p0.x;
+				float64 p0y = _line.p0.y;
+				float64 p1x = _line.p1.x;
+				float64 p1y = _line.p1.y;
+
+				_line.p0.x = p0x * cos(angle) - p0y * sin(angle);
+				_line.p0.y = p0x * sin(angle) + p0y * cos(angle);
+				_line.p1.x = p1x * cos(angle) - p1y * sin(angle);
+				_line.p1.y = p1x * sin(angle) + p1y * cos(angle);
+
+				_line.p0 = _line.p0 + centre;
+				_line.p1 = _line.p1 + centre;
+
+				_drawing << _line;
+			}
+			drawingcurrentblock->Append(_drawing.data, _drawing.size);
+			_drawing.Release();
+			return;
 		}
 		void addLWPolyline(const DRW_LWPolyline& data) override
 		{
+			struct CustomCalculator
+			{
+				int32 CalculateCentre(float64x2 p1, float64x2 p2, float64 r,float64x2* c1, float64x2* c2)
+				{
+					float64x2 centre;
+
+					// Calculate the distance between the two points
+					double dx = p2.x - p1.x;
+					double dy = p2.y - p1.y;
+					double d_sq = dx * dx + dy * dy;
+					double d = std::sqrt(d_sq);
+
+					// Check if the circle is possible
+					if (d > 2 * r) 
+					{
+						return -1;
+					}
+
+					// Compute the midpoint between p1 and p2
+					float64x2 mid;
+					mid.x = (p1.x + p2.x) / 2.0;
+					mid.y = (p1.y + p2.y) / 2.0;
+
+					// Calculate the distance from the midpoint to the circle centers
+					double h = sqrt(r * r - (d / 2.0) * (d / 2.0));
+
+					// Determine the direction vector perpendicular to the line segment
+					double ux = -dy / d;
+					double uy = dx / d;
+
+					// Calculate the two possible centers
+					c1->x = mid.x + h * ux;
+					c1->y = mid.y + h * uy;
+
+					c2->x = mid.x - h * ux;
+					c2->y = mid.y - h * uy;
+
+					return 0;
+				}
+			
+				float64 CheckSide(float64x2 p1, float64x2 p2, float64x2 c)
+				{
+					float64x2 v1, v2;
+					v1.x = p2.x - p1.x;
+					v1.y = p2.y - p1.y;
+					v2.x = c.x - p1.x;
+					v2.y = c.y - p1.y;
+					return (v1.x * v2.y - v1.y * v2.x);
+				}
+			}customcalculator;
 			Heap<Line> _drawing;
 			Line _line;
-			_line.p0.x = data.vertex->x;
-			_line.p0.y = data.vertex->y;
-			_line.p1.x = data.vertlist[0]->x;
-			_line.p1.y = data.vertlist[0]->y;
-			_drawing << _line;
+			float64x2 c1;
+			float64x2 c2;
+			float64x2 centre;
+			float64 r;
+			float64 d;
+			float64 b;
+			float64 anglestart;
+			float64 angleend;
+			float64 inc;
+
+			_line.p0.x = data.vertlist[0]->x;
+			_line.p0.y = data.vertlist[0]->y;
 
 			for (uint32 i = 1; i < data.vertexnum; i++)
 			{
-				_line.p0.x = data.vertlist[i - 1]->x;
-				_line.p0.y = data.vertlist[i - 1]->y;
-				_line.p1.x = data.vertlist[i - 0]->x;
-				_line.p1.y = data.vertlist[i - 0]->y;
-				_drawing << _line;
+				_line.p1.x = data.vertlist[i]->x;
+				_line.p1.y = data.vertlist[i]->y;
+				b = data.vertlist[i - 1]->bulge;
+				if (b)
+				{
+					d = Distance(_line.p0, _line.p1);
+					b = b * d / 2;
+					r = (d*d + 4*Absolute(b)* Absolute(b)) / (8* Absolute(b));
+					customcalculator.CalculateCentre(_line.p0, _line.p1, r, &c1, &c2);
+					inc = 0.5 / r;
+
+					float64 side;
+					side = customcalculator.CheckSide(_line.p0, _line.p1, c1);
+					if (data.vertlist[i - 1]->bulge > 0)
+					{
+						if (customcalculator.CheckSide(_line.p0, _line.p1, c1) > 0)
+						{
+							inc *= 1;
+							if (data.vertlist[i - 1]->bulge <= 1)
+								centre = c1;
+							else
+								centre = c2;
+						}
+						else
+						{
+							inc *= -1;
+							if (data.vertlist[i - 1]->bulge <= 1)
+								centre = c2;
+							else
+								centre = c1;
+						}
+					}
+					else
+					{
+						if (customcalculator.CheckSide(_line.p0, _line.p1, c1) > 0)
+						{
+							inc *= -1;
+							if (data.vertlist[i - 1]->bulge >= -1)
+								centre = c2;
+							else
+								centre = c1;
+						}
+						else
+						{
+							inc *= 1;
+							if (data.vertlist[i - 1]->bulge >= -1)
+								centre = c1;
+							else
+								centre = c2;
+							
+						}
+					}
+
+					if (inc > 0)
+					{
+						anglestart = atan2(_line.p0.y - centre.y, _line.p0.x - centre.x);
+						angleend = atan2(_line.p1.y - centre.y, _line.p1.x - centre.x);
+						if (angleend < anglestart)angleend += 2 * pi;
+					}
+					else
+					{
+						anglestart = atan2(_line.p0.y - centre.y, _line.p0.x - centre.x);
+						angleend = atan2(_line.p1.y - centre.y, _line.p1.x - centre.x);
+						if (angleend > anglestart)angleend -= 2 * pi;
+					}
+
+					for (float64 i = (anglestart + inc); Absolute(i - angleend) > Absolute(inc); i += inc)
+					{
+						_line.p1.x = centre.x + r * cos((i));
+						_line.p1.y = centre.y + r * sin((i));
+						_drawing << _line;
+						_line.p0 = _line.p1;
+					}
+					_drawing.data[_drawing.size - 1].p1.x = data.vertlist[i]->x;
+					_drawing.data[_drawing.size - 1].p1.y = data.vertlist[i]->y;
+					_line.p0.x = data.vertlist[i]->x;
+					_line.p0.y = data.vertlist[i]->y;
+				}
+				else
+				{
+					_drawing << _line;
+					_line.p0 = _line.p1;
+				}
 			}
 			drawingcurrentblock->Append(_drawing.data, _drawing.size);
 			_drawing.Release();
@@ -588,7 +783,8 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 
 	dxfRW dxf("intermediated.txt");
 #else
-	dxfRW dxf("Lasercutting Cargo 2mm MS with material.dxf");
+	dxfRW dxf("Ellipse.dxf");
+	//dxfRW dxf("Lasercutting Cargo 2mm MS with material.dxf");
 	//dxfRW dxf("Om Jali.dxf");
 	//dxfRW dxf("spline.dxf");
 	//dxfRW dxf("TEST.dxf");

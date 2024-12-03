@@ -1020,6 +1020,13 @@ struct float64x2
 	{
 		return sqrt((x * x) + (y * y));
 	}
+	float64x2 Cross(const float64x2 f)
+	{
+		float64x2 result;
+		result.x = (y * f.x) - (x * f.y);
+		result.y = (x * f.y) - (y * f.x);
+		return result;
+	}
 	void Normalize()
 	{
 		float64 factor = (float64)sqrt((x * x) + (y * y));
