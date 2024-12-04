@@ -611,6 +611,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 		}
 		void addInsert(const DRW_Insert& data) override
 		{
+			Heap<Line> _drawing;
 			char blockname[256];
 			for (uint32 i = 0; i < data.name.size(); i++)
 				blockname[i] = data.name[i];
@@ -646,10 +647,11 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 						line.p1.x += data.basePoint.x;
 						line.p1.y += data.basePoint.y;
 
-						drawing << line;
+						_drawing << line;
 					}
 				}
 			}
+			drawing.Append(_drawing.data, _drawing.size);
 		}
 		void addTrace(const DRW_Trace& data) override
 		{
@@ -797,19 +799,6 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 	cout << "drawing = " << (uint32)(void*)drawing.data << endl;
 	cout << "drawinglength = "<< drawing.size << endl;
 	cout << "LoadDXF Out" << endl;
-	return 0;
-}
-
-EMSATTRIBUTE int32 ConvertToLineDrawing()
-{
-	if (drawing.size == 0)return -1;
-
-	return 0;
-}
-
-EMSATTRIBUTE int32 Generate3DHalfDepth()
-{
-	if (drawing.size == 0)return -1;
 	return 0;
 }
 
