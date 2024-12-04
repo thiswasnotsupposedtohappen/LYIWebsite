@@ -151,8 +151,6 @@ document.addEventListener('touchmove', function(event)
     touchxp = event.touches[0].clientX;
     touchyp = event.touches[0].clientY;
     DrawDXF();
-
-    document.querySelector(".consoleoutput").innerHTML = "mousex = " + mousex + " mousey = " + mousey;    
   }
 
   if (event.touches.length === 2) 
@@ -168,8 +166,6 @@ document.addEventListener('touchmove', function(event)
       zoom = 0.1;
     DrawDXF();
     squeeze = newsqueeze;
-
-    document.querySelector(".consoleoutput").innerHTML = "squeeze = " + squeeze + " newsqueeze = " + newsqueeze;
   }
 });
 

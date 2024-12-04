@@ -20,20 +20,99 @@
   </div>
 
   <div class="shop-menu">
+
+  </div>
+</body>
+
+<script>
+  const url = new URLSearchParams(window.location.search);
+  if(url.size == 0)
+  {
+    document.querySelector('.shop-menu').innerHTML = `
     <div class="shop-menu-items">
-      <a href="shop-manufacturing.html"><img class="shop-menu-items-img" src="images/CNC Manufacturing.jpg"></a><br>
+      <a href="shop-cnc-manufacturing.html"><img class="shop-menu-items-img" src="images/CNC Manufacturing.jpg"></a><br>
       <h2>CNC Manufacturing</h2>
     </div>
     <div class="shop-menu-items">
-      <a href="shop-doors.html"><img class="shop-menu-items-img" src="images/door.JPG"></a><br>
+      <a href="shop.html?category=doors"><img class="shop-menu-items-img" src="images/door.JPG"></a><br>
       <h2>Doors</h2>
     </div>
     <div class="shop-menu-items">
-      <a href="shop-mandir.html"><img class="shop-menu-items-img" src="images/Mandir.JPG"></a><br>
+      <a href="shop.html?category=mandir"><img class="shop-menu-items-img" src="images/Mandir.JPG"></a><br>
       <h2>Mandir</h2>
-    </div>
-  </div>
+    </div>    
+    <div class="shop-menu-items">
+      <a href="shop.html?category=jali"><img class="shop-menu-items-img" src="images/Jali.JPG"></a><br>
+      <h2>Decorative Jali</h2>
+    </div>    
+        <div class="shop-menu-items">
+      <a href="shop.html?category=custonised_mandirback"><img class="shop-menu-items-img" src="images/IMG_1216.jpg"></a><br>
+      <h2>Customised Mandir Back</h2>
+    </div>    
+    `;
+  }
+  else
+  {
+    const category = url.get('category');
+    if(category == 'doors')
+    {
+      for(var i=1;i<=46;i++)
+      {
+        document.querySelector('.shop-menu').innerHTML += `
+          <div class="shop-menu-items">
+            <a href="shop.html?category=doors"><img class="shop-menu-items-img" src="images/Doors/`+i+`.jpg"></a><br>
+            <h2>Door-`+i+`</h2>
+          </div>
+          `;
+      }
+    }
+    if(category == 'mandir')
+    {
+      for(var i=1;i<=27;i++)
+      {
+        document.querySelector('.shop-menu').innerHTML += `
+        <div class="shop-menu-items">
+          <a href="shop.html?category=mandir"><img class="shop-menu-items-img" src="images/Mandir/`+i+`.jpg"></a><br>
+          <h2>Mandir-`+i+`</h2>
+        </div>
+          `;
+      }
+    }
+    if(category == 'jali')
+    {
+      for(var i=1;i<=280;i++)
+      {
+        document.querySelector('.shop-menu').innerHTML += `
+        <div class="shop-menu-items">
+          <a href="shop-customised.html?design=JaliPartition-`+i+`"><img class="shop-menu-items-img" src="images/Decorative Jali/Jali/`+i+`.jpg"></a><br>
+          <h2>JaliPartition-`+i+`</h2>
+        </div>
+        `;
+      }
+    }
+    if(category == 'custonised_mandirback')
+    {
+      for(var i=1;i<=30;i++)
+      {
+        document.querySelector('.shop-menu').innerHTML += `
+        <div class="shop-menu-items">
+          <a href="shop-customised.html?design=MandirDesign-`+i+`"><img class="shop-menu-items-img" src="images/Decorative Jali/Mandir Back/`+i+`.jpg"></a><br>
+          <h2>MandirDesign-`+i+`</h2>
+        </div>
+        `;
+      }  
+      for(var i=1;i<=20;i++)  
+      {
+        document.querySelector('.shop-menu').innerHTML += `
+        <div class="shop-menu-items">
+          <a href="shop-customised.html?design=MandirSide-`+i+`"><img class="shop-menu-items-img" src="images/Decorative Jali/Mandir side/`+i+`.jpg"></a><br>
+          <h2>MandirSide-`+i+`</h2>
+        </div>
+        `;
+      }
+    }
+  }
 
-</body>
+</script>
 
 </html>

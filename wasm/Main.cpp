@@ -599,6 +599,12 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 				p = q;
 				previousu = u;
 			}
+			if (_drawing.size == 0)
+			{
+				q.x = controlpoints[data->ncontrol - 1].x;
+				q.y = controlpoints[data->ncontrol - 1].y;
+				_drawing << _line;
+			}
 			_drawing.data[_drawing.size - 1].p1.x = controlpoints[data->ncontrol - 1].x;
 			_drawing.data[_drawing.size - 1].p1.y = controlpoints[data->ncontrol - 1].y;
 			drawingcurrentblock->Append(_drawing.data, _drawing.size);
@@ -785,7 +791,8 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 
 	dxfRW dxf("intermediated.txt");
 #else
-	dxfRW dxf("lwpoly.dxf");
+	dxfRW dxf("All Jali Designs.dxf");
+	//dxfRW dxf("lwpoly.dxf");
 	//dxfRW dxf("Ellipse.dxf");
 	//dxfRW dxf("Lasercutting Cargo 2mm MS with material.dxf");
 	//dxfRW dxf("Om Jali.dxf");
