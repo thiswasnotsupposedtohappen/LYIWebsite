@@ -558,6 +558,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 			float64x2* controlpoints = new float64x2[data->ncontrol];
 			float64* knots = new float64[data->nknots];
 			int32 degree = data->degree;
+			float64 length = 0;
 
 			for (uint32 i = 0; i < data->ncontrol; i++)
 			{
@@ -570,6 +571,11 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 				knots[i] = data->knotslist[i] / data->knotslist[data->nknots - 1];
 			}
 
+			for (uint32 i = 1; i < data->ncontrol; i++)
+			{
+				length += Distance(controlpoints[i - 1], controlpoints[i]);
+			}
+
 			LinkedList<Line> _drawing;
 			Line _line;
 
@@ -579,13 +585,14 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 			float64 previousu = 0;
 			p = spline.InterpolateSpline(0, degree, controlpoints, data->ncontrol, knots);
 			_line.p0 = p;
-			for (float64 u = 0; u <= 1.001; u+=0.001)
+			float64 inc = 0.1 / length;
+			for (float64 u = 0; u <= 1.001; u+= inc)
 			{
 				q = spline.InterpolateSpline(u, degree, controlpoints, data->ncontrol, knots);
 				if (p == q)
 					continue;
 				w = spline.InterpolateSpline((previousu + u)/2, degree, controlpoints, data->ncontrol, knots);
-				if (DistanceOfaPointFromLine(w,p,q) < 0.1)
+				if (DistanceOfaPointFromLine(w,p,q) < 0.001)
 					continue;
 				_line.p0 = p;
 				_line.p1 = q;
