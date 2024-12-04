@@ -169,15 +169,15 @@ struct LinkedList
 	struct Element
 	{
 		DataType data;
-		Element *right;
-		Element *left;
+		Element* right;
+		Element* left;
 		Element()
 		{
 			right = 0;
 			left = 0;
 		}
 	};
-	Element *head, *current, *tail;
+	Element* head, * current, * tail;
 	uint32 count;
 	DataType Get()
 	{
@@ -231,8 +231,20 @@ struct LinkedList
 			return true;
 		return false;
 	}
+	bool CheckIfRight()
+	{
+		if (current->right)
+			return true;
+		return false;
+	}
+	bool CheckIfLeft()
+	{
+		if (current->left)
+			return true;
+		return false;
+	}
 	void InsertRight(DataType data)
-	{		
+	{
 		if (current)
 		{
 			if (current->right)
@@ -264,7 +276,7 @@ struct LinkedList
 		count++;
 	}
 	void InsertLeft(DataType data)
-	{		
+	{
 		if (current)
 		{
 			if (current->left)
@@ -324,9 +336,10 @@ struct LinkedList
 			current = tail;
 		}
 		count++;
+		current = tail;
 	}
 	DataType PopHead()
-	{		
+	{
 		DataType returndata;
 		ZeroMemory(&returndata, sizeof(DataType));
 		if (head)
@@ -350,11 +363,60 @@ struct LinkedList
 		return returndata;
 	}
 
-	LinkedList()
+	void operator = (const LinkedList<DataType>& _linkedlist)
 	{
-		ZeroMemory(this, sizeof(LinkedList));
+		current = _linkedlist.current;
+		head = _linkedlist.head;
+		tail = _linkedlist.tail;
+		count = _linkedlist.count;
 	}
-	~LinkedList()
+	void operator << (DataType data)
+	{
+		PushTail(data);
+	}
+	void Append(const LinkedList<DataType>& _linkedlist)
+	{	
+		if (_linkedlist.count)
+		{
+			if (tail)
+			{
+				tail->right = _linkedlist.head;
+				_linkedlist.head->left = tail;
+				tail = _linkedlist.tail;
+				current = _linkedlist.tail;
+				count += _linkedlist.count;
+			}
+			else
+			{
+				head = _linkedlist.head;
+				current = _linkedlist.current;
+				tail = _linkedlist.tail;
+				count = _linkedlist.count;
+			}
+		}
+		if (count % 1000 == 0)
+			cout << "Append, Total Count: " << count << endl;
+	}
+
+	bool VerifyIntegrity()
+	{
+		Element* _current = head;
+		uint32 _count = 0;
+		while (_current)
+		{
+			_count++;
+			if (_current->right)
+			{
+				if (_current->right->left != _current)
+					return false;
+			}
+			_current = _current->right;
+		}
+		if (_count != count)
+			return false;
+		return true;
+	}
+	void Release()
 	{
 		current = head;
 		while (current)
@@ -363,6 +425,11 @@ struct LinkedList
 			delete current;
 			current = right;
 		}
+		ZeroMemory(this, sizeof(LinkedList));
+	}
+	LinkedList()
+	{
+		ZeroMemory(this, sizeof(LinkedList));
 	}
 };
 template <typename DataType>

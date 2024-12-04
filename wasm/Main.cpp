@@ -1,11 +1,13 @@
 ﻿#ifdef EMS
 #include <emscripten.h>
 #define EMSATTRIBUTE extern "C" EMSCRIPTEN_KEEPALIVE
+#define FAULT {cout << "FAULT" << endl;while(1);}
 #else
 #define EMSCRIPTEN_KEEPALIVE
 #define EMSATTRIBUTE
 #define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
+#define FAULT __debugbreak();
 #endif
 #include <iostream>
 #include <fstream>
@@ -27,11 +29,12 @@ struct Line
 struct Block
 {
 	char name[240];
-	Heap<Line> blockdata;
+	LinkedList<Line> blockdata;
 };
-Heap<Block> block;
-Heap<Line> drawing;
-Heap<Line> *drawingcurrentblock = &drawing;
+LinkedList<Block> block;
+LinkedList<Line> drawing;
+LinkedList<Line> *drawingcurrentblock = &drawing;
+Heap<Line> drawingexport;
 
 EMSCRIPTEN_KEEPALIVE int32 main()
 {
@@ -57,10 +60,6 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 	{
 		float64 test = 0;
 	public:
-		uint32 CopyData()
-		{
-			return test;
-		}
 		void addHeader(const DRW_Header* data) override
 		{
 			test++;
@@ -103,9 +102,8 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 		}
 		void endBlock() override
 		{
-			if (_block->blockdata.size)
+			if (_block->blockdata.count)
 				block << *_block;
-			//delete _block;
 			_block = 0;
 			drawingcurrentblock = &drawing;
 		}
@@ -133,7 +131,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 		}
 		void addArc(const DRW_Arc& data) override
 		{
-			Heap<Line> _drawing;
+			LinkedList<Line> _drawing;
 			Line _line;
 			float64 anglestart = data.staangle;
 			float64 angleend = data.endangle;
@@ -163,15 +161,14 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 				_drawing << _line;
 				_line.p0 = _line.p1;
 			}
-			_drawing.data[_drawing.size - 1].p1.x = data.basePoint.x + data.radious * cos(angleend);
-			_drawing.data[_drawing.size - 1].p1.y = data.basePoint.y + data.radious * sin(angleend);
-			drawingcurrentblock->Append(_drawing.data, _drawing.size);
-			_drawing.Release();
+			_drawing.tail->data.p1.x = data.basePoint.x + data.radious * cos(angleend);
+			_drawing.tail->data.p1.y = data.basePoint.y + data.radious * sin(angleend);
+			drawingcurrentblock->Append(_drawing);
 			return;
 		}
 		void addCircle(const DRW_Circle& data) override
 		{
-			Heap<Line> _drawing;
+			LinkedList<Line> _drawing;
 			Line _line;
 			_line.p0.x = data.basePoint.x + data.radious * cos(0);
 			_line.p0.y = data.basePoint.y + data.radious * sin(0);
@@ -183,15 +180,14 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 				_drawing << _line;
 				_line.p0 = _line.p1;
 			}
-			_drawing.data[_drawing.size - 1].p1.x = data.basePoint.x + data.radious * cos(2 * pi);
-			_drawing.data[_drawing.size - 1].p1.y = data.basePoint.y + data.radious * sin(2 * pi);
-			drawingcurrentblock->Append(_drawing.data, _drawing.size);
-			_drawing.Release();
+			_drawing.tail->data.p1.x = data.basePoint.x + data.radious * cos(2 * pi);
+			_drawing.tail->data.p1.y = data.basePoint.y + data.radious * sin(2 * pi);
+			drawingcurrentblock->Append(_drawing);
 			return;
 		}
 		void addEllipse(const DRW_Ellipse& data) override
 		{
-			Heap<Line> _drawing;
+			LinkedList<Line> _drawing;
 			Line _line;
 			float64x2 centre;
 			float64x2 startpoint;
@@ -249,8 +245,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 
 				_drawing << _line;
 			}
-			drawingcurrentblock->Append(_drawing.data, _drawing.size);
-			_drawing.Release();
+			drawingcurrentblock->Append(_drawing);
 			return;
 		}
 		void addLWPolyline(const DRW_LWPolyline& data) override
@@ -305,7 +300,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 					return (v1.x * v2.y - v1.y * v2.x);
 				}
 			}customcalculator;
-			Heap<Line> _drawing;
+			LinkedList<Line> _drawing;
 			Line _line;
 			float64x2 c1;
 			float64x2 c2;
@@ -395,8 +390,8 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 						_drawing << _line;
 						_line.p0 = _line.p1;
 					}
-					_drawing.data[_drawing.size - 1].p1.x = data.vertlist[i]->x;
-					_drawing.data[_drawing.size - 1].p1.y = data.vertlist[i]->y;
+					_drawing.tail->data.p1.x = data.vertlist[i]->x;
+					_drawing.tail->data.p1.y = data.vertlist[i]->y;
 					_line.p0.x = data.vertlist[i]->x;
 					_line.p0.y = data.vertlist[i]->y;
 				}
@@ -406,13 +401,12 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 					_line.p0 = _line.p1;
 				}
 			}
-			drawingcurrentblock->Append(_drawing.data, _drawing.size);
-			_drawing.Release();
+			drawingcurrentblock->Append(_drawing);
 			return;
 		}
 		void addPolyline(const DRW_Polyline& data) override
 		{
-			Heap<Line> _drawing;
+			LinkedList<Line> _drawing;
 			Line _line;
 			_line.p0.x = data.vertlist[0]->basePoint.x;
 			_line.p0.y = data.vertlist[0]->basePoint.y;
@@ -427,8 +421,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 				_line.p1.y = data.vertlist[i - 0]->basePoint.y;
 				_drawing << _line;
 			}
-			drawingcurrentblock->Append(_drawing.data, _drawing.size);
-			_drawing.Release();
+			drawingcurrentblock->Append(_drawing);
 			return;
 		}
 		void addSpline(const DRW_Spline* data) override
@@ -577,7 +570,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 				knots[i] = data->knotslist[i] / data->knotslist[data->nknots - 1];
 			}
 
-			Heap<Line> _drawing;
+			LinkedList<Line> _drawing;
 			Line _line;
 
 			float64x2 p;
@@ -585,6 +578,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 			float64x2 w;
 			float64 previousu = 0;
 			p = spline.InterpolateSpline(0, degree, controlpoints, data->ncontrol, knots);
+			_line.p0 = p;
 			for (float64 u = 0; u <= 1.001; u+=0.001)
 			{
 				q = spline.InterpolateSpline(u, degree, controlpoints, data->ncontrol, knots);
@@ -599,16 +593,18 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 				p = q;
 				previousu = u;
 			}
-			if (_drawing.size == 0)
+			if (_drawing.count == 0)
 			{
 				q.x = controlpoints[data->ncontrol - 1].x;
 				q.y = controlpoints[data->ncontrol - 1].y;
+				_line.p1 = q;
 				_drawing << _line;
 			}
-			_drawing.data[_drawing.size - 1].p1.x = controlpoints[data->ncontrol - 1].x;
-			_drawing.data[_drawing.size - 1].p1.y = controlpoints[data->ncontrol - 1].y;
-			drawingcurrentblock->Append(_drawing.data, _drawing.size);
-			_drawing.Release();
+			_drawing.tail->data.p1.x = controlpoints[data->ncontrol - 1].x;
+			_drawing.tail->data.p1.y = controlpoints[data->ncontrol - 1].y;
+			drawingcurrentblock->Append(_drawing);
+			delete[] controlpoints;
+			delete[] knots;
 			return;		
 		}
 		void addKnot(const DRW_Entity& data) override
@@ -617,19 +613,20 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 		}
 		void addInsert(const DRW_Insert& data) override
 		{
-			Heap<Line> _drawing;
+			LinkedList<Line> _drawing;
 			char blockname[256];
 			for (uint32 i = 0; i < data.name.size(); i++)
 				blockname[i] = data.name[i];
 			blockname[data.name.size()] = 0;
 
-			for (uint32 i = 0; i < block.size; i++)
-			{
-				if (strcmp(blockname,block[i].name) == 0)
+			uint32 i, j;
+			for (i = 0, block.GotoHead(); i < block.count; i++, block.MoveRight())
+			{				
+				if (strcmp(blockname,block.current->data.name) == 0)
 				{
-					for (uint32 j = 0; j < block[i].blockdata.size; j++)
+					for (j = 0, block.current->data.blockdata.GotoHead(); j < block.current->data.blockdata.count;j++, block.current->data.blockdata.MoveRight())
 					{
-						Line line = block[i].blockdata.data[j];
+						Line line = block.current->data.blockdata.current->data;
 						line.p0.x *= data.xscale;
 						line.p0.y *= data.yscale;
 						line.p1.x *= data.xscale;
@@ -657,7 +654,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 					}
 				}
 			}
-			drawing.Append(_drawing.data, _drawing.size);
+			drawing.Append(_drawing);
 		}
 		void addTrace(const DRW_Trace& data) override
 		{
@@ -791,7 +788,9 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 
 	dxfRW dxf("intermediated.txt");
 #else
-	dxfRW dxf("All Jali Designs.dxf");
+	//debugspline.dxf
+	dxfRW dxf("debugspline.dxf");
+	//dxfRW dxf("All Jali Designs.dxf");
 	//dxfRW dxf("lwpoly.dxf");
 	//dxfRW dxf("Ellipse.dxf");
 	//dxfRW dxf("Lasercutting Cargo 2mm MS with material.dxf");
@@ -800,22 +799,30 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 	//dxfRW dxf("TEST.dxf");
 #endif
 	if (!dxf.read(&reader, false)) { return -1; }
-	for (uint32 i = 0; i < block.size; i++)
-		block[i].blockdata.Release();
+
+	cout << "Exporting Drawing" << endl;
+	drawingexport.data = new Line[drawing.count];
+	drawingexport.size = drawing.count;
+	uint32 i;
+	for (i = 0, drawing.GotoHead(); i < drawing.count; i++, drawing.MoveRight())
+		drawingexport.data[i] = drawing.Get();		
+
+	for (i = 0, block.GotoHead(); i < block.count; i++, block.MoveRight())
+		block.current->data.blockdata.Release();
 	block.Release();	
 
-	cout << "drawing = " << (uint32)(void*)drawing.data << endl;
-	cout << "drawinglength = "<< drawing.size << endl;
+	cout << "drawing = " << (uint32)(void*)drawingexport.data << endl;
+	cout << "drawinglength = "<< drawingexport.size << endl;
 	cout << "LoadDXF Out" << endl;
 	return 0;
 }
 
 EMSATTRIBUTE void* GETdrawing()
 {
-	return (void*)drawing.data;
+	return (void*)drawingexport.data;
 }
 
 EMSATTRIBUTE uint32 GETdrawinglength()
 {
-	return drawing.size;
+	return drawingexport.size;
 }	
