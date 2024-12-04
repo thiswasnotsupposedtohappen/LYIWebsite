@@ -414,12 +414,12 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 		{
 			Heap<Line> _drawing;
 			Line _line;
-			_line.p0.x = data.basePoint.x;
-			_line.p0.y = data.basePoint.y;
-			_line.p1.x = data.vertlist[0]->basePoint.x;
-			_line.p1.y = data.vertlist[0]->basePoint.y;
+			_line.p0.x = data.vertlist[0]->basePoint.x;
+			_line.p0.y = data.vertlist[0]->basePoint.y;
+			_line.p1.x = data.vertlist[1]->basePoint.x;
+			_line.p1.y = data.vertlist[1]->basePoint.y;
 			_drawing << _line;
-			for (uint32 i = 1; i < data.vertexcount; i++)
+			for (uint32 i = 2; i < data.vertlist.size(); i++)
 			{
 				_line.p0.x = data.vertlist[i - 1]->basePoint.x;
 				_line.p0.y = data.vertlist[i - 1]->basePoint.y;
@@ -785,7 +785,8 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 
 	dxfRW dxf("intermediated.txt");
 #else
-	dxfRW dxf("Ellipse.dxf");
+	dxfRW dxf("lwpoly.dxf");
+	//dxfRW dxf("Ellipse.dxf");
 	//dxfRW dxf("Lasercutting Cargo 2mm MS with material.dxf");
 	//dxfRW dxf("Om Jali.dxf");
 	//dxfRW dxf("spline.dxf");
