@@ -312,14 +312,14 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 			float64 angleend;
 			float64 inc;
 
-			_line.p0.x = data.vertlist[0]->x;
-			_line.p0.y = data.vertlist[0]->y;
+			_line.p0.x = data.vertex->x;
+			_line.p0.y = data.vertex->y;
 
-			for (uint32 i = 1; i < data.vertexnum; i++)
+			for (uint32 i = 0; i < data.vertexnum; i++)
 			{
 				_line.p1.x = data.vertlist[i]->x;
 				_line.p1.y = data.vertlist[i]->y;
-				b = data.vertlist[i - 1]->bulge;
+				b = data.vertlist[i]->bulge;
 				if (b)
 				{
 					d = Distance(_line.p0, _line.p1);
@@ -330,12 +330,12 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 
 					float64 side;
 					side = customcalculator.CheckSide(_line.p0, _line.p1, c1);
-					if (data.vertlist[i - 1]->bulge > 0)
+					if (data.vertlist[i]->bulge > 0)
 					{
 						if (customcalculator.CheckSide(_line.p0, _line.p1, c1) > 0)
 						{
 							inc *= 1;
-							if (data.vertlist[i - 1]->bulge <= 1)
+							if (data.vertlist[i]->bulge <= 1)
 								centre = c1;
 							else
 								centre = c2;
@@ -343,7 +343,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 						else
 						{
 							inc *= -1;
-							if (data.vertlist[i - 1]->bulge <= 1)
+							if (data.vertlist[i]->bulge <= 1)
 								centre = c2;
 							else
 								centre = c1;
@@ -354,7 +354,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 						if (customcalculator.CheckSide(_line.p0, _line.p1, c1) > 0)
 						{
 							inc *= -1;
-							if (data.vertlist[i - 1]->bulge >= -1)
+							if (data.vertlist[i]->bulge >= -1)
 								centre = c2;
 							else
 								centre = c1;
@@ -362,7 +362,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 						else
 						{
 							inc *= 1;
-							if (data.vertlist[i - 1]->bulge >= -1)
+							if (data.vertlist[i]->bulge >= -1)
 								centre = c1;
 							else
 								centre = c2;
@@ -795,15 +795,14 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 
 	dxfRW dxf("intermediated.txt");
 #else
-	//debugspline.dxf
-	dxfRW dxf("debugspline.dxf");
+	//dxfRW dxf("debugspline.dxf");
 	//dxfRW dxf("All Jali Designs.dxf");
 	//dxfRW dxf("lwpoly.dxf");
 	//dxfRW dxf("Ellipse.dxf");
 	//dxfRW dxf("Lasercutting Cargo 2mm MS with material.dxf");
 	//dxfRW dxf("Om Jali.dxf");
 	//dxfRW dxf("spline.dxf");
-	//dxfRW dxf("TEST.dxf");
+	dxfRW dxf("Test.dxf");
 #endif
 	if (!dxf.read(&reader, false)) { return -1; }
 

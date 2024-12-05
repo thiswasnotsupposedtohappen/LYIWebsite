@@ -23,33 +23,21 @@
 
   <input type="file" id="fileInput" style="padding-left: 50px;"></input><br>
 
-  <div id = "viewer" style="height: 500px; margin-top: 50px; border-style: solid; border-width: 2px; border-color: black; margin-bottom: 50px;">
+  <div id = "viewer" style="height: 800px; margin-top: 50px; border-style: solid; border-width: 2px; border-color: black; margin-bottom: 50px;">
     <canvas></canvas>
   </div>
 
   <div class="shop-manufacturingspecification">
 
-    <div  class="shop-manufacturingconfig">
-      <div style="text-align: end;"><h3>Construction:</h3></div>   
-      <div class="shop-manufacturingconfig-options">
-        <button class="shop-manufacturingconfig-button unselected construction-standalone" onclick="OnClickConstruction(this.closest('.shop-manufacturingconfig-options'), 'Standalone')"><h2>Standalone</h2></button>
-        <button class="shop-manufacturingconfig-button unselected construction-backsupported" onclick="OnClickConstruction(this.closest('.shop-manufacturingconfig-options'), 'Back-Supported')"><h2>Back-Supported</h2></button>
-        <button class="shop-manufacturingconfig-button unselected construction-halfdepth" onclick="OnClickConstruction(this.closest('.shop-manufacturingconfig-options'), 'Half-Depth')"><h2>Half-Depth</h2></button>     
-      </div>
-
-      <div style="height: 30px;"></div><div></div>
-      <div style="text-align: end;"><b>Standalone:</b></div><div>One-Piece of Raw Material having through cut design</div>
-      <div style="height: 10px;"></div><div></div>
-      <div style="text-align: end;"><b>Back-Supported:</b></div><div>Two Pieces of Material pasted togther front having the design cut-out and back material is just a rectanglar piece. This type is generally used so that back material can hold some cut-outs of top material which would other wise fall of, for example while having letter 'D' in design, the inner part of 'D' will fall off. This type is also generally used for backlit mandirs where top material can be acrylic and bottom material can be 040 acrylic so that when LED is lit at the back it gives an illuminated effect. </div>
-      <div style="height: 10px;"></div><div></div>
-      <div style="text-align: end;"><b>Half-Depth:</b></div><div>One-Piece of Raw Material having design cut till only a defined depth and not cut all the way through</div>      
-    </div>
-
     <div class="shop-manufacturingconfig">
-      <div style="text-align: end;"><h3>Raw-Material by:</h3></div>   
+      <div style="text-align: end;"><h3>Dimensions:</h3></div>   
       <div class="shop-manufacturingconfig-options">
-        <button class="shop-manufacturingconfig-button unselected rawmaterial-lyi" onclick="OnClickSupplier(this.closest('.shop-manufacturingconfig-options'), 'LightYear')"><h2>LightYear</h2></button>
-        <button class="shop-manufacturingconfig-button unselected rawmaterial-customer" onclick="OnClickSupplier(this.closest('.shop-manufacturingconfig-options'), 'Customer') "><h2>Customer</h2></button>
+        <input type="number" class="shop-manufacturingconfig-input dimensions-length" style="width: 100px" onchange="OnChangeDimensionsLength(this)" onclick="OnChangeDimensionsLength(this)"></input>
+        <h2 style="line-height: 50px;">X</h2>
+        <input type="number" class="shop-manufacturingconfig-input dimensions-width"  style="width: 100px" onchange="OnChangeDimensionsWidth(this)"  onclick="OnChangeDimensionsWidth(this)" ></input>
+        <button class="shop-manufacturingconfig-button unselected dimensions-mm" onclick="OnClickUnit('mm')"><h2>mm</h2></button>
+        <button class="shop-manufacturingconfig-button unselected dimensions-inches" onclick="OnClickUnit('inches') "><h2>inches</h2></button>
+        <button class="shop-manufacturingconfig-button unselected dimensions-feet" onclick="OnClickUnit('feet') "><h2>feet</h2></button>
       </div>
 
       <div style="height: 30px;"></div><div></div>
@@ -61,36 +49,65 @@
     <div class="shop-manufacturingconfig">
       <div style="text-align: end;"><h3>Size-Option:</h3></div>   
       <div class="shop-manufacturingconfig-options">
-        <button class="shop-manufacturingconfig-button unselected size-1x1" onclick="OnClickSize(this.closest('.shop-manufacturingconfig-options'), '1ft x 1ft')"><h2>1ft x 1ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-manufacturingconfig-button unselected size-2x1" onclick="OnClickSize(this.closest('.shop-manufacturingconfig-options'), '2ft x 1ft')"><h2>2ft x 1ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-manufacturingconfig-button unselected size-2x2" onclick="OnClickSize(this.closest('.shop-manufacturingconfig-options'), '2ft x 2ft')"><h2>2ft x 2ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-manufacturingconfig-button unselected size-4x1" onclick="OnClickSize(this.closest('.shop-manufacturingconfig-options'), '4ft x 1ft')"><h2>4ft x 1ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-manufacturingconfig-button unselected size-4x2" onclick="OnClickSize(this.closest('.shop-manufacturingconfig-options'), '4ft x 2ft')"><h2>4ft x 2ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-manufacturingconfig-button unselected size-4x3" onclick="OnClickSize(this.closest('.shop-manufacturingconfig-options'), '4ft x 3ft')"><h2>4ft x 3ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-manufacturingconfig-button unselected size-4x4" onclick="OnClickSize(this.closest('.shop-manufacturingconfig-options'), '4ft x 4ft')"><h2>4ft x 4ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-manufacturingconfig-button unselected size-5x2" onclick="OnClickSize(this.closest('.shop-manufacturingconfig-options'), '5ft x 2ft')"><h2>5ft x 2ft <span style="color: red  ;">N</span></h2></button>
-        <button class="shop-manufacturingconfig-button unselected size-5x4" onclick="OnClickSize(this.closest('.shop-manufacturingconfig-options'), '5ft x 4ft')"><h2>5ft x 4ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-manufacturingconfig-button unselected size-6x2" onclick="OnClickSize(this.closest('.shop-manufacturingconfig-options'), '6ft x 2ft')"><h2>6ft x 2ft <span style="color: red  ;">N</span></h2></button>
-        <button class="shop-manufacturingconfig-button unselected size-6x4" onclick="OnClickSize(this.closest('.shop-manufacturingconfig-options'), '6ft x 4ft')"><h2>6ft x 4ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-manufacturingconfig-button unselected size-8x4" onclick="OnClickSize(this.closest('.shop-manufacturingconfig-options'), '8ft x 4ft')"><h2>8ft x 4ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-1x1" onclick="OnClickSize('1ft x 1ft')"><h2>1ft x 1ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-2x1" onclick="OnClickSize('2ft x 1ft')"><h2>2ft x 1ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-2x2" onclick="OnClickSize('2ft x 2ft')"><h2>2ft x 2ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-4x1" onclick="OnClickSize('4ft x 1ft')"><h2>4ft x 1ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-4x2" onclick="OnClickSize('4ft x 2ft')"><h2>4ft x 2ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-4x3" onclick="OnClickSize('4ft x 3ft')"><h2>4ft x 3ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-4x4" onclick="OnClickSize('4ft x 4ft')"><h2>4ft x 4ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-5x2" onclick="OnClickSize('5ft x 2ft')"><h2>5ft x 2ft <span style="color: red  ;">N</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-5x4" onclick="OnClickSize('5ft x 4ft')"><h2>5ft x 4ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-6x2" onclick="OnClickSize('6ft x 2ft')"><h2>6ft x 2ft <span style="color: red  ;">N</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-6x4" onclick="OnClickSize('6ft x 4ft')"><h2>6ft x 4ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-8x1" onclick="OnClickSize('8ft x 1ft')"><h2>8ft x 1ft <span style="color: red  ;">N</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-8x2" onclick="OnClickSize('8ft x 2ft')"><h2>8ft x 2ft <span style="color: red  ;">N</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-8x4" onclick="OnClickSize('8ft x 4ft')"><h2>8ft x 4ft <span style="color: green;">S</span></h2></button>
       </div>
 
       <div style="height: 30px;"></div><div></div>
-      <div style="text-align: end;"><b>Size selection:</b></div><div>Choose the smallest size-option in which your design would fit, example if your size is 500mm x 300mm which translates to 1.64ft x 0.98ft the closest size-option will be 2ftx1ft</div>
-      <div style="height: 10px;"></div><div></div>
       <div style="text-align: end;"><b>S-variant:</b></div><div>Standard size variant. Nominal cost for raw material is used</div>
       <div style="height: 10px;"></div><div></div>
       <div style="text-align: end;"><b>N-variant:</b></div><div>Non-Standard size variant. An additional cost above Nominal cost is added because of the remaining material from the entire sheet it is cut from has low order requirment and harder to use else-where</div>    
     </div>
 
     <div class="shop-manufacturingconfig">
+      <div style="text-align: end;"><h3>Raw-Material by:</h3></div>   
+      <div class="shop-manufacturingconfig-options">
+        <button class="shop-manufacturingconfig-button unselected rawmaterial-lyi" onclick="OnClickSupplier('LightYear')"><h2>LightYear</h2></button>
+        <button class="shop-manufacturingconfig-button unselected rawmaterial-customer" onclick="OnClickSupplier('Customer') "><h2>Customer</h2></button>
+      </div>
+
+      <div style="height: 30px;"></div><div></div>
+      <div style="text-align: end;"><b>LightYear:</b></div><div>Raw material is pruchased by LightYear Industries</div>
+      <div style="height: 10px;"></div><div></div>
+      <div style="text-align: end;"><b>Customer:</b></div><div>Raw material is provided by customer</div>
+    </div>
+
+    <div  class="shop-manufacturingconfig">
+      <div style="text-align: end;"><h3>Construction:</h3></div>   
+      <div class="shop-manufacturingconfig-options">
+        <button class="shop-manufacturingconfig-button unselected construction-standalone" onclick="OnClickConstruction('Standalone')"><h2>Standalone</h2></button>
+        <button class="shop-manufacturingconfig-button unselected construction-backsupported" onclick="OnClickConstruction('Back-Supported')"><h2>Back-Supported</h2></button>
+        <button class="shop-manufacturingconfig-button unselected construction-halfdepth" onclick="OnClickConstruction('Half-Depth')"><h2>Half-Depth</h2></button>     
+      </div>
+
+      <div style="height: 30px;"></div><div></div>
+      <div style="text-align: end;"><b>Standalone:</b></div><div>One-Piece of Raw Material having through cut design</div>
+      <div style="height: 10px;"></div><div></div>
+      <div style="text-align: end;"><b>Back-Supported:</b></div><div>Two Pieces of Material pasted togther front having the design cut-out and back material is just a rectanglar piece. This type is generally used so that back material can hold some cut-outs of top material which would other wise fall of, for example while having letter 'D' in design, the inner part of 'D' will fall off. This type is also generally used for backlit mandirs where top material can be acrylic and bottom material can be 040 acrylic so that when LED is lit at the back it gives an illuminated effect. </div>
+      <div style="height: 10px;"></div><div></div>
+      <div style="text-align: end;"><b>Half-Depth:</b></div><div>One-Piece of Raw Material having design cut till only a defined depth and not cut all the way through</div>      
+    </div>
+
+    <div class="shop-manufacturingconfig">
       <div style="text-align: end;"><h3>Process:</h3></div>   
       <div class="shop-manufacturingconfig-options">
-        <button class="shop-manufacturingconfig-button unselected process-laser" onclick="OnClickProcess(this.closest('.shop-manufacturingconfig-options'), 'CNC Laser 0.5mm')"><h2>CNC Laser 0.5mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected process-router3mm" onclick="OnClickProcess(this.closest('.shop-manufacturingconfig-options'), 'CNC Router 3mm')"><h2>CNC Router 3mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected process-router4mm" onclick="OnClickProcess(this.closest('.shop-manufacturingconfig-options'), 'CNC Router 4mm')"><h2>CNC Router 4mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected process-router6mm" onclick="OnClickProcess(this.closest('.shop-manufacturingconfig-options'), 'CNC Router 6mm')"><h2>CNC Router 6mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected process-router8mm" onclick="OnClickProcess(this.closest('.shop-manufacturingconfig-options'), 'CNC Router 8mm')"><h2>CNC Router 8mm</h2></button>
+        <button class="shop-manufacturingconfig-button unselected process-laser" onclick="OnClickProcess('CNC Laser 0.5mm')"><h2>CNC Laser 0.5mm</h2></button>
+        <button class="shop-manufacturingconfig-button unselected process-router3mm" onclick="OnClickProcess('CNC Router 3mm')"><h2>CNC Router 3mm</h2></button>
+        <button class="shop-manufacturingconfig-button unselected process-router4mm" onclick="OnClickProcess('CNC Router 4mm')"><h2>CNC Router 4mm</h2></button>
+        <button class="shop-manufacturingconfig-button unselected process-router6mm" onclick="OnClickProcess('CNC Router 6mm')"><h2>CNC Router 6mm</h2></button>
+        <button class="shop-manufacturingconfig-button unselected process-router8mm" onclick="OnClickProcess('CNC Router 8mm')"><h2>CNC Router 8mm</h2></button>
       </div>
 
       <div style="height: 30px;"></div><div></div>
@@ -102,130 +119,130 @@
     <div class="shop-manufacturingconfig shop-manufacturingconfig-materialfront">
       <div style="text-align: end;"><h3>Front Material:</h3></div>   
       <div class="shop-manufacturingconfig-options">
-        <button class="shop-manufacturingconfig-button unselected front-acrylic" onclick="OnClickMaterialFront(this.closest('.shop-manufacturingconfig-options'), 'Acrylic')"><h2>Acrylic</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-corian" onclick="OnClickMaterialFront(this.closest('.shop-manufacturingconfig-options'), 'Corian')"><h2>Corian</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-acp" onclick="OnClickMaterialFront(this.closest('.shop-manufacturingconfig-options'), 'ACP')"><h2>ACP</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-laminatedplywood" onclick="OnClickMaterialFront(this.closest('.shop-manufacturingconfig-options'), 'Laminated Plywood')"><h2>Laminated Plywood</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-mdf" onclick="OnClickMaterialFront(this.closest('.shop-manufacturingconfig-options'), 'MDF')"><h2>MDF</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-wpcpvcfoam" onclick="OnClickMaterialFront(this.closest('.shop-manufacturingconfig-options'), 'WPC/PVC/Foam')"><h2>WPC/PVC/Foam</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-cementsheet" onclick="OnClickMaterialFront(this.closest('.shop-manufacturingconfig-options'), 'Cement Sheet')"><h2>Cement Sheet</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-acrylic" onclick="OnClickMaterialFront('Acrylic')"><h2>Acrylic</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-corian" onclick="OnClickMaterialFront('Corian')"><h2>Corian</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-acp" onclick="OnClickMaterialFront('ACP')"><h2>ACP</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-laminatedplywood" onclick="OnClickMaterialFront('Laminated Plywood')"><h2>Laminated Plywood</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-mdf" onclick="OnClickMaterialFront('MDF')"><h2>MDF</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-wpcpvcfoam" onclick="OnClickMaterialFront('WPC/PVC/Foam')"><h2>WPC/PVC/Foam</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-cementsheet" onclick="OnClickMaterialFront('Cement Sheet')"><h2>Cement Sheet</h2></button>
       </div>
 
       <div style="height: 30px;"></div><div></div>
 
       <div style="text-align: end;"><h3>Thickness:</h3></div>   
       <div class="shop-manufacturingconfig-options">
-        <button class="shop-manufacturingconfig-button unselected front-1mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '1mm')"><h2>1mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-2mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '2mm')"><h2>2mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-3mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '3mm')"><h2>3mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-4mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '4mm')"><h2>4mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-5mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '5mm')"><h2>5mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-6mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '6mm')"><h2>6mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-8mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '8mm')"><h2>8mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-10mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '10mm')"><h2>10mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-12mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '12mm')"><h2>12mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-15mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '15mm')"><h2>15mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-18mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '18mm')"><h2>18mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-20mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '20mm')"><h2>20mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-25mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '25mm')"><h2>25mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-1mm" onclick="OnClickThicknessFront('1mm')"><h2>1mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-2mm" onclick="OnClickThicknessFront('2mm')"><h2>2mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-3mm" onclick="OnClickThicknessFront('3mm')"><h2>3mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-4mm" onclick="OnClickThicknessFront('4mm')"><h2>4mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-5mm" onclick="OnClickThicknessFront('5mm')"><h2>5mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-6mm" onclick="OnClickThicknessFront('6mm')"><h2>6mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-8mm" onclick="OnClickThicknessFront('8mm')"><h2>8mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-10mm" onclick="OnClickThicknessFront('10mm')"><h2>10mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-12mm" onclick="OnClickThicknessFront('12mm')"><h2>12mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-15mm" onclick="OnClickThicknessFront('15mm')"><h2>15mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-18mm" onclick="OnClickThicknessFront('18mm')"><h2>18mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-20mm" onclick="OnClickThicknessFront('20mm')"><h2>20mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-25mm" onclick="OnClickThicknessFront('25mm')"><h2>25mm</h2></button>
       </div>
 
       <div style="height: 30px;"></div><div></div>
 
       <div style="text-align: end;"><h3>Color:</h3></div>   
       <div class="shop-manufacturingconfig-options">
-        <button class="shop-manufacturingconfig-button unselected front-white" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'White')"><h2>White</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: white;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-black" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'Black')"><h2>Black</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: black;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-red" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'Red')"><h2>Red</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: red;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-green" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'Green')"><h2>Green</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: green;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-blue" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'Blue')"><h2>Blue</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: blue;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-orange" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'Orange')"><h2>Orange</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: orange;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-brown" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'Brown')"><h2>Brown</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: brown;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-yellow" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'Yellow')"><h2>Yellow</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: yellow;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-transparent" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'Transparent')"><h2>Transparent</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: transparent;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-white040" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'White040')"><h2>White 40%</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: rgba(255, 255, 255, 0.4);"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-raw" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'RAW')"><h2>RAW</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-white" onclick="OnClickColorFront('White')"><h2>White</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: white;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-black" onclick="OnClickColorFront('Black')"><h2>Black</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: black;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-red" onclick="OnClickColorFront('Red')"><h2>Red</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: red;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-green" onclick="OnClickColorFront('Green')"><h2>Green</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: green;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-blue" onclick="OnClickColorFront('Blue')"><h2>Blue</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: blue;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-orange" onclick="OnClickColorFront('Orange')"><h2>Orange</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: orange;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-brown" onclick="OnClickColorFront('Brown')"><h2>Brown</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: brown;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-yellow" onclick="OnClickColorFront('Yellow')"><h2>Yellow</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: yellow;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-transparent" onclick="OnClickColorFront('Transparent')"><h2>Transparent</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: transparent;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-white040" onclick="OnClickColorFront('White040')"><h2>White 40%</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: rgba(255, 255, 255, 0.4);"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-raw" onclick="OnClickColorFront('RAW')"><h2>RAW</h2></button>
       </div>
     </div>
 
     <div class="shop-manufacturingconfig shop-manufacturingconfig-materialback">
       <div style="text-align: end;"><h3>Back Material:</h3></div>   
       <div class="shop-manufacturingconfig-options">
-        <button class="shop-manufacturingconfig-button unselected back-acrylic" onclick="OnClickMaterialBack(this.closest('.shop-manufacturingconfig-options'), 'Acrylic')"><h2>Acrylic</h2></button>
-        <button class="shop-manufacturingconfig-button unselected back-corian" onclick="OnClickMaterialBack(this.closest('.shop-manufacturingconfig-options'), 'Corian')"><h2>Corian</h2></button>
-        <button class="shop-manufacturingconfig-button unselected back-acp" onclick="OnClickMaterialBack(this.closest('.shop-manufacturingconfig-options'), 'ACP')"><h2>ACP</h2></button>
-        <button class="shop-manufacturingconfig-button unselected back-laminatedplywood" onclick="OnClickMaterialBack(this.closest('.shop-manufacturingconfig-options'), 'Laminated Plywood')"><h2>Laminated Plywood</h2></button>
-        <button class="shop-manufacturingconfig-button unselected back-mdf" onclick="OnClickMaterialBack(this.closest('.shop-manufacturingconfig-options'), 'MDF')"><h2>MDF</h2></button>
-        <button class="shop-manufacturingconfig-button unselected back-wpcpvcfoam" onclick="OnClickMaterialBack(this.closest('.shop-manufacturingconfig-options'), 'WPC/PVC/Foam')"><h2>WPC/PVC/Foam</h2></button>
-        <button class="shop-manufacturingconfig-button unselected back-cementsheet" onclick="OnClickMaterialBack(this.closest('.shop-manufacturingconfig-options'), 'Cement Sheet')"><h2>Cement Sheet</h2></button>
+        <button class="shop-manufacturingconfig-button unselected back-acrylic" onclick="OnClickMaterialBack('Acrylic')"><h2>Acrylic</h2></button>
+        <button class="shop-manufacturingconfig-button unselected back-corian" onclick="OnClickMaterialBack('Corian')"><h2>Corian</h2></button>
+        <button class="shop-manufacturingconfig-button unselected back-acp" onclick="OnClickMaterialBack('ACP')"><h2>ACP</h2></button>
+        <button class="shop-manufacturingconfig-button unselected back-laminatedplywood" onclick="OnClickMaterialBack('Laminated Plywood')"><h2>Laminated Plywood</h2></button>
+        <button class="shop-manufacturingconfig-button unselected back-mdf" onclick="OnClickMaterialBack('MDF')"><h2>MDF</h2></button>
+        <button class="shop-manufacturingconfig-button unselected back-wpcpvcfoam" onclick="OnClickMaterialBack('WPC/PVC/Foam')"><h2>WPC/PVC/Foam</h2></button>
+        <button class="shop-manufacturingconfig-button unselected back-cementsheet" onclick="OnClickMaterialBack('Cement Sheet')"><h2>Cement Sheet</h2></button>
       </div>
 
       <div style="height: 30px;"></div><div></div>
 
       <div style="text-align: end;"><h3>Thickness:</h3></div>   
       <div class="shop-manufacturingconfig-options">
-        <button class="shop-manufacturingconfig-button unselected back-1mm" onclick="OnClickThicknessBack(this.closest('.shop-manufacturingconfig-options'), '1mm')"><h2>1mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected back-2mm" onclick="OnClickThicknessBack(this.closest('.shop-manufacturingconfig-options'), '2mm')"><h2>2mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected back-3mm" onclick="OnClickThicknessBack(this.closest('.shop-manufacturingconfig-options'), '3mm')"><h2>3mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected back-4mm" onclick="OnClickThicknessBack(this.closest('.shop-manufacturingconfig-options'), '4mm')"><h2>4mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected back-5mm" onclick="OnClickThicknessBack(this.closest('.shop-manufacturingconfig-options'), '5mm')"><h2>5mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected back-6mm" onclick="OnClickThicknessBack(this.closest('.shop-manufacturingconfig-options'), '6mm')"><h2>6mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected back-8mm" onclick="OnClickThicknessBack(this.closest('.shop-manufacturingconfig-options'), '8mm')"><h2>8mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected back-10mm" onclick="OnClickThicknessBack(this.closest('.shop-manufacturingconfig-options'), '10mm')"><h2>10mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected back-12mm" onclick="OnClickThicknessBack(this.closest('.shop-manufacturingconfig-options'), '12mm')"><h2>12mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected back-15mm" onclick="OnClickThicknessBack(this.closest('.shop-manufacturingconfig-options'), '15mm')"><h2>15mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected back-18mm" onclick="OnClickThicknessBack(this.closest('.shop-manufacturingconfig-options'), '18mm')"><h2>18mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected back-20mm" onclick="OnClickThicknessBack(this.closest('.shop-manufacturingconfig-options'), '20mm')"><h2>20mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected back-25mm" onclick="OnClickThicknessBack(this.closest('.shop-manufacturingconfig-options'), '25mm')"><h2>25mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled back-1mm" onclick="OnClickThicknessBack('1mm')"><h2>1mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled back-2mm" onclick="OnClickThicknessBack('2mm')"><h2>2mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled back-3mm" onclick="OnClickThicknessBack('3mm')"><h2>3mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled back-4mm" onclick="OnClickThicknessBack('4mm')"><h2>4mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled back-5mm" onclick="OnClickThicknessBack('5mm')"><h2>5mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled back-6mm" onclick="OnClickThicknessBack('6mm')"><h2>6mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled back-8mm" onclick="OnClickThicknessBack('8mm')"><h2>8mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled back-10mm" onclick="OnClickThicknessBack('10mm')"><h2>10mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled back-12mm" onclick="OnClickThicknessBack('12mm')"><h2>12mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled back-15mm" onclick="OnClickThicknessBack('15mm')"><h2>15mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled back-18mm" onclick="OnClickThicknessBack('18mm')"><h2>18mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled back-20mm" onclick="OnClickThicknessBack('20mm')"><h2>20mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled back-25mm" onclick="OnClickThicknessBack('25mm')"><h2>25mm</h2></button>
       </div>
 
       <div style="height: 30px;"></div><div></div>
 
       <div style="text-align: end;"><h3>Color:</h3></div>   
       <div class="shop-manufacturingconfig-options">
-        <button class="shop-manufacturingconfig-button unselected back-white" onclick="OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'White')"><h2>White</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: white;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected back-black" onclick="OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'Black')"><h2>Black</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: black;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected back-red" onclick="OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'Red')"><h2>Red</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: red;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected back-green" onclick="OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'Green')"><h2>Green</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: green;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected back-blue" onclick="OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'Blue')"><h2>Blue</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: blue;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected back-orange" onclick="OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'Oragne')"><h2>Oragne</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: orange;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected back-brown" onclick="OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'Brown')"><h2>Brown</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: brown;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected back-yellow" onclick="OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'Yellow')"><h2>Yellow</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: yellow;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected back-transparent" onclick="OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'Transparent')"><h2>Transparent</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: transparent;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected back-white040" onclick="OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'White040')"><h2>White 40%</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: rgba(255, 255, 255, 0.4);"></div></button>
-        <button class="shop-manufacturingconfig-button unselected back-raw" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'RAW')"><h2>RAW</h2></button>
+        <button class="shop-manufacturingconfig-button disabled back-white" onclick="OnClickColorBack('White')"><h2>White</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: white;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled back-black" onclick="OnClickColorBack('Black')"><h2>Black</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: black;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled back-red" onclick="OnClickColorBack('Red')"><h2>Red</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: red;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled back-green" onclick="OnClickColorBack('Green')"><h2>Green</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: green;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled back-blue" onclick="OnClickColorBack('Blue')"><h2>Blue</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: blue;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled back-orange" onclick="OnClickColorBack('Oragne')"><h2>Oragne</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: orange;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled back-brown" onclick="OnClickColorBack('Brown')"><h2>Brown</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: brown;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled back-yellow" onclick="OnClickColorBack('Yellow')"><h2>Yellow</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: yellow;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled back-transparent" onclick="OnClickColorBack('Transparent')"><h2>Transparent</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: transparent;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled back-white040" onclick="OnClickColorBack('White040')"><h2>White 40%</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: rgba(255, 255, 255, 0.4);"></div></button>
+        <button class="shop-manufacturingconfig-button disabled back-raw" onclick="OnClickColorFront('RAW')"><h2>RAW</h2></button>
       </div>
     </div>
 
     <div class="shop-manufacturingconfig shop-manufacturingconfig-materialhalfdepth">
       <div style="text-align: end;"><h3>Material:</h3></div>   
       <div class="shop-manufacturingconfig-options">
-        <button class="shop-manufacturingconfig-button unselected front-acrylic" onclick="OnClickMaterialFront(this.closest('.shop-manufacturingconfig-options'), 'Acrylic');OnClickMaterialBack(this.closest('.shop-manufacturingconfig-options'), 'Acrylic');"><h2>Acrylic</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-corian" onclick="OnClickMaterialFront(this.closest('.shop-manufacturingconfig-options'), 'Corian');OnClickMaterialBack(this.closest('.shop-manufacturingconfig-options'), 'Corian');""><h2>Corian</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-acp" onclick="OnClickMaterialFront(this.closest('.shop-manufacturingconfig-options'), 'ACP');OnClickMaterialBack(this.closest('.shop-manufacturingconfig-options'), 'ACP');""><h2>ACP</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-laminatedplywood" onclick="OnClickMaterialFront(this.closest('.shop-manufacturingconfig-options'), 'Laminated Plywood');OnClickMaterialBack(this.closest('.shop-manufacturingconfig-options'), 'Laminated Plywood');""><h2>Laminated Plywood</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-mdf" onclick="OnClickMaterialFront(this.closest('.shop-manufacturingconfig-options'), 'MDF');OnClickMaterialBack(this.closest('.shop-manufacturingconfig-options'), 'MDF');""><h2>MDF</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-wpcpvcfoam" onclick="OnClickMaterialFront(this.closest('.shop-manufacturingconfig-options'), 'WPC/PVC/Foam');OnClickMaterialBack(this.closest('.shop-manufacturingconfig-options'), 'WPC/PVC/Foam');""><h2>WPC/PVC/Foam</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-cementsheet" onclick="OnClickMaterialFront(this.closest('.shop-manufacturingconfig-options'), 'Cement Sheet');OnClickMaterialBack(this.closest('.shop-manufacturingconfig-options'), 'Cement Sheet');""><h2>Cement Sheet</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-acrylic" onclick="OnClickMaterialFront('Acrylic');OnClickMaterialBack('Acrylic');"><h2>Acrylic</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-corian" onclick="OnClickMaterialFront('Corian');OnClickMaterialBack('Corian');""><h2>Corian</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-acp" onclick="OnClickMaterialFront('ACP');OnClickMaterialBack('ACP');""><h2>ACP</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-laminatedplywood" onclick="OnClickMaterialFront('Laminated Plywood');OnClickMaterialBack('Laminated Plywood');""><h2>Laminated Plywood</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-mdf" onclick="OnClickMaterialFront('MDF');OnClickMaterialBack('MDF');""><h2>MDF</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-wpcpvcfoam" onclick="OnClickMaterialFront('WPC/PVC/Foam');OnClickMaterialBack('WPC/PVC/Foam');""><h2>WPC/PVC/Foam</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-cementsheet" onclick="OnClickMaterialFront('Cement Sheet');OnClickMaterialBack('Cement Sheet');""><h2>Cement Sheet</h2></button>
       </div>
 
       <div style="height: 30px;"></div><div></div>
 
       <div style="text-align: end;"><h3>Total Thickness:</h3></div>   
       <div class="shop-manufacturingconfig-options">
-        <button class="shop-manufacturingconfig-button unselected front-1mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '1mm')"><h2>1mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-2mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '2mm')"><h2>2mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-3mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '3mm')"><h2>3mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-4mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '4mm')"><h2>4mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-5mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '5mm')"><h2>5mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-6mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '6mm')"><h2>6mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-8mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '8mm')"><h2>8mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-10mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '10mm')"><h2>10mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-12mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '12mm')"><h2>12mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-15mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '15mm')"><h2>15mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-18mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '18mm')"><h2>18mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-20mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '20mm')"><h2>20mm</h2></button>
-        <button class="shop-manufacturingconfig-button unselected front-25mm" onclick="OnClickThicknessFront(this.closest('.shop-manufacturingconfig-options'), '25mm')"><h2>25mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-1mm" onclick="OnClickThicknessFront('1mm')"><h2>1mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-2mm" onclick="OnClickThicknessFront('2mm')"><h2>2mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-3mm" onclick="OnClickThicknessFront('3mm')"><h2>3mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-4mm" onclick="OnClickThicknessFront('4mm')"><h2>4mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-5mm" onclick="OnClickThicknessFront('5mm')"><h2>5mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-6mm" onclick="OnClickThicknessFront('6mm')"><h2>6mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-8mm" onclick="OnClickThicknessFront('8mm')"><h2>8mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-10mm" onclick="OnClickThicknessFront('10mm')"><h2>10mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-12mm" onclick="OnClickThicknessFront('12mm')"><h2>12mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-15mm" onclick="OnClickThicknessFront('15mm')"><h2>15mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-18mm" onclick="OnClickThicknessFront('18mm')"><h2>18mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-20mm" onclick="OnClickThicknessFront('20mm')"><h2>20mm</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-25mm" onclick="OnClickThicknessFront('25mm')"><h2>25mm</h2></button>
       </div>
 
       <div style="height: 30px;"></div><div></div>
@@ -239,17 +256,17 @@
 
       <div style="text-align: end;"><h3>Color:</h3></div>   
       <div class="shop-manufacturingconfig-options">
-        <button class="shop-manufacturingconfig-button unselected front-white" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'White');OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'White');"><h2>White</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: white;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-black" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'Black');OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'Black');"><h2>Black</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: black;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-red" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'Red');OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'Red');"><h2>Red</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: red;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-green" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'Green');OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'Green');"><h2>Green</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: green;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-blue" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'Blue');OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'Blue');"><h2>Blue</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: blue;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-orange" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'Oragne');OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'Oragne');"><h2>Oragne</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: orange;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-brown" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'Brown');OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'Brown');"><h2>Brown</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: brown;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-yellow" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'Yellow');OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'Yellow');"><h2>Yellow</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: yellow;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-transparent" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'Transparent');OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'Transparent');"><h2>Transparent</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: transparent;"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-white040" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'White040');OnClickColorBack(this.closest('.shop-manufacturingconfig-options'), 'White040');"><h2>White 40%</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: rgba(255, 255, 255, 0.4);"></div></button>
-        <button class="shop-manufacturingconfig-button unselected front-raw" onclick="OnClickColorFront(this.closest('.shop-manufacturingconfig-options'), 'RAW')"><h2>RAW</h2></button>
+        <button class="shop-manufacturingconfig-button disabled front-white" onclick="OnClickColorFront('White');OnClickColorBack('White');"><h2>White</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: white;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-black" onclick="OnClickColorFront('Black');OnClickColorBack('Black');"><h2>Black</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: black;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-red" onclick="OnClickColorFront('Red');OnClickColorBack('Red');"><h2>Red</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: red;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-green" onclick="OnClickColorFront('Green');OnClickColorBack('Green');"><h2>Green</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: green;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-blue" onclick="OnClickColorFront('Blue');OnClickColorBack('Blue');"><h2>Blue</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: blue;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-orange" onclick="OnClickColorFront('Oragne');OnClickColorBack('Oragne');"><h2>Oragne</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: orange;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-brown" onclick="OnClickColorFront('Brown');OnClickColorBack('Brown');"><h2>Brown</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: brown;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-yellow" onclick="OnClickColorFront('Yellow');OnClickColorBack('Yellow');"><h2>Yellow</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: yellow;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-transparent" onclick="OnClickColorFront('Transparent');OnClickColorBack('Transparent');"><h2>Transparent</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: transparent;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-white040" onclick="OnClickColorFront('White040');OnClickColorBack('White040');"><h2>White 40%</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: rgba(255, 255, 255, 0.4);"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-raw" onclick="OnClickColorFront('RAW')"><h2>RAW</h2></button>
       </div>
     </div>
   </div>
@@ -258,8 +275,780 @@
   </div>
 </body>
 
+<script>
+  class JaliSpecifications
+  {
+    constructor()
+    {
+      this.construction = undefined;
+      this.supplier = undefined;
+      this.size = undefined;
+      this.process = undefined;
+      this.materialfront = undefined;
+      this.materialback = undefined;
+      this.thicknessfront = undefined;
+      this.thicknessback = undefined;
+      this.colorfront = undefined;
+      this.colorback = undefined;
+    }
+  }
+  var manufacturingspecifications = new JaliSpecifications();
+  var dimensionsunit = 'mm';
+  
+  OnClickUnit('mm');
+  OnClickSupplier('LightYear');
+  OnClickConstruction('Standalone');
+  
+  function OnChangeDimensionsLength(input)
+  {
+    if(dimensionsunit == 'mm')if(input.value > 2440)input.value = 2440;
+    if(dimensionsunit == 'inches')if(input.value > 96.063)input.value = 96.063;
+    if(dimensionsunit == 'feet')if(input.value > 8.005)input.value = 8.005;
+    SetSizeOptions();
+  }
+  function OnChangeDimensionsWidth(input)
+  {
+    if(dimensionsunit == 'mm')if(input.value > 1220)input.value = 1220;
+    if(dimensionsunit == 'inches')if(input.value > 48.031)input.value = 48.031;
+    if(dimensionsunit == 'feet')if(input.value > 4.003)input.value = 4.003;
+    SetSizeOptions();
+  }
+  function SetSizeOptions()
+  {
+    DisableButton(document.querySelector(".size-1x1"));
+    DisableButton(document.querySelector(".size-1x2"));
+    DisableButton(document.querySelector(".size-2x2"));
+    DisableButton(document.querySelector(".size-4x1"));
+    DisableButton(document.querySelector(".size-4x2"));
+    DisableButton(document.querySelector(".size-4x3"));
+    DisableButton(document.querySelector(".size-4x4"));
+    DisableButton(document.querySelector(".size-5x2"));
+    DisableButton(document.querySelector(".size-5x4"));
+    DisableButton(document.querySelector(".size-6x2"));
+    DisableButton(document.querySelector(".size-6x4"));
+    DisableButton(document.querySelector(".size-8x1"));
+    DisableButton(document.querySelector(".size-8x1"));
+    DisableButton(document.querySelector(".size-8x4"));
+  
+    var dimensionslength = document.querySelector(".dimensions-length");
+    var dimensionswidth = document.querySelector(".dimensions-width");
+    var length = parseFloat(dimensionslength.value);
+    var width = parseFloat(dimensionswidth.value);
+    if(parseFloat(dimensionswidth.value) > parseFloat(dimensionslength.value))
+    {
+      var temp = length;
+      length = width;
+      width = temp;
+    }
+  
+    if(dimensionsunit == "mm")
+    {
+      var lengthinfeet = Math.ceil(length / 304.8);
+      var widthinfeet = Math.ceil(width / 304.8);
+      if(length > (8*304.8) && length <= 2440)lengthinfeet = 8;
+      if(width > (4*304.8) && width <= 1220)widthinfeet = 4;
+    }
+    if(dimensionsunit == "inches")
+    {
+      var lengthinfeet = Math.ceil(length / 12);
+      var widthinfeet = Math.ceil(width / 12);
+      if(length > (8*12) && length <= 96.063)lengthinfeet = 8;
+      if(width > (4*12) && width <= 48.031)widthinfeet = 4;
+    }
+    if(dimensionsunit == "feet")
+    {
+      var lengthinfeet = Math.ceil(length);
+      var widthinfeet = Math.ceil(width);
+      if(length > 8 && length <= 8.005)lengthinfeet = 8;
+      if(width > 4 && width <= 4.003)widthinfeet = 4;
+    }
+  
+    if(lengthinfeet == 1 && widthinfeet == 1){EnableButton(document.querySelector(".size-1x1"));OnClickSize('1ft x 1ft');}
+    if(lengthinfeet == 2 && widthinfeet == 1){EnableButton(document.querySelector(".size-2x1"));OnClickSize('2ft x 1ft');}
+    if(lengthinfeet == 2 && widthinfeet == 2){EnableButton(document.querySelector(".size-2x2"));OnClickSize('2ft x 2ft');}
+    if(lengthinfeet == 3 && widthinfeet == 1){EnableButton(document.querySelector(".size-4x1"));OnClickSize('4ft x 1ft');}
+    if(lengthinfeet == 3 && widthinfeet == 2){EnableButton(document.querySelector(".size-4x2"));OnClickSize('4ft x 2ft');}
+    if(lengthinfeet == 3 && widthinfeet == 3){EnableButton(document.querySelector(".size-4x3"));OnClickSize('4ft x 3ft');}
+    if(lengthinfeet == 4 && widthinfeet == 1){EnableButton(document.querySelector(".size-4x1"));OnClickSize('4ft x 1ft');}
+    if(lengthinfeet == 4 && widthinfeet == 2){EnableButton(document.querySelector(".size-4x2"));OnClickSize('4ft x 2ft');}
+    if(lengthinfeet == 4 && widthinfeet == 3){EnableButton(document.querySelector(".size-4x3"));OnClickSize('4ft x 3ft');}
+    if(lengthinfeet == 4 && widthinfeet == 4){EnableButton(document.querySelector(".size-4x4"));OnClickSize('4ft x 4ft');}
+    if(lengthinfeet == 5 && widthinfeet == 1){EnableButton(document.querySelector(".size-5x2"));OnClickSize('5ft x 2ft');}
+    if(lengthinfeet == 5 && widthinfeet == 2){EnableButton(document.querySelector(".size-5x2"));OnClickSize('5ft x 2ft');}
+    if(lengthinfeet == 5 && widthinfeet == 3){EnableButton(document.querySelector(".size-5x4"));OnClickSize('5ft x 4ft');}
+    if(lengthinfeet == 5 && widthinfeet == 4){EnableButton(document.querySelector(".size-5x4"));OnClickSize('5ft x 4ft');}
+    if(lengthinfeet == 6 && widthinfeet == 1){EnableButton(document.querySelector(".size-6x2"));OnClickSize('6ft x 2ft');}
+    if(lengthinfeet == 6 && widthinfeet == 2){EnableButton(document.querySelector(".size-6x2"));OnClickSize('6ft x 2ft');}
+    if(lengthinfeet == 6 && widthinfeet == 3){EnableButton(document.querySelector(".size-6x4"));OnClickSize('6ft x 4ft');}
+    if(lengthinfeet == 6 && widthinfeet == 4){EnableButton(document.querySelector(".size-6x4"));OnClickSize('6ft x 4ft');}  
+    if(lengthinfeet == 7 && widthinfeet == 1){EnableButton(document.querySelector(".size-8x1"));OnClickSize('8ft x 1ft');}
+    if(lengthinfeet == 7 && widthinfeet == 2){EnableButton(document.querySelector(".size-8x2"));OnClickSize('8ft x 2ft');}
+    if(lengthinfeet == 7 && widthinfeet == 3){EnableButton(document.querySelector(".size-8x4"));OnClickSize('8ft x 4ft');}
+    if(lengthinfeet == 7 && widthinfeet == 4){EnableButton(document.querySelector(".size-8x4"));OnClickSize('8ft x 4ft');}
+    if(lengthinfeet == 8 && widthinfeet == 1){EnableButton(document.querySelector(".size-8x1"));OnClickSize('8ft x 1ft');}
+    if(lengthinfeet == 8 && widthinfeet == 2){EnableButton(document.querySelector(".size-8x2"));OnClickSize('8ft x 2ft');}
+    if(lengthinfeet == 8 && widthinfeet == 3){EnableButton(document.querySelector(".size-8x4"));OnClickSize('8ft x 4ft');}
+    if(lengthinfeet == 8 && widthinfeet == 4){EnableButton(document.querySelector(".size-8x4"));OnClickSize('8ft x 4ft');}
+    
+  }
+  function OnClickUnit(type)
+  {
+    var dimensionslength = document.querySelector(".dimensions-length");
+    var dimensionswidth = document.querySelector(".dimensions-width");
+    if(dimensionsunit == 'mm')
+    {
+      if(type == 'inches')
+      {
+        dimensionslength.value /= 25.4;
+        dimensionswidth.value /= 25.4;
+      }
+      if(type == 'feet')
+      {
+        dimensionslength.value /= 304.8;
+        dimensionswidth.value /= 304.8;
+      }
+    }
+    if(dimensionsunit == 'inches')
+    {
+      if(type == 'mm')
+      {
+        dimensionslength.value *= 25.4;
+        dimensionswidth.value *= 25.4;
+      }
+      if(type == 'feet')
+      {
+        dimensionslength.value /= 12;
+        dimensionswidth.value /= 12;
+      }
+    }
+    if(dimensionsunit == 'feet')
+    {
+      if(type == 'mm')
+      {
+        dimensionslength.value *= 304.8;
+        dimensionswidth.value *= 304.8;
+      }
+      if(type == 'inches')
+      {
+        dimensionslength.value *= 12;
+        dimensionswidth.value *= 12;
+      }
+    }
+  
+    dimensionslength.value = Math.round(dimensionslength.value * 1000) / 1000;
+    dimensionswidth.value = Math.round(dimensionswidth.value * 1000) / 1000;
+  
+    dimensionsunit = type;
+    var index = undefined;
+    if(type == 'mm')index = 0;
+    if(type == 'inches')index = 1;
+    if(type == 'feet')index = 2;
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[0], index);
+  }
+  
+  function OnClickSize(type)
+  {
+    manufacturingspecifications.size = type;
+    var index = undefined;
+    if(type == '1ft x 1ft')index = 0;
+    if(type == '2ft x 1ft')index = 1;
+    if(type == '2ft x 2ft')index = 2;
+    if(type == '4ft x 1ft')index = 3;
+    if(type == '4ft x 2ft')index = 4;
+    if(type == '4ft x 3ft')index = 5;
+    if(type == '4ft x 4ft')index = 6;
+    if(type == '5ft x 2ft')index = 7;
+    if(type == '5ft x 4ft')index = 8;
+    if(type == '6ft x 2ft')index = 9;
+    if(type == '6ft x 4ft')index = 10;
+    if(type == '8ft x 1ft')index = 11;
+    if(type == '8ft x 2ft')index = 12;
+    if(type == '8ft x 4ft')index = 13;
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[1], index);
+  }
+  
+  function OnClickSupplier(type)
+  {
+    manufacturingspecifications.supplier = type;
+    var index = undefined;
+    if(type == 'LightYear')index = 0;
+    if(type == 'Customer')index = 1;
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[2], index);
+  }
+  
+  function OnClickConstruction(type)
+  {
+    manufacturingspecifications.construction = type;
+    var index = undefined;
+  
+    document.querySelectorAll(".process-laser").forEach(element => {EnableButton(element);});
+  
+    if(type=='Standalone')
+    {
+      document.querySelector(".shop-manufacturingconfig-materialfront").style.display="grid"
+      document.querySelector(".shop-manufacturingconfig-materialback").style.display="none"
+      document.querySelector(".shop-manufacturingconfig-materialhalfdepth").style.display="none"
+      index = 0;
+    }
+    if(type=='Back-Supported')
+    {
+      document.querySelector(".shop-manufacturingconfig-materialfront").style.display="grid"
+      document.querySelector(".shop-manufacturingconfig-materialback").style.display="grid"
+      document.querySelector(".shop-manufacturingconfig-materialhalfdepth").style.display="none"
+      index = 1;
+  }
+    if(type=='Half-Depth')
+    {
+      document.querySelector(".shop-manufacturingconfig-materialfront").style.display="none"
+      document.querySelector(".shop-manufacturingconfig-materialback").style.display="none"
+      document.querySelector(".shop-manufacturingconfig-materialhalfdepth").style.display="grid"
+      index = 2;
+  
+      document.querySelectorAll(".process-laser").forEach(element => {DisableButton(element);});
+    }
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[3], index);
+  
+    for(var i=4;i<document.querySelectorAll(".shop-manufacturingconfig-options").length;i++)
+      SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[i], -1);  
+  
+    for(var i=5;i<document.querySelectorAll(".shop-manufacturingconfig-options").length;i++)
+      DisableButtons(document.querySelectorAll(".shop-manufacturingconfig-options")[i]);  
+  }
+  
+  function OnClickProcess(type)
+  {
+    manufacturingspecifications.process = type;
+    manufacturingspecifications.materialfront = undefined;
+    manufacturingspecifications.materialback = undefined;
+    manufacturingspecifications.thicknessfront = undefined;
+    manufacturingspecifications.thicknessback = undefined;
+    manufacturingspecifications.colorfront = undefined;
+    manufacturingspecifications.colorback = undefined;
+  
+    var index = undefined;
+    if(type == 'CNC Laser 0.5mm')index = 0;
+    if(type == 'CNC Router 3mm')index = 1;
+    if(type == 'CNC Router 4mm')index = 2;
+    if(type == 'CNC Router 6mm')index = 3;
+    if(type == 'CNC Router 8mm')index = 4;
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[4], index);
+  
+    for(var i=5;i<document.querySelectorAll(".shop-manufacturingconfig-options").length;i++)
+      SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[i], -1);    
+  
+    EnableButtons(document.querySelectorAll(".shop-manufacturingconfig-options")[5]);
+    DisableButtons(document.querySelectorAll(".shop-manufacturingconfig-options")[6]);
+    DisableButtons(document.querySelectorAll(".shop-manufacturingconfig-options")[7]);  
+    EnableButtons(document.querySelectorAll(".shop-manufacturingconfig-options")[8]);
+    DisableButtons(document.querySelectorAll(".shop-manufacturingconfig-options")[9]);
+    DisableButtons(document.querySelectorAll(".shop-manufacturingconfig-options")[10]);
+    DisableButtons(document.querySelectorAll(".shop-manufacturingconfig-options")[11]);
+    DisableButtons(document.querySelectorAll(".shop-manufacturingconfig-options")[12]);
+    DisableButtons(document.querySelectorAll(".shop-manufacturingconfig-options")[13]);
+    DisableButtons(document.querySelectorAll(".shop-manufacturingconfig-options")[14]);
+  
+    document.querySelectorAll(".front-acrylic").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-corian").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-acp").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-laminatedplywood").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-mdf").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-wpcpvcfoam").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-cementsheet").forEach(element => {EnableButton(element);});
+    if(index == 0)
+    {
+      document.querySelectorAll(".front-acp").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-laminatedplywood").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-cementsheet").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-mdf").forEach(element => {DisableButton(element);});
+    }
+    if(index == 1)
+    {
+      document.querySelectorAll(".front-cementsheet").forEach(element => {DisableButton(element);});
+    }
+    if(index == 2)
+    {
+      document.querySelectorAll(".front-cementsheet").forEach(element => {DisableButton(element);});
+    }
+    if(index == 3)
+    {
+    }
+    if(index == 4)
+    {
+    } 
+  }
+  
+  function OnClickMaterialFront(type)
+  {
+    manufacturingspecifications.materialfront = type;
+    manufacturingspecifications.thicknessfront = undefined;
+    manufacturingspecifications.colorfront = undefined;
+  
+    var index = undefined;
+    if(type == 'Acrylic')index = 0;
+    if(type == 'Corian')index = 1;
+    if(type == 'ACP')index = 2;
+    if(type == 'Laminated Plywood')index = 3;
+    if(type == 'MDF')index = 4;
+    if(type == 'WPC/PVC/Foam')index = 5;
+    if(type == 'Cement Sheet')index = 6;
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[5], index);
+  
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[6], -1);
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[7], -1);
+  
+    document.querySelectorAll(".front-1mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-2mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-3mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-4mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-5mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-6mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-8mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-10mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-12mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-15mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-18mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-20mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-25mm").forEach(element => {EnableButton(element);});
+  
+    document.querySelectorAll(".front-white").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-black").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-red").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-green").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-blue").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-orange").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-brown").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-yellow").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-transparent").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-white040").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".front-raw").forEach(element => {EnableButton(element);});
+  
+    if(index == 0)
+    {
+      document.querySelectorAll(".front-raw").forEach(element => {DisableButton(element);});
+    }
+  
+    if(index == 1)
+    {
+      document.querySelectorAll(".front-1mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-2mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-3mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-4mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-5mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-8mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-10mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-15mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-18mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-20mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-25mm").forEach(element => {DisableButton(element);});
+  
+      document.querySelectorAll(".front-black").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-red").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-green").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-blue").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-orange").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-brown").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-yellow").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-transparent").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-white040").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-raw").forEach(element => {DisableButton(element);});
+    }
+  
+    if(index == 2)
+    {
+      document.querySelectorAll(".front-1mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-2mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-4mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-5mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-6mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-8mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-10mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-12mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-15mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-18mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-20mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-25mm").forEach(element => {DisableButton(element);});
+  
+      document.querySelectorAll(".front-transparent").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-white040").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-raw").forEach(element => {DisableButton(element);});
+    }
+  
+    if(index == 3)
+    {
+      document.querySelectorAll(".front-1mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-2mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-3mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-4mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-5mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-6mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-8mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-10mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-15mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-20mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-25mm").forEach(element => {DisableButton(element);});
+  
+      document.querySelectorAll(".front-transparent").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-white040").forEach(element => {DisableButton(element);});    
+    }
+  
+    if(index == 4)
+    {
+      document.querySelectorAll(".front-1mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-2mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-3mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-4mm").forEach(element => {DisableButton(element);});
+  
+      document.querySelectorAll(".front-white").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-black").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-red").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-green").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-blue").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-orange").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-brown").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-yellow").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-transparent").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-white040").forEach(element => {DisableButton(element);});
+    }
+  
+    if(index == 5)
+    {
+      document.querySelectorAll(".front-1mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-2mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-4mm").forEach(element => {DisableButton(element);});
+  
+      document.querySelectorAll(".front-black").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-red").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-green").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-blue").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-orange").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-brown").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-yellow").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-transparent").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-white040").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".front-raw").forEach(element => {DisableButton(element);});
+    }
+  
+    if(index == 6)
+      {
+        document.querySelectorAll(".front-1mm").forEach(element => {DisableButton(element);});
+        document.querySelectorAll(".front-2mm").forEach(element => {DisableButton(element);});
+        document.querySelectorAll(".front-3mm").forEach(element => {DisableButton(element);});
+        document.querySelectorAll(".front-4mm").forEach(element => {DisableButton(element);});
+    
+        document.querySelectorAll(".front-white").forEach(element => {DisableButton(element);});
+        document.querySelectorAll(".front-black").forEach(element => {DisableButton(element);});
+        document.querySelectorAll(".front-red").forEach(element => {DisableButton(element);});
+        document.querySelectorAll(".front-green").forEach(element => {DisableButton(element);});
+        document.querySelectorAll(".front-blue").forEach(element => {DisableButton(element);});
+        document.querySelectorAll(".front-orange").forEach(element => {DisableButton(element);});
+        document.querySelectorAll(".front-brown").forEach(element => {DisableButton(element);});
+        document.querySelectorAll(".front-yellow").forEach(element => {DisableButton(element);});
+        document.querySelectorAll(".front-transparent").forEach(element => {DisableButton(element);});
+        document.querySelectorAll(".front-white040").forEach(element => {DisableButton(element);});
+      }
+  
+    if(manufacturingspecifications.process == 'CNC Laser 0.5mm')document.querySelectorAll(".front-25mm").forEach(element => {DisableButton(element);});
+    if(manufacturingspecifications.process != 'CNC Laser 0.5mm')document.querySelectorAll(".front-1mm").forEach(element => {DisableButton(element);});
+  }
+  
+  function OnClickMaterialBack(type)
+  {
+    manufacturingspecifications.materialback = type;
+    manufacturingspecifications.thicknessback = undefined;
+    manufacturingspecifications.colorback = undefined;
+    
+    var index = undefined;
+    if(type == 'Acrylic')index = 0;
+    if(type == 'Corian')index = 1;
+    if(type == 'ACP')index = 2;
+    if(type == 'Laminated Plywood')index = 3;
+    if(type == 'MDF')index = 4;
+    if(type == 'WPC/PVC/Foam')index = 5;
+    if(type == 'Cement Sheet')index = 6;
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[8], index);
+  
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[9], -1);
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[10], -1);
+  
+    document.querySelectorAll(".back-1mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-2mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-3mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-4mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-5mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-6mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-8mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-10mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-12mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-15mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-18mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-20mm").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-25mm").forEach(element => {EnableButton(element);});
+  
+    document.querySelectorAll(".back-white").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-black").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-red").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-green").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-blue").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-orange").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-brown").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-yellow").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-transparent").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-white040").forEach(element => {EnableButton(element);});
+    document.querySelectorAll(".back-raw").forEach(element => {EnableButton(element);});
+  
+    if(index == 0)
+    {
+      document.querySelectorAll(".back-raw").forEach(element => {DisableButton(element);});
+    }
+  
+    if(index == 1)
+    {
+      document.querySelectorAll(".back-1mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-2mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-3mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-4mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-5mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-8mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-10mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-15mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-18mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-20mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-25mm").forEach(element => {DisableButton(element);});
+  
+      document.querySelectorAll(".back-black").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-red").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-green").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-blue").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-orange").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-brown").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-yellow").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-transparent").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-white040").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-raw").forEach(element => {DisableButton(element);});
+    }
+  
+    if(index == 2)
+    {
+      document.querySelectorAll(".back-1mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-2mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-4mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-5mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-6mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-8mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-10mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-12mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-15mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-18mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-20mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-25mm").forEach(element => {DisableButton(element);});
+  
+      document.querySelectorAll(".back-transparent").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-white040").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-raw").forEach(element => {DisableButton(element);});
+    }
+  
+    if(index == 3)
+    {
+      document.querySelectorAll(".back-1mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-2mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-3mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-4mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-5mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-6mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-8mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-10mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-15mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-20mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-25mm").forEach(element => {DisableButton(element);});
+  
+      document.querySelectorAll(".back-transparent").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-white040").forEach(element => {DisableButton(element);});    
+    }
+  
+    if(index == 4)
+    {
+      document.querySelectorAll(".back-1mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-2mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-3mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-4mm").forEach(element => {DisableButton(element);});
+  
+      document.querySelectorAll(".back-white").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-black").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-red").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-green").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-blue").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-orange").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-brown").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-yellow").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-transparent").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-white040").forEach(element => {DisableButton(element);});
+    }
+  
+    if(index == 5)
+    {
+      document.querySelectorAll(".back-1mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-2mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-4mm").forEach(element => {DisableButton(element);});
+  
+      document.querySelectorAll(".back-black").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-red").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-green").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-blue").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-orange").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-brown").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-yellow").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-transparent").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-white040").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-raw").forEach(element => {DisableButton(element);});
+    }
+  
+    if(index == 6)
+    {
+      document.querySelectorAll(".back-1mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-2mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-3mm").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-4mm").forEach(element => {DisableButton(element);});
+  
+      document.querySelectorAll(".back-white").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-black").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-red").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-green").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-blue").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-orange").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-brown").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-yellow").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-transparent").forEach(element => {DisableButton(element);});
+      document.querySelectorAll(".back-white040").forEach(element => {DisableButton(element);});
+    }
+  }
+  
+  function OnClickThicknessFront(type)
+  {
+    manufacturingspecifications.thicknessfront = type;
+    var index = undefined;
+    
+    if(type == '1mm')index = 0;
+    if(type == '2mm')index = 1;
+    if(type == '3mm')index = 2;
+    if(type == '4mm')index = 3;
+    if(type == '5mm')index = 4;
+    if(type == '6mm')index = 5;
+    if(type == '8mm')index = 6;
+    if(type == '10mm')index = 7;
+    if(type == '12mm')index = 8;
+    if(type == '15mm')index = 9;
+    if(type == '18mm')index = 10;
+    if(type == '20mm')index = 11;
+    if(type == '25mm')index = 12;
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[6], index);
+  }
+  
+  function OnClickThicknessBack(type)
+  {
+    manufacturingspecifications.thicknessback = type;
+    var index = undefined;
+    
+    if(type == '1mm')index = 0;
+    if(type == '2mm')index = 1;
+    if(type == '3mm')index = 2;
+    if(type == '4mm')index = 3;
+    if(type == '5mm')index = 4;
+    if(type == '6mm')index = 5;
+    if(type == '8mm')index = 6;
+    if(type == '10mm')index = 7;
+    if(type == '12mm')index = 8;
+    if(type == '15mm')index = 9;
+    if(type == '18mm')index = 10;
+    if(type == '20mm')index = 11;
+    if(type == '25mm')index = 12;
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[9], index);
+  }
+  
+  function OnClickColorFront(type)
+  {
+    manufacturingspecifications.colorfront = type;
+    var index = undefined;
+    if(type == 'White')index = 0;
+    if(type == 'Black')index = 1;
+    if(type == 'Red')index = 2;
+    if(type == 'Green')index = 3;
+    if(type == 'Blue')index = 4;
+    if(type == 'Orange')index = 5;
+    if(type == 'Brown')index = 6;
+    if(type == 'Yellow')index = 7;
+    if(type == 'Transparent')index = 8;
+    if(type == 'White040')index = 9;
+    if(type == 'RAW')index = 10;
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[7], index);
+
+    LoadRawMaterial(document.querySelector(".dimensions-length").value, document.querySelector(".dimensions-width").value);
+  }
+  
+  function OnClickColorBack(type)
+  {
+    manufacturingspecifications.colorback = type;
+    var index = undefined;
+    if(type == 'White')index = 0;
+    if(type == 'Black')index = 1;
+    if(type == 'Red')index = 2;
+    if(type == 'Green')index = 3;
+    if(type == 'Blue')index = 4;
+    if(type == 'Orange')index = 5;
+    if(type == 'Brown')index = 6;
+    if(type == 'Yellow')index = 7;
+    if(type == 'Transparent')index = 8;
+    if(type == 'White040')index = 9;
+    if(type == 'RAW')index = 10;
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[10], index);
+  }
+  
+  function OnChangeCuttingDepth(input)
+  {
+    if(input.value > parseInt(manufacturingspecifications.thicknessfront))input.value = parseInt(manufacturingspecifications.thicknessfront) -2;
+  }
+  
+  function EnableButtons(div)
+  {
+    div.querySelectorAll(".shop-manufacturingconfig-button").forEach(element => {element.classList.remove("disabled");});
+    div.querySelectorAll(".shop-manufacturingconfig-button").forEach(element => {element.classList.remove("selected");});
+    div.querySelectorAll(".shop-manufacturingconfig-button").forEach(element => {element.classList.add("unselected");});
+  }
+  function DisableButtons(div)
+  {
+    div.querySelectorAll(".shop-manufacturingconfig-button").forEach(element => {element.classList.remove("selected");});
+    div.querySelectorAll(".shop-manufacturingconfig-button").forEach(element => {element.classList.remove("unselected");});
+    div.querySelectorAll(".shop-manufacturingconfig-button").forEach(element => {element.classList.add("disabled");});
+  }
+  function SelectButton(div, index)
+  {
+    div.querySelectorAll(".shop-manufacturingconfig-button").forEach(element => {element.classList.remove("selected");});
+    div.querySelectorAll(".shop-manufacturingconfig-button").forEach(element => {element.classList.add("unselected");});
+    if(index != -1)div.querySelectorAll(".shop-manufacturingconfig-button")[index].classList.remove("unselected");
+    if(index != -1)div.querySelectorAll(".shop-manufacturingconfig-button")[index].classList.add("selected");
+  }
+  function EnableButton(button)
+  {
+    button.classList.remove("selected");
+    button.classList.remove("disabled");
+    button.classList.add("unselected");
+  }
+  function DisableButton(button)
+  {
+    if (button) 
+    {
+      button.classList.remove("selected");
+      button.classList.remove("unselected");
+      button.classList.add("disabled");
+    }
+  }
+</script>
+
 <script src="wasm/LYIWebsite.js"></script>  
 <script>  
+function FloatCompare(a,b)
+{
+  return Math.abs(a-b) < 0.0001;
+}
 class Point
 {
   constructor()
@@ -276,6 +1065,8 @@ class Line
     this.p1=undefined;
   }
 };
+var drawing_rawmaterial = undefined;
+var drawing_rawmaterial_color = "black";
 var drawing = undefined;
 var drawinglength = undefined;
 
@@ -293,18 +1084,8 @@ ctx.resetTransform();
 ctx.translate(canvas.width/2,canvas.height/2);
 ctx.scale(1,-1);
 
-ctx.strokeStyle = "red";
-ctx.beginPath();
-ctx.moveTo(0,0);
-ctx.lineTo((canvas.width/2),0);
-ctx.moveTo(0,0);
-ctx.lineTo(0,(canvas.height/2));    
-ctx.stroke();
+Draw();
 
-Module.onRuntimeInitialized = function() 
-{
-  console.log("WASM Loaded");
-};
 addEventListener("resize", function() 
 {
   canvas.width = viewer.clientWidth;
@@ -312,7 +1093,7 @@ addEventListener("resize", function()
   ctx.resetTransform();
   ctx.translate(canvas.width/2,canvas.height/2);
   ctx.scale(1,-1);
-  DrawDXF();
+  Draw();
 });
 canvas.addEventListener('wheel', function(event) 
 {
@@ -320,7 +1101,7 @@ canvas.addEventListener('wheel', function(event)
   zoom -= (event.deltaY/1000) * zoom;
   if(zoom < 0.1)
     zoom = 0.1;
-  DrawDXF();
+  Draw();
 });
 canvas.addEventListener('mousedown', function(event) 
 {
@@ -339,7 +1120,7 @@ document.addEventListener('mousemove', function(event)
   {
     mousex += event.movementX;
     mousey -= event.movementY;
-    DrawDXF();
+    Draw();
   }
 });
 
@@ -374,7 +1155,7 @@ document.addEventListener('touchmove', function(event)
     mousey -= event.touches[0].clientY - touchyp;
     touchxp = event.touches[0].clientX;
     touchyp = event.touches[0].clientY;
-    DrawDXF();
+    Draw();
   }
 
   if (event.touches.length === 2) 
@@ -388,45 +1169,149 @@ document.addEventListener('touchmove', function(event)
     zoom += (newsqueeze - squeeze)/1000;
     if(zoom < 0.1)
       zoom = 0.1;
-    DrawDXF();
+    Draw();
     squeeze = newsqueeze;
   }
 });
 
 console.log("System Ready");
 
-function DrawDXF()
+function Draw()
 {
   ctx.clearRect(-canvas.width/2,-canvas.height/2,canvas.width,canvas.height);
 
   ctx.strokeStyle = "red";
+  ctx.lineWidth = 1;
   ctx.beginPath();
   ctx.moveTo(mousex,mousey);
   ctx.lineTo((canvas.width/2),mousey);
   ctx.moveTo(mousex,mousey);
   ctx.lineTo(mousex,(canvas.height/2));    
+  ctx.moveTo(mousex,mousey);
+  ctx.lineTo(-(canvas.width/2),mousey);
+  ctx.moveTo(mousex,mousey);
+  ctx.lineTo(mousex,-(canvas.height/2));    
   ctx.stroke();
 
-  ctx.strokeStyle = "blue";
-  var toggle = 0
-  for(var i=0;i<drawinglength;i++)
+  if(drawing_rawmaterial != undefined)
   {
-    if(toggle == 0)
-    {
-      ctx.strokeStyle = "blue";
-      toggle = 1;
-    }
-    else
-    {
-      ctx.strokeStyle = "green";
-      toggle = 0;
-    }
+    ctx.fillStyle = drawing_rawmaterial_color;
     ctx.beginPath();
-    ctx.moveTo((drawing[i].p0.x * zoom + mousex),(drawing[i].p0.y * zoom + mousey));
-    ctx.lineTo((drawing[i].p1.x * zoom + mousex),(drawing[i].p1.y * zoom + mousey));   
+    ctx.moveTo((drawing_rawmaterial[0].p0.x * zoom + mousex),(drawing_rawmaterial[0].p0.y * zoom + mousey));
+    ctx.lineTo((drawing_rawmaterial[0].p1.x * zoom + mousex),(drawing_rawmaterial[0].p1.y * zoom + mousey));   
+    ctx.lineTo((drawing_rawmaterial[1].p1.x * zoom + mousex),(drawing_rawmaterial[1].p1.y * zoom + mousey));   
+    ctx.lineTo((drawing_rawmaterial[2].p1.x * zoom + mousex),(drawing_rawmaterial[2].p1.y * zoom + mousey));
+    ctx.lineTo((drawing_rawmaterial[3].p1.x * zoom + mousex),(drawing_rawmaterial[3].p1.y * zoom + mousey));    
+    ctx.fill();
+
+    ctx.strokeStyle = "black";
+    ctx.beginPath();
+    ctx.moveTo((drawing_rawmaterial[0].p0.x * zoom + mousex),(drawing_rawmaterial[0].p0.y * zoom + mousey));
+    ctx.lineTo((drawing_rawmaterial[0].p1.x * zoom + mousex),(drawing_rawmaterial[0].p1.y * zoom + mousey));   
+    ctx.lineTo((drawing_rawmaterial[1].p1.x * zoom + mousex),(drawing_rawmaterial[1].p1.y * zoom + mousey));   
+    ctx.lineTo((drawing_rawmaterial[2].p1.x * zoom + mousex),(drawing_rawmaterial[2].p1.y * zoom + mousey));
+    ctx.lineTo((drawing_rawmaterial[3].p1.x * zoom + mousex),(drawing_rawmaterial[3].p1.y * zoom + mousey));    
     ctx.stroke();
   }
+  
+  if(drawing != undefined)
+  {
+    ctx.fillStyle = "white";
+    var px = drawing[0].p0.x;
+    var py = drawing[0].p0.y;
+    var qx = px;
+    var qy = py;
+    for(var i=0;i<drawinglength;i++)
+    {
+      if(FloatCompare(px,qx) && FloatCompare(py,qy))
+      {
+        ctx.beginPath();
+        px=drawing[i].p0.x;
+        py=drawing[i].p0.y;
+        ctx.moveTo((drawing[i].p0.x * zoom + mousex),(drawing[i].p0.y * zoom + mousey));
+      }      
+      ctx.lineTo((drawing[i].p1.x * zoom + mousex),(drawing[i].p1.y * zoom + mousey));   
+      qx = drawing[i].p1.x;
+      qy = drawing[i].p1.y;
+      if(FloatCompare(px,qx) && FloatCompare(py,qy))
+      {
+        ctx.fill();
+        px=qx;
+        py=qy;
+      }    
+    }
+    ctx.strokeStyle = "black";
+    var px = drawing[0].p0.x;
+    var py = drawing[0].p0.y;
+    var qx = px;
+    var qy = py;
+    for(var i=0;i<drawinglength;i++)
+    {
+      if(FloatCompare(px,qx) && FloatCompare(py,qy))
+      {
+        ctx.beginPath();
+        px=drawing[i].p0.x;
+        py=drawing[i].p0.y;
+        ctx.moveTo((drawing[i].p0.x * zoom + mousex),(drawing[i].p0.y * zoom + mousey));
+      }      
+      ctx.lineTo((drawing[i].p1.x * zoom + mousex),(drawing[i].p1.y * zoom + mousey));   
+      qx = drawing[i].p1.x;
+      qy = drawing[i].p1.y;
+      if(FloatCompare(px,qx) && FloatCompare(py,qy))
+      {
+        ctx.stroke();
+        px=qx;
+        py=qy;
+      }    
+    }
+  }
 } 
+
+function LoadRawMaterial(length,width)
+{
+  drawing_rawmaterial = new Array(4);
+  drawing_rawmaterial[0] = new Line;
+  drawing_rawmaterial[0].p0 = new Point;
+  drawing_rawmaterial[0].p1 = new Point;
+  drawing_rawmaterial[0].p0.x = -length/2;
+  drawing_rawmaterial[0].p0.y = -width/2;
+  drawing_rawmaterial[0].p1.x = length/2;
+  drawing_rawmaterial[0].p1.y = -width/2;
+  drawing_rawmaterial[1] = new Line;
+  drawing_rawmaterial[1].p0 = new Point;
+  drawing_rawmaterial[1].p1 = new Point;
+  drawing_rawmaterial[1].p0.x = length/2;
+  drawing_rawmaterial[1].p0.y = -width/2;
+  drawing_rawmaterial[1].p1.x = length/2;
+  drawing_rawmaterial[1].p1.y = width/2;
+  drawing_rawmaterial[2] = new Line;
+  drawing_rawmaterial[2].p0 = new Point;
+  drawing_rawmaterial[2].p1 = new Point;
+  drawing_rawmaterial[2].p0.x = length/2;
+  drawing_rawmaterial[2].p0.y = width/2;
+  drawing_rawmaterial[2].p1.x = -length/2;
+  drawing_rawmaterial[2].p1.y = width/2;
+  drawing_rawmaterial[3] = new Line;
+  drawing_rawmaterial[3].p0 = new Point;
+  drawing_rawmaterial[3].p1 = new Point;
+  drawing_rawmaterial[3].p0.x = -length/2;
+  drawing_rawmaterial[3].p0.y = width/2;
+  drawing_rawmaterial[3].p1.x = -length/2;
+  drawing_rawmaterial[3].p1.y = -width/2;  
+
+  if(manufacturingspecifications.colorfront == "White")drawing_rawmaterial_color = "White";
+  if(manufacturingspecifications.colorfront == "Black")drawing_rawmaterial_color = "Black";
+  if(manufacturingspecifications.colorfront == "Red")drawing_rawmaterial_color = "Red";
+  if(manufacturingspecifications.colorfront == "Green")drawing_rawmaterial_color = "Green";
+  if(manufacturingspecifications.colorfront == "Blue")drawing_rawmaterial_color = "Blue";
+  if(manufacturingspecifications.colorfront == "Orange")drawing_rawmaterial_color = "Orange";
+  if(manufacturingspecifications.colorfront == "Brown")drawing_rawmaterial_color = "Brown";
+  if(manufacturingspecifications.colorfront == "Yellow")drawing_rawmaterial_color = "Yellow";
+  if(manufacturingspecifications.colorfront == "Transparent")drawing_rawmaterial_color = "White";
+  if(manufacturingspecifications.colorfront == "White040")drawing_rawmaterial_color = "Grey";
+
+  Draw();
+}
 
 function OnClickLoadDXF() 
 {
@@ -459,7 +1344,7 @@ function OnClickLoadDXF()
         drawing[i].p1.y = HEAPF64[address/8 + 3];
         address += 32;
       }
-      DrawDXF();
+      Draw();
     };
     reader.readAsText(file);
   } 
@@ -468,654 +1353,45 @@ function OnClickLoadDXF()
     console.log("No file selected");
   }
 }
+
+function LoadDXFOnSlot(url)
+{
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", url, true);
+  xhr.responseType = "arraybuffer";
+  xhr.onload = function (oEvent) 
+  {
+    var arrayBuffer = xhr.response;
+    if (arrayBuffer) 
+    {
+      var byteArray = new Uint8Array(arrayBuffer);
+      var memory = _malloc(byteArray.length);
+      HEAPU8.set(byteArray, memory);
+
+      console.log("return = " + _LoadDXF(memory, byteArray.length));
+      _free(memory);
+
+      var address = _GETdrawing();
+      drawinglength =  _GETdrawinglength();
+      drawing = new Array(drawinglength);
+      for(var i=0;i<drawinglength;i++)
+      {
+        drawing[i] = new Line;
+        drawing[i].p0 = new Point;
+        drawing[i].p1 = new Point;
+        drawing[i].p0.x = HEAPF64[address/8 + 0];
+        drawing[i].p0.y = HEAPF64[address/8 + 1];
+        drawing[i].p1.x = HEAPF64[address/8 + 2];
+        drawing[i].p1.y = HEAPF64[address/8 + 3];
+        address += 32;
+      }
+      Draw();
+    }
+  };  
+  xhr.send(null);
+} 
 </script>
 
 <script>
-class JaliSpecifications
-{
-  constructor()
-  {
-    this.construction = undefined;
-    this.supplier = undefined;
-    this.size = undefined;
-    this.process = undefined;
-    this.materialfront = undefined;
-    this.materialback = undefined;
-    this.thicknessfront = undefined;
-    this.thicknessback = undefined;
-    this.colorfront = undefined;
-    this.colorback = undefined;
-  }
-}
-var manufacturingspecifications = new JaliSpecifications();
-
-OnClickConstruction(document.querySelectorAll(".shop-manufacturingconfig-options")[0], 'Standalone');
-OnClickSupplier(document.querySelectorAll(".shop-manufacturingconfig-options")[1], 'LightYear');
-//OnClickSize(document.querySelectorAll(".shop-manufacturingconfig-options")[2], '1ft x 1ft');
-
-function OnClickConstruction(div, type)
-{
-  manufacturingspecifications.construction = type;
-  var index = undefined;
-
-  document.querySelectorAll(".process-laser").forEach(element => {EnableButton(element);});
-
-  if(type=='Standalone')
-  {
-    document.querySelector(".shop-manufacturingconfig-materialfront").style.display="grid"
-    document.querySelector(".shop-manufacturingconfig-materialback").style.display="none"
-    document.querySelector(".shop-manufacturingconfig-materialhalfdepth").style.display="none"
-    index = 0;
-  }
-  if(type=='Back-Supported')
-  {
-    document.querySelector(".shop-manufacturingconfig-materialfront").style.display="grid"
-    document.querySelector(".shop-manufacturingconfig-materialback").style.display="grid"
-    document.querySelector(".shop-manufacturingconfig-materialhalfdepth").style.display="none"
-    index = 1;
-}
-  if(type=='Half-Depth')
-  {
-    document.querySelector(".shop-manufacturingconfig-materialfront").style.display="none"
-    document.querySelector(".shop-manufacturingconfig-materialback").style.display="none"
-    document.querySelector(".shop-manufacturingconfig-materialhalfdepth").style.display="grid"
-    index = 2;
-
-    document.querySelectorAll(".process-laser").forEach(element => {DisableButton(element);});
-  }
-  SelectButton(div.querySelectorAll(".shop-manufacturingconfig-button"), index);
-}
-
-function OnClickSupplier(div, type)
-{
-  manufacturingspecifications.supplier = type;
-  var index = undefined;
-  if(type == 'LightYear')index = 0;
-  if(type == 'Customer')index = 1;
-  SelectButton(div.querySelectorAll(".shop-manufacturingconfig-button"), index);
-}
-
-function OnClickSize(div, type)
-{
-  manufacturingspecifications.size = type;
-  var index = undefined;
-  if(type == '1ft x 1ft')index = 0;
-  if(type == '2ft x 1ft')index = 1;
-  if(type == '2ft x 2ft')index = 2;
-  if(type == '4ft x 1ft')index = 3;
-  if(type == '4ft x 2ft')index = 4;
-  if(type == '4ft x 3ft')index = 5;
-  if(type == '4ft x 4ft')index = 6;
-  if(type == '5ft x 2ft')index = 7;
-  if(type == '5ft x 4ft')index = 8;
-  if(type == '6ft x 2ft')index = 9;
-  if(type == '6ft x 4ft')index = 10;
-  if(type == '8ft x 4ft')index = 11;
-  SelectButton(div.querySelectorAll(".shop-manufacturingconfig-button"), index);
-}
-
-function OnClickProcess(div, type)
-{
-  manufacturingspecifications.process = type;
-  manufacturingspecifications.materialfront = undefined;
-  manufacturingspecifications.materialback = undefined;
-  manufacturingspecifications.thicknessfront = undefined;
-  manufacturingspecifications.thicknessback = undefined;
-  manufacturingspecifications.colorfront = undefined;
-  manufacturingspecifications.colorback = undefined;
-
-  var index = undefined;
-  if(type == 'CNC Laser 0.5mm')index = 0;
-  if(type == 'CNC Router 3mm')index = 1;
-  if(type == 'CNC Router 4mm')index = 2;
-  if(type == 'CNC Router 6mm')index = 3;
-  if(type == 'CNC Router 8mm')index = 4;
-  SelectButton(div.querySelectorAll(".shop-manufacturingconfig-button"), index);
-
-  for(var i=4;i<document.querySelectorAll(".shop-manufacturingconfig-options").length;i++)
-    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[i].querySelectorAll(".shop-manufacturingconfig-button"), -1);  
-
-  document.querySelectorAll(".front-acrylic").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-corian").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-acp").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-laminatedplywood").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-mdf").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-wpcpvcfoam").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-cementsheet").forEach(element => {EnableButton(element);});
-
-  document.querySelectorAll(".front-1mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-2mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-3mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-4mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-5mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-6mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-8mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-10mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-12mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-15mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-18mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-20mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-25mm").forEach(element => {EnableButton(element);});
-
-  document.querySelectorAll(".front-white").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-black").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-red").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-green").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-blue").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-orange").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-brown").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-yellow").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-transparent").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-white040").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-raw").forEach(element => {EnableButton(element);});
-
-  if(index == 0)
-  {
-    document.querySelectorAll(".front-acp").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-laminatedplywood").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-cementsheet").forEach(element => {DisableButton(element);});
-  }
-  if(index == 1)
-  {
-    document.querySelectorAll(".front-cementsheet").forEach(element => {DisableButton(element);});
-  }
-  if(index == 2)
-  {
-    document.querySelectorAll(".front-cementsheet").forEach(element => {DisableButton(element);});
-  }
-  if(index == 3)
-  {
-  }
-  if(index == 4)
-  {
-  } 
-}
-
-function OnClickMaterialFront(div, type)
-{
-  manufacturingspecifications.materialfront = type;
-  manufacturingspecifications.thicknessfront = undefined;
-  manufacturingspecifications.colorfront = undefined;
-
-  var index = undefined;
-  if(type == 'Acrylic')index = 0;
-  if(type == 'Corian')index = 1;
-  if(type == 'ACP')index = 2;
-  if(type == 'Laminated Plywood')index = 3;
-  if(type == 'MDF')index = 4;
-  if(type == 'WPC/PVC/Foam')index = 5;
-  if(type == 'Cement Sheet')index = 6;
-  SelectButton(div.querySelectorAll(".shop-manufacturingconfig-button"), index);
-
-  SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[5].querySelectorAll(".shop-manufacturingconfig-button"), -1);
-  SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[6].querySelectorAll(".shop-manufacturingconfig-button"), -1);
-  SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[11].querySelectorAll(".shop-manufacturingconfig-button"), -1);
-  SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[12].querySelectorAll(".shop-manufacturingconfig-button"), -1);
-  SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[13].querySelectorAll(".shop-manufacturingconfig-button"), -1);
-
-  document.querySelectorAll(".front-1mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-2mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-3mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-4mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-5mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-6mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-8mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-10mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-12mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-15mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-18mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-20mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-25mm").forEach(element => {EnableButton(element);});
-
-  document.querySelectorAll(".front-white").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-black").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-red").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-green").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-blue").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-orange").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-brown").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-yellow").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-transparent").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-white040").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".front-raw").forEach(element => {EnableButton(element);});
-
-  if(index == 0)
-  {
-    document.querySelectorAll(".front-raw").forEach(element => {DisableButton(element);});
-  }
-
-  if(index == 1)
-  {
-    document.querySelectorAll(".front-1mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-2mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-3mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-4mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-5mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-8mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-10mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-15mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-18mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-20mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-25mm").forEach(element => {DisableButton(element);});
-
-    document.querySelectorAll(".front-black").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-red").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-green").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-blue").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-orange").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-brown").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-yellow").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-transparent").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-white040").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-raw").forEach(element => {DisableButton(element);});
-  }
-
-  if(index == 2)
-  {
-    document.querySelectorAll(".front-1mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-2mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-4mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-5mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-6mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-8mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-10mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-12mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-15mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-18mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-20mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-25mm").forEach(element => {DisableButton(element);});
-
-    document.querySelectorAll(".front-transparent").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-white040").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-raw").forEach(element => {DisableButton(element);});
-  }
-
-  if(index == 3)
-  {
-    document.querySelectorAll(".front-1mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-2mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-3mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-4mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-5mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-6mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-8mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-10mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-15mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-20mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-25mm").forEach(element => {DisableButton(element);});
-
-    document.querySelectorAll(".front-transparent").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-white040").forEach(element => {DisableButton(element);});    
-  }
-
-  if(index == 4)
-  {
-    document.querySelectorAll(".front-1mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-2mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-3mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-4mm").forEach(element => {DisableButton(element);});
-
-    document.querySelectorAll(".front-white").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-black").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-red").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-green").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-blue").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-orange").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-brown").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-yellow").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-transparent").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-white040").forEach(element => {DisableButton(element);});
-  }
-
-  if(index == 5)
-  {
-    document.querySelectorAll(".front-1mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-2mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-4mm").forEach(element => {DisableButton(element);});
-
-    document.querySelectorAll(".front-black").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-red").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-green").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-blue").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-orange").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-brown").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-yellow").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-transparent").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-white040").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".front-raw").forEach(element => {DisableButton(element);});
-  }
-
-  if(index == 6)
-    {
-      document.querySelectorAll(".front-1mm").forEach(element => {DisableButton(element);});
-      document.querySelectorAll(".front-2mm").forEach(element => {DisableButton(element);});
-      document.querySelectorAll(".front-3mm").forEach(element => {DisableButton(element);});
-      document.querySelectorAll(".front-4mm").forEach(element => {DisableButton(element);});
-  
-      document.querySelectorAll(".front-white").forEach(element => {DisableButton(element);});
-      document.querySelectorAll(".front-black").forEach(element => {DisableButton(element);});
-      document.querySelectorAll(".front-red").forEach(element => {DisableButton(element);});
-      document.querySelectorAll(".front-green").forEach(element => {DisableButton(element);});
-      document.querySelectorAll(".front-blue").forEach(element => {DisableButton(element);});
-      document.querySelectorAll(".front-orange").forEach(element => {DisableButton(element);});
-      document.querySelectorAll(".front-brown").forEach(element => {DisableButton(element);});
-      document.querySelectorAll(".front-yellow").forEach(element => {DisableButton(element);});
-      document.querySelectorAll(".front-transparent").forEach(element => {DisableButton(element);});
-      document.querySelectorAll(".front-white040").forEach(element => {DisableButton(element);});
-    }
-
-  if(manufacturingspecifications.process == 'CNC Laser 0.5mm')document.querySelectorAll(".front-25mm").forEach(element => {DisableButton(element);});
-  if(manufacturingspecifications.process != 'CNC Laser 0.5mm')document.querySelectorAll(".front-1mm").forEach(element => {DisableButton(element);});
-}
-
-function OnClickMaterialBack(div, type)
-{
-  manufacturingspecifications.materialback = type;
-  manufacturingspecifications.thicknessback = undefined;
-  manufacturingspecifications.colorback = undefined;
-  
-  var index = undefined;
-  if(type == 'Acrylic')index = 0;
-  if(type == 'Corian')index = 1;
-  if(type == 'ACP')index = 2;
-  if(type == 'Laminated Plywood')index = 3;
-  if(type == 'MDF')index = 4;
-  if(type == 'WPC/PVC/Foam')index = 5;
-  if(type == 'Cement Sheet')index = 6;
-  SelectButton(div.querySelectorAll(".shop-manufacturingconfig-button"), index);
-
-  SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[8].querySelectorAll(".shop-manufacturingconfig-button"), -1);
-  SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[9].querySelectorAll(".shop-manufacturingconfig-button"), -1);
-  SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[11].querySelectorAll(".shop-manufacturingconfig-button"), -1);
-  SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[12].querySelectorAll(".shop-manufacturingconfig-button"), -1);
-  SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[13].querySelectorAll(".shop-manufacturingconfig-button"), -1);
-
-  document.querySelectorAll(".back-1mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-2mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-3mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-4mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-5mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-6mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-8mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-10mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-12mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-15mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-18mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-20mm").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-25mm").forEach(element => {EnableButton(element);});
-
-  document.querySelectorAll(".back-white").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-black").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-red").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-green").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-blue").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-orange").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-brown").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-yellow").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-transparent").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-white040").forEach(element => {EnableButton(element);});
-  document.querySelectorAll(".back-raw").forEach(element => {EnableButton(element);});
-
-  if(index == 0)
-  {
-    document.querySelectorAll(".back-raw").forEach(element => {DisableButton(element);});
-  }
-
-  if(index == 1)
-  {
-    document.querySelectorAll(".back-1mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-2mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-3mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-4mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-5mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-8mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-10mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-15mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-18mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-20mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-25mm").forEach(element => {DisableButton(element);});
-
-    document.querySelectorAll(".back-black").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-red").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-green").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-blue").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-orange").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-brown").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-yellow").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-transparent").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-white040").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-raw").forEach(element => {DisableButton(element);});
-  }
-
-  if(index == 2)
-  {
-    document.querySelectorAll(".back-1mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-2mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-4mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-5mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-6mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-8mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-10mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-12mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-15mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-18mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-20mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-25mm").forEach(element => {DisableButton(element);});
-
-    document.querySelectorAll(".back-transparent").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-white040").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-raw").forEach(element => {DisableButton(element);});
-  }
-
-  if(index == 3)
-  {
-    document.querySelectorAll(".back-1mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-2mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-3mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-4mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-5mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-6mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-8mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-10mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-15mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-20mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-25mm").forEach(element => {DisableButton(element);});
-
-    document.querySelectorAll(".back-transparent").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-white040").forEach(element => {DisableButton(element);});    
-  }
-
-  if(index == 4)
-  {
-    document.querySelectorAll(".back-1mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-2mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-3mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-4mm").forEach(element => {DisableButton(element);});
-
-    document.querySelectorAll(".back-white").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-black").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-red").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-green").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-blue").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-orange").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-brown").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-yellow").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-transparent").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-white040").forEach(element => {DisableButton(element);});
-  }
-
-  if(index == 5)
-  {
-    document.querySelectorAll(".back-1mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-2mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-4mm").forEach(element => {DisableButton(element);});
-
-    document.querySelectorAll(".back-black").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-red").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-green").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-blue").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-orange").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-brown").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-yellow").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-transparent").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-white040").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-raw").forEach(element => {DisableButton(element);});
-  }
-
-  if(index == 6)
-  {
-    document.querySelectorAll(".back-1mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-2mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-3mm").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-4mm").forEach(element => {DisableButton(element);});
-
-    document.querySelectorAll(".back-white").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-black").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-red").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-green").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-blue").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-orange").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-brown").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-yellow").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-transparent").forEach(element => {DisableButton(element);});
-    document.querySelectorAll(".back-white040").forEach(element => {DisableButton(element);});
-  }
-
-  if(manufacturingspecifications.process == 'CNC Laser 0.5mm')document.querySelectorAll(".back-25mm").forEach(element => {DisableButton(element);});
-  if(manufacturingspecifications.process != 'CNC Laser 0.5mm')document.querySelectorAll(".back-1mm").forEach(element => {DisableButton(element);});
-}
-
-function OnClickThicknessFront(div, type)
-{
-  manufacturingspecifications.thicknessfront = type;
-  var index = undefined;
-  
-  if(type == '1mm')index = 0;
-  if(type == '2mm')index = 1;
-  if(type == '3mm')index = 2;
-  if(type == '4mm')index = 3;
-  if(type == '5mm')index = 4;
-  if(type == '6mm')index = 5;
-  if(type == '8mm')index = 6;
-  if(type == '10mm')index = 7;
-  if(type == '12mm')index = 8;
-  if(type == '15mm')index = 9;
-  if(type == '18mm')index = 10;
-  if(type == '20mm')index = 11;
-  if(type == '25mm')index = 12;
-  SelectButton(div.querySelectorAll(".shop-manufacturingconfig-button"), index);
-}
-
-function OnClickThicknessBack(div, type)
-{
-  manufacturingspecifications.thicknessback = type;
-  var index = undefined;
-  
-  if(type == '1mm')index = 0;
-  if(type == '2mm')index = 1;
-  if(type == '3mm')index = 2;
-  if(type == '4mm')index = 3;
-  if(type == '5mm')index = 4;
-  if(type == '6mm')index = 5;
-  if(type == '8mm')index = 6;
-  if(type == '10mm')index = 7;
-  if(type == '12mm')index = 8;
-  if(type == '15mm')index = 9;
-  if(type == '18mm')index = 10;
-  if(type == '20mm')index = 11;
-  if(type == '25mm')index = 12;
-  SelectButton(div.querySelectorAll(".shop-manufacturingconfig-button"), index);
-}
-
-function OnClickColorFront(div, type)
-{
-  manufacturingspecifications.colorfront = type;
-  var index = undefined;
-  if(type == 'White')index = 0;
-  if(type == 'Black')index = 1;
-  if(type == 'Red')index = 2;
-  if(type == 'Green')index = 3;
-  if(type == 'Blue')index = 4;
-  if(type == 'Orange')index = 5;
-  if(type == 'Brown')index = 6;
-  if(type == 'Yellow')index = 7;
-  if(type == 'Transparent')index = 8;
-  if(type == 'White040')index = 9;
-  if(type == 'RAW')index = 10;
-  SelectButton(div.querySelectorAll(".shop-manufacturingconfig-button"), index);
-}
-
-function OnClickColorBack(div, type)
-{
-  manufacturingspecifications.colorback = type;
-  var index = undefined;
-  if(type == 'White')index = 0;
-  if(type == 'Black')index = 1;
-  if(type == 'Red')index = 2;
-  if(type == 'Green')index = 3;
-  if(type == 'Blue')index = 4;
-  if(type == 'Orange')index = 5;
-  if(type == 'Brown')index = 6;
-  if(type == 'Yellow')index = 7;
-  if(type == 'Transparent')index = 8;
-  if(type == 'White040')index = 9;
-  if(type == 'RAW')index = 10;
-  SelectButton(div.querySelectorAll(".shop-manufacturingconfig-button"), index);
-}
-
-function OnChangeCuttingDepth(input)
-{
-  if(input.value > parseInt(manufacturingspecifications.thicknessfront))input.value = parseInt(manufacturingspecifications.thicknessfront) -2;
-}
-
-function SelectButton(divquerryselectorall, index)
-{
-  divquerryselectorall.forEach(element => {element.classList.remove("selected");});
-  divquerryselectorall.forEach(element => {element.classList.add("unselected");});   
-  if(index != -1)divquerryselectorall[index].classList.remove("unselected");
-  if(index != -1)divquerryselectorall[index].classList.add("selected");
-}
-function EnableButton(button)
-{
-  button.classList.remove("selected");
-  button.classList.remove("disabled");
-  button.classList.add("unselected");
-}
-function DisableButton(button)
-{
-  button.classList.remove("selected");
-  button.classList.remove("unselected");
-  button.classList.add("disabled");
-}
-
-// var shop_menu_innerhtml = document.querySelector(".shop-menu").innerHTML;
-// for(var i=1;i<=30;i++)
-// {
-//   shop_menu_innerhtml += `
-//   <div class="shop-menu-items">
-//     <a href="shop-manufacturing-build.html?design=MandirDesign-`+i+`"><img class="shop-menu-items-img" src="images/Decorative Jali/Mandir Back/`+i+`.jpg"></a><br>
-//     <h2>MandirDesign-`+i+`</h2>
-//   </div>
-//   `;
-// }  
-// for(var i=1;i<=20;i++)  
-// {
-//   shop_menu_innerhtml += `
-//   <div class="shop-menu-items">
-//     <a href="shop-manufacturing-build.html?design=MandirSide-`+i+`"><img class="shop-menu-items-img" src="images/Decorative Jali/Mandir side/`+i+`.jpg"></a><br>
-//     <h2>MandirSide-`+i+`</h2>
-//   </div>
-//   `;
-// }
-// for(var i=1;i<=280;i++)
-// {
-//   shop_menu_innerhtml += `
-//   <div class="shop-menu-items">
-//     <a href="shop-manufacturing-build.html?design=JaliPartition-`+i+`"><img class="shop-menu-items-img" src="images/Decorative Jali/Jali/`+i+`.jpg"></a><br>
-//     <h2>JaliPartition-`+i+`</h2>
-//   </div>
-//   `;
-// }
-// document.querySelector(".shop-menu").innerHTML = shop_menu_innerhtml;
 </script>
 </html>

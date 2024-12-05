@@ -394,8 +394,6 @@ struct LinkedList
 				count = _linkedlist.count;
 			}
 		}
-		if (count % 1000 == 0)
-			cout << "Append, Total Count: " << count << endl;
 	}
 
 	bool VerifyIntegrity()
