@@ -1066,10 +1066,10 @@ class Line
 };
 var drawing_rawmaterial = undefined;
 var drawing_rawmaterial_color = "white";
-var drawing = undefined;
-var drawinglength = undefined;
+var drawing = [];
+var drawinglength = [];
 
-var zoom = 1;
+var zoom = 0.5;
 var buttonleftmousedown = false;
 var mousex = 0, mousey = 0;
 var touchxp = 0, touchyp = 0;
@@ -1206,33 +1206,36 @@ function Draw()
     ctx.stroke();
   }
   
-  if(drawing != undefined)
+  for(var i=0;i<32;i++)
   {
-    ctx.strokeStyle = "black";
-    ctx.fillStyle = "white";
-    var px = drawing[0].p0.x;
-    var py = drawing[0].p0.y;
-    var qx = px;
-    var qy = py;
-    for(var i=0;i<drawinglength;i++)
+    if(drawing[i] != undefined)
     {
-      if(FloatCompare(px,qx) && FloatCompare(py,qy))
+      ctx.strokeStyle = "black";
+      ctx.fillStyle = "white";
+      var px = drawing[i][0].p0.x;
+      var py = drawing[i][0].p0.y;
+      var qx = px;
+      var qy = py;
+      for(var j=0;j<drawinglength;j++)
       {
-        ctx.beginPath();
-        px=drawing[i].p0.x;
-        py=drawing[i].p0.y;
-        ctx.moveTo((drawing[i].p0.x * zoom + mousex),(drawing[i].p0.y * zoom + mousey));
-      }      
-      ctx.lineTo((drawing[i].p1.x * zoom + mousex),(drawing[i].p1.y * zoom + mousey));   
-      qx = drawing[i].p1.x;
-      qy = drawing[i].p1.y;
-      if(FloatCompare(px,qx) && FloatCompare(py,qy))
-      {
-        ctx.fill();
-        ctx.stroke();
-        px=qx;
-        py=qy;
-      }    
+        if(FloatCompare(px,qx) && FloatCompare(py,qy))
+        {
+          ctx.beginPath();
+          px=drawing[i][j].p0.x;
+          py=drawing[i][j].p0.y;
+          ctx.moveTo((drawing[i][j].p0.x * zoom + mousex),(drawing[i][j].p0.y * zoom + mousey));
+        }      
+        ctx.lineTo((drawing[i][j].p1.x * zoom + mousex),(drawing[i][j].p1.y * zoom + mousey));   
+        qx = drawing[i][j].p1.x;
+        qy = drawing[i][j].p1.y;
+        if(FloatCompare(px,qx) && FloatCompare(py,qy))
+        {
+          ctx.fill();
+          ctx.stroke();
+          px=qx;
+          py=qy;
+        }    
+      }
     }
   }
 } 
@@ -1283,7 +1286,7 @@ function LoadRawMaterial(length,width)
   Draw();
 }
 
-function OnClickLoadDXF() 
+function OnClickLoadDXF(slot) 
 {
   var fileInput = document.getElementById('fileInput');
   var file = fileInput.files[0];
@@ -1301,17 +1304,17 @@ function OnClickLoadDXF()
       _free(memory);
 
       var address = _GETdrawing();
-      drawinglength =  _GETdrawinglength();
-      drawing = new Array(drawinglength);
+      drawinglength[slot] =  _GETdrawinglength();
+      drawing[slot] = new Array(drawinglength);
       for(var i=0;i<drawinglength;i++)
       {
-        drawing[i] = new Line;
-        drawing[i].p0 = new Point;
-        drawing[i].p1 = new Point;
-        drawing[i].p0.x = HEAPF64[address/8 + 0];
-        drawing[i].p0.y = HEAPF64[address/8 + 1];
-        drawing[i].p1.x = HEAPF64[address/8 + 2];
-        drawing[i].p1.y = HEAPF64[address/8 + 3];
+        drawing[slot][i] = new Line;
+        drawing[slot][i].p0 = new Point;
+        drawing[slot][i].p1 = new Point;
+        drawing[slot][i].p0.x = HEAPF64[address/8 + 0];
+        drawing[slot][i].p0.y = HEAPF64[address/8 + 1];
+        drawing[slot][i].p1.x = HEAPF64[address/8 + 2];
+        drawing[slot][i].p1.y = HEAPF64[address/8 + 3];
         address += 32;
       }
       Draw();
@@ -1324,7 +1327,7 @@ function OnClickLoadDXF()
   }
 }
 
-function LoadDXFOnSlot(url)
+function LoadDXFOnSlot(slot,url)
 {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
@@ -1342,21 +1345,22 @@ function LoadDXFOnSlot(url)
       _free(memory);
 
       var address = _GETdrawing();
-      drawinglength =  _GETdrawinglength();
-      drawing = new Array(drawinglength);
-      for(var i=0;i<drawinglength;i++)
+      drawinglength[slot] =  _GETdrawinglength();
+      drawing[slot] = new Array(drawinglength);
+      for (var i = 0; i < drawinglength; i++) 
       {
-        drawing[i] = new Line;
-        drawing[i].p0 = new Point;
-        drawing[i].p1 = new Point;
-        drawing[i].p0.x = HEAPF64[address/8 + 0];
-        drawing[i].p0.y = HEAPF64[address/8 + 1];
-        drawing[i].p1.x = HEAPF64[address/8 + 2];
-        drawing[i].p1.y = HEAPF64[address/8 + 3];
+        drawing[slot][i] = new Line;
+        drawing[slot][i].p0 = new Point;
+        drawing[slot][i].p1 = new Point;
+        drawing[slot][i].p0.x = HEAPF64[address / 8 + 0];
+        drawing[slot][i].p0.y = HEAPF64[address / 8 + 1];
+        drawing[slot][i].p1.x = HEAPF64[address / 8 + 2];
+        drawing[slot][i].p1.y = HEAPF64[address / 8 + 3];
         address += 32;
       }
-      Draw();
+      Draw();    
     }
+    
   };  
   xhr.send(null);
 } 
@@ -1381,7 +1385,7 @@ function LoadDXFOnSlot(url)
       OnChangeDimensionsWidth(document.querySelector(".dimensions-width"));      
 
       LoadRawMaterial(900,1200);
-      LoadDXFOnSlot("dxf/Mandir Jali Objects/Om 3.dxf");
+      LoadDXFOnSlot(0,"dxf/Mandir Jali Objects/Om 3.dxf");
     }
   };
 
