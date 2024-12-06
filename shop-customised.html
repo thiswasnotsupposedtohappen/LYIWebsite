@@ -201,7 +201,7 @@
         <button class="shop-manufacturingconfig-button disabled back-red" onclick="OnClickColorBack('Red')"><h2>Red</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: red;"></div></button>
         <button class="shop-manufacturingconfig-button disabled back-green" onclick="OnClickColorBack('Green')"><h2>Green</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: green;"></div></button>
         <button class="shop-manufacturingconfig-button disabled back-blue" onclick="OnClickColorBack('Blue')"><h2>Blue</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: blue;"></div></button>
-        <button class="shop-manufacturingconfig-button disabled back-orange" onclick="OnClickColorBack('Oragne')"><h2>Oragne</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: orange;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled back-orange" onclick="OnClickColorBack('Orange')"><h2>Oragne</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: orange;"></div></button>
         <button class="shop-manufacturingconfig-button disabled back-brown" onclick="OnClickColorBack('Brown')"><h2>Brown</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: brown;"></div></button>
         <button class="shop-manufacturingconfig-button disabled back-yellow" onclick="OnClickColorBack('Yellow')"><h2>Yellow</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: yellow;"></div></button>
         <button class="shop-manufacturingconfig-button disabled back-transparent" onclick="OnClickColorBack('Transparent')"><h2>Transparent</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: transparent;"></div></button>
@@ -999,6 +999,8 @@
     if(type == 'White040')index = 9;
     if(type == 'RAW')index = 10;
     SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[10], index);
+    
+    LoadRawMaterial(document.querySelector(".dimensions-length").value, document.querySelector(".dimensions-width").value);
   }
   
   function OnChangeCuttingDepth(input)
@@ -1044,9 +1046,9 @@
 
 <script src="wasm/LYIWebsite.js"></script>  
 <script>  
-function FloatCompare(a,b)
+function FloatCompare(x)
 {
-  return Math.abs(a-b) < 0.0001;
+  return Math.abs(x) < 0.0001;
 }
 class Point
 {
@@ -1077,7 +1079,8 @@ class DesignObject
   }
 }
 var drawing_rawmaterial = undefined;
-var drawing_rawmaterial_color = "white";
+var drawing_rawmaterial_frontcolor = "white";
+var drawing_rawmaterial_backcolor = "white";
 var drawingobject = [];
 
 var zoom = 0.5;
@@ -1203,10 +1206,10 @@ function Draw()
   ctx.lineTo(mousex,-(canvas.height/2));    
   ctx.stroke();
 
+  ctx.strokeStyle = "black";
+  ctx.fillStyle = drawing_rawmaterial_frontcolor;
   if(drawing_rawmaterial != undefined)
   {
-    ctx.strokeStyle = "black";
-    ctx.fillStyle = drawing_rawmaterial_color;
     ctx.beginPath();
     ctx.moveTo((drawing_rawmaterial[0].p.x * zoom + mousex),(drawing_rawmaterial[0].p.y * zoom + mousey));
     ctx.lineTo((drawing_rawmaterial[0].q.x * zoom + mousex),(drawing_rawmaterial[0].q.y * zoom + mousey));   
@@ -1217,34 +1220,29 @@ function Draw()
     ctx.stroke();
   }
   
-  for(var i=0;i<32;i++)
+  ctx.strokeStyle = "black";
+  ctx.fillStyle = drawing_rawmaterial_backcolor;
+  for(var i=0;i<drawingobject.length;i++)
   {
     if(drawingobject[i] != undefined)
     {
-      ctx.strokeStyle = "black";
-      ctx.fillStyle = "white";
-      var px = drawingobject[i].drawing[0].p.x;
-      var py = drawingobject[i].drawing[0].p.y;
-      var qx = px;
-      var qy = py;
+      var p = drawingobject[i].drawing[0].p;
+      var q = p;
       for(var j=0;j<drawingobject[i].length;j++)
       {
-        if(FloatCompare(px,qx) && FloatCompare(py,qy))
+        if(FloatCompare(p.x-q.x) && FloatCompare(p.y-q.y))
         {
           ctx.beginPath();
-          px=drawingobject[i].drawing[j].p.x;
-          py=drawingobject[i].drawing[j].p.y;
-          ctx.moveTo((drawingobject[i].drawing[j].p.x * zoom + mousex),(drawingobject[i].drawing[j].p.y * zoom + mousey));
+          p=drawingobject[i].drawing[j].p;
+          ctx.moveTo((p.x * zoom + mousex),(p.y * zoom + mousey));
         }      
-        ctx.lineTo((drawingobject[i].drawing[j].q.x * zoom + mousex),(drawingobject[i].drawing[j].q.y * zoom + mousey));   
-        qx = drawingobject[i].drawing[j].q.x;
-        qy = drawingobject[i].drawing[j].q.y;
-        if(FloatCompare(px,qx) && FloatCompare(py,qy))
+        q = drawingobject[i].drawing[j].q;
+        ctx.lineTo((q.x * zoom + mousex),(q.y * zoom + mousey));   
+        if(FloatCompare(p.x-q.x) && FloatCompare(p.y-q.y))
         {
           ctx.fill();
           ctx.stroke();
-          px=qx;
-          py=qy;
+          p=q;
         }    
       }
     }
@@ -1283,55 +1281,84 @@ function LoadRawMaterial(length,width)
   drawing_rawmaterial[3].q.x = -length/2;
   drawing_rawmaterial[3].q.y = -width/2;  
 
-  if(manufacturingspecifications.colorfront == "White")drawing_rawmaterial_color = "White";
-  if(manufacturingspecifications.colorfront == "Black")drawing_rawmaterial_color = "Black";
-  if(manufacturingspecifications.colorfront == "Red")drawing_rawmaterial_color = "Red";
-  if(manufacturingspecifications.colorfront == "Green")drawing_rawmaterial_color = "Green";
-  if(manufacturingspecifications.colorfront == "Blue")drawing_rawmaterial_color = "Blue";
-  if(manufacturingspecifications.colorfront == "Orange")drawing_rawmaterial_color = "Orange";
-  if(manufacturingspecifications.colorfront == "Brown")drawing_rawmaterial_color = "Brown";
-  if(manufacturingspecifications.colorfront == "Yellow")drawing_rawmaterial_color = "Yellow";
-  if(manufacturingspecifications.colorfront == "Transparent")drawing_rawmaterial_color = undefined;
-  if(manufacturingspecifications.colorfront == "White040")drawing_rawmaterial_color = undefined;
+  if(manufacturingspecifications.colorfront == "White")drawing_rawmaterial_frontcolor = "White";
+  if(manufacturingspecifications.colorfront == "Black")drawing_rawmaterial_frontcolor = "Black";
+  if(manufacturingspecifications.colorfront == "Red")drawing_rawmaterial_frontcolor = "Red";
+  if(manufacturingspecifications.colorfront == "Green")drawing_rawmaterial_frontcolor = "Green";
+  if(manufacturingspecifications.colorfront == "Blue")drawing_rawmaterial_frontcolor = "Blue";
+  if(manufacturingspecifications.colorfront == "Orange")drawing_rawmaterial_frontcolor = "Orange";
+  if(manufacturingspecifications.colorfront == "Brown")drawing_rawmaterial_frontcolor = "Brown";
+  if(manufacturingspecifications.colorfront == "Yellow")drawing_rawmaterial_frontcolor = "Yellow";
+  if(manufacturingspecifications.colorfront == "Transparent")drawing_rawmaterial_frontcolor = undefined;
+  if(manufacturingspecifications.colorfront == "White040")drawing_rawmaterial_frontcolor = undefined;
 
+  if(manufacturingspecifications.colorback == "White")drawing_rawmaterial_backcolor = "White";
+  if(manufacturingspecifications.colorback == "Black")drawing_rawmaterial_backcolor = "Black";
+  if(manufacturingspecifications.colorback == "Red")drawing_rawmaterial_backcolor = "Red";
+  if(manufacturingspecifications.colorback == "Green")drawing_rawmaterial_backcolor = "Green";
+  if(manufacturingspecifications.colorback == "Blue")drawing_rawmaterial_backcolor = "Blue";
+  if(manufacturingspecifications.colorback == "Orange")drawing_rawmaterial_backcolor = "Orange";
+  if(manufacturingspecifications.colorback == "Brown")drawing_rawmaterial_backcolor = "Brown";
+  if(manufacturingspecifications.colorback == "Yellow")drawing_rawmaterial_backcolor = "Yellow";
+  if(manufacturingspecifications.colorback == "Transparent")drawing_rawmaterial_backcolor = undefined;
+  if(manufacturingspecifications.colorback == "White040")drawing_rawmaterial_backcolor = undefined;
   Draw();
 }
 
-function LoadDXFOnDrawingObject(slot,url)
+function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
 {
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", url, true);
-  xhr.responseType = "arraybuffer";
-  xhr.onload = function (oEvent) 
+  xhr.open("GET", url, false);
+  xhr.onload = function (oEvent)
   {
-    var arrayBuffer = xhr.response;
-    if (arrayBuffer) 
+    var data = new Uint8Array(new TextEncoder().encode(xhr.responseText));
+    var memory = _malloc(data.length);
+    HEAPU8.set(data, memory);
+
+    console.log("return = " + _LoadDXF(memory, data.length));
+    _free(memory);
+
+    drawingobject[slot] = new DesignObject();
+    var address = _GETdrawing();
+    drawingobject[slot].length =  _GETdrawinglength();
+    drawingobject[slot].drawing = new Array(drawingobject[slot].length);
+    for (var i = 0; i < drawingobject[slot].length; i++) 
     {
-      var byteArray = new Uint8Array(arrayBuffer);
-      var memory = _malloc(byteArray.length);
-      HEAPU8.set(byteArray, memory);
+      drawingobject[slot].drawing[i] = new Line;
+      drawingobject[slot].drawing[i].p = new Point;
+      drawingobject[slot].drawing[i].q = new Point;
+      drawingobject[slot].drawing[i].p.x = HEAPF64[address / 8 + 0];
+      drawingobject[slot].drawing[i].p.y = HEAPF64[address / 8 + 1];
+      drawingobject[slot].drawing[i].q.x = HEAPF64[address / 8 + 2];
+      drawingobject[slot].drawing[i].q.y = HEAPF64[address / 8 + 3];
 
-      console.log("return = " + _LoadDXF(memory, byteArray.length));
-      _free(memory);
-
-      drawingobject[slot] = new DesignObject();
-      var address = _GETdrawing();
-      drawingobject[slot].length =  _GETdrawinglength();
-      drawingobject[slot].drawing = new Array(drawingobject[slot].length);
-      for (var i = 0; i < drawingobject[slot].length; i++) 
-      {
-        drawingobject[slot].drawing[i] = new Line;
-        drawingobject[slot].drawing[i].p = new Point;
-        drawingobject[slot].drawing[i].q = new Point;
-        drawingobject[slot].drawing[i].p.x = HEAPF64[address / 8 + 0];
-        drawingobject[slot].drawing[i].p.y = HEAPF64[address / 8 + 1];
-        drawingobject[slot].drawing[i].q.x = HEAPF64[address / 8 + 2];
-        drawingobject[slot].drawing[i].q.y = HEAPF64[address / 8 + 3];
-
-        address += 32;
-      }
-      Draw();    
+      address += 32;
     }
+    for (var i = 0; i < drawingobject[slot].length; i++) 
+    {
+      drawingobject[slot].drawing[i].p.x *= scale;
+      drawingobject[slot].drawing[i].p.y *= scale;
+      drawingobject[slot].drawing[i].q.x *= scale;
+      drawingobject[slot].drawing[i].q.y *= scale;
+
+      var cosangle = Math.cos(angle);
+      var sinangle = Math.sin(angle);
+
+      var px = drawingobject[slot].drawing[i].p.x;
+      var py = drawingobject[slot].drawing[i].p.y;
+      var qx = drawingobject[slot].drawing[i].q.x;
+      var qy = drawingobject[slot].drawing[i].q.y;
+
+      drawingobject[slot].drawing[i].p.x = px * cosangle - py * sinangle;
+      drawingobject[slot].drawing[i].p.y = px * sinangle + py * cosangle;
+      drawingobject[slot].drawing[i].q.x = qx * cosangle - qy * sinangle;
+      drawingobject[slot].drawing[i].q.y = qx * sinangle + qy * cosangle;
+
+      drawingobject[slot].drawing[i].p.x += offsetx;
+      drawingobject[slot].drawing[i].p.y += offsety;
+      drawingobject[slot].drawing[i].q.x += offsetx;
+      drawingobject[slot].drawing[i].q.y += offsety;
+    } 
   };  
   xhr.send(null);
 } 
@@ -1353,10 +1380,15 @@ function LoadDXFOnDrawingObject(slot,url)
       document.querySelector(".dimensions-length").value = 900;
       document.querySelector(".dimensions-width").value = 1200;
       OnChangeDimensionsLength(document.querySelector(".dimensions-length"));
-      OnChangeDimensionsWidth(document.querySelector(".dimensions-width"));      
+      OnChangeDimensionsWidth(document.querySelector(".dimensions-width"));   
 
-      LoadRawMaterial(900,1200);
-      LoadDXFOnDrawingObject(0,"dxf/Mandir Jali Objects/Om 3.dxf");     
+      LoadRawMaterial(900, 1200);
+      LoadDXFOnSlot(0, "dxf/Mandir Jali Objects/Om 3.dxf", 1.5, 0, 0, 0);
+      LoadDXFOnSlot(1, "dxf/Mandir Jali Objects/Ghanti.dxf", 1.5, 0, -300, +350);
+      LoadDXFOnSlot(2, "dxf/Mandir Jali Objects/Ghanti.dxf", 1.5, 0, +300, +350);
+      LoadDXFOnSlot(3, "dxf/Mandir Jali Objects/Diya 3.dxf", 1.5, 0, -300, -350);
+      LoadDXFOnSlot(4, "dxf/Mandir Jali Objects/Diya 3.dxf", 1.5, 0, +300, -350);
+      Draw();
     }
   };
 

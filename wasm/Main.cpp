@@ -52,9 +52,11 @@ EMSCRIPTEN_KEEPALIVE int32 main()
 
 EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 {
-	cout << "LoadDXF In" << endl;
+	//cout << "LoadDXF In" << endl;
 	block.Release();
 	static Block* _block = 0;
+
+	drawing.Release();
 
 	class DXFReader : public DRW_Interface
 	{
@@ -806,7 +808,8 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 #endif
 	if (!dxf.read(&reader, false)) { return -1; }
 
-	cout << "Exporting Drawing" << endl;
+	//cout << "Exporting Drawing" << endl;
+	drawingexport.Release();
 	drawingexport.data = new Line[drawing.count];
 	drawingexport.size = drawing.count;
 	uint32 i;
@@ -817,9 +820,9 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 		block.current->data.blockdata.Release();
 	block.Release();	
 
-	cout << "drawing = " << (uint32)(void*)drawingexport.data << endl;
-	cout << "drawinglength = "<< drawingexport.size << endl;
-	cout << "LoadDXF Out" << endl;
+	//cout << "drawing = " << (uint32)(void*)drawingexport.data << endl;
+	//cout << "drawinglength = "<< drawingexport.size << endl;
+	//cout << "LoadDXF Out" << endl;
 	return 0;
 }
 
