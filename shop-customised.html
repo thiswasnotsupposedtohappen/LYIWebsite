@@ -1060,14 +1060,25 @@ class Line
 {
   constructor()
   {
-    this.p0=undefined;
-    this.p1=undefined;
+    this.p=undefined;
+    this.q=undefined;
   }
 };
+class DesignObject
+{
+  constructor()
+  {
+    var drawing = undefined;
+    var length = 0;
+    var scale = 1;
+    var rotation = 0;
+    var offsetx = 0;
+    var offsety = 0;
+  }
+}
 var drawing_rawmaterial = undefined;
 var drawing_rawmaterial_color = "white";
-var drawing = [];
-var drawinglength = [];
+var drawingobject = [];
 
 var zoom = 0.5;
 var buttonleftmousedown = false;
@@ -1197,37 +1208,37 @@ function Draw()
     ctx.strokeStyle = "black";
     ctx.fillStyle = drawing_rawmaterial_color;
     ctx.beginPath();
-    ctx.moveTo((drawing_rawmaterial[0].p0.x * zoom + mousex),(drawing_rawmaterial[0].p0.y * zoom + mousey));
-    ctx.lineTo((drawing_rawmaterial[0].p1.x * zoom + mousex),(drawing_rawmaterial[0].p1.y * zoom + mousey));   
-    ctx.lineTo((drawing_rawmaterial[1].p1.x * zoom + mousex),(drawing_rawmaterial[1].p1.y * zoom + mousey));   
-    ctx.lineTo((drawing_rawmaterial[2].p1.x * zoom + mousex),(drawing_rawmaterial[2].p1.y * zoom + mousey));
-    ctx.lineTo((drawing_rawmaterial[3].p1.x * zoom + mousex),(drawing_rawmaterial[3].p1.y * zoom + mousey));    
+    ctx.moveTo((drawing_rawmaterial[0].p.x * zoom + mousex),(drawing_rawmaterial[0].p.y * zoom + mousey));
+    ctx.lineTo((drawing_rawmaterial[0].q.x * zoom + mousex),(drawing_rawmaterial[0].q.y * zoom + mousey));   
+    ctx.lineTo((drawing_rawmaterial[1].q.x * zoom + mousex),(drawing_rawmaterial[1].q.y * zoom + mousey));   
+    ctx.lineTo((drawing_rawmaterial[2].q.x * zoom + mousex),(drawing_rawmaterial[2].q.y * zoom + mousey));
+    ctx.lineTo((drawing_rawmaterial[3].q.x * zoom + mousex),(drawing_rawmaterial[3].q.y * zoom + mousey));    
     if(ctx.fillStyle != undefined)ctx.fill();
     ctx.stroke();
   }
   
   for(var i=0;i<32;i++)
   {
-    if(drawing[i] != undefined)
+    if(drawingobject[i] != undefined)
     {
       ctx.strokeStyle = "black";
       ctx.fillStyle = "white";
-      var px = drawing[i][0].p0.x;
-      var py = drawing[i][0].p0.y;
+      var px = drawingobject[i].drawing[0].p.x;
+      var py = drawingobject[i].drawing[0].p.y;
       var qx = px;
       var qy = py;
-      for(var j=0;j<drawinglength;j++)
+      for(var j=0;j<drawingobject[i].length;j++)
       {
         if(FloatCompare(px,qx) && FloatCompare(py,qy))
         {
           ctx.beginPath();
-          px=drawing[i][j].p0.x;
-          py=drawing[i][j].p0.y;
-          ctx.moveTo((drawing[i][j].p0.x * zoom + mousex),(drawing[i][j].p0.y * zoom + mousey));
+          px=drawingobject[i].drawing[j].p.x;
+          py=drawingobject[i].drawing[j].p.y;
+          ctx.moveTo((drawingobject[i].drawing[j].p.x * zoom + mousex),(drawingobject[i].drawing[j].p.y * zoom + mousey));
         }      
-        ctx.lineTo((drawing[i][j].p1.x * zoom + mousex),(drawing[i][j].p1.y * zoom + mousey));   
-        qx = drawing[i][j].p1.x;
-        qy = drawing[i][j].p1.y;
+        ctx.lineTo((drawingobject[i].drawing[j].q.x * zoom + mousex),(drawingobject[i].drawing[j].q.y * zoom + mousey));   
+        qx = drawingobject[i].drawing[j].q.x;
+        qy = drawingobject[i].drawing[j].q.y;
         if(FloatCompare(px,qx) && FloatCompare(py,qy))
         {
           ctx.fill();
@@ -1244,33 +1255,33 @@ function LoadRawMaterial(length,width)
 {
   drawing_rawmaterial = new Array(4);
   drawing_rawmaterial[0] = new Line;
-  drawing_rawmaterial[0].p0 = new Point;
-  drawing_rawmaterial[0].p1 = new Point;
-  drawing_rawmaterial[0].p0.x = -length/2;
-  drawing_rawmaterial[0].p0.y = -width/2;
-  drawing_rawmaterial[0].p1.x = length/2;
-  drawing_rawmaterial[0].p1.y = -width/2;
+  drawing_rawmaterial[0].p = new Point;
+  drawing_rawmaterial[0].q = new Point;
+  drawing_rawmaterial[0].p.x = -length/2;
+  drawing_rawmaterial[0].p.y = -width/2;
+  drawing_rawmaterial[0].q.x = length/2;
+  drawing_rawmaterial[0].q.y = -width/2;
   drawing_rawmaterial[1] = new Line;
-  drawing_rawmaterial[1].p0 = new Point;
-  drawing_rawmaterial[1].p1 = new Point;
-  drawing_rawmaterial[1].p0.x = length/2;
-  drawing_rawmaterial[1].p0.y = -width/2;
-  drawing_rawmaterial[1].p1.x = length/2;
-  drawing_rawmaterial[1].p1.y = width/2;
+  drawing_rawmaterial[1].p = new Point;
+  drawing_rawmaterial[1].q = new Point;
+  drawing_rawmaterial[1].p.x = length/2;
+  drawing_rawmaterial[1].p.y = -width/2;
+  drawing_rawmaterial[1].q.x = length/2;
+  drawing_rawmaterial[1].q.y = width/2;
   drawing_rawmaterial[2] = new Line;
-  drawing_rawmaterial[2].p0 = new Point;
-  drawing_rawmaterial[2].p1 = new Point;
-  drawing_rawmaterial[2].p0.x = length/2;
-  drawing_rawmaterial[2].p0.y = width/2;
-  drawing_rawmaterial[2].p1.x = -length/2;
-  drawing_rawmaterial[2].p1.y = width/2;
+  drawing_rawmaterial[2].p = new Point;
+  drawing_rawmaterial[2].q = new Point;
+  drawing_rawmaterial[2].p.x = length/2;
+  drawing_rawmaterial[2].p.y = width/2;
+  drawing_rawmaterial[2].q.x = -length/2;
+  drawing_rawmaterial[2].q.y = width/2;
   drawing_rawmaterial[3] = new Line;
-  drawing_rawmaterial[3].p0 = new Point;
-  drawing_rawmaterial[3].p1 = new Point;
-  drawing_rawmaterial[3].p0.x = -length/2;
-  drawing_rawmaterial[3].p0.y = width/2;
-  drawing_rawmaterial[3].p1.x = -length/2;
-  drawing_rawmaterial[3].p1.y = -width/2;  
+  drawing_rawmaterial[3].p = new Point;
+  drawing_rawmaterial[3].q = new Point;
+  drawing_rawmaterial[3].p.x = -length/2;
+  drawing_rawmaterial[3].p.y = width/2;
+  drawing_rawmaterial[3].q.x = -length/2;
+  drawing_rawmaterial[3].q.y = -width/2;  
 
   if(manufacturingspecifications.colorfront == "White")drawing_rawmaterial_color = "White";
   if(manufacturingspecifications.colorfront == "Black")drawing_rawmaterial_color = "Black";
@@ -1286,48 +1297,7 @@ function LoadRawMaterial(length,width)
   Draw();
 }
 
-function OnClickLoadDXF(slot) 
-{
-  var fileInput = document.getElementById('fileInput');
-  var file = fileInput.files[0];
-  if (file) 
-  {
-    var reader = new FileReader();
-    reader.onload = function(e) 
-    {
-      var stringdata = e.target.result;
-      var data = new Uint8Array(new TextEncoder().encode(stringdata));
-      var memory = _malloc(data.length);
-      HEAPU8.set(data, memory);
-
-      console.log("return = " + _LoadDXF(memory, data.length));
-      _free(memory);
-
-      var address = _GETdrawing();
-      drawinglength[slot] =  _GETdrawinglength();
-      drawing[slot] = new Array(drawinglength);
-      for(var i=0;i<drawinglength;i++)
-      {
-        drawing[slot][i] = new Line;
-        drawing[slot][i].p0 = new Point;
-        drawing[slot][i].p1 = new Point;
-        drawing[slot][i].p0.x = HEAPF64[address/8 + 0];
-        drawing[slot][i].p0.y = HEAPF64[address/8 + 1];
-        drawing[slot][i].p1.x = HEAPF64[address/8 + 2];
-        drawing[slot][i].p1.y = HEAPF64[address/8 + 3];
-        address += 32;
-      }
-      Draw();
-    };
-    reader.readAsText(file);
-  } 
-  else 
-  {
-    console.log("No file selected");
-  }
-}
-
-function LoadDXFOnSlot(slot,url)
+function LoadDXFOnDrawingObject(slot,url)
 {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
@@ -1344,23 +1314,24 @@ function LoadDXFOnSlot(slot,url)
       console.log("return = " + _LoadDXF(memory, byteArray.length));
       _free(memory);
 
+      drawingobject[slot] = new DesignObject();
       var address = _GETdrawing();
-      drawinglength[slot] =  _GETdrawinglength();
-      drawing[slot] = new Array(drawinglength);
-      for (var i = 0; i < drawinglength; i++) 
+      drawingobject[slot].length =  _GETdrawinglength();
+      drawingobject[slot].drawing = new Array(drawingobject[slot].length);
+      for (var i = 0; i < drawingobject[slot].length; i++) 
       {
-        drawing[slot][i] = new Line;
-        drawing[slot][i].p0 = new Point;
-        drawing[slot][i].p1 = new Point;
-        drawing[slot][i].p0.x = HEAPF64[address / 8 + 0];
-        drawing[slot][i].p0.y = HEAPF64[address / 8 + 1];
-        drawing[slot][i].p1.x = HEAPF64[address / 8 + 2];
-        drawing[slot][i].p1.y = HEAPF64[address / 8 + 3];
+        drawingobject[slot].drawing[i] = new Line;
+        drawingobject[slot].drawing[i].p = new Point;
+        drawingobject[slot].drawing[i].q = new Point;
+        drawingobject[slot].drawing[i].p.x = HEAPF64[address / 8 + 0];
+        drawingobject[slot].drawing[i].p.y = HEAPF64[address / 8 + 1];
+        drawingobject[slot].drawing[i].q.x = HEAPF64[address / 8 + 2];
+        drawingobject[slot].drawing[i].q.y = HEAPF64[address / 8 + 3];
+
         address += 32;
       }
       Draw();    
     }
-    
   };  
   xhr.send(null);
 } 
@@ -1385,7 +1356,7 @@ function LoadDXFOnSlot(slot,url)
       OnChangeDimensionsWidth(document.querySelector(".dimensions-width"));      
 
       LoadRawMaterial(900,1200);
-      LoadDXFOnSlot(0,"dxf/Mandir Jali Objects/Om 3.dxf");
+      LoadDXFOnDrawingObject(0,"dxf/Mandir Jali Objects/Om 3.dxf");     
     }
   };
 
