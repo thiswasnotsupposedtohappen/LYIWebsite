@@ -18,14 +18,19 @@
     <div><a class="TopRibbonText" href="contact.html">Contact Us</a></div>
     <div><a class="TopRibbonText" href="cart.html"><span class="material-symbols-outlined" style="width: 100px; font-size: 50px;">shopping_cart</span></a></div>
   </div>
+  <div class="editorribbon">
+    <button class = "editorribbonbutton" onclick = "OnClickView('Specifications')">Specifications</button>
+    <button class = "editorribbonbutton" onclick = "OnClickView('DesignElements')">Design Elements</button>
+    <button class = "editorribbonbutton" onclick = "OnClickView('ReviewCost')">Review/Cost</button>
+  </div>
 
-  <div id = "viewer" style="height: 800px; margin-top: 50px; border-style: solid; border-width: 2px; border-color: black; margin-bottom: 50px;">
+  <div id = "viewer" style="height: 1200px; margin-top: 50px; border-style: solid; border-width: 2px; border-color: black; margin-bottom: 50px; overflow: hidden;">
     <canvas></canvas>
   </div>
 
-  <div class="shop-manufacturingspecification">
+  <div class="shop-manufacturingspecification shop-basepellete">
 
-    <div class="shop-manufacturingconfig">
+    <div class="shop-manufacturingconfig shop-containerpellete">
       <div style="text-align: end;"><h3>Dimensions:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <input type="number" class="shop-manufacturingconfig-input dimensions-length" style="width: 100px" onchange="OnChangeDimensionsLength(this)" onclick="OnChangeDimensionsLength(this)"></input>
@@ -42,7 +47,7 @@
       <div style="text-align: end;"><b>Customer:</b></div><div>Raw material is provided by customer</div>
     </div>
 
-    <div class="shop-manufacturingconfig">
+    <div class="shop-manufacturingconfig shop-containerpellete">
       <div style="text-align: end;"><h3>Size-Option:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button disabled size-1x1" onclick="OnClickSize('1ft x 1ft')"><h2>1ft x 1ft <span style="color: green;">S</span></h2></button>
@@ -67,7 +72,7 @@
       <div style="text-align: end;"><b>N-variant:</b></div><div>Non-Standard size variant. An additional cost above Nominal cost is added because of the remaining material from the entire sheet it is cut from has low order requirment and harder to use else-where</div>    
     </div>
 
-    <div class="shop-manufacturingconfig">
+    <div class="shop-manufacturingconfig shop-containerpellete">
       <div style="text-align: end;"><h3>Raw-Material by:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button unselected rawmaterial-lyi" onclick="OnClickSupplier('LightYear')"><h2>LightYear</h2></button>
@@ -80,7 +85,7 @@
       <div style="text-align: end;"><b>Customer:</b></div><div>Raw material is provided by customer</div>
     </div>
 
-    <div  class="shop-manufacturingconfig">
+    <div  class="shop-manufacturingconfig shop-containerpellete">
       <div style="text-align: end;"><h3>Construction:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button unselected construction-standalone" onclick="OnClickConstruction('Standalone')"><h2>Standalone</h2></button>
@@ -96,7 +101,7 @@
       <div style="text-align: end;"><b>Half-Depth:</b></div><div>One-Piece of Raw Material having design cut till only a defined depth and not cut all the way through</div>      
     </div>
 
-    <div class="shop-manufacturingconfig">
+    <div class="shop-manufacturingconfig shop-containerpellete">
       <div style="text-align: end;"><h3>Process:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button unselected process-laser" onclick="OnClickProcess('CNC Laser 0.5mm')"><h2>CNC Laser 0.5mm</h2></button>
@@ -112,7 +117,7 @@
       <div style="text-align: end;"><b>CNC Router:</b></div><div>Manufactured using CNC Router. Pros can cut almost any material with good edge finish and acuracy. Cons cannot cut small/thin geometrey, minimum cutting radius of geometrey is dependent on tool diameter. An example 4mm tool can cut geometrey with minimum radium of 2mm. Smaller the diameter sharper geometrey can be cut. Example when cutting a square slot, the corners will be round with radius of half the tool diameter. Lower the tool disameter, slower the machining speed thus higher will be the cost</div>
     </div>
 
-    <div class="shop-manufacturingconfig shop-manufacturingconfig-materialfront">
+    <div class="shop-manufacturingconfig shop-manufacturingconfig-materialfront shop-containerpellete">
       <div style="text-align: end;"><h3>Front Material:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button disabled front-acrylic" onclick="OnClickMaterialFront('Acrylic')"><h2>Acrylic</h2></button>
@@ -161,7 +166,7 @@
       </div>
     </div>
 
-    <div class="shop-manufacturingconfig shop-manufacturingconfig-materialback">
+    <div class="shop-manufacturingconfig shop-manufacturingconfig-materialback shop-containerpellete">
       <div style="text-align: end;"><h3>Back Material:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button unselected back-acrylic" onclick="OnClickMaterialBack('Acrylic')"><h2>Acrylic</h2></button>
@@ -210,7 +215,7 @@
       </div>
     </div>
 
-    <div class="shop-manufacturingconfig shop-manufacturingconfig-materialhalfdepth">
+    <div class="shop-manufacturingconfig shop-manufacturingconfig-materialhalfdepth shop-containerpellete">
       <div style="text-align: end;"><h3>Material:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button disabled front-acrylic" onclick="OnClickMaterialFront('Acrylic');OnClickMaterialBack('Acrylic');"><h2>Acrylic</h2></button>
@@ -267,7 +272,72 @@
     </div>
   </div>
 
-  <div class="shop-menu">
+  <div class="shop-designelements shop-basepellete">    
+
+    <div class="shop-designelements-rack shop-containerpellete">
+      <div class="shop-designelements-rack-tray">
+        <div class="shop-designelements-rack-tray-item">
+          <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
+          <button class="shop-containerpellete-tray-item-buttonadd unselected">
+            +
+          </button>
+        </div>
+        <div class="shop-designelements-rack-tray-item">
+          <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
+          <button class="shop-containerpellete-tray-item-buttonadd unselected">
+            +
+          </button>
+        </div>
+        <div class="shop-designelements-rack-tray-item">
+          <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
+          <button class="shop-containerpellete-tray-item-buttonadd unselected">
+            +
+          </button>
+        </div>
+        <div class="shop-designelements-rack-tray-item">
+          <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
+          <button class="shop-containerpellete-tray-item-buttonadd unselected">
+            +
+          </button>
+        </div>
+        <div class="shop-designelements-rack-tray-item">
+          <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
+          <button class="shop-containerpellete-tray-item-buttonadd unselected">
+            +
+          </button>
+        </div>
+        <div class="shop-designelements-rack-tray-item">
+          <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
+          <button class="shop-containerpellete-tray-item-buttonadd unselected">
+            +
+          </button>
+        </div>
+        <div class="shop-designelements-rack-tray-item">
+          <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
+          <button class="shop-containerpellete-tray-item-buttonadd unselected">
+            +
+          </button>
+        </div>
+        <div class="shop-designelements-rack-tray-item">
+          <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
+          <button class="shop-containerpellete-tray-item-buttonadd unselected">
+            +
+          </button>
+        </div>
+        <div class="shop-designelements-rack-tray-item">
+          <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
+          <button class="shop-containerpellete-tray-item-buttonadd unselected">
+            +
+          </button>
+        </div>
+      </div>
+    </div>    
+    <div class="shop-designelements-items shop-containerpellete">
+      <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
+    </div>
+  </div>
+
+  <div class="shop-review">
   </div>
 </body>
 
@@ -307,9 +377,61 @@
   manufacturingspecifications.design = [];
   var dimensionsunit = 'mm';
   
+  OnClickView('DesignElements');
   OnClickUnit('mm');
   OnClickSupplier('LightYear');
   OnClickConstruction('Standalone');
+
+  function EnableButtons(div)
+  {
+    div.querySelectorAll("button").forEach(element => {element.classList.remove("disabled");});
+    div.querySelectorAll("button").forEach(element => {element.classList.remove("selected");});
+    div.querySelectorAll("button").forEach(element => {element.classList.add("unselected");});
+  }
+  function DisableButtons(div)
+  {
+    div.querySelectorAll("button").forEach(element => {element.classList.remove("selected");});
+    div.querySelectorAll("button").forEach(element => {element.classList.remove("unselected");});
+    div.querySelectorAll("button").forEach(element => {element.classList.add("disabled");});
+  }
+  function SelectButton(div, index)
+  {
+    div.querySelectorAll("button").forEach(element => {element.classList.remove("selected");});
+    div.querySelectorAll("button").forEach(element => {element.classList.add("unselected");});
+    if(index != -1)div.querySelectorAll("button")[index].classList.remove("unselected");
+    if(index != -1)div.querySelectorAll("button")[index].classList.add("selected");
+  }
+  function EnableButton(button)
+  {
+    button.classList.remove("selected");
+    button.classList.remove("disabled");
+    button.classList.add("unselected");
+  }
+  function DisableButton(button)
+  {
+    if (button) 
+    {
+      button.classList.remove("selected");
+      button.classList.remove("unselected");
+      button.classList.add("disabled");
+    }
+  }
+
+  function OnClickView(type)
+  {
+    var index = undefined;
+    if(type == 'Specifications')index = 0;
+    if(type == 'DesignElements')index = 1;
+    if(type == 'ReviewCost')index = 2;
+    SelectButton(document.querySelector(".editorribbon"), index);
+
+    document.querySelector(".shop-manufacturingspecification").style.display = "none";
+    document.querySelector(".shop-designelements").style.display = "none";
+    document.querySelector(".shop-review").style.display = "none";
+    if(index == 0)document.querySelector(".shop-manufacturingspecification").style.display = "block";
+    if(index == 1)document.querySelector(".shop-designelements").style.display = "block";
+    if(index == 2)document.querySelector(".shop-review").style.display = "block";
+  }
   
   function OnChangeDimensionsLength(input)
   {
@@ -607,9 +729,12 @@
     if(type == 'WPC/PVC/Foam')index = 5;
     if(type == 'Cement Sheet')index = 6;
     SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[5], index);
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[11], index);
   
     SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[6], -1);
     SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[7], -1);
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[12], -1);
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[13], -1);
   
     document.querySelectorAll(".front-1mm").forEach(element => {EnableButton(element);});
     document.querySelectorAll(".front-2mm").forEach(element => {EnableButton(element);});
@@ -956,6 +1081,9 @@
     if(type == '20mm')index = 11;
     if(type == '25mm')index = 12;
     SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[6], index);
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[12], index);
+
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[14], -1);
   }
   
   function OnClickThicknessBack(type)
@@ -994,7 +1122,7 @@
     if(type == 'Transparent')index = 8;
     if(type == 'White040')index = 9;
     if(type == 'RAW')index = 10;
-    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[7], index);
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[14], index);
 
     LoadRawMaterial(document.querySelector(".dimensions-length").value, document.querySelector(".dimensions-width").value);
   }
@@ -1024,40 +1152,57 @@
     if(input.value > parseInt(manufacturingspecifications.thicknessfront))input.value = parseInt(manufacturingspecifications.thicknessfront) -2;
   }
   
-  function EnableButtons(div)
+  var traymousedown = false;
+  var trayposition = 0;
+  var touchprevious = 0;
+  document.querySelector(".shop-designelements-rack").addEventListener('touchstart', function(event) 
   {
-    div.querySelectorAll(".shop-manufacturingconfig-button").forEach(element => {element.classList.remove("disabled");});
-    div.querySelectorAll(".shop-manufacturingconfig-button").forEach(element => {element.classList.remove("selected");});
-    div.querySelectorAll(".shop-manufacturingconfig-button").forEach(element => {element.classList.add("unselected");});
-  }
-  function DisableButtons(div)
+    event.preventDefault();
+    traymousedown = true;
+    touchprevious = event.touches[0].clientX;
+  });
+  document.querySelector(".shop-designelements-rack").addEventListener('mousedown', function(event) 
   {
-    div.querySelectorAll(".shop-manufacturingconfig-button").forEach(element => {element.classList.remove("selected");});
-    div.querySelectorAll(".shop-manufacturingconfig-button").forEach(element => {element.classList.remove("unselected");});
-    div.querySelectorAll(".shop-manufacturingconfig-button").forEach(element => {element.classList.add("disabled");});
-  }
-  function SelectButton(div, index)
+    event.preventDefault();
+    traymousedown = true;
+  });
+  document.querySelector(".shop-designelements-rack").addEventListener('mousemove', function(event) 
   {
-    div.querySelectorAll(".shop-manufacturingconfig-button").forEach(element => {element.classList.remove("selected");});
-    div.querySelectorAll(".shop-manufacturingconfig-button").forEach(element => {element.classList.add("unselected");});
-    if(index != -1)div.querySelectorAll(".shop-manufacturingconfig-button")[index].classList.remove("unselected");
-    if(index != -1)div.querySelectorAll(".shop-manufacturingconfig-button")[index].classList.add("selected");
-  }
-  function EnableButton(button)
-  {
-    button.classList.remove("selected");
-    button.classList.remove("disabled");
-    button.classList.add("unselected");
-  }
-  function DisableButton(button)
-  {
-    if (button) 
+    event.preventDefault();
+    if(traymousedown)
     {
-      button.classList.remove("selected");
-      button.classList.remove("unselected");
-      button.classList.add("disabled");
+      trayposition += event.movementX;
+      document.querySelector(".shop-designelements-rack-tray").style.left = trayposition + "px";    
+      console.log(trayposition);  
+      if(trayposition > 12)trayposition = 12;
+      if(trayposition < -2000)trayposition = -2000;
     }
-  }
+  });
+  document.querySelector(".shop-designelements-rack").addEventListener('touchmove', function(event) 
+  {
+    event.preventDefault();
+    if(traymousedown)
+    {
+      trayposition += event.touches[0].clientX - touchprevious;
+      touchprevious = event.touches[0].clientX;
+      document.querySelector(".shop-designelements-rack-tray").style.left = trayposition + "px";    
+      if(trayposition > 0)trayposition = 0;
+      if(trayposition < -2000)trayposition = -2000;      
+    }
+  });
+  document.addEventListener('mouseup', function(event) 
+  {
+    traymousedown = false;
+  });
+  document.addEventListener('touchend', function(event) 
+  {
+    traymousedown = false;
+  });
+
+  function AddDesignElement()
+  {
+
+  }  
 </script>
 
 <script src="wasm/LYIWebsite.js"></script>  
@@ -1099,7 +1244,7 @@ var drawing_rawmaterial_frontcolor = "white";
 var drawing_rawmaterial_backcolor = "white";
 var drawingobject = [];
 
-var zoom = 0.5;
+var zoom = 0.8;
 var buttonleftmousedown = false;
 var mousex = 0, mousey = 0;
 var touchxp = 0, touchyp = 0;
@@ -1384,7 +1529,6 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
   const url = new URLSearchParams(window.location.search);
   if(url.size == 0)
   {
-    console.log(window.location);
     window.location.href = "shop.html?category=custonised_mandirback";
   }  
   var designcatalogue = undefined;
@@ -1393,7 +1537,6 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
   xhr.onload = function (oEvent)
   {
     designcatalogue = JSON.parse(xhr.responseText);
-    console.log(designcatalogue);
   }
   xhr.send(null);
 
@@ -1405,9 +1548,6 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
     for(var i=0;i<Object.keys(designcatalogue.designcatalogue).length;i++)
     {
       var design = designcatalogue.designcatalogue[i];
-      console.log(design);
-      console.log(design.name);
-      console.log(category);
       if(design.name == category)
       {
         document.querySelector(".dimensions-length").value = design.dimensionsx;
@@ -1432,4 +1572,173 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
     }
   };
 </script>
+
 </html>
+<style>
+.editorribbon
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+
+  height: 180px;
+  align-items: center;
+  padding-left: 50px;
+  padding-right: 50px;
+  column-gap: 10px;
+
+  background-color: #FFFFFF;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.editorribbonbutton
+{  
+  margin-top: 100px;
+  display: flex;
+  height: 50px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.shop-basepellete
+{
+  background-color: rgb(124,85,59);
+  border-radius: 30px;
+  padding: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.shop-containerpellete
+{
+  background-color: rgb(228, 228, 228);
+  border-radius: 10px;
+  border-style: solid;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  display: grid;
+  grid-template-columns: 220px 1fr;
+
+  align-items: baseline;
+}
+.shop-manufacturingconfig-options
+{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.shop-manufacturingconfig-input
+{
+  width: 213px;
+  height: 50px;
+  text-align: center;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: black;
+
+  font-size: 20px;
+}
+.shop-manufacturingconfig-button
+{
+  width: 220px;
+  height: 50px;
+  text-align: center;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: black;
+  vertical-align: middle;
+
+  position: relative;
+}
+.shop-manufacturingconfig-button-colorpatch
+{
+  position: absolute;
+  top: 8px;
+  right: 6px;
+
+  width: 40px;
+  height: 30px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: black;
+}
+
+.shop-designelements-rack
+{
+  position: relative; 
+  height: 230px; 
+  margin-bottom: 50px; 
+  overflow: hidden;
+}
+.shop-designelements-rack-tray
+{
+  position: absolute;
+  display: flex;
+  column-gap: 20px;
+  top: 10px;
+  left: 10px;  
+}
+.shop-designelements-rack-tray-item
+{
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+.shop-designelements-rack-tray-item-img
+{
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  border-style: solid;
+}
+.shop-containerpellete-tray-item-buttonadd
+{
+  position: absolute;
+  bottom: -30px;
+  left: 75px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 25px;
+  border-color: black;
+  vertical-align: middle;
+  justify-content: center;
+  background-color: rgb(30, 255, 0);
+  font-size: 50px;
+  line-height: 28px;
+}
+.shop-designelements-items
+{
+  height: 210px;
+}
+
+.shop-designelements-element-button
+{
+  width: 250px;
+  height: 50px;
+  text-align: center;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: black;
+  vertical-align: middle;
+  justify-content: center;
+}
+</style>
