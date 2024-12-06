@@ -1,0 +1,97 @@
+{
+  "designcatalogue" :
+  [
+    {
+      "name": "MandirDesign-1",
+      "dimensionsx" : 900,
+      "dimensionsy" : 1200,
+      "size": "4ft x 3ft",
+      "supplier": "LightYear",
+      "construction": "Standalone",
+      "designelement": 
+      [
+        {
+          "dxfurl": "dxf/Mandir Jali Objects/Om 3.dxf",
+          "positionx": 0,
+          "positiony": 0,
+          "rotation": 0,
+          "scale": 1.5
+        },
+        {
+          "dxfurl": "dxf/Mandir Jali Objects/Ghanti.dxf",
+          "positionx": -300,
+          "positiony": 350,
+          "rotation": 0,
+          "scale": 1.5
+        },
+        {
+          "dxfurl": "dxf/Mandir Jali Objects/Ghanti.dxf",
+          "positionx": 300,
+          "positiony": 350,
+          "rotation": 0,
+          "scale": 1.5
+        },
+        {
+          "dxfurl": "dxf/Mandir Jali Objects/Diya 3.dxf",
+          "positionx": -300,
+          "positiony": -400,
+          "rotation": 0,
+          "scale": 1.5
+        },
+        {
+          "dxfurl": "dxf/Mandir Jali Objects/Diya 3.dxf",
+          "positionx": 300,
+          "positiony": -400,
+          "rotation": 0,
+          "scale": 1.5
+        }
+      ]
+    },
+    {
+      "name": "MandirDesign-2",
+      "dimensionsx" : 900,
+      "dimensionsy" : 1200,
+      "size": "4ft x 3ft",
+      "supplier": "LightYear",
+      "construction": "Standalone",
+      "designelement": 
+      [
+        {
+          "dxfurl": "dxf/Mandir Jali Objects/Om 3.dxf",
+          "positionx": 0,
+          "positiony": 0,
+          "rotation": 0,
+          "scale": 1.5
+        },
+        {
+          "dxfurl": "dxf/Mandir Jali Objects/Ghanti.dxf",
+          "positionx": -300,
+          "positiony": 350,
+          "rotation": 0,
+          "scale": 1.5
+        },
+        {
+          "dxfurl": "dxf/Mandir Jali Objects/Ghanti.dxf",
+          "positionx": 300,
+          "positiony": 350,
+          "rotation": 0,
+          "scale": 1.5
+        },
+        {
+          "dxfurl": "dxf/Mandir Jali Objects/Diya 3.dxf",
+          "positionx": -300,
+          "positiony": -400,
+          "rotation": 0,
+          "scale": 1.5
+        },
+        {
+          "dxfurl": "dxf/Mandir Jali Objects/Diya 3.dxf",
+          "positionx": 300,
+          "positiony": -400,
+          "rotation": 0,
+          "scale": 1.5
+        }
+      ]
+    }
+  ]
+}

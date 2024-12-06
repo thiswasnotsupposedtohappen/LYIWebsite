@@ -272,13 +272,27 @@
 </body>
 
 <script>
-  class JaliSpecifications
+  class DesignElement
   {
     constructor()
     {
-      this.construction = undefined;
-      this.supplier = undefined;
+      this.dxfurl = undefined;
+      this.positionx = undefined;
+      this.positiony = undefined;
+      this.rotation = undefined;
+      this.scale = undefined;
+    }
+  }
+  class ManufacturingSpecifications
+  {
+    constructor()
+    {
+      this.name = undefined;
+      this.dimensionsx = undefined;
+      this.dimensionsy = undefined;
       this.size = undefined;
+      this.supplier = undefined;
+      this.construction = undefined;
       this.process = undefined;
       this.materialfront = undefined;
       this.materialback = undefined;
@@ -286,9 +300,11 @@
       this.thicknessback = undefined;
       this.colorfront = undefined;
       this.colorback = undefined;
+      this.designelement = undefined;
     }
   }
-  var manufacturingspecifications = new JaliSpecifications();
+  var manufacturingspecifications = new ManufacturingSpecifications();
+  manufacturingspecifications.design = [];
   var dimensionsunit = 'mm';
   
   OnClickUnit('mm');
@@ -999,7 +1015,7 @@
     if(type == 'White040')index = 9;
     if(type == 'RAW')index = 10;
     SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[10], index);
-    
+
     LoadRawMaterial(document.querySelector(".dimensions-length").value, document.querySelector(".dimensions-width").value);
   }
   
@@ -1370,27 +1386,50 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
   {
     console.log(window.location);
     window.location.href = "shop.html?category=custonised_mandirback";
+  }  
+  var designcatalogue = undefined;
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "DesignCatalogue.json", false);
+  xhr.onload = function (oEvent)
+  {
+    designcatalogue = JSON.parse(xhr.responseText);
+    console.log(designcatalogue);
   }
+  xhr.send(null);
+
   Module.onRuntimeInitialized = function() 
   {
     console.log("WASM Loaded");
     const category = url.get('design');
-    if(category == 'MandirDesign-1')
-    {
-      document.querySelector(".dimensions-length").value = 900;
-      document.querySelector(".dimensions-width").value = 1200;
-      OnChangeDimensionsLength(document.querySelector(".dimensions-length"));
-      OnChangeDimensionsWidth(document.querySelector(".dimensions-width"));   
 
-      LoadRawMaterial(900, 1200);
-      LoadDXFOnSlot(0, "dxf/Mandir Jali Objects/Om 3.dxf", 1.5, 0, 0, 0);
-      LoadDXFOnSlot(1, "dxf/Mandir Jali Objects/Ghanti.dxf", 1.5, 0, -300, +350);
-      LoadDXFOnSlot(2, "dxf/Mandir Jali Objects/Ghanti.dxf", 1.5, 0, +300, +350);
-      LoadDXFOnSlot(3, "dxf/Mandir Jali Objects/Diya 3.dxf", 1.5, 0, -300, -350);
-      LoadDXFOnSlot(4, "dxf/Mandir Jali Objects/Diya 3.dxf", 1.5, 0, +300, -350);
-      Draw();
+    for(var i=0;i<Object.keys(designcatalogue.designcatalogue).length;i++)
+    {
+      var design = designcatalogue.designcatalogue[i];
+      console.log(design);
+      console.log(design.name);
+      console.log(category);
+      if(design.name == category)
+      {
+        document.querySelector(".dimensions-length").value = design.dimensionsx;
+        document.querySelector(".dimensions-width").value = design.dimensionsy;
+        SetSizeOptions();
+        OnClickUnit('mm');
+        OnClickSupplier(design.supplier);
+        OnClickConstruction(design.construction);
+
+        LoadRawMaterial(design.dimensionsx, design.dimensionsy);
+        for(var j=0;j<Object.keys(design.designelement).length;j++)
+        {
+          LoadDXFOnSlot(j,
+          design.designelement[j].dxfurl, 
+          design.designelement[j].scale, 
+          design.designelement[j].rotation, 
+          design.designelement[j].positionx, 
+          design.designelement[j].positiony);
+        }
+        Draw();
+      }
     }
   };
-
 </script>
 </html>
