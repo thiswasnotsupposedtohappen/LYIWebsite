@@ -1,0 +1,48 @@
+<script>
+    var traymousedown = false;
+    var trayposition = 0;
+    var touchprevious = 0;
+    document.querySelector(".shop-designelements-tray").addEventListener('touchstart', function(event) 
+    {
+        event.preventDefault();
+        traymousedown = true;
+        touchprevious = event.touches[0].clientX;
+    });
+    document.querySelector(".shop-designelements-tray").addEventListener('mousedown', function(event) 
+    {
+        event.preventDefault();
+        traymousedown = true;
+    });
+    document.querySelector(".shop-designelements-tray").addEventListener('mousemove', function(event) 
+    {
+        event.preventDefault();
+        if(traymousedown)
+        {
+        trayposition += event.movementX;
+        if(trayposition > 12)trayposition = 12;
+        if(trayposition < -2000)trayposition = -2000;
+        document.querySelector(".shop-designelements-tray").style.left = trayposition + "px";
+        console.log(trayposition);  
+        }
+    });
+    document.querySelector(".shop-designelements-tray").addEventListener('touchmove', function(event) 
+    {
+        event.preventDefault();
+        if(traymousedown)
+        {
+        trayposition += event.touches[0].clientX - touchprevious;
+        touchprevious = event.touches[0].clientX;
+        if(trayposition > 12)trayposition = 12;
+        if(trayposition < -2000)trayposition = -2000;
+        document.querySelector(".shop-designelements-tray").style.left = trayposition + "px";    
+        }
+    });
+    document.addEventListener('mouseup', function(event) 
+    {
+        traymousedown = false;
+    });
+    document.addEventListener('touchend', function(event) 
+    {
+        traymousedown = false;
+    });
+</script>

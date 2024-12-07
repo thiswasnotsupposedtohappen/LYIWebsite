@@ -76,8 +76,9 @@ h8
   display: inline;
   margin: 0;
 }
-input, select, textarea {
-  font-size: 16px;
+pre
+{
+  display: inline;
 }
 
 .TopRibbon
