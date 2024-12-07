@@ -278,29 +278,29 @@
     <div class="shop-designelements-tray shop-containerpellete">
       <div class="shop-designelements-tray-editor">
         <pre><h2>Position X</h2></pre>
-        <input type="number" class="shop-designelements-tray-editor-input" onchange="OnChangePositionX(this)"></input>
-        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">arrow_back</span></button>
-        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">arrow_forward</span></button>
+        <input type="number" class="shop-designelements-tray-editor-input disabled" onchange="DesignEditUpdate('input-positionx')"></input>
+        <pre>   </pre><button class="shop-designelements-tray-item-button disabled" onclick="DesignEditUpdate('button-left')" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">arrow_back</span></button>
+        <pre>   </pre><button class="shop-designelements-tray-item-button disabled" onclick="DesignEditUpdate('button-right')" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">arrow_forward</span></button>
       </div>
       <div class="shop-designelements-tray-editor">
         <pre><h2>Position Y</h2></pre>
-        <input type="number" class="shop-designelements-tray-editor-input" onchange="OnChangePositionY(this)"></input>
-        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">arrow_upward</span></button>
-        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">arrow_downward</span></button>
-      </div>
-      <div class="shop-designelements-tray-editor">
-        <pre><h2>     Scale</h2></pre>
-        <input type="number" class="shop-designelements-tray-editor-input" onchange="OnChangeScale(this)"></input>
-        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">add</span></button>
-        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">remove</span></button>
+        <input type="number" class="shop-designelements-tray-editor-input disabled" onchange="DesignEditUpdate('input-positiony')"></input>
+        <pre>   </pre><button class="shop-designelements-tray-item-button disabled" onclick="DesignEditUpdate('button-up')" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">arrow_upward</span></button>
+        <pre>   </pre><button class="shop-designelements-tray-item-button disabled" onclick="DesignEditUpdate('button-down')" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">arrow_downward</span></button>
       </div>
       <div class="shop-designelements-tray-editor">
         <pre><h2>  Rotation</h2></pre>
-        <input type="number" class="shop-designelements-tray-editor-input" onchange="OnChangeRotation(this)"></input>
-        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">rotate_left</span></button>
-        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">rotate_right</span></button>
+        <input type="number" class="shop-designelements-tray-editor-input disabled" onchange="DesignEditUpdate('input-rotation')"></input>
+        <pre>   </pre><button class="shop-designelements-tray-item-button disabled" onclick="DesignEditUpdate('button-ccw')" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">rotate_left</span></button>
+        <pre>   </pre><button class="shop-designelements-tray-item-button disabled" onclick="DesignEditUpdate('button-cw')" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">rotate_right</span></button>
       </div>
-      <button class="shop-designelements-tray-item-button" style="right:30px;top:30px;bottom:30px; background-color: rgb(30, 255, 0);"><span class="material-symbols-outlined">done_outline</span></button>
+      <div class="shop-designelements-tray-editor">
+        <pre><h2>     Scale</h2></pre>
+        <input type="number" class="shop-designelements-tray-editor-input disabled" onchange="DesignEditUpdate('input-scale')"></input>
+        <pre>   </pre><button class="shop-designelements-tray-item-button disabled" onclick="DesignEditUpdate('button-plus')" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">add</span></button>
+        <pre>   </pre><button class="shop-designelements-tray-item-button disabled" onclick="DesignEditUpdate('button-minus')"style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">remove</span></button>
+      </div>
+      <button class="shop-designelements-tray-item-button" onclick="DesignEditApply()" style="right:30px;top:30px;bottom:30px; background-color: rgb(30, 255, 0);"><span class="material-symbols-outlined">done_outline</span></button>
     </div>
 
     <div class="shop-designelements-tray shop-containerpellete">
@@ -352,7 +352,7 @@
   manufacturingspecifications.design = [];
   var dimensionsunit = 'mm';
   
-  OnClickView('DesignElements');
+  OnClickView('Specifications');
   OnClickUnit('mm');
   OnClickSupplier('LightYear');
   OnClickConstruction('Standalone');
@@ -1459,9 +1459,19 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
 } 
 </script>
 
-<script>
+<script>  
+  for(var i=1;i<=32;i++)
+  {
+    document.querySelectorAll(".shop-designelements-tray")[2].innerHTML += `
+    <div class="shop-designelements-tray-item">
+      <img src="dxf/Mandir Jali Objects/`+i+`.jpg" class="shop-designelements-tray-item-img">
+      <button class="shop-designelements-tray-item-button" onclick="DesignAdd(`+ i +`)" style="bottom: 5px;left:85px;background-color: rgb(30, 255, 0);"><span class="material-symbols-outlined">add</span></button>
+    </div>
+    `;
+  }   
   var design = undefined;
-  
+  var designelementeditindex = undefined;
+
   const url = new URLSearchParams(window.location.search);
   if(url.size == 0)
   {
@@ -1478,57 +1488,147 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
 
   Module.onRuntimeInitialized = function() 
   {
-    console.log("WASM Loaded");
-    const category = url.get('design');    
-
     for(var i=0;i<Object.keys(designcatalogue.designcatalogue).length;i++)
     {
-      design = designcatalogue.designcatalogue[i];
-      if(design.name == category)
+      var _design = designcatalogue.designcatalogue[i];
+      console.log(_design.name);
+      console.log(url.get("design"));
+      if(_design.name == url.get("design"))
       {
+        design = _design;
+        console.log("Design Found");
         document.querySelector(".dimensions-length").value = design.dimensionsx;
         document.querySelector(".dimensions-width").value = design.dimensionsy;
         SetSizeOptions();
         OnClickUnit('mm');
         OnClickSupplier(design.supplier);
         OnClickConstruction(design.construction);
-
         LoadRawMaterial(design.dimensionsx, design.dimensionsy);
-        for(var j=0;j<Object.keys(design.designelement).length;j++)
-        {
-          LoadDXFOnSlot(j,
-          design.designelement[j].dxfurl, 
-          design.designelement[j].scale, 
-          design.designelement[j].rotation, 
-          design.designelement[j].positionx, 
-          design.designelement[j].positiony);
-        }
-        Draw();
+        DesignLoad();
+      }      
+    }    
+    console.log(design.designelement);
+  };  
 
-        for(var j=0;j<Object.keys(design.designelement).length;j++)
-        {
-          document.querySelectorAll(".shop-designelements-tray")[1].innerHTML += `
-          <div class="shop-designelements-tray-item">
-            <img src="`+ design.designelement[j].thumbnailurl +`" class="shop-designelements-tray-item-img" onclick="">
-            <button class="shop-designelements-tray-item-button" style="bottom: 5px;left:35px; background-color: rgb(61, 213, 255);"><span class="material-symbols-outlined">build</span></button>
-            <button class="shop-designelements-tray-item-button" style="bottom: 5px;left:145px;background-color: rgb(255, 0, 0);"><span class="material-symbols-outlined">delete_forever</span></button>
-          </div>
-          `;
-        }
-
-        for(var j=1;j<=32;j++)
-        {
-          document.querySelectorAll(".shop-designelements-tray")[2].innerHTML += `
-          <div class="shop-designelements-tray-item">
-            <img src="dxf/Mandir Jali Objects/`+j+`.jpg" class="shop-designelements-tray-item-img" onclick="">
-            <button class="shop-designelements-tray-item-button" style="bottom: 5px;left:85px;background-color: rgb(30, 255, 0);"><span class="material-symbols-outlined">add</span></button>
-          </div>
-          `;
-        }        
-      }
-      break;
+  function DesignLoad()
+  {
+    document.querySelectorAll(".shop-designelements-tray")[1].innerHTML = "";
+    for(var i=0;i<Object.keys(design.designelement).length;i++)
+    {
+      LoadDXFOnSlot(i,
+      design.designelement[i].dxfurl, 
+      design.designelement[i].scale, 
+      design.designelement[i].rotation, 
+      design.designelement[i].positionx, 
+      design.designelement[i].positiony);
+      
+      document.querySelectorAll(".shop-designelements-tray")[1].innerHTML += `
+      <div class="shop-designelements-tray-item">
+        <img src="`+ design.designelement[i].thumbnailurl +`" class="shop-designelements-tray-item-img">
+        <button class="shop-designelements-tray-item-button" onclick="DesignEditSelect(`+ i +`)" style="bottom: 5px;left:35px; background-color: rgb(61, 213, 255);"><span class="material-symbols-outlined">build</span></button>
+        <button class="shop-designelements-tray-item-button" onclick="DesignRemove(`+ i +`)" style="bottom: 5px;left:145px;background-color: rgb(255, 0, 0);"><span class="material-symbols-outlined">delete_forever</span></button>
+      </div>
+      `;
     }
-  };
+    Draw();  
+  }
+  function DesignAdd(index)
+  {
+    design.designelement[Object.keys(design.designelement).length] = new Object();
+    design.designelement[Object.keys(design.designelement).length-1].dxfurl = "dxf/Mandir Jali Objects/"+index+".dxf";
+    design.designelement[Object.keys(design.designelement).length-1].thumbnailurl = "dxf/Mandir Jali Objects/"+index+".jpg";
+    design.designelement[Object.keys(design.designelement).length-1].scale = 1;
+    design.designelement[Object.keys(design.designelement).length-1].rotation = 0;
+    design.designelement[Object.keys(design.designelement).length-1].positionx = 0;
+    design.designelement[Object.keys(design.designelement).length-1].positiony = 0;
+    DesignLoad();
+    DesignEditSelect(Object.keys(design.designelement).length-1);
+  }
+  function DesignEditSelect(element_index)
+  {
+    designelementeditindex = element_index;
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[0].classList.remove("disabled");
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[1].classList.remove("disabled");
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[2].classList.remove("disabled");
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[3].classList.remove("disabled");
+    document.querySelectorAll(".shop-designelements-tray-item-button")[0].classList.remove("disabled");
+    document.querySelectorAll(".shop-designelements-tray-item-button")[1].classList.remove("disabled");
+    document.querySelectorAll(".shop-designelements-tray-item-button")[2].classList.remove("disabled");
+    document.querySelectorAll(".shop-designelements-tray-item-button")[3].classList.remove("disabled");
+    document.querySelectorAll(".shop-designelements-tray-item-button")[4].classList.remove("disabled");
+    document.querySelectorAll(".shop-designelements-tray-item-button")[5].classList.remove("disabled");
+    document.querySelectorAll(".shop-designelements-tray-item-button")[6].classList.remove("disabled");
+    document.querySelectorAll(".shop-designelements-tray-item-button")[7].classList.remove("disabled");
+    document.querySelectorAll(".shop-designelements-tray-item-button")[8].classList.remove("disabled");
+
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[0].value = design.designelement[element_index].positionx;
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[1].value = design.designelement[element_index].positiony;
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value = 180.0*design.designelement[element_index].rotation/3.141;
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[3].value = design.designelement[element_index].scale;
+  }
+  function DesignEditApply()
+  {
+    designelementeditindex = undefined;
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[0].classList.add("disabled");
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[1].classList.add("disabled");
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[2].classList.add("disabled");
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[3].classList.add("disabled");
+    document.querySelectorAll(".shop-designelements-tray-item-button")[0].classList.add("disabled");
+    document.querySelectorAll(".shop-designelements-tray-item-button")[1].classList.add("disabled");
+    document.querySelectorAll(".shop-designelements-tray-item-button")[2].classList.add("disabled");
+    document.querySelectorAll(".shop-designelements-tray-item-button")[3].classList.add("disabled");
+    document.querySelectorAll(".shop-designelements-tray-item-button")[4].classList.add("disabled");
+    document.querySelectorAll(".shop-designelements-tray-item-button")[5].classList.add("disabled");
+    document.querySelectorAll(".shop-designelements-tray-item-button")[6].classList.add("disabled");
+    document.querySelectorAll(".shop-designelements-tray-item-button")[7].classList.add("disabled");
+    document.querySelectorAll(".shop-designelements-tray-item-button")[8].classList.add("disabled");
+
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[0].value = "";
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[1].value = "";
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value = "";
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[3].value = "";
+  }
+  function DesignEditUpdate(action)
+  {
+    if(action == "input-positionx"){design.designelement[designelementeditindex].positionx = parseFloat(document.querySelectorAll(".shop-designelements-tray-editor-input")[0].value);}
+    if(action == "input-positiony"){design.designelement[designelementeditindex].positiony = parseFloat(document.querySelectorAll(".shop-designelements-tray-editor-input")[1].value);}
+    if(action == "input-rotation"){design.designelement[designelementeditindex].rotation  = -3.141 * parseFloat(document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value)/180.0;}
+    if(action == "input-scale"){design.designelement[designelementeditindex].scale     = parseFloat(document.querySelectorAll(".shop-designelements-tray-editor-input")[3].value);}
+
+    if(action == "button-left"){design.designelement[designelementeditindex].positionx -= 10;document.querySelectorAll(".shop-designelements-tray-editor-input")[0].value = design.designelement[designelementeditindex].positionx;}
+    if(action == "button-right"){design.designelement[designelementeditindex].positionx += 10;document.querySelectorAll(".shop-designelements-tray-editor-input")[0].value = design.designelement[designelementeditindex].positionx;}
+    if(action == "button-up"){design.designelement[designelementeditindex].positiony += 10;document.querySelectorAll(".shop-designelements-tray-editor-input")[1].value = design.designelement[designelementeditindex].positiony;}
+    if(action == "button-down"){design.designelement[designelementeditindex].positiony -= 10;document.querySelectorAll(".shop-designelements-tray-editor-input")[1].value = design.designelement[designelementeditindex].positiony;}
+    if(action == "button-ccw"){design.designelement[designelementeditindex].rotation += (45.0 * 3.141) / 180;document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value  = -180.0*design.designelement[designelementeditindex].rotation/3.141;}
+    if(action == "button-cw"){design.designelement[designelementeditindex].rotation -= (45.0 * 3.141) / 180;document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value  = -180.0*design.designelement[designelementeditindex].rotation/3.141;}
+    if(action == "button-plus"){design.designelement[designelementeditindex].scale += 0.1;document.querySelectorAll(".shop-designelements-tray-editor-input")[3].value = design.designelement[designelementeditindex].scale;}
+    if(action == "button-minus"){design.designelement[designelementeditindex].scale -= 0.1;document.querySelectorAll(".shop-designelements-tray-editor-input")[3].value = design.designelement[designelementeditindex].scale;}
+
+    LoadDXFOnSlot(designelementeditindex,
+      design.designelement[designelementeditindex].dxfurl, 
+      design.designelement[designelementeditindex].scale, 
+      design.designelement[designelementeditindex].rotation, 
+      design.designelement[designelementeditindex].positionx, 
+      design.designelement[designelementeditindex].positiony);
+    Draw();  
+  }
+  function DesignRemove(element_index)
+  {
+    design.designelement.splice(element_index, 1);
+    drawingobject.splice(element_index, 1);
+    document.querySelectorAll(".shop-designelements-tray")[1].innerHTML = "";
+    for(var i=0;i<Object.keys(design.designelement).length;i++)
+    {
+      document.querySelectorAll(".shop-designelements-tray")[1].innerHTML += `
+      <div class="shop-designelements-tray-item">
+        <img src="`+ design.designelement[i].thumbnailurl +`" class="shop-designelements-tray-item-img">
+        <button class="shop-designelements-tray-item-button" onclick="" style="bottom: 5px;left:35px; background-color: rgb(61, 213, 255);"><span class="material-symbols-outlined">build</span></button>
+        <button class="shop-designelements-tray-item-button" onclick="DesignRemove(`+ i +`)" style="bottom: 5px;left:145px;background-color: rgb(255, 0, 0);"><span class="material-symbols-outlined">delete_forever</span></button>
+      </div>
+      `;
+    }
+    DesignLoad();
+  }
 </script>
 
 </html>
