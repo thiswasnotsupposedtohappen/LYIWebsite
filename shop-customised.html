@@ -25,7 +25,7 @@
     <button class = "editorribbonbutton" onclick = "OnClickView('ReviewCost')">Review/Cost</button>
   </div>
 
-  <div id = "viewer" style="height: 1000px; margin-top: 50px; border-style: solid; border-width: 2px; border-color: black; margin-bottom: 50px; overflow: hidden;">
+  <div id = "viewer" style="height: 1000px; margin-top: 50px; border-style: solid; border-width: 20px; border-radius: 30px ;border-color: rgb(124,85,59);; margin-bottom: 50px; overflow: hidden;">
     <canvas></canvas>
   </div>
 
@@ -277,18 +277,6 @@
         
     <div class="shop-designelements-tray shop-containerpellete">
       <div class="shop-designelements-tray-editor">
-        <pre><h2>     Scale</h2></pre>
-        <input type="number" class="shop-designelements-tray-editor-input" onchange="OnChangeScale(this)"></input>
-        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">add</span></button>
-        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">remove</span></button>
-      </div>
-      <div class="shop-designelements-tray-editor">
-        <pre><h2>  Rotation</h2></pre>
-        <input type="number" class="shop-designelements-tray-editor-input" onchange="OnChangeRotation(this)"></input>
-        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">rotate_left</span></button>
-        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">rotate_right</span></button>
-      </div>
-      <div class="shop-designelements-tray-editor">
         <pre><h2>Position X</h2></pre>
         <input type="number" class="shop-designelements-tray-editor-input" onchange="OnChangePositionX(this)"></input>
         <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">arrow_back</span></button>
@@ -300,38 +288,25 @@
         <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">arrow_upward</span></button>
         <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">arrow_downward</span></button>
       </div>
-
+      <div class="shop-designelements-tray-editor">
+        <pre><h2>     Scale</h2></pre>
+        <input type="number" class="shop-designelements-tray-editor-input" onchange="OnChangeScale(this)"></input>
+        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">add</span></button>
+        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">remove</span></button>
+      </div>
+      <div class="shop-designelements-tray-editor">
+        <pre><h2>  Rotation</h2></pre>
+        <input type="number" class="shop-designelements-tray-editor-input" onchange="OnChangeRotation(this)"></input>
+        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">rotate_left</span></button>
+        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">rotate_right</span></button>
+      </div>
       <button class="shop-designelements-tray-item-button" style="right:30px;top:30px;bottom:30px; background-color: rgb(30, 255, 0);"><span class="material-symbols-outlined">done_outline</span></button>
     </div>
 
     <div class="shop-designelements-tray shop-containerpellete">
-
-      <div class="shop-designelements-tray-item">
-        <img src="images/DummyDesignObject.JPG" class="shop-designelements-tray-item-img" onclick="">
-        <button class="shop-designelements-tray-item-button" style="bottom: 5px;left:35px; background-color: rgb(61, 213, 255);"><span class="material-symbols-outlined">build</span></button>
-        <button class="shop-designelements-tray-item-button" style="bottom: 5px;left:145px;background-color: rgb(255, 0, 0);"><span class="material-symbols-outlined">delete_forever</span></button>
-      </div>
-
-      <div class="shop-designelements-tray-item">
-        <img src="images/DummyDesignObject.JPG" class="shop-designelements-tray-item-img" onclick="">
-        <button class="shop-designelements-tray-item-button" style="bottom: 5px;left:35px; background-color: rgb(61, 213, 255);"><span class="material-symbols-outlined">build</span></button>
-        <button class="shop-designelements-tray-item-button" style="bottom: 5px;left:145px;background-color: rgb(255, 0, 0);"><span class="material-symbols-outlined">delete_forever</span></button>
-      </div>
-
     </div>
 
     <div class="shop-designelements-tray shop-containerpellete">
-
-      <div class="shop-designelements-tray-item">
-        <img src="images/DummyDesignObject.JPG" class="shop-designelements-tray-item-img" onclick="">
-        <button class="shop-designelements-tray-item-button" style="bottom: 5px;left:85px;background-color: rgb(30, 255, 0);"><span class="material-symbols-outlined">add</span></button>
-      </div>
-
-      <div class="shop-designelements-tray-item">
-        <img src="images/DummyDesignObject.JPG" class="shop-designelements-tray-item-img" onclick="">
-        <button class="shop-designelements-tray-item-button" style="bottom: 5px;left:85px;background-color: rgb(30, 255, 0);"><span class="material-symbols-outlined">add</span></button>
-      </div>
-
     </div>    
 
   </div>
@@ -346,6 +321,7 @@
     constructor()
     {
       this.dxfurl = undefined;
+      this.thumbnailurl = undefined;
       this.positionx = undefined;
       this.positiony = undefined;
       this.rotation = undefined;
@@ -376,7 +352,7 @@
   manufacturingspecifications.design = [];
   var dimensionsunit = 'mm';
   
-  OnClickView('Specifications');
+  OnClickView('DesignElements');
   OnClickUnit('mm');
   OnClickSupplier('LightYear');
   OnClickConstruction('Standalone');
@@ -1484,6 +1460,8 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
 </script>
 
 <script>
+  var design = undefined;
+  
   const url = new URLSearchParams(window.location.search);
   if(url.size == 0)
   {
@@ -1501,11 +1479,11 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
   Module.onRuntimeInitialized = function() 
   {
     console.log("WASM Loaded");
-    const category = url.get('design');
+    const category = url.get('design');    
 
     for(var i=0;i<Object.keys(designcatalogue.designcatalogue).length;i++)
     {
-      var design = designcatalogue.designcatalogue[i];
+      design = designcatalogue.designcatalogue[i];
       if(design.name == category)
       {
         document.querySelector(".dimensions-length").value = design.dimensionsx;
@@ -1526,7 +1504,29 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
           design.designelement[j].positiony);
         }
         Draw();
+
+        for(var j=0;j<Object.keys(design.designelement).length;j++)
+        {
+          document.querySelectorAll(".shop-designelements-tray")[1].innerHTML += `
+          <div class="shop-designelements-tray-item">
+            <img src="`+ design.designelement[j].thumbnailurl +`" class="shop-designelements-tray-item-img" onclick="">
+            <button class="shop-designelements-tray-item-button" style="bottom: 5px;left:35px; background-color: rgb(61, 213, 255);"><span class="material-symbols-outlined">build</span></button>
+            <button class="shop-designelements-tray-item-button" style="bottom: 5px;left:145px;background-color: rgb(255, 0, 0);"><span class="material-symbols-outlined">delete_forever</span></button>
+          </div>
+          `;
+        }
+
+        for(var j=1;j<=32;j++)
+        {
+          document.querySelectorAll(".shop-designelements-tray")[2].innerHTML += `
+          <div class="shop-designelements-tray-item">
+            <img src="dxf/Mandir Jali Objects/`+j+`.jpg" class="shop-designelements-tray-item-img" onclick="">
+            <button class="shop-designelements-tray-item-button" style="bottom: 5px;left:85px;background-color: rgb(30, 255, 0);"><span class="material-symbols-outlined">add</span></button>
+          </div>
+          `;
+        }        
       }
+      break;
     }
   };
 </script>
@@ -1696,6 +1696,10 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
   vertical-align: middle;
   justify-content: center;  
 }
+.shop-designelements-tray-item-button:hover
+{
+  color: rgb(255, 115, 0);
+}
 .shop-designelements-tray-item-img
 {
   margin: 10px;;
@@ -1703,5 +1707,6 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
   height: 200px;
   border-radius: 20px;
   border-style: solid;
+  border-width: 2px;
 }
 </style>
