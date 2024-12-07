@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&icon_names=shopping_cart" />
   <link rel="icon" type="image/x-icon" href="images/titleicon.png" />
+  <meta name="viewport" content="user-scalable=no">
 </head>
 
 <body class="Body">
@@ -278,62 +279,74 @@
       <div class="shop-designelements-rack-tray">
         <div class="shop-designelements-rack-tray-item">
           <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
-          <button class="shop-containerpellete-tray-item-buttonadd unselected">
-            +
-          </button>
+          <button class="shop-designelements-rack-tray-item-buttonadd unselected">+</button>
         </div>
         <div class="shop-designelements-rack-tray-item">
           <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
-          <button class="shop-containerpellete-tray-item-buttonadd unselected">
-            +
-          </button>
+          <button class="shop-designelements-rack-tray-item-buttonadd unselected">+</button>
         </div>
         <div class="shop-designelements-rack-tray-item">
           <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
-          <button class="shop-containerpellete-tray-item-buttonadd unselected">
-            +
-          </button>
+          <button class="shop-designelements-rack-tray-item-buttonadd unselected">+</button>
         </div>
         <div class="shop-designelements-rack-tray-item">
           <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
-          <button class="shop-containerpellete-tray-item-buttonadd unselected">
-            +
-          </button>
+          <button class="shop-designelements-rack-tray-item-buttonadd unselected">+</button>
         </div>
         <div class="shop-designelements-rack-tray-item">
           <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
-          <button class="shop-containerpellete-tray-item-buttonadd unselected">
-            +
-          </button>
+          <button class="shop-designelements-rack-tray-item-buttonadd unselected">+</button>
         </div>
         <div class="shop-designelements-rack-tray-item">
           <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
-          <button class="shop-containerpellete-tray-item-buttonadd unselected">
-            +
-          </button>
+          <button class="shop-designelements-rack-tray-item-buttonadd unselected">+</button>
         </div>
         <div class="shop-designelements-rack-tray-item">
           <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
-          <button class="shop-containerpellete-tray-item-buttonadd unselected">
-            +
-          </button>
+          <button class="shop-designelements-rack-tray-item-buttonadd unselected">+</button>
         </div>
         <div class="shop-designelements-rack-tray-item">
           <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
-          <button class="shop-containerpellete-tray-item-buttonadd unselected">
-            +
-          </button>
+          <button class="shop-designelements-rack-tray-item-buttonadd unselected">+</button>
         </div>
         <div class="shop-designelements-rack-tray-item">
           <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
-          <button class="shop-containerpellete-tray-item-buttonadd unselected">
-            +
-          </button>
+          <button class="shop-designelements-rack-tray-item-buttonadd unselected">+</button>
         </div>
       </div>
     </div>    
-    <div class="shop-designelements-items shop-containerpellete">
-      <img src="images/DummyDesignObject.JPG" class="shop-designelements-rack-tray-item-img" onclick="">
+    <div class="shop-designelements-chart shop-containerpellete">
+
+      <div class="shop-designelements-chart-item">
+        <img src="images/DummyDesignObject.JPG" class="shop-designelements-chart-item-img" onclick="">
+        <button class="shop-designelements-chart-item-buttonremove unselected">X</button>
+        <div>
+          Scale
+          <input type="number" class="shop-designelements-chart-item-input" onchange="OnChangeScale(this)">
+          Rotation
+          <input type="number" class="shop-designelements-chart-item-input" onchange="OnChangeScale(this)"><br>
+          Position X
+          <input type="number" class="shop-designelements-chart-item-input" onchange="OnChangeScale(this)">
+          Position Y
+          <input type="number" class="shop-designelements-chart-item-input" onchange="OnChangeScale(this)">          
+        </div>
+      </div>
+
+      <div class="shop-designelements-chart-item">
+        <img src="images/DummyDesignObject.JPG" class="shop-designelements-chart-item-img" onclick="">
+        <button class="shop-designelements-chart-item-buttonremove unselected">X</button>
+        <div>
+          Scale
+          <input type="number" class="shop-designelements-chart-item-input" onchange="OnChangeScale(this)">
+          Rotation
+          <input type="number" class="shop-designelements-chart-item-input" onchange="OnChangeScale(this)"><br>
+          Position X
+          <input type="number" class="shop-designelements-chart-item-input" onchange="OnChangeScale(this)">
+          Position Y
+          <input type="number" class="shop-designelements-chart-item-input" onchange="OnChangeScale(this)">          
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -400,6 +413,7 @@
     div.querySelectorAll("button").forEach(element => {element.classList.add("unselected");});
     if(index != -1)div.querySelectorAll("button")[index].classList.remove("unselected");
     if(index != -1)div.querySelectorAll("button")[index].classList.add("selected");
+    if(typeof Draw !== 'undefined')Draw();
   }
   function EnableButton(button)
   {
@@ -626,6 +640,10 @@
       document.querySelector(".shop-manufacturingconfig-materialback").style.display="none"
       document.querySelector(".shop-manufacturingconfig-materialhalfdepth").style.display="none"
       index = 0;
+      manufacturingspecifications.materialback = undefined;
+      manufacturingspecifications.thicknessback = undefined;
+      manufacturingspecifications.colorback = undefined;
+      drawing_rawmaterial_backcolor = "White";
     }
     if(type=='Back-Supported')
     {
@@ -1122,6 +1140,7 @@
     if(type == 'Transparent')index = 8;
     if(type == 'White040')index = 9;
     if(type == 'RAW')index = 10;
+    SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[7], index);
     SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[14], index);
 
     LoadRawMaterial(document.querySelector(".dimensions-length").value, document.querySelector(".dimensions-width").value);
@@ -1172,10 +1191,10 @@
     if(traymousedown)
     {
       trayposition += event.movementX;
-      document.querySelector(".shop-designelements-rack-tray").style.left = trayposition + "px";    
-      console.log(trayposition);  
       if(trayposition > 12)trayposition = 12;
       if(trayposition < -2000)trayposition = -2000;
+      document.querySelector(".shop-designelements-rack-tray").style.left = trayposition + "px";
+      console.log(trayposition);  
     }
   });
   document.querySelector(".shop-designelements-rack").addEventListener('touchmove', function(event) 
@@ -1185,9 +1204,9 @@
     {
       trayposition += event.touches[0].clientX - touchprevious;
       touchprevious = event.touches[0].clientX;
+      if(trayposition > 12)trayposition = 12;
+      if(trayposition < -2000)trayposition = -2000;
       document.querySelector(".shop-designelements-rack-tray").style.left = trayposition + "px";    
-      if(trayposition > 0)trayposition = 0;
-      if(trayposition < -2000)trayposition = -2000;      
     }
   });
   document.addEventListener('mouseup', function(event) 
@@ -1633,6 +1652,7 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
 
   align-items: baseline;
 }
+
 .shop-manufacturingconfig-options
 {
   display: flex;
@@ -1706,7 +1726,7 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
   border-radius: 20px;
   border-style: solid;
 }
-.shop-containerpellete-tray-item-buttonadd
+.shop-designelements-rack-tray-item-buttonadd
 {
   position: absolute;
   bottom: -30px;
@@ -1715,18 +1735,55 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
   height: 50px;
   text-align: center;
   border-style: solid;
-  border-width: 2px;
+  border-width: 3px;
   border-radius: 25px;
-  border-color: black;
+  border-color: rgb(0, 0, 0);
   vertical-align: middle;
   justify-content: center;
   background-color: rgb(30, 255, 0);
   font-size: 50px;
   line-height: 28px;
 }
-.shop-designelements-items
+.shop-designelements-chart
 {
-  height: 210px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.shop-designelements-chart-item
+{
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 6px;
+  border-color: rgb(97, 0, 0);
+  display: flex;
+  width: 100%;
+  max-width: 960px;
+  height: 250px;
+  background-color: rosybrown;
+  position: relative;
+}
+.shop-designelements-chart-item-buttonremove
+{
+  position: absolute;
+  bottom: 5px;
+  left: 85px;
+  width: 50px;
+  height: 50px;
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 25px;
+  border-color: rgb(0, 0, 0);
+  background-color: rgb(255, 0, 0);
+  font-size: 30px;
+}
+.shop-designelements-chart-item-img
+{
+  margin: 10px;;
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  border-style: solid;
 }
 
 .shop-designelements-element-button
