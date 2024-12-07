@@ -279,21 +279,29 @@
       <div class="shop-designelements-tray-editor">
         <pre><h2>     Scale</h2></pre>
         <input type="number" class="shop-designelements-tray-editor-input" onchange="OnChangeScale(this)"></input>
+        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">add</span></button>
+        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">remove</span></button>
       </div>
       <div class="shop-designelements-tray-editor">
         <pre><h2>  Rotation</h2></pre>
         <input type="number" class="shop-designelements-tray-editor-input" onchange="OnChangeRotation(this)"></input>
+        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">rotate_left</span></button>
+        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">rotate_right</span></button>
       </div>
       <div class="shop-designelements-tray-editor">
         <pre><h2>Position X</h2></pre>
         <input type="number" class="shop-designelements-tray-editor-input" onchange="OnChangePositionX(this)"></input>
+        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">arrow_back</span></button>
+        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">arrow_forward</span></button>
       </div>
       <div class="shop-designelements-tray-editor">
         <pre><h2>Position Y</h2></pre>
         <input type="number" class="shop-designelements-tray-editor-input" onchange="OnChangePositionY(this)"></input>
+        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">arrow_upward</span></button>
+        <pre>   </pre><button class="shop-designelements-tray-item-button" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">arrow_downward</span></button>
       </div>
 
-      <button class="shop-designelements-tray-item-button" style="right:30px;top:170px;background-color: rgb(30, 255, 0);"><span class="material-symbols-outlined">done_outline</span></button>
+      <button class="shop-designelements-tray-item-button" style="right:30px;top:30px;bottom:30px; background-color: rgb(30, 255, 0);"><span class="material-symbols-outlined">done_outline</span></button>
     </div>
 
     <div class="shop-designelements-tray shop-containerpellete">
@@ -1641,7 +1649,7 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
 {
   display: inline-block;
   margin: 10px;
-  width: 100%;
+  width: 520px;
   height: 50px;
 
   border-radius: 20px;
@@ -1695,18 +1703,5 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
   height: 200px;
   border-radius: 20px;
   border-style: solid;
-}
-
-.shop-designelements-element-button
-{
-  width: 250px;
-  height: 50px;
-  text-align: center;
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 10px;
-  border-color: black;
-  vertical-align: middle;
-  justify-content: center;
 }
 </style>
