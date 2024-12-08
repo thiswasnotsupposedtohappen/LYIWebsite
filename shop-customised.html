@@ -1189,7 +1189,7 @@ var drawing_rawmaterial_frontcolor = "white";
 var drawing_rawmaterial_backcolor = "white";
 var drawingobject = [];
 
-var zoom = 0.8;
+var zoom = 1;
 var buttonleftmousedown = false;
 var mousex = 0, mousey = 0;
 var touchxp = 0, touchyp = 0;
@@ -1508,16 +1508,44 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
         var _design = designcatalogue.designcatalogue[i];
         if(_design.name == url.get("design"))
         {
-          manufacturingspecifications = _design;
-          document.querySelector(".dimensions-length").value = manufacturingspecifications.dimensionsx;
-          document.querySelector(".dimensions-width").value = manufacturingspecifications.dimensionsy;
+          var _manufacturingspecifications = _design;
+          console.log(_manufacturingspecifications);
+          document.querySelector(".dimensions-length").value = _manufacturingspecifications.dimensionsx;
+          document.querySelector(".dimensions-width").value = _manufacturingspecifications.dimensionsy;
           SetSizeOptions();
           OnClickUnit('mm');
-          OnClickSupplier(manufacturingspecifications.supplier);
-          OnClickConstruction(manufacturingspecifications.construction);
+          OnClickSupplier(_manufacturingspecifications.supplier);
+          OnClickConstruction(_manufacturingspecifications.construction);
+          if(_manufacturingspecifications.construction == "Standalone")
+          {
+            
+            if(_manufacturingspecifications.process != undefined)OnClickProcess(_manufacturingspecifications.process);
+            if(_manufacturingspecifications.materialfront != undefined)OnClickMaterialFront(_manufacturingspecifications.materialfront);
+            if(_manufacturingspecifications.thicknessfront != undefined)OnClickThicknessFront(_manufacturingspecifications.thicknessfront);
+            if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
+          }
+          if(manufacturingspecifications.construction == "Back-Supported")
+          {
+            if(_manufacturingspecifications.process != undefined)OnClickProcess(_manufacturingspecifications.process);
+            if(_manufacturingspecifications.materialfront != undefined)OnClickMaterialFront(_manufacturingspecifications.materialfront);
+            if(_manufacturingspecifications.thicknessfront != undefined)OnClickThicknessFront(_manufacturingspecifications.thicknessfront);
+            if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
+            if(_manufacturingspecifications.materialback != undefined)OnClickMaterialBack(_manufacturingspecifications.materialback);
+            if(_manufacturingspecifications.thicknessback != undefined)OnClickThicknessBack(_manufacturingspecifications.thicknessback);
+            if(_manufacturingspecifications.colorback != undefined)OnClickColorBack(_manufacturingspecifications.colorback);
+          }
+          if(_manufacturingspecifications.construction == "Half-Depth")
+          {
+            if(_manufacturingspecifications.process != undefined)OnClickProcess(_manufacturingspecifications.process);
+            if(_manufacturingspecifications.materialfront != undefined)OnClickMaterialFront(_manufacturingspecifications.materialfront);
+            if(_manufacturingspecifications.thicknessfront != undefined)OnClickThicknessFront(_manufacturingspecifications.thicknessfront);
+            if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
+            if(_manufacturingspecifications.cuttingepth != undefined)OnChangeCuttingDepth(_manufacturingspecifications.cuttingepth);
+          }
+          manufacturingspecifications = _manufacturingspecifications;
           LoadRawMaterial(manufacturingspecifications.dimensionsx, manufacturingspecifications.dimensionsy);
           DesignLoad();
-        }      
+          }      
       }   
     }
   };  
@@ -1546,19 +1574,19 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
   }
   function DesignAdd(index)
   {
-    if(manufacturingspecifications == undefined)
-    {
-      manufacturingspecifications = new ManufacturingSpecifications();
-      manufacturingspecifications.designelement = [];      
-    }
+    if (manufacturingspecifications == undefined) 
+        manufacturingspecifications = new ManufacturingSpecifications();
+    if (manufacturingspecifications.designelement == undefined) 
+        manufacturingspecifications.designelement = [];
+    var _designelement = new DesignElement();
+    _designelement.dxfurl = "dxf/Mandir Jali Objects/"+index+".dxf";
+    _designelement.thumbnailurl = "dxf/Mandir Jali Objects/"+index+".jpg";
+    _designelement.positionx = 0;
+    _designelement.positiony = 0;
+    _designelement.rotation = 0;
+    _designelement.scale = 1;
 
-    manufacturingspecifications.designelement[Object.keys(manufacturingspecifications.designelement).length] = new DesignElement();
-    manufacturingspecifications.designelement[Object.keys(manufacturingspecifications.designelement).length-1].dxfurl = "dxf/Mandir Jali Objects/"+index+".dxf";
-    manufacturingspecifications.designelement[Object.keys(manufacturingspecifications.designelement).length-1].thumbnailurl = "dxf/Mandir Jali Objects/"+index+".jpg";
-    manufacturingspecifications.designelement[Object.keys(manufacturingspecifications.designelement).length-1].scale = 1;
-    manufacturingspecifications.designelement[Object.keys(manufacturingspecifications.designelement).length-1].rotation = 0;
-    manufacturingspecifications.designelement[Object.keys(manufacturingspecifications.designelement).length-1].positionx = 0;
-    manufacturingspecifications.designelement[Object.keys(manufacturingspecifications.designelement).length-1].positiony = 0;
+    manufacturingspecifications.designelement.push(_designelement);
     DesignLoad();
     DesignEditSelect(Object.keys(manufacturingspecifications.designelement).length-1);
   }

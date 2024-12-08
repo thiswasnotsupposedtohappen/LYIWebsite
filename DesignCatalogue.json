@@ -3,105 +3,111 @@
   [
     {
       "name": "MandirDesign-1",
-      "dimensionsx" : 900,
-      "dimensionsy" : 1200,
-      "size": "4ft x 3ft",
+      "dimensionsx": 300,
+      "dimensionsy": 500,
+      "size": "2ft x 1ft",
       "supplier": "LightYear",
       "construction": "Standalone",
-      "designelement": 
-      [
+      "process": "CNC Laser 0.5mm",
+      "materialfront": "Acrylic",
+      "thicknessfront": "5mm",
+      "colorfront": "Black",
+      "designelement": [
+        {
+          "dxfurl": "dxf/Mandir Jali Objects/30.dxf",
+          "thumbnailurl": "dxf/Mandir Jali Objects/30.jpg",
+          "positionx": 0,
+          "positiony": 190,
+          "rotation": 0,
+          "scale": 0.5
+        },
+        {
+          "dxfurl": "dxf/Mandir Jali Objects/32.dxf",
+          "thumbnailurl": "dxf/Mandir Jali Objects/32.jpg",
+          "positionx": 0,
+          "positiony": 195,
+          "rotation": 0,
+          "scale": 0.5
+        },
+        {
+          "dxfurl": "dxf/Mandir Jali Objects/20.dxf",
+          "thumbnailurl": "dxf/Mandir Jali Objects/20.jpg",
+          "positionx": -90,
+          "positiony": -130,
+          "rotation": 0,
+          "scale": 0.4
+        },
+        {
+          "dxfurl": "dxf/Mandir Jali Objects/20.dxf",
+          "thumbnailurl": "dxf/Mandir Jali Objects/20.jpg",
+          "positionx": 90,
+          "positiony": -130,
+          "rotation": 0,
+          "scale": 0.4
+        },
         {
           "dxfurl": "dxf/Mandir Jali Objects/23.dxf",
           "thumbnailurl": "dxf/Mandir Jali Objects/23.jpg",
           "positionx": 0,
-          "positiony": 0,
+          "positiony": 30,
           "rotation": 0,
-          "scale": 1.5
-        },
-        {
-          "dxfurl": "dxf/Mandir Jali Objects/10.dxf",
-          "thumbnailurl": "dxf/Mandir Jali Objects/10.jpg",
-          "positionx": -300,
-          "positiony": 350,
-          "rotation": 0,
-          "scale": 1.5
-        },
-        {
-          "dxfurl": "dxf/Mandir Jali Objects/10.dxf",
-          "thumbnailurl": "dxf/Mandir Jali Objects/10.jpg",
-          "positionx": 300,
-          "positiony": 350,
-          "rotation": 0,
-          "scale": 1.5
-        },
-        {
-          "dxfurl": "dxf/Mandir Jali Objects/5.dxf",
-          "thumbnailurl": "dxf/Mandir Jali Objects/5.jpg",
-          "positionx": -300,
-          "positiony": -400,
-          "rotation": 0,
-          "scale": 1.5
-        },
-        {
-          "dxfurl": "dxf/Mandir Jali Objects/5.dxf",
-          "thumbnailurl": "dxf/Mandir Jali Objects/5.jpg",
-          "positionx": 300,
-          "positiony": -400,
-          "rotation": 0,
-          "scale": 1.5
+          "scale": 0.7
         }
       ]
     },
     {
       "name": "MandirDesign-2",
-      "dimensionsx" : 900,
-      "dimensionsy" : 1200,
-      "size": "4ft x 3ft",
+      "dimensionsx": 300,
+      "dimensionsy": 500,
+      "size": "2ft x 1ft",
       "supplier": "LightYear",
       "construction": "Standalone",
-      "designelement": 
-      [
+      "designelement": [
         {
-          "dxfurl": "dxf/Mandir Jali Objects/23.dxf",
-          "thumbnailurl": "dxf/Mandir Jali Objects/23.jpg",
+          "dxfurl": "dxf/Mandir Jali Objects/9.dxf",
+          "thumbnailurl": "dxf/Mandir Jali Objects/9.jpg",
+          "positionx": -110,
+          "positiony": 150,
+          "rotation": 0,
+          "scale": 0.5
+        },
+        {
+          "dxfurl": "dxf/Mandir Jali Objects/9.dxf",
+          "thumbnailurl": "dxf/Mandir Jali Objects/9.jpg",
+          "positionx": 110,
+          "positiony": 150,
+          "rotation": 0,
+          "scale": 0.5
+        },
+        {
+          "dxfurl": "dxf/Mandir Jali Objects/17.dxf",
+          "thumbnailurl": "dxf/Mandir Jali Objects/17.jpg",
+          "positionx": 110,
+          "positiony": -150,
+          "rotation": 0,
+          "scale": 0.7
+        },
+        {
+          "dxfurl": "dxf/Mandir Jali Objects/17.dxf",
+          "thumbnailurl": "dxf/Mandir Jali Objects/17.jpg",
+          "positionx": -110,
+          "positiony": -150,
+          "rotation": 0,
+          "scale": 0.7
+        },
+        {
+          "dxfurl": "dxf/Mandir Jali Objects/21.dxf",
+          "thumbnailurl": "dxf/Mandir Jali Objects/21.jpg",
           "positionx": 0,
           "positiony": 0,
           "rotation": 0,
-          "scale": 1.5
-        },
-        {
-          "dxfurl": "dxf/Mandir Jali Objects/10.dxf",
-          "thumbnailurl": "dxf/Mandir Jali Objects/10.jpg",
-          "positionx": -300,
-          "positiony": 350,
-          "rotation": 0,
-          "scale": 1.5
-        },
-        {
-          "dxfurl": "dxf/Mandir Jali Objects/10.dxf",
-          "thumbnailurl": "dxf/Mandir Jali Objects/10.jpg",
-          "positionx": 300,
-          "positiony": 350,
-          "rotation": 0,
-          "scale": 1.5
-        },
-        {
-          "dxfurl": "dxf/Mandir Jali Objects/5.dxf",
-          "thumbnailurl": "dxf/Mandir Jali Objects/5.jpg",
-          "positionx": -300,
-          "positiony": -400,
-          "rotation": 0,
-          "scale": 1.5
-        },
-        {
-          "dxfurl": "dxf/Mandir Jali Objects/5.dxf",
-          "thumbnailurl": "dxf/Mandir Jali Objects/5.jpg",
-          "positionx": 300,
-          "positiony": -400,
-          "rotation": 0,
-          "scale": 1.5
+          "scale": 0.5
         }
-      ]
+      ],
+      "process": "CNC Laser 0.5mm",
+      "materialfront": "Acrylic",
+      "thicknessfront": "5mm",
+      "colorfront": "Black"
     }
   ]
 }
