@@ -95,6 +95,15 @@
     }
     if(category == 'custonised_mandirback')
     {
+      for(var i=0;i<1;i++)
+      {
+        document.querySelector('.shop-menu').innerHTML += `
+        <div class="shop-menu-items">
+          <a href="shop-customised.html?design=BlankDesign"><img class="shop-menu-items-img" src="images/BlackDesign.png"></a><br>
+          <h2>Blank Design</h2>
+        </div>
+        `;
+      } 
       for(var i=1;i<=30;i++)
       {
         document.querySelector('.shop-menu').innerHTML += `

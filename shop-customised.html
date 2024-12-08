@@ -25,13 +25,13 @@
     <button class = "editorribbonbutton" onclick = "OnClickView('ReviewCost')">Review/Cost</button>
   </div>
 
-  <div id = "viewer" style="height: 1000px; margin-top: 50px; border-style: solid; border-width: 20px; border-radius: 30px ;border-color: rgb(124,85,59);; margin-bottom: 50px; overflow: hidden;">
+  <div id = "viewer" style="height: 1000px; margin-top: 50px; border-style: solid; border-width: 20px; border-radius: 30px ;border-color: rgb(124,85,59);overflow: hidden;">
     <canvas></canvas>
   </div>
 
   <div class="shop-manufacturingspecification shop-basepellete">
 
-    <div class="shop-manufacturingconfig shop-containerpellete">
+    <div class="shop-manufacturingconfig shop-containerpellete shop-containerpellete-specifications">
       <div style="text-align: end;"><h3>Dimensions:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <input type="number" class="shop-manufacturingconfig-input dimensions-length" style="width: 100px" onchange="OnChangeDimensionsLength(this)" onclick="OnChangeDimensionsLength(this)"></input>
@@ -48,23 +48,23 @@
       <div style="text-align: end;"><b>Customer:</b></div><div>Raw material is provided by customer</div>
     </div>
 
-    <div class="shop-manufacturingconfig shop-containerpellete">
+    <div class="shop-manufacturingconfig shop-containerpellete shop-containerpellete-specifications">
       <div style="text-align: end;"><h3>Size-Option:</h3></div>   
       <div class="shop-manufacturingconfig-options">
-        <button class="shop-manufacturingconfig-button disabled size-1x1" onclick="OnClickSize('1ft x 1ft')"><h2>1ft x 1ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-manufacturingconfig-button disabled size-2x1" onclick="OnClickSize('2ft x 1ft')"><h2>2ft x 1ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-manufacturingconfig-button disabled size-2x2" onclick="OnClickSize('2ft x 2ft')"><h2>2ft x 2ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-manufacturingconfig-button disabled size-4x1" onclick="OnClickSize('4ft x 1ft')"><h2>4ft x 1ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-manufacturingconfig-button disabled size-4x2" onclick="OnClickSize('4ft x 2ft')"><h2>4ft x 2ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-manufacturingconfig-button disabled size-4x3" onclick="OnClickSize('4ft x 3ft')"><h2>4ft x 3ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-manufacturingconfig-button disabled size-4x4" onclick="OnClickSize('4ft x 4ft')"><h2>4ft x 4ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-manufacturingconfig-button disabled size-5x2" onclick="OnClickSize('5ft x 2ft')"><h2>5ft x 2ft <span style="color: red  ;">N</span></h2></button>
-        <button class="shop-manufacturingconfig-button disabled size-5x4" onclick="OnClickSize('5ft x 4ft')"><h2>5ft x 4ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-manufacturingconfig-button disabled size-6x2" onclick="OnClickSize('6ft x 2ft')"><h2>6ft x 2ft <span style="color: red  ;">N</span></h2></button>
-        <button class="shop-manufacturingconfig-button disabled size-6x4" onclick="OnClickSize('6ft x 4ft')"><h2>6ft x 4ft <span style="color: green;">S</span></h2></button>
-        <button class="shop-manufacturingconfig-button disabled size-8x1" onclick="OnClickSize('8ft x 1ft')"><h2>8ft x 1ft <span style="color: red  ;">N</span></h2></button>
-        <button class="shop-manufacturingconfig-button disabled size-8x2" onclick="OnClickSize('8ft x 2ft')"><h2>8ft x 2ft <span style="color: red  ;">N</span></h2></button>
-        <button class="shop-manufacturingconfig-button disabled size-8x4" onclick="OnClickSize('8ft x 4ft')"><h2>8ft x 4ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-1x1"><h2>1ft x 1ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-2x1"><h2>2ft x 1ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-2x2"><h2>2ft x 2ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-4x1"><h2>4ft x 1ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-4x2"><h2>4ft x 2ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-4x3"><h2>4ft x 3ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-4x4"><h2>4ft x 4ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-5x2"><h2>5ft x 2ft <span style="color: red  ;">N</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-5x4"><h2>5ft x 4ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-6x2"><h2>6ft x 2ft <span style="color: red  ;">N</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-6x4"><h2>6ft x 4ft <span style="color: green;">S</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-8x1"><h2>8ft x 1ft <span style="color: red  ;">N</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-8x2"><h2>8ft x 2ft <span style="color: red  ;">N</span></h2></button>
+        <button class="shop-manufacturingconfig-button disabled size-8x4"><h2>8ft x 4ft <span style="color: green;">S</span></h2></button>
       </div>
 
       <div style="height: 30px;"></div><div></div>
@@ -73,7 +73,7 @@
       <div style="text-align: end;"><b>N-variant:</b></div><div>Non-Standard size variant. An additional cost above Nominal cost is added because of the remaining material from the entire sheet it is cut from has low order requirment and harder to use else-where</div>    
     </div>
 
-    <div class="shop-manufacturingconfig shop-containerpellete">
+    <div class="shop-manufacturingconfig shop-containerpellete shop-containerpellete-specifications">
       <div style="text-align: end;"><h3>Raw-Material by:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button unselected rawmaterial-lyi" onclick="OnClickSupplier('LightYear')"><h2>LightYear</h2></button>
@@ -86,7 +86,7 @@
       <div style="text-align: end;"><b>Customer:</b></div><div>Raw material is provided by customer</div>
     </div>
 
-    <div  class="shop-manufacturingconfig shop-containerpellete">
+    <div  class="shop-manufacturingconfig shop-containerpellete shop-containerpellete-specifications">
       <div style="text-align: end;"><h3>Construction:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button unselected construction-standalone" onclick="OnClickConstruction('Standalone')"><h2>Standalone</h2></button>
@@ -102,7 +102,7 @@
       <div style="text-align: end;"><b>Half-Depth:</b></div><div>One-Piece of Raw Material having design cut till only a defined depth and not cut all the way through</div>      
     </div>
 
-    <div class="shop-manufacturingconfig shop-containerpellete">
+    <div class="shop-manufacturingconfig shop-containerpellete shop-containerpellete-specifications">
       <div style="text-align: end;"><h3>Process:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button unselected process-laser" onclick="OnClickProcess('CNC Laser 0.5mm')"><h2>CNC Laser 0.5mm</h2></button>
@@ -118,7 +118,7 @@
       <div style="text-align: end;"><b>CNC Router:</b></div><div>Manufactured using CNC Router. Pros can cut almost any material with good edge finish and acuracy. Cons cannot cut small/thin geometrey, minimum cutting radius of geometrey is dependent on tool diameter. An example 4mm tool can cut geometrey with minimum radium of 2mm. Smaller the diameter sharper geometrey can be cut. Example when cutting a square slot, the corners will be round with radius of half the tool diameter. Lower the tool disameter, slower the machining speed thus higher will be the cost</div>
     </div>
 
-    <div class="shop-manufacturingconfig shop-manufacturingconfig-materialfront shop-containerpellete">
+    <div class="shop-manufacturingconfig shop-containerpellete shop-manufacturingconfig-materialfront shop-containerpellete-specifications">
       <div style="text-align: end;"><h3>Front Material:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button disabled front-acrylic" onclick="OnClickMaterialFront('Acrylic')"><h2>Acrylic</h2></button>
@@ -167,7 +167,7 @@
       </div>
     </div>
 
-    <div class="shop-manufacturingconfig shop-manufacturingconfig-materialback shop-containerpellete">
+    <div class="shop-manufacturingconfig shop-containerpellete shop-manufacturingconfig-materialback shop-containerpellete-specifications">
       <div style="text-align: end;"><h3>Back Material:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button unselected back-acrylic" onclick="OnClickMaterialBack('Acrylic')"><h2>Acrylic</h2></button>
@@ -216,7 +216,7 @@
       </div>
     </div>
 
-    <div class="shop-manufacturingconfig shop-manufacturingconfig-materialhalfdepth shop-containerpellete">
+    <div class="shop-manufacturingconfig shop-containerpellete shop-manufacturingconfig-materialhalfdepth shop-containerpellete-specifications">
       <div style="text-align: end;"><h3>Material:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button disabled front-acrylic" onclick="OnClickMaterialFront('Acrylic');OnClickMaterialBack('Acrylic');"><h2>Acrylic</h2></button>
@@ -276,6 +276,7 @@
   <div class="shop-designelements shop-basepellete">
         
     <div class="shop-designelements-tray shop-containerpellete">
+
       <div class="shop-designelements-tray-editor">
         <pre><h2>Position X</h2></pre>
         <input type="number" class="shop-designelements-tray-editor-input disabled" onchange="DesignEditUpdate('input-positionx')"></input>
@@ -308,12 +309,23 @@
 
     <div class="shop-designelements-tray shop-containerpellete">
     </div>    
-
   </div>
 
   <div class="shop-review">
   </div>
+
+  <div class="shop-basepellete">
+    <div class="shop-designfile shop-containerpellete shop-containerpellete-designfile">
+      <div>
+        <button class="shop-designfile-button unselected" onclick="DesignOpen()" style="float: left;" ><h2>Open Design</h2></button>
+      </div>
+      <div>
+        <button class="shop-designfile-button unselected" onclick="DesignSave()" style="float: right;" ><h2>Save Design</h2></button>
+      </div>
+    </div>
+  </div>
 </body>
+</html>
 
 <script>
   class DesignElement
@@ -345,6 +357,7 @@
       this.thicknessback = undefined;
       this.colorfront = undefined;
       this.colorback = undefined;
+      this.cuttingepth = undefined;
       this.designelement = undefined;
     }
   }
@@ -353,6 +366,7 @@
   var dimensionsunit = 'mm';
   
   OnClickView('Specifications');
+  //OnClickView('DesignElements');
   OnClickUnit('mm');
   OnClickSupplier('LightYear');
   OnClickConstruction('Standalone');
@@ -444,6 +458,8 @@
     var dimensionswidth = document.querySelector(".dimensions-width");
     var length = parseFloat(dimensionslength.value);
     var width = parseFloat(dimensionswidth.value);
+    manufacturingspecifications.dimensionsx = length;
+    manufacturingspecifications.dimensionsy = width;
 
     LoadRawMaterial(document.querySelector(".dimensions-length").value, document.querySelector(".dimensions-width").value);
 
@@ -493,7 +509,7 @@
     if(lengthinfeet == 6 && widthinfeet == 1){EnableButton(document.querySelector(".size-6x2"));OnClickSize('6ft x 2ft');}
     if(lengthinfeet == 6 && widthinfeet == 2){EnableButton(document.querySelector(".size-6x2"));OnClickSize('6ft x 2ft');}
     if(lengthinfeet == 6 && widthinfeet == 3){EnableButton(document.querySelector(".size-6x4"));OnClickSize('6ft x 4ft');}
-    if(lengthinfeet == 6 && widthinfeet == 4){EnableButton(document.querySelector(".size-6x4"));OnClickSize('6ft x 4ft');}  
+    if(lengthinfeet == 6 && widthinfeet == 4){EnableButton(document.querySelector(".size-6x4"));OnClickSize('6ft x 4ft');}
     if(lengthinfeet == 7 && widthinfeet == 1){EnableButton(document.querySelector(".size-8x1"));OnClickSize('8ft x 1ft');}
     if(lengthinfeet == 7 && widthinfeet == 2){EnableButton(document.querySelector(".size-8x2"));OnClickSize('8ft x 2ft');}
     if(lengthinfeet == 7 && widthinfeet == 3){EnableButton(document.querySelector(".size-8x4"));OnClickSize('8ft x 4ft');}
@@ -502,7 +518,6 @@
     if(lengthinfeet == 8 && widthinfeet == 2){EnableButton(document.querySelector(".size-8x2"));OnClickSize('8ft x 2ft');}
     if(lengthinfeet == 8 && widthinfeet == 3){EnableButton(document.querySelector(".size-8x4"));OnClickSize('8ft x 4ft');}
     if(lengthinfeet == 8 && widthinfeet == 4){EnableButton(document.querySelector(".size-8x4"));OnClickSize('8ft x 4ft');}
-    
   }
   function OnClickUnit(type)
   {
@@ -1131,12 +1146,8 @@
   function OnChangeCuttingDepth(input)
   {
     if(input.value > parseInt(manufacturingspecifications.thicknessfront))input.value = parseInt(manufacturingspecifications.thicknessfront) -2;
+    manufacturingspecifications.cuttingepth = input.value;
   }
-  
-  function AddDesignElement()
-  {
-
-  }  
 </script>
 
 <script src="wasm/LYIWebsite.js"></script>  
@@ -1469,7 +1480,6 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
     </div>
     `;
   }   
-  var design = undefined;
   var designelementeditindex = undefined;
 
   const url = new URLSearchParams(window.location.search);
@@ -1488,43 +1498,45 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
 
   Module.onRuntimeInitialized = function() 
   {
-    for(var i=0;i<Object.keys(designcatalogue.designcatalogue).length;i++)
+    if(url.get("design") == "BlankDesign")
     {
-      var _design = designcatalogue.designcatalogue[i];
-      console.log(_design.name);
-      console.log(url.get("design"));
-      if(_design.name == url.get("design"))
+    }
+    else
+    {
+      for(var i=0;i<Object.keys(designcatalogue.designcatalogue).length;i++)
       {
-        design = _design;
-        console.log("Design Found");
-        document.querySelector(".dimensions-length").value = design.dimensionsx;
-        document.querySelector(".dimensions-width").value = design.dimensionsy;
-        SetSizeOptions();
-        OnClickUnit('mm');
-        OnClickSupplier(design.supplier);
-        OnClickConstruction(design.construction);
-        LoadRawMaterial(design.dimensionsx, design.dimensionsy);
-        DesignLoad();
-      }      
-    }    
-    console.log(design.designelement);
+        var _design = designcatalogue.designcatalogue[i];
+        if(_design.name == url.get("design"))
+        {
+          manufacturingspecifications = _design;
+          document.querySelector(".dimensions-length").value = manufacturingspecifications.dimensionsx;
+          document.querySelector(".dimensions-width").value = manufacturingspecifications.dimensionsy;
+          SetSizeOptions();
+          OnClickUnit('mm');
+          OnClickSupplier(manufacturingspecifications.supplier);
+          OnClickConstruction(manufacturingspecifications.construction);
+          LoadRawMaterial(manufacturingspecifications.dimensionsx, manufacturingspecifications.dimensionsy);
+          DesignLoad();
+        }      
+      }   
+    }
   };  
 
   function DesignLoad()
   {
     document.querySelectorAll(".shop-designelements-tray")[1].innerHTML = "";
-    for(var i=0;i<Object.keys(design.designelement).length;i++)
+    for(var i=0;i<Object.keys(manufacturingspecifications.designelement).length;i++)
     {
       LoadDXFOnSlot(i,
-      design.designelement[i].dxfurl, 
-      design.designelement[i].scale, 
-      design.designelement[i].rotation, 
-      design.designelement[i].positionx, 
-      design.designelement[i].positiony);
+      manufacturingspecifications.designelement[i].dxfurl, 
+      manufacturingspecifications.designelement[i].scale, 
+      manufacturingspecifications.designelement[i].rotation, 
+      manufacturingspecifications.designelement[i].positionx, 
+      manufacturingspecifications.designelement[i].positiony);
       
       document.querySelectorAll(".shop-designelements-tray")[1].innerHTML += `
       <div class="shop-designelements-tray-item">
-        <img src="`+ design.designelement[i].thumbnailurl +`" class="shop-designelements-tray-item-img">
+        <img src="`+ manufacturingspecifications.designelement[i].thumbnailurl +`" class="shop-designelements-tray-item-img">
         <button class="shop-designelements-tray-item-button" onclick="DesignEditSelect(`+ i +`)" style="bottom: 5px;left:35px; background-color: rgb(61, 213, 255);"><span class="material-symbols-outlined">build</span></button>
         <button class="shop-designelements-tray-item-button" onclick="DesignRemove(`+ i +`)" style="bottom: 5px;left:145px;background-color: rgb(255, 0, 0);"><span class="material-symbols-outlined">delete_forever</span></button>
       </div>
@@ -1534,15 +1546,21 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
   }
   function DesignAdd(index)
   {
-    design.designelement[Object.keys(design.designelement).length] = new Object();
-    design.designelement[Object.keys(design.designelement).length-1].dxfurl = "dxf/Mandir Jali Objects/"+index+".dxf";
-    design.designelement[Object.keys(design.designelement).length-1].thumbnailurl = "dxf/Mandir Jali Objects/"+index+".jpg";
-    design.designelement[Object.keys(design.designelement).length-1].scale = 1;
-    design.designelement[Object.keys(design.designelement).length-1].rotation = 0;
-    design.designelement[Object.keys(design.designelement).length-1].positionx = 0;
-    design.designelement[Object.keys(design.designelement).length-1].positiony = 0;
+    if(manufacturingspecifications == undefined)
+    {
+      manufacturingspecifications = new ManufacturingSpecifications();
+      manufacturingspecifications.designelement = [];      
+    }
+
+    manufacturingspecifications.designelement[Object.keys(manufacturingspecifications.designelement).length] = new DesignElement();
+    manufacturingspecifications.designelement[Object.keys(manufacturingspecifications.designelement).length-1].dxfurl = "dxf/Mandir Jali Objects/"+index+".dxf";
+    manufacturingspecifications.designelement[Object.keys(manufacturingspecifications.designelement).length-1].thumbnailurl = "dxf/Mandir Jali Objects/"+index+".jpg";
+    manufacturingspecifications.designelement[Object.keys(manufacturingspecifications.designelement).length-1].scale = 1;
+    manufacturingspecifications.designelement[Object.keys(manufacturingspecifications.designelement).length-1].rotation = 0;
+    manufacturingspecifications.designelement[Object.keys(manufacturingspecifications.designelement).length-1].positionx = 0;
+    manufacturingspecifications.designelement[Object.keys(manufacturingspecifications.designelement).length-1].positiony = 0;
     DesignLoad();
-    DesignEditSelect(Object.keys(design.designelement).length-1);
+    DesignEditSelect(Object.keys(manufacturingspecifications.designelement).length-1);
   }
   function DesignEditSelect(element_index)
   {
@@ -1561,10 +1579,10 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
     document.querySelectorAll(".shop-designelements-tray-item-button")[7].classList.remove("disabled");
     document.querySelectorAll(".shop-designelements-tray-item-button")[8].classList.remove("disabled");
 
-    document.querySelectorAll(".shop-designelements-tray-editor-input")[0].value = design.designelement[element_index].positionx;
-    document.querySelectorAll(".shop-designelements-tray-editor-input")[1].value = design.designelement[element_index].positiony;
-    document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value = 180.0*design.designelement[element_index].rotation/3.141;
-    document.querySelectorAll(".shop-designelements-tray-editor-input")[3].value = design.designelement[element_index].scale;
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[0].value = manufacturingspecifications.designelement[element_index].positionx;
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[1].value = manufacturingspecifications.designelement[element_index].positiony;
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value = 180.0*manufacturingspecifications.designelement[element_index].rotation/3.141;
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[3].value = manufacturingspecifications.designelement[element_index].scale;
   }
   function DesignEditApply()
   {
@@ -1590,38 +1608,38 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
   }
   function DesignEditUpdate(action)
   {
-    if(action == "input-positionx"){design.designelement[designelementeditindex].positionx = parseFloat(document.querySelectorAll(".shop-designelements-tray-editor-input")[0].value);}
-    if(action == "input-positiony"){design.designelement[designelementeditindex].positiony = parseFloat(document.querySelectorAll(".shop-designelements-tray-editor-input")[1].value);}
-    if(action == "input-rotation"){design.designelement[designelementeditindex].rotation  = -3.141 * parseFloat(document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value)/180.0;}
-    if(action == "input-scale"){design.designelement[designelementeditindex].scale     = parseFloat(document.querySelectorAll(".shop-designelements-tray-editor-input")[3].value);}
+    if(action == "input-positionx"){manufacturingspecifications.designelement[designelementeditindex].positionx = parseFloat(document.querySelectorAll(".shop-designelements-tray-editor-input")[0].value);}
+    if(action == "input-positiony"){manufacturingspecifications.designelement[designelementeditindex].positiony = parseFloat(document.querySelectorAll(".shop-designelements-tray-editor-input")[1].value);}
+    if(action == "input-rotation"){manufacturingspecifications.designelement[designelementeditindex].rotation  = -3.141 * parseFloat(document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value)/180.0;}
+    if(action == "input-scale"){manufacturingspecifications.designelement[designelementeditindex].scale     = parseFloat(document.querySelectorAll(".shop-designelements-tray-editor-input")[3].value);}
 
-    if(action == "button-left"){design.designelement[designelementeditindex].positionx -= 10;document.querySelectorAll(".shop-designelements-tray-editor-input")[0].value = design.designelement[designelementeditindex].positionx;}
-    if(action == "button-right"){design.designelement[designelementeditindex].positionx += 10;document.querySelectorAll(".shop-designelements-tray-editor-input")[0].value = design.designelement[designelementeditindex].positionx;}
-    if(action == "button-up"){design.designelement[designelementeditindex].positiony += 10;document.querySelectorAll(".shop-designelements-tray-editor-input")[1].value = design.designelement[designelementeditindex].positiony;}
-    if(action == "button-down"){design.designelement[designelementeditindex].positiony -= 10;document.querySelectorAll(".shop-designelements-tray-editor-input")[1].value = design.designelement[designelementeditindex].positiony;}
-    if(action == "button-ccw"){design.designelement[designelementeditindex].rotation += (45.0 * 3.141) / 180;document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value  = -180.0*design.designelement[designelementeditindex].rotation/3.141;}
-    if(action == "button-cw"){design.designelement[designelementeditindex].rotation -= (45.0 * 3.141) / 180;document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value  = -180.0*design.designelement[designelementeditindex].rotation/3.141;}
-    if(action == "button-plus"){design.designelement[designelementeditindex].scale += 0.1;document.querySelectorAll(".shop-designelements-tray-editor-input")[3].value = design.designelement[designelementeditindex].scale;}
-    if(action == "button-minus"){design.designelement[designelementeditindex].scale -= 0.1;document.querySelectorAll(".shop-designelements-tray-editor-input")[3].value = design.designelement[designelementeditindex].scale;}
+    if(action == "button-left"){manufacturingspecifications.designelement[designelementeditindex].positionx -= 10;document.querySelectorAll(".shop-designelements-tray-editor-input")[0].value = manufacturingspecifications.designelement[designelementeditindex].positionx;}
+    if(action == "button-right"){manufacturingspecifications.designelement[designelementeditindex].positionx += 10;document.querySelectorAll(".shop-designelements-tray-editor-input")[0].value = manufacturingspecifications.designelement[designelementeditindex].positionx;}
+    if(action == "button-up"){manufacturingspecifications.designelement[designelementeditindex].positiony += 10;document.querySelectorAll(".shop-designelements-tray-editor-input")[1].value = manufacturingspecifications.designelement[designelementeditindex].positiony;}
+    if(action == "button-down"){manufacturingspecifications.designelement[designelementeditindex].positiony -= 10;document.querySelectorAll(".shop-designelements-tray-editor-input")[1].value = manufacturingspecifications.designelement[designelementeditindex].positiony;}
+    if(action == "button-ccw"){manufacturingspecifications.designelement[designelementeditindex].rotation += (45.0 * 3.141) / 180;document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value  = -180.0*manufacturingspecifications.designelement[designelementeditindex].rotation/3.141;}
+    if(action == "button-cw"){manufacturingspecifications.designelement[designelementeditindex].rotation -= (45.0 * 3.141) / 180;document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value  = -180.0*manufacturingspecifications.designelement[designelementeditindex].rotation/3.141;}
+    if(action == "button-plus"){manufacturingspecifications.designelement[designelementeditindex].scale += 0.1;document.querySelectorAll(".shop-designelements-tray-editor-input")[3].value = manufacturingspecifications.designelement[designelementeditindex].scale;}
+    if(action == "button-minus"){manufacturingspecifications.designelement[designelementeditindex].scale -= 0.1;document.querySelectorAll(".shop-designelements-tray-editor-input")[3].value = manufacturingspecifications.designelement[designelementeditindex].scale;}
 
     LoadDXFOnSlot(designelementeditindex,
-      design.designelement[designelementeditindex].dxfurl, 
-      design.designelement[designelementeditindex].scale, 
-      design.designelement[designelementeditindex].rotation, 
-      design.designelement[designelementeditindex].positionx, 
-      design.designelement[designelementeditindex].positiony);
+    manufacturingspecifications.designelement[designelementeditindex].dxfurl, 
+      manufacturingspecifications.designelement[designelementeditindex].scale, 
+      manufacturingspecifications.designelement[designelementeditindex].rotation, 
+      manufacturingspecifications.designelement[designelementeditindex].positionx, 
+      manufacturingspecifications.designelement[designelementeditindex].positiony);
     Draw();  
   }
   function DesignRemove(element_index)
   {
-    design.designelement.splice(element_index, 1);
+    manufacturingspecifications.designelement.splice(element_index, 1);
     drawingobject.splice(element_index, 1);
     document.querySelectorAll(".shop-designelements-tray")[1].innerHTML = "";
-    for(var i=0;i<Object.keys(design.designelement).length;i++)
+    for(var i=0;i<Object.keys(manufacturingspecifications.designelement).length;i++)
     {
       document.querySelectorAll(".shop-designelements-tray")[1].innerHTML += `
       <div class="shop-designelements-tray-item">
-        <img src="`+ design.designelement[i].thumbnailurl +`" class="shop-designelements-tray-item-img">
+        <img src="`+ manufacturingspecifications.designelement[i].thumbnailurl +`" class="shop-designelements-tray-item-img">
         <button class="shop-designelements-tray-item-button" onclick="" style="bottom: 5px;left:35px; background-color: rgb(61, 213, 255);"><span class="material-symbols-outlined">build</span></button>
         <button class="shop-designelements-tray-item-button" onclick="DesignRemove(`+ i +`)" style="bottom: 5px;left:145px;background-color: rgb(255, 0, 0);"><span class="material-symbols-outlined">delete_forever</span></button>
       </div>
@@ -1629,9 +1647,82 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
     }
     DesignLoad();
   }
+  function DesignSave() 
+  {
+
+    manufacturingspecifications.name = "UserCustomDesign";
+    console.log(manufacturingspecifications);
+
+    const designjsonstring = JSON.stringify(manufacturingspecifications,null,2);
+    const blob = new Blob([designjsonstring], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'design.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+  function DesignOpen() 
+  {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.json';
+
+    fileInput.onchange = event => 
+    {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => 
+      {
+        var _manufacturingspecifications = JSON.parse(e.target.result);
+        console.log(_manufacturingspecifications);
+        document.querySelector(".dimensions-length").value = _manufacturingspecifications.dimensionsx;
+        document.querySelector(".dimensions-width").value = _manufacturingspecifications.dimensionsy;
+        SetSizeOptions();
+        OnClickUnit('mm');
+        OnClickSupplier(_manufacturingspecifications.supplier);
+        OnClickConstruction(_manufacturingspecifications.construction);
+        if(_manufacturingspecifications.construction == "Standalone")
+        {
+          
+          if(_manufacturingspecifications.process != undefined)OnClickProcess(_manufacturingspecifications.process);
+          if(_manufacturingspecifications.materialfront != undefined)OnClickMaterialFront(_manufacturingspecifications.materialfront);
+          if(_manufacturingspecifications.thicknessfront != undefined)OnClickThicknessFront(_manufacturingspecifications.thicknessfront);
+          if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
+        }
+        if(manufacturingspecifications.construction == "Back-Supported")
+        {
+          if(_manufacturingspecifications.process != undefined)OnClickProcess(_manufacturingspecifications.process);
+          if(_manufacturingspecifications.materialfront != undefined)OnClickMaterialFront(_manufacturingspecifications.materialfront);
+          if(_manufacturingspecifications.thicknessfront != undefined)OnClickThicknessFront(_manufacturingspecifications.thicknessfront);
+          if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
+          if(_manufacturingspecifications.materialback != undefined)OnClickMaterialBack(_manufacturingspecifications.materialback);
+          if(_manufacturingspecifications.thicknessback != undefined)OnClickThicknessBack(_manufacturingspecifications.thicknessback);
+          if(_manufacturingspecifications.colorback != undefined)OnClickColorBack(_manufacturingspecifications.colorback);
+        }
+        if(_manufacturingspecifications.construction == "Half-Depth")
+        {
+          if(_manufacturingspecifications.process != undefined)OnClickProcess(_manufacturingspecifications.process);
+          if(_manufacturingspecifications.materialfront != undefined)OnClickMaterialFront(_manufacturingspecifications.materialfront);
+          if(_manufacturingspecifications.thicknessfront != undefined)OnClickThicknessFront(_manufacturingspecifications.thicknessfront);
+          if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
+          if(_manufacturingspecifications.cuttingepth != undefined)OnChangeCuttingDepth(_manufacturingspecifications.cuttingepth);
+        }
+        manufacturingspecifications = _manufacturingspecifications;
+        LoadRawMaterial(manufacturingspecifications.dimensionsx, manufacturingspecifications.dimensionsy);
+        DesignLoad();
+      };
+      reader.readAsText(file);
+    };
+
+    fileInput.click();
+  }
+
 </script>
 
-</html>
 <style>
 .editorribbon
 {
@@ -1676,6 +1767,8 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
   padding: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 .shop-containerpellete
 {
@@ -1688,10 +1781,17 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
 
   display: grid;
   grid-template-columns: 220px 1fr;
-
-  align-items: baseline;
 }
-
+.shop-containerpellete-specifications
+{
+  display: grid;
+  grid-template-columns: 220px 1fr;
+}
+.shop-containerpellete-designfile
+{
+  width: 100%;
+  box-sizing: border-box;
+}
 .shop-manufacturingconfig-options
 {
   display: flex;
@@ -1808,5 +1908,20 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
   border-radius: 20px;
   border-style: solid;
   border-width: 2px;
+}
+
+.shop-designfile
+{
+}
+.shop-designfile-button
+{
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: black;
+  vertical-align: middle;
 }
 </style>
