@@ -351,11 +351,14 @@
 
   <div class="shop-basepellete">
     <div class="shop-designfile shop-containerpellete shop-containerpellete-designfile">
-      <div>
-        <button class="shop-designfile-button unselected" onclick="DesignOpen()" style="float: left;" ><h2>Open Design</h2></button>
+      <div style="text-align:left;">
+        <button class="shop-designfile-button unselected" onclick="DesignOpen()"><h2>Open Design</h2></button>
       </div>
-      <div>
-        <button class="shop-designfile-button unselected" onclick="DesignSave()" style="float: right;" ><h2>Save Design</h2></button>
+      <div style="text-align: center;">
+        <button class="shop-designfile-button unselected" onclick="DesignUpload()"><h2>Upload DXF</h2></button>
+      </div>
+      <div style="text-align: right;">
+        <button class="shop-designfile-button unselected" onclick="DesignSave()"><h2>Save Design</h2></button>
       </div>
     </div>
   </div>
@@ -1791,6 +1794,26 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
 
     fileInput.click();
   }
+  function DesignUpload()
+  {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.dxf';
+
+    fileInput.onchange = event => 
+    {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = e => 
+      {
+        console.log(e.target.result);
+      };
+      reader.readAsText(file);
+    };
+
+    fileInput.click();
+  }
 </script>
 
 <script>
@@ -2004,6 +2027,8 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
 
 .shop-designfile
 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .shop-designfile-button
 {
