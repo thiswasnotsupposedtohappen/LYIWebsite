@@ -980,6 +980,12 @@ struct float64x2
 		if (y != f.y)return false;
 		return true;
 	}
+	bool operator % (const float64x2 f)
+	{
+		if (Absolute(x - f.x) >= 0.001)return false;
+		if (Absolute(y - f.y) >= 0.001)return false;
+		return true;
+	}
 
 	float64x2 operator+(const float64x2 f)
 	{

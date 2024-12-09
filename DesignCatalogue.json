@@ -12,44 +12,45 @@
       "materialfront": "Acrylic",
       "thicknessfront": "5mm",
       "colorfront": "Black",
-      "designelement": [
+      "designobjectlength" : 5,
+      "designobject": [
         {
           "dxfurl": "dxf/Mandir Jali Objects/30.dxf",
           "thumbnailurl": "dxf/Mandir Jali Objects/30.jpg",
-          "positionx": 0,
-          "positiony": 190,
+          "offsetx": 0,
+          "offsety": 190,
           "angle": 0,
           "scale": 0.5
         },
         {
           "dxfurl": "dxf/Mandir Jali Objects/32.dxf",
           "thumbnailurl": "dxf/Mandir Jali Objects/32.jpg",
-          "positionx": 0,
-          "positiony": 195,
+          "offsetx": 0,
+          "offsety": 190,
           "angle": 0,
           "scale": 0.5
         },
         {
           "dxfurl": "dxf/Mandir Jali Objects/20.dxf",
           "thumbnailurl": "dxf/Mandir Jali Objects/20.jpg",
-          "positionx": -90,
-          "positiony": -130,
+          "offsetx": -90,
+          "offsety": -130,
           "angle": 0,
           "scale": 0.4
         },
         {
           "dxfurl": "dxf/Mandir Jali Objects/20.dxf",
           "thumbnailurl": "dxf/Mandir Jali Objects/20.jpg",
-          "positionx": 90,
-          "positiony": -130,
+          "offsetx": 90,
+          "offsety": -130,
           "angle": 0,
           "scale": 0.4
         },
         {
           "dxfurl": "dxf/Mandir Jali Objects/23.dxf",
           "thumbnailurl": "dxf/Mandir Jali Objects/23.jpg",
-          "positionx": 0,
-          "positiony": 30,
+          "offsetx": 0,
+          "offsety": 30,
           "angle": 0,
           "scale": 0.7
         }
@@ -62,52 +63,53 @@
       "size": "2ft x 1ft",
       "supplier": "LightYear",
       "construction": "Standalone",
-      "designelement": [
+      "process": "CNC Laser 0.5mm",
+      "materialfront": "Acrylic",
+      "thicknessfront": "5mm",
+      "colorfront": "Black",
+      "designobjectlength" : 5,
+      "designobject": [
         {
           "dxfurl": "dxf/Mandir Jali Objects/9.dxf",
           "thumbnailurl": "dxf/Mandir Jali Objects/9.jpg",
-          "positionx": -110,
-          "positiony": 150,
+          "offsetx": -110,
+          "offsety": 150,
           "angle": 0,
           "scale": 0.5
         },
         {
           "dxfurl": "dxf/Mandir Jali Objects/9.dxf",
           "thumbnailurl": "dxf/Mandir Jali Objects/9.jpg",
-          "positionx": 110,
-          "positiony": 150,
+          "offsetx": 110,
+          "offsety": 150,
           "angle": 0,
           "scale": 0.5
         },
         {
           "dxfurl": "dxf/Mandir Jali Objects/17.dxf",
           "thumbnailurl": "dxf/Mandir Jali Objects/17.jpg",
-          "positionx": 110,
-          "positiony": -150,
+          "offsetx": 110,
+          "offsety": -150,
           "angle": 0,
           "scale": 0.7
         },
         {
           "dxfurl": "dxf/Mandir Jali Objects/17.dxf",
           "thumbnailurl": "dxf/Mandir Jali Objects/17.jpg",
-          "positionx": -110,
-          "positiony": -150,
+          "offsetx": -110,
+          "offsety": -150,
           "angle": 0,
           "scale": 0.7
         },
         {
           "dxfurl": "dxf/Mandir Jali Objects/21.dxf",
           "thumbnailurl": "dxf/Mandir Jali Objects/21.jpg",
-          "positionx": 0,
-          "positiony": 0,
+          "offsetx": 0,
+          "offsety": 0,
           "angle": 0,
           "scale": 0.5
         }
-      ],
-      "process": "CNC Laser 0.5mm",
-      "materialfront": "Acrylic",
-      "thicknessfront": "5mm",
-      "colorfront": "Black"
+      ]
     },
     {
       "name": "MandirDesign-10",
@@ -120,17 +122,17 @@
       "materialfront": "Acrylic",
       "thicknessfront": "5mm",
       "colorfront": "Black",
-      "designelement": [
+      "designobjectlength" : 1,
+      "designobject": [
         {
           "dxfurl": "dxf/Mandir Jali Objects/22.dxf",
           "thumbnailurl": "dxf/Mandir Jali Objects/22.jpg",
-          "positionx": 0,
-          "positiony": 0,
+          "offsetx": 0,
+          "offsety": 0,
           "angle": 0,
           "scale": 0.5
         }
-      ],
-      "design": []
+      ]
     }
   ]
 }

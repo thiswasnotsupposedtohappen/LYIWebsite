@@ -14,7 +14,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-
 using namespace std;
 #include "PoDefinition.h"
 #include "PoUtilities.h"
@@ -35,6 +34,7 @@ LinkedList<Block> block;
 LinkedList<Line> drawing;
 LinkedList<Line> *drawingcurrentblock = &drawing;
 Heap<Line> drawingexport;
+Heap<LinkedList<Line>> loop;
 
 EMSCRIPTEN_KEEPALIVE int32 main()
 {
@@ -823,6 +823,22 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 	//cout << "drawing = " << (uint32)(void*)drawingexport.data << endl;
 	//cout << "drawinglength = "<< drawingexport.size << endl;
 	//cout << "LoadDXF Out" << endl;
+	return 0;
+}
+
+EMSATTRIBUTE int32 GenerateLoops()
+{
+	for (uint32 i = 0; i < drawingexport.size; i++)
+	{
+		for (uint32 j = i; j < drawingexport.size; j++)
+		{
+
+		}
+		for (uint32 j = 0; j < i; j++)
+		{
+
+		}
+	}
 	return 0;
 }
 
