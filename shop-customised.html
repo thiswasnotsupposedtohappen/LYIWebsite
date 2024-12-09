@@ -373,10 +373,25 @@ function FloatCompare(x)
 }
 class Point
 {
-  constructor()
+  constructor(x,y)
   {
-    this.x=undefined;
-    this.y=undefined;
+    this.x = x;
+    this.y = y;
+  }
+  Transform(offsetx, offsety, angle, scale)
+  {
+    var _x = this.x;
+    var _y = this.y;
+    var cosangle = Math.cos(angle);
+    var sinangle = Math.sin(angle);
+    _x = this.x * cosangle - this.y * sinangle;
+    _y = this.x * sinangle + this.y * cosangle;
+    _x *= scale;
+    _y *= scale;
+    _x += offsetx;
+    _y += offsety;
+    const tranformedpoint = new Point(_x, _y);
+    return tranformedpoint;
   }
 };
 class Line
@@ -393,10 +408,17 @@ class DesignObject
   {
     var drawing = undefined;
     var length = 0;
-    var scale = 1;
-    var rotation = 0;
     var offsetx = 0;
     var offsety = 0;
+    var angle = 0;
+    var scale = 1;
+  }
+  Transform(_offsetx, _offsety, _angle, _scale)
+  {
+    this.offsetx = _offsetx;
+    this.offsety = _offsety;
+    this.angle = _angle;
+    this.scale = _scale;
   }
 }
 var drawing_rawmaterial = undefined;
@@ -553,11 +575,11 @@ function Draw()
       {
         if(FloatCompare(p.x-q.x) && FloatCompare(p.y-q.y))
         {
-          ctx.beginPath();
-          p=drawingobject[i].drawing[j].p;
+          ctx.beginPath();          
+          p=drawingobject[i].drawing[j].p.Transform(drawingobject[i].offsetx,drawingobject[i].offsety,drawingobject[i].angle,drawingobject[i].scale);
           ctx.moveTo((p.x * zoom + mousex),(p.y * zoom + mousey));
         }      
-        q = drawingobject[i].drawing[j].q;
+        q=drawingobject[i].drawing[j].q.Transform(drawingobject[i].offsetx,drawingobject[i].offsety,drawingobject[i].angle,drawingobject[i].scale);
         ctx.lineTo((q.x * zoom + mousex),(q.y * zoom + mousey));   
         if(FloatCompare(p.x-q.x) && FloatCompare(p.y-q.y))
         {
@@ -626,7 +648,7 @@ function LoadRawMaterial(length,width)
   Draw();
 }
 
-function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
+function LoadDXFOnSlot(slot,url)
 {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url, false);
@@ -655,31 +677,6 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
 
       address += 32;
     }
-    for (var i = 0; i < drawingobject[slot].length; i++) 
-    {
-      drawingobject[slot].drawing[i].p.x *= scale;
-      drawingobject[slot].drawing[i].p.y *= scale;
-      drawingobject[slot].drawing[i].q.x *= scale;
-      drawingobject[slot].drawing[i].q.y *= scale;
-
-      var cosangle = Math.cos(angle);
-      var sinangle = Math.sin(angle);
-
-      var px = drawingobject[slot].drawing[i].p.x;
-      var py = drawingobject[slot].drawing[i].p.y;
-      var qx = drawingobject[slot].drawing[i].q.x;
-      var qy = drawingobject[slot].drawing[i].q.y;
-
-      drawingobject[slot].drawing[i].p.x = px * cosangle - py * sinangle;
-      drawingobject[slot].drawing[i].p.y = px * sinangle + py * cosangle;
-      drawingobject[slot].drawing[i].q.x = qx * cosangle - qy * sinangle;
-      drawingobject[slot].drawing[i].q.y = qx * sinangle + qy * cosangle;
-
-      drawingobject[slot].drawing[i].p.x += offsetx;
-      drawingobject[slot].drawing[i].p.y += offsety;
-      drawingobject[slot].drawing[i].q.x += offsetx;
-      drawingobject[slot].drawing[i].q.y += offsety;
-    } 
   };  
   xhr.send(null);
 } 
@@ -694,7 +691,7 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
       this.thumbnailurl = undefined;
       this.positionx = undefined;
       this.positiony = undefined;
-      this.rotation = undefined;
+      this.angle = undefined;
       this.scale = undefined;
     }
   }
@@ -1604,12 +1601,8 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
     
     for(var i=0;i<Object.keys(manufacturingspecifications.designelement).length;i++)
     {
-      LoadDXFOnSlot(i,
-      manufacturingspecifications.designelement[i].dxfurl, 
-      manufacturingspecifications.designelement[i].scale, 
-      manufacturingspecifications.designelement[i].rotation, 
-      manufacturingspecifications.designelement[i].positionx, 
-      manufacturingspecifications.designelement[i].positiony);
+      LoadDXFOnSlot(i,manufacturingspecifications.designelement[i].dxfurl);
+      drawingobject[i].Transform(manufacturingspecifications.designelement[i].positionx,manufacturingspecifications.designelement[i].positiony,manufacturingspecifications.designelement[i].angle, manufacturingspecifications.designelement[i].scale);
       
       document.querySelectorAll(".shop-designelements-tray")[1].innerHTML += `
       <div class="shop-designelements-tray-item">
@@ -1632,7 +1625,7 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
     _designelement.thumbnailurl = "dxf/Mandir Jali Objects/"+index+".jpg";
     _designelement.positionx = 0;
     _designelement.positiony = 0;
-    _designelement.rotation = 0;
+    _designelement.angle = 0;
     _designelement.scale = 1;
 
     manufacturingspecifications.designelement.push(_designelement);
@@ -1658,7 +1651,7 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
 
     document.querySelectorAll(".shop-designelements-tray-editor-input")[0].value = manufacturingspecifications.designelement[element_index].positionx;
     document.querySelectorAll(".shop-designelements-tray-editor-input")[1].value = manufacturingspecifications.designelement[element_index].positiony;
-    document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value = 180.0*manufacturingspecifications.designelement[element_index].rotation/3.141;
+    document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value = 180.0*manufacturingspecifications.designelement[element_index].angle/3.141;
     document.querySelectorAll(".shop-designelements-tray-editor-input")[3].value = manufacturingspecifications.designelement[element_index].scale;
   }
   function DesignEditApply()
@@ -1687,24 +1680,20 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
   {
     if(action == "input-positionx"){manufacturingspecifications.designelement[designelementeditindex].positionx = parseFloat(document.querySelectorAll(".shop-designelements-tray-editor-input")[0].value);}
     if(action == "input-positiony"){manufacturingspecifications.designelement[designelementeditindex].positiony = parseFloat(document.querySelectorAll(".shop-designelements-tray-editor-input")[1].value);}
-    if(action == "input-rotation"){manufacturingspecifications.designelement[designelementeditindex].rotation  = -3.141 * parseFloat(document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value)/180.0;}
+    if(action == "input-rotation"){manufacturingspecifications.designelement[designelementeditindex].angle  = -3.141 * parseFloat(document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value)/180.0;}
     if(action == "input-scale"){manufacturingspecifications.designelement[designelementeditindex].scale     = parseFloat(document.querySelectorAll(".shop-designelements-tray-editor-input")[3].value);}
 
     if(action == "button-left"){manufacturingspecifications.designelement[designelementeditindex].positionx -= 10;document.querySelectorAll(".shop-designelements-tray-editor-input")[0].value = manufacturingspecifications.designelement[designelementeditindex].positionx;}
     if(action == "button-right"){manufacturingspecifications.designelement[designelementeditindex].positionx += 10;document.querySelectorAll(".shop-designelements-tray-editor-input")[0].value = manufacturingspecifications.designelement[designelementeditindex].positionx;}
     if(action == "button-up"){manufacturingspecifications.designelement[designelementeditindex].positiony += 10;document.querySelectorAll(".shop-designelements-tray-editor-input")[1].value = manufacturingspecifications.designelement[designelementeditindex].positiony;}
     if(action == "button-down"){manufacturingspecifications.designelement[designelementeditindex].positiony -= 10;document.querySelectorAll(".shop-designelements-tray-editor-input")[1].value = manufacturingspecifications.designelement[designelementeditindex].positiony;}
-    if(action == "button-ccw"){manufacturingspecifications.designelement[designelementeditindex].rotation += (45.0 * 3.141) / 180;document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value  = -180.0*manufacturingspecifications.designelement[designelementeditindex].rotation/3.141;}
-    if(action == "button-cw"){manufacturingspecifications.designelement[designelementeditindex].rotation -= (45.0 * 3.141) / 180;document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value  = -180.0*manufacturingspecifications.designelement[designelementeditindex].rotation/3.141;}
+    if(action == "button-ccw"){manufacturingspecifications.designelement[designelementeditindex].angle += (45.0 * 3.141) / 180;document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value  = -180.0*manufacturingspecifications.designelement[designelementeditindex].angle/3.141;}
+    if(action == "button-cw"){manufacturingspecifications.designelement[designelementeditindex].angle -= (45.0 * 3.141) / 180;document.querySelectorAll(".shop-designelements-tray-editor-input")[2].value  = -180.0*manufacturingspecifications.designelement[designelementeditindex].angle/3.141;}
     if(action == "button-plus"){manufacturingspecifications.designelement[designelementeditindex].scale += 0.1;document.querySelectorAll(".shop-designelements-tray-editor-input")[3].value = manufacturingspecifications.designelement[designelementeditindex].scale;}
     if(action == "button-minus"){manufacturingspecifications.designelement[designelementeditindex].scale -= 0.1;document.querySelectorAll(".shop-designelements-tray-editor-input")[3].value = manufacturingspecifications.designelement[designelementeditindex].scale;}
 
-    LoadDXFOnSlot(designelementeditindex,
-    manufacturingspecifications.designelement[designelementeditindex].dxfurl, 
-      manufacturingspecifications.designelement[designelementeditindex].scale, 
-      manufacturingspecifications.designelement[designelementeditindex].rotation, 
-      manufacturingspecifications.designelement[designelementeditindex].positionx, 
-      manufacturingspecifications.designelement[designelementeditindex].positiony);
+    drawingobject[designelementeditindex].Transform(manufacturingspecifications.designelement[designelementeditindex].positionx,manufacturingspecifications.designelement[designelementeditindex].positiony,manufacturingspecifications.designelement[designelementeditindex].angle, manufacturingspecifications.designelement[designelementeditindex].scale);         
+    console.log(drawingobject[designelementeditindex]);
     Draw();  
   }
   function DesignRemove(element_index)

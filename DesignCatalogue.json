@@ -18,7 +18,7 @@
           "thumbnailurl": "dxf/Mandir Jali Objects/30.jpg",
           "positionx": 0,
           "positiony": 190,
-          "rotation": 0,
+          "angle": 0,
           "scale": 0.5
         },
         {
@@ -26,7 +26,7 @@
           "thumbnailurl": "dxf/Mandir Jali Objects/32.jpg",
           "positionx": 0,
           "positiony": 195,
-          "rotation": 0,
+          "angle": 0,
           "scale": 0.5
         },
         {
@@ -34,7 +34,7 @@
           "thumbnailurl": "dxf/Mandir Jali Objects/20.jpg",
           "positionx": -90,
           "positiony": -130,
-          "rotation": 0,
+          "angle": 0,
           "scale": 0.4
         },
         {
@@ -42,7 +42,7 @@
           "thumbnailurl": "dxf/Mandir Jali Objects/20.jpg",
           "positionx": 90,
           "positiony": -130,
-          "rotation": 0,
+          "angle": 0,
           "scale": 0.4
         },
         {
@@ -50,7 +50,7 @@
           "thumbnailurl": "dxf/Mandir Jali Objects/23.jpg",
           "positionx": 0,
           "positiony": 30,
-          "rotation": 0,
+          "angle": 0,
           "scale": 0.7
         }
       ]
@@ -68,7 +68,7 @@
           "thumbnailurl": "dxf/Mandir Jali Objects/9.jpg",
           "positionx": -110,
           "positiony": 150,
-          "rotation": 0,
+          "angle": 0,
           "scale": 0.5
         },
         {
@@ -76,7 +76,7 @@
           "thumbnailurl": "dxf/Mandir Jali Objects/9.jpg",
           "positionx": 110,
           "positiony": 150,
-          "rotation": 0,
+          "angle": 0,
           "scale": 0.5
         },
         {
@@ -84,7 +84,7 @@
           "thumbnailurl": "dxf/Mandir Jali Objects/17.jpg",
           "positionx": 110,
           "positiony": -150,
-          "rotation": 0,
+          "angle": 0,
           "scale": 0.7
         },
         {
@@ -92,7 +92,7 @@
           "thumbnailurl": "dxf/Mandir Jali Objects/17.jpg",
           "positionx": -110,
           "positiony": -150,
-          "rotation": 0,
+          "angle": 0,
           "scale": 0.7
         },
         {
@@ -100,7 +100,7 @@
           "thumbnailurl": "dxf/Mandir Jali Objects/21.jpg",
           "positionx": 0,
           "positiony": 0,
-          "rotation": 0,
+          "angle": 0,
           "scale": 0.5
         }
       ],
@@ -126,7 +126,7 @@
           "thumbnailurl": "dxf/Mandir Jali Objects/22.jpg",
           "positionx": 0,
           "positiony": 0,
-          "rotation": 0,
+          "angle": 0,
           "scale": 0.5
         }
       ],
