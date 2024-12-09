@@ -108,6 +108,29 @@
       "materialfront": "Acrylic",
       "thicknessfront": "5mm",
       "colorfront": "Black"
+    },
+    {
+      "name": "MandirDesign-10",
+      "dimensionsx": 300,
+      "dimensionsy": 500,
+      "size": "2ft x 1ft",
+      "supplier": "LightYear",
+      "construction": "Standalone",
+      "process": "CNC Laser 0.5mm",
+      "materialfront": "Acrylic",
+      "thicknessfront": "5mm",
+      "colorfront": "Black",
+      "designelement": [
+        {
+          "dxfurl": "dxf/Mandir Jali Objects/22.dxf",
+          "thumbnailurl": "dxf/Mandir Jali Objects/22.jpg",
+          "positionx": 0,
+          "positiony": 0,
+          "rotation": 0,
+          "scale": 0.5
+        }
+      ],
+      "design": []
     }
   ]
 }

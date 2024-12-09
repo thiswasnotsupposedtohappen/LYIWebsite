@@ -277,26 +277,30 @@
         
     <div class="shop-designelements-tray shop-containerpellete">
 
+      <div style=" width: 100%;box-sizing: border-box;">
+        <h3><b>Design Element Editor</b></h3>
+      </div>
+
       <div class="shop-designelements-tray-editor">
-        <pre><h2>Position X</h2></pre>
+        <pre><h2>Horizontal Position</h2></pre>
         <input type="number" class="shop-designelements-tray-editor-input disabled" onchange="DesignEditUpdate('input-positionx')"></input>
         <pre>   </pre><button class="shop-designelements-tray-item-button disabled" onclick="DesignEditUpdate('button-left')" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">arrow_back</span></button>
         <pre>   </pre><button class="shop-designelements-tray-item-button disabled" onclick="DesignEditUpdate('button-right')" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">arrow_forward</span></button>
       </div>
       <div class="shop-designelements-tray-editor">
-        <pre><h2>Position Y</h2></pre>
+        <pre><h2>  Vertical Position</h2></pre>
         <input type="number" class="shop-designelements-tray-editor-input disabled" onchange="DesignEditUpdate('input-positiony')"></input>
         <pre>   </pre><button class="shop-designelements-tray-item-button disabled" onclick="DesignEditUpdate('button-up')" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">arrow_upward</span></button>
         <pre>   </pre><button class="shop-designelements-tray-item-button disabled" onclick="DesignEditUpdate('button-down')" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">arrow_downward</span></button>
       </div>
       <div class="shop-designelements-tray-editor">
-        <pre><h2>  Rotation</h2></pre>
+        <pre><h2>           Rotation</h2></pre>
         <input type="number" class="shop-designelements-tray-editor-input disabled" onchange="DesignEditUpdate('input-rotation')"></input>
         <pre>   </pre><button class="shop-designelements-tray-item-button disabled" onclick="DesignEditUpdate('button-ccw')" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">rotate_left</span></button>
         <pre>   </pre><button class="shop-designelements-tray-item-button disabled" onclick="DesignEditUpdate('button-cw')" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">rotate_right</span></button>
       </div>
       <div class="shop-designelements-tray-editor">
-        <pre><h2>     Scale</h2></pre>
+        <pre><h2>              Scale</h2></pre>
         <input type="number" class="shop-designelements-tray-editor-input disabled" onchange="DesignEditUpdate('input-scale')"></input>
         <pre>   </pre><button class="shop-designelements-tray-item-button disabled" onclick="DesignEditUpdate('button-plus')" style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">add</span></button>
         <pre>   </pre><button class="shop-designelements-tray-item-button disabled" onclick="DesignEditUpdate('button-minus')"style="position: static; background-color: rgb(174, 219, 255);"><span class="material-symbols-outlined">remove</span></button>
@@ -311,7 +315,38 @@
     </div>    
   </div>
 
-  <div class="shop-review">
+  <div class="shop-review shop-basepellete">
+    <div class="shop-review-grid shop-containerpellete">
+      <div style="text-align: end; color:rgb(255, 0, 0)"><h3>Review Specifications</h3></div><div></div><div></div>
+      <div style="text-align: end;"><h2>Horizontal Dimension:</h2></div><div class="shop-review-specification-dimensionx"><h2></h2></div><div></div>
+      <div style="text-align: end;"><h2>Vertical Dimension:</h2></div><div class="shop-review-specification-dimensiony"><h2></h2></div><div></div>
+      <div style="text-align: end;"><h2>Size Considered:</h2></div><div class="shop-review-specification-size"><h2></h2></div><div></div>
+      <div style="text-align: end;"><h2>Construction:</h2></div><div class="shop-review-specification-construction"><h2></h2></div><div></div>
+      <div style="text-align: end;"><h2>Process:</h2></div><div class="shop-review-specification-process"><h2></h2></div><div></div>
+      <div style="text-align: end;"><h2>Front Material:</h2></div><div class="shop-review-specification-materialfront"><h2></h2></div><div></div>
+      <div style="text-align: end;"><h2>Back Material:</h2></div><div class="shop-review-specification-materialback"><h2></h2></div><div></div>
+      <div style="text-align: end;"><h2>Front Thickness:</h2></div><div class="shop-review-specification-thicknessfront"><h2></h2></div><div></div>
+      <div style="text-align: end;"><h2>Back Thickness:</h2></div><div class="shop-review-specification-thicknessback"><h2></h2></div><div></div>
+      <div style="text-align: end;"><h2>Front Color:</h2></div><div class="shop-review-specification-colorfront"><h2></h2></div><div></div>
+      <div style="text-align: end;"><h2>Back Color:</h2></div><div class="shop-review-specification-colorback"><h2></h2></div><div></div>
+      <div style="text-align: end;"><h2>Cutting Depth:</h2></div><div class="shop-review-specification-cuttingdepth"><h2></h2></div><div></div>
+      <div style="height: 25px;"></div><div></div><div></div>
+      <div style="text-align: end; color:rgb(255, 0, 0)"><h3>Costing Calculation</h3></div><div style="text-align: center; color:rgb(255, 0, 0)"><h3>Rate</h3></div><div style="text-align: start; color:rgb(255, 0, 0)"><h3>How?</h3></div>
+      <div style="text-align: end;"><h2>Raw Material:</h2></div><div class="shop-review-cost-rate"><h2></h2></div><div class="shop-review-cost-how"></div>
+      <div style="text-align: end;"><h2>Machining:</h2></div><div class="shop-review-cost-rate"><h2></h2></div><div class="shop-review-cost-how"></div>
+      <div style="text-align: end;"><h2>Assembly:</h2></div><div class="shop-review-cost-rate"><h2></h2></div><div class="shop-review-cost-how"></div>
+      <div style="text-align: end;"><h2>Post Processing:</h2></div><div class="shop-review-cost-rate"><h2></h2></div><div class="shop-review-cost-how"></div>
+      <div style="text-align: end;"><h2>Packaging:</h2></div><div class="shop-review-cost-rate"><h2></h2></div><div class="shop-review-cost-how"></div>
+      <div style="text-align: end; color:rgb(4, 114, 0)"><h3>Total:</h3></div><div style="text-align: center; color:rgb(0, 0, 0)"><h3></h3></div><div style="text-align: start; color:rgb(0, 0, 0)"><h3></h3></div>
+      <div style="height: 25px;"></div><div></div><div></div>
+
+      <div style="display: flex; justify-content: end;"><h5 style="display:flex; align-items:end;">Quantity:</h5></div>
+      <div style="display: flex; justify-content: center; align-items: end; font-size: 30px;">X<input type="number" value=1 style="height: 50px; width: 100px; font-size: 30px; text-align: end;"></input></div>
+      <div><button class="unselected" style="width: 100px; height: 50px; border-radius: 20px; font-size: 30px;">BUY</button></div>
+
+      <div style="height: 25px;"></div><div></div><div></div>
+
+    </div>
   </div>
 
   <div class="shop-basepellete">
@@ -326,6 +361,326 @@
   </div>
 </body>
 </html>
+
+<script src="wasm/LYIWebsite.js"></script>  
+<script>  
+function FloatCompare(x)
+{
+  return Math.abs(x) < 0.0001;
+}
+class Point
+{
+  constructor()
+  {
+    this.x=undefined;
+    this.y=undefined;
+  }
+};
+class Line
+{
+  constructor()
+  {
+    this.p=undefined;
+    this.q=undefined;
+  }
+};
+class DesignObject
+{
+  constructor()
+  {
+    var drawing = undefined;
+    var length = 0;
+    var scale = 1;
+    var rotation = 0;
+    var offsetx = 0;
+    var offsety = 0;
+  }
+}
+var drawing_rawmaterial = undefined;
+var drawing_rawmaterial_frontcolor = "white";
+var drawing_rawmaterial_backcolor = "white";
+var drawingobject = [];
+
+var zoom = 1;
+var buttonleftmousedown = false;
+var mousex = 0, mousey = 0;
+var touchxp = 0, touchyp = 0;
+var squeeze = 0;
+var viewer = document.getElementById("viewer");
+var canvas = document.querySelector("canvas");
+canvas.width = viewer.clientWidth;
+canvas.height = viewer.clientHeight;
+var ctx = canvas.getContext("2d");
+ctx.resetTransform();
+ctx.translate(canvas.width/2,canvas.height/2);
+ctx.scale(1,-1);
+
+Draw();
+
+addEventListener("resize", function() 
+{
+  canvas.width = viewer.clientWidth;
+  canvas.height = viewer.clientHeight;
+  ctx.resetTransform();
+  ctx.translate(canvas.width/2,canvas.height/2);
+  ctx.scale(1,-1);
+  Draw();
+});
+canvas.addEventListener('wheel', function(event) 
+{
+  event.preventDefault();
+  zoom -= (event.deltaY/1000) * zoom;
+  if(zoom < 0.1)
+    zoom = 0.1;
+  Draw();
+});
+canvas.addEventListener('mousedown', function(event) 
+{
+  event.preventDefault();
+  if (event.button === 0) 
+    buttonleftmousedown = true;
+});
+document.addEventListener('mouseup', function(event) 
+{
+  if (event.button === 0) 
+    buttonleftmousedown = false;
+});
+document.addEventListener('mousemove', function(event) 
+{
+  if (buttonleftmousedown) 
+  {
+    mousex += event.movementX;
+    mousey -= event.movementY;
+    Draw();
+  }
+});
+
+canvas.addEventListener('touchstart', function(event) 
+{
+  event.preventDefault();
+  if (event.touches.length === 1) 
+  {
+    buttonleftmousedown = true;
+    touchxp = event.touches[0].clientX;
+    touchyp = event.touches[0].clientY;
+  }    
+  if (event.touches.length === 2) 
+  {
+    var touchx0 = event.touches[0].clientX;
+    var touchy0 = event.touches[0].clientY;
+    var touchx1 = event.touches[1].clientX;
+    var touchy1 = event.touches[1].clientY;
+
+    squeeze = Math.sqrt((touchx1-touchx0)*(touchx1-touchx0) + (touchy1-touchy0)*(touchy1-touchy0));
+  }    
+});
+document.addEventListener('touchend', function(event) 
+{
+  buttonleftmousedown = false;    
+});
+document.addEventListener('touchmove', function(event) 
+{
+  if (buttonleftmousedown && event.touches.length === 1) 
+  {
+    mousex += event.touches[0].clientX - touchxp;
+    mousey -= event.touches[0].clientY - touchyp;
+    touchxp = event.touches[0].clientX;
+    touchyp = event.touches[0].clientY;
+    Draw();
+  }
+
+  if (event.touches.length === 2) 
+  {
+    var touchx0 = event.touches[0].clientX;
+    var touchy0 = event.touches[0].clientY;
+    var touchx1 = event.touches[1].clientX;
+    var touchy1 = event.touches[1].clientY;
+
+    var newsqueeze = Math.sqrt((touchx1-touchx0)*(touchx1-touchx0) + (touchy1-touchy0)*(touchy1-touchy0));
+    zoom += (newsqueeze - squeeze)/1000;
+    if(zoom < 0.1)
+      zoom = 0.1;
+    Draw();
+    squeeze = newsqueeze;
+  }
+});
+
+console.log("System Ready");
+
+function Draw()
+{
+  ctx.clearRect(-canvas.width/2,-canvas.height/2,canvas.width,canvas.height);
+
+  ctx.strokeStyle = "red";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(mousex,mousey);
+  ctx.lineTo((canvas.width/2),mousey);
+  ctx.moveTo(mousex,mousey);
+  ctx.lineTo(mousex,(canvas.height/2));    
+  ctx.moveTo(mousex,mousey);
+  ctx.lineTo(-(canvas.width/2),mousey);
+  ctx.moveTo(mousex,mousey);
+  ctx.lineTo(mousex,-(canvas.height/2));    
+  ctx.stroke();
+
+  ctx.strokeStyle = "black";
+  ctx.fillStyle = drawing_rawmaterial_frontcolor;
+  if(drawing_rawmaterial != undefined)
+  {
+    ctx.beginPath();
+    ctx.moveTo((drawing_rawmaterial[0].p.x * zoom + mousex),(drawing_rawmaterial[0].p.y * zoom + mousey));
+    ctx.lineTo((drawing_rawmaterial[0].q.x * zoom + mousex),(drawing_rawmaterial[0].q.y * zoom + mousey));   
+    ctx.lineTo((drawing_rawmaterial[1].q.x * zoom + mousex),(drawing_rawmaterial[1].q.y * zoom + mousey));   
+    ctx.lineTo((drawing_rawmaterial[2].q.x * zoom + mousex),(drawing_rawmaterial[2].q.y * zoom + mousey));
+    ctx.lineTo((drawing_rawmaterial[3].q.x * zoom + mousex),(drawing_rawmaterial[3].q.y * zoom + mousey));    
+    if(ctx.fillStyle != undefined)ctx.fill();
+    ctx.stroke();
+  }
+  
+  ctx.strokeStyle = "black";
+  ctx.fillStyle = drawing_rawmaterial_backcolor;
+  for(var i=0;i<drawingobject.length;i++)
+  {
+    if(drawingobject[i] != undefined)
+    {
+      var p = drawingobject[i].drawing[0].p;
+      var q = p;
+      for(var j=0;j<drawingobject[i].length;j++)
+      {
+        if(FloatCompare(p.x-q.x) && FloatCompare(p.y-q.y))
+        {
+          ctx.beginPath();
+          p=drawingobject[i].drawing[j].p;
+          ctx.moveTo((p.x * zoom + mousex),(p.y * zoom + mousey));
+        }      
+        q = drawingobject[i].drawing[j].q;
+        ctx.lineTo((q.x * zoom + mousex),(q.y * zoom + mousey));   
+        if(FloatCompare(p.x-q.x) && FloatCompare(p.y-q.y))
+        {
+          ctx.fill();
+          ctx.stroke();
+          p=q;
+        }    
+      }
+    }
+  }
+} 
+
+function LoadRawMaterial(length,width)
+{
+  drawing_rawmaterial = new Array(4);
+  drawing_rawmaterial[0] = new Line;
+  drawing_rawmaterial[0].p = new Point;
+  drawing_rawmaterial[0].q = new Point;
+  drawing_rawmaterial[0].p.x = -length/2;
+  drawing_rawmaterial[0].p.y = -width/2;
+  drawing_rawmaterial[0].q.x = length/2;
+  drawing_rawmaterial[0].q.y = -width/2;
+  drawing_rawmaterial[1] = new Line;
+  drawing_rawmaterial[1].p = new Point;
+  drawing_rawmaterial[1].q = new Point;
+  drawing_rawmaterial[1].p.x = length/2;
+  drawing_rawmaterial[1].p.y = -width/2;
+  drawing_rawmaterial[1].q.x = length/2;
+  drawing_rawmaterial[1].q.y = width/2;
+  drawing_rawmaterial[2] = new Line;
+  drawing_rawmaterial[2].p = new Point;
+  drawing_rawmaterial[2].q = new Point;
+  drawing_rawmaterial[2].p.x = length/2;
+  drawing_rawmaterial[2].p.y = width/2;
+  drawing_rawmaterial[2].q.x = -length/2;
+  drawing_rawmaterial[2].q.y = width/2;
+  drawing_rawmaterial[3] = new Line;
+  drawing_rawmaterial[3].p = new Point;
+  drawing_rawmaterial[3].q = new Point;
+  drawing_rawmaterial[3].p.x = -length/2;
+  drawing_rawmaterial[3].p.y = width/2;
+  drawing_rawmaterial[3].q.x = -length/2;
+  drawing_rawmaterial[3].q.y = -width/2;  
+
+  if(manufacturingspecifications.colorfront == "White")drawing_rawmaterial_frontcolor = "White";
+  if(manufacturingspecifications.colorfront == "Black")drawing_rawmaterial_frontcolor = "Black";
+  if(manufacturingspecifications.colorfront == "Red")drawing_rawmaterial_frontcolor = "Red";
+  if(manufacturingspecifications.colorfront == "Green")drawing_rawmaterial_frontcolor = "Green";
+  if(manufacturingspecifications.colorfront == "Blue")drawing_rawmaterial_frontcolor = "Blue";
+  if(manufacturingspecifications.colorfront == "Orange")drawing_rawmaterial_frontcolor = "Orange";
+  if(manufacturingspecifications.colorfront == "Brown")drawing_rawmaterial_frontcolor = "Brown";
+  if(manufacturingspecifications.colorfront == "Yellow")drawing_rawmaterial_frontcolor = "Yellow";
+  if(manufacturingspecifications.colorfront == "Transparent")drawing_rawmaterial_frontcolor = undefined;
+  if(manufacturingspecifications.colorfront == "White040")drawing_rawmaterial_frontcolor = undefined;
+
+  if(manufacturingspecifications.colorback == "White")drawing_rawmaterial_backcolor = "White";
+  if(manufacturingspecifications.colorback == "Black")drawing_rawmaterial_backcolor = "Black";
+  if(manufacturingspecifications.colorback == "Red")drawing_rawmaterial_backcolor = "Red";
+  if(manufacturingspecifications.colorback == "Green")drawing_rawmaterial_backcolor = "Green";
+  if(manufacturingspecifications.colorback == "Blue")drawing_rawmaterial_backcolor = "Blue";
+  if(manufacturingspecifications.colorback == "Orange")drawing_rawmaterial_backcolor = "Orange";
+  if(manufacturingspecifications.colorback == "Brown")drawing_rawmaterial_backcolor = "Brown";
+  if(manufacturingspecifications.colorback == "Yellow")drawing_rawmaterial_backcolor = "Yellow";
+  if(manufacturingspecifications.colorback == "Transparent")drawing_rawmaterial_backcolor = undefined;
+  if(manufacturingspecifications.colorback == "White040")drawing_rawmaterial_backcolor = undefined;
+  Draw();
+}
+
+function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
+{
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", url, false);
+  xhr.onload = function (oEvent)
+  {
+    var data = new Uint8Array(new TextEncoder().encode(xhr.responseText));
+    var memory = _malloc(data.length);
+    HEAPU8.set(data, memory);
+
+    console.log("return = " + _LoadDXF(memory, data.length));
+    _free(memory);
+
+    drawingobject[slot] = new DesignObject();
+    var address = _GETdrawing();
+    drawingobject[slot].length =  _GETdrawinglength();
+    drawingobject[slot].drawing = new Array(drawingobject[slot].length);
+    for (var i = 0; i < drawingobject[slot].length; i++) 
+    {
+      drawingobject[slot].drawing[i] = new Line;
+      drawingobject[slot].drawing[i].p = new Point;
+      drawingobject[slot].drawing[i].q = new Point;
+      drawingobject[slot].drawing[i].p.x = HEAPF64[address / 8 + 0];
+      drawingobject[slot].drawing[i].p.y = HEAPF64[address / 8 + 1];
+      drawingobject[slot].drawing[i].q.x = HEAPF64[address / 8 + 2];
+      drawingobject[slot].drawing[i].q.y = HEAPF64[address / 8 + 3];
+
+      address += 32;
+    }
+    for (var i = 0; i < drawingobject[slot].length; i++) 
+    {
+      drawingobject[slot].drawing[i].p.x *= scale;
+      drawingobject[slot].drawing[i].p.y *= scale;
+      drawingobject[slot].drawing[i].q.x *= scale;
+      drawingobject[slot].drawing[i].q.y *= scale;
+
+      var cosangle = Math.cos(angle);
+      var sinangle = Math.sin(angle);
+
+      var px = drawingobject[slot].drawing[i].p.x;
+      var py = drawingobject[slot].drawing[i].p.y;
+      var qx = drawingobject[slot].drawing[i].q.x;
+      var qy = drawingobject[slot].drawing[i].q.y;
+
+      drawingobject[slot].drawing[i].p.x = px * cosangle - py * sinangle;
+      drawingobject[slot].drawing[i].p.y = px * sinangle + py * cosangle;
+      drawingobject[slot].drawing[i].q.x = qx * cosangle - qy * sinangle;
+      drawingobject[slot].drawing[i].q.y = qx * sinangle + qy * cosangle;
+
+      drawingobject[slot].drawing[i].p.x += offsetx;
+      drawingobject[slot].drawing[i].p.y += offsety;
+      drawingobject[slot].drawing[i].q.x += offsetx;
+      drawingobject[slot].drawing[i].q.y += offsety;
+    } 
+  };  
+  xhr.send(null);
+} 
+</script>
 
 <script>
   class DesignElement
@@ -367,6 +722,7 @@
   
   OnClickView('Specifications');
   //OnClickView('DesignElements');
+  //OnClickView('ReviewCost');
   OnClickUnit('mm');
   OnClickSupplier('LightYear');
   OnClickConstruction('Standalone');
@@ -420,7 +776,7 @@
     document.querySelector(".shop-review").style.display = "none";
     if(index == 0)document.querySelector(".shop-manufacturingspecification").style.display = "block";
     if(index == 1)document.querySelector(".shop-designelements").style.display = "block";
-    if(index == 2)document.querySelector(".shop-review").style.display = "block";
+    if(index == 2){document.querySelector(".shop-review").style.display = "block";if(typeof PopulateCost == 'function')PopulateCost();}
   }
   
   function OnChangeDimensionsLength(input)
@@ -1150,327 +1506,12 @@
   }
 </script>
 
-<script src="wasm/LYIWebsite.js"></script>  
 <script>  
-function FloatCompare(x)
-{
-  return Math.abs(x) < 0.0001;
-}
-class Point
-{
-  constructor()
-  {
-    this.x=undefined;
-    this.y=undefined;
-  }
-};
-class Line
-{
-  constructor()
-  {
-    this.p=undefined;
-    this.q=undefined;
-  }
-};
-class DesignObject
-{
-  constructor()
-  {
-    var drawing = undefined;
-    var length = 0;
-    var scale = 1;
-    var rotation = 0;
-    var offsetx = 0;
-    var offsety = 0;
-  }
-}
-var drawing_rawmaterial = undefined;
-var drawing_rawmaterial_frontcolor = "white";
-var drawing_rawmaterial_backcolor = "white";
-var drawingobject = [];
-
-var zoom = 1;
-var buttonleftmousedown = false;
-var mousex = 0, mousey = 0;
-var touchxp = 0, touchyp = 0;
-var squeeze = 0;
-var viewer = document.getElementById("viewer");
-var canvas = document.querySelector("canvas");
-canvas.width = viewer.clientWidth;
-canvas.height = viewer.clientHeight;
-var ctx = canvas.getContext("2d");
-ctx.resetTransform();
-ctx.translate(canvas.width/2,canvas.height/2);
-ctx.scale(1,-1);
-
-Draw();
-
-addEventListener("resize", function() 
-{
-  canvas.width = viewer.clientWidth;
-  canvas.height = viewer.clientHeight;
-  ctx.resetTransform();
-  ctx.translate(canvas.width/2,canvas.height/2);
-  ctx.scale(1,-1);
-  Draw();
-});
-canvas.addEventListener('wheel', function(event) 
-{
-  event.preventDefault();
-  zoom -= (event.deltaY/1000) * zoom;
-  if(zoom < 0.1)
-    zoom = 0.1;
-  Draw();
-});
-canvas.addEventListener('mousedown', function(event) 
-{
-  event.preventDefault();
-  if (event.button === 0) 
-    buttonleftmousedown = true;
-});
-document.addEventListener('mouseup', function(event) 
-{
-  if (event.button === 0) 
-    buttonleftmousedown = false;
-});
-document.addEventListener('mousemove', function(event) 
-{
-  if (buttonleftmousedown) 
-  {
-    mousex += event.movementX;
-    mousey -= event.movementY;
-    Draw();
-  }
-});
-
-canvas.addEventListener('touchstart', function(event) 
-{
-  event.preventDefault();
-  if (event.touches.length === 1) 
-  {
-    buttonleftmousedown = true;
-    touchxp = event.touches[0].clientX;
-    touchyp = event.touches[0].clientY;
-  }    
-  if (event.touches.length === 2) 
-  {
-    var touchx0 = event.touches[0].clientX;
-    var touchy0 = event.touches[0].clientY;
-    var touchx1 = event.touches[1].clientX;
-    var touchy1 = event.touches[1].clientY;
-
-    squeeze = Math.sqrt((touchx1-touchx0)*(touchx1-touchx0) + (touchy1-touchy0)*(touchy1-touchy0));
-  }    
-});
-document.addEventListener('touchend', function(event) 
-{
-  buttonleftmousedown = false;    
-});
-document.addEventListener('touchmove', function(event) 
-{
-  if (buttonleftmousedown && event.touches.length === 1) 
-  {
-    mousex += event.touches[0].clientX - touchxp;
-    mousey -= event.touches[0].clientY - touchyp;
-    touchxp = event.touches[0].clientX;
-    touchyp = event.touches[0].clientY;
-    Draw();
-  }
-
-  if (event.touches.length === 2) 
-  {
-    var touchx0 = event.touches[0].clientX;
-    var touchy0 = event.touches[0].clientY;
-    var touchx1 = event.touches[1].clientX;
-    var touchy1 = event.touches[1].clientY;
-
-    var newsqueeze = Math.sqrt((touchx1-touchx0)*(touchx1-touchx0) + (touchy1-touchy0)*(touchy1-touchy0));
-    zoom += (newsqueeze - squeeze)/1000;
-    if(zoom < 0.1)
-      zoom = 0.1;
-    Draw();
-    squeeze = newsqueeze;
-  }
-});
-
-console.log("System Ready");
-
-function Draw()
-{
-  ctx.clearRect(-canvas.width/2,-canvas.height/2,canvas.width,canvas.height);
-
-  ctx.strokeStyle = "red";
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(mousex,mousey);
-  ctx.lineTo((canvas.width/2),mousey);
-  ctx.moveTo(mousex,mousey);
-  ctx.lineTo(mousex,(canvas.height/2));    
-  ctx.moveTo(mousex,mousey);
-  ctx.lineTo(-(canvas.width/2),mousey);
-  ctx.moveTo(mousex,mousey);
-  ctx.lineTo(mousex,-(canvas.height/2));    
-  ctx.stroke();
-
-  ctx.strokeStyle = "black";
-  ctx.fillStyle = drawing_rawmaterial_frontcolor;
-  if(drawing_rawmaterial != undefined)
-  {
-    ctx.beginPath();
-    ctx.moveTo((drawing_rawmaterial[0].p.x * zoom + mousex),(drawing_rawmaterial[0].p.y * zoom + mousey));
-    ctx.lineTo((drawing_rawmaterial[0].q.x * zoom + mousex),(drawing_rawmaterial[0].q.y * zoom + mousey));   
-    ctx.lineTo((drawing_rawmaterial[1].q.x * zoom + mousex),(drawing_rawmaterial[1].q.y * zoom + mousey));   
-    ctx.lineTo((drawing_rawmaterial[2].q.x * zoom + mousex),(drawing_rawmaterial[2].q.y * zoom + mousey));
-    ctx.lineTo((drawing_rawmaterial[3].q.x * zoom + mousex),(drawing_rawmaterial[3].q.y * zoom + mousey));    
-    if(ctx.fillStyle != undefined)ctx.fill();
-    ctx.stroke();
-  }
-  
-  ctx.strokeStyle = "black";
-  ctx.fillStyle = drawing_rawmaterial_backcolor;
-  for(var i=0;i<drawingobject.length;i++)
-  {
-    if(drawingobject[i] != undefined)
-    {
-      var p = drawingobject[i].drawing[0].p;
-      var q = p;
-      for(var j=0;j<drawingobject[i].length;j++)
-      {
-        if(FloatCompare(p.x-q.x) && FloatCompare(p.y-q.y))
-        {
-          ctx.beginPath();
-          p=drawingobject[i].drawing[j].p;
-          ctx.moveTo((p.x * zoom + mousex),(p.y * zoom + mousey));
-        }      
-        q = drawingobject[i].drawing[j].q;
-        ctx.lineTo((q.x * zoom + mousex),(q.y * zoom + mousey));   
-        if(FloatCompare(p.x-q.x) && FloatCompare(p.y-q.y))
-        {
-          ctx.fill();
-          ctx.stroke();
-          p=q;
-        }    
-      }
-    }
-  }
-} 
-
-function LoadRawMaterial(length,width)
-{
-  drawing_rawmaterial = new Array(4);
-  drawing_rawmaterial[0] = new Line;
-  drawing_rawmaterial[0].p = new Point;
-  drawing_rawmaterial[0].q = new Point;
-  drawing_rawmaterial[0].p.x = -length/2;
-  drawing_rawmaterial[0].p.y = -width/2;
-  drawing_rawmaterial[0].q.x = length/2;
-  drawing_rawmaterial[0].q.y = -width/2;
-  drawing_rawmaterial[1] = new Line;
-  drawing_rawmaterial[1].p = new Point;
-  drawing_rawmaterial[1].q = new Point;
-  drawing_rawmaterial[1].p.x = length/2;
-  drawing_rawmaterial[1].p.y = -width/2;
-  drawing_rawmaterial[1].q.x = length/2;
-  drawing_rawmaterial[1].q.y = width/2;
-  drawing_rawmaterial[2] = new Line;
-  drawing_rawmaterial[2].p = new Point;
-  drawing_rawmaterial[2].q = new Point;
-  drawing_rawmaterial[2].p.x = length/2;
-  drawing_rawmaterial[2].p.y = width/2;
-  drawing_rawmaterial[2].q.x = -length/2;
-  drawing_rawmaterial[2].q.y = width/2;
-  drawing_rawmaterial[3] = new Line;
-  drawing_rawmaterial[3].p = new Point;
-  drawing_rawmaterial[3].q = new Point;
-  drawing_rawmaterial[3].p.x = -length/2;
-  drawing_rawmaterial[3].p.y = width/2;
-  drawing_rawmaterial[3].q.x = -length/2;
-  drawing_rawmaterial[3].q.y = -width/2;  
-
-  if(manufacturingspecifications.colorfront == "White")drawing_rawmaterial_frontcolor = "White";
-  if(manufacturingspecifications.colorfront == "Black")drawing_rawmaterial_frontcolor = "Black";
-  if(manufacturingspecifications.colorfront == "Red")drawing_rawmaterial_frontcolor = "Red";
-  if(manufacturingspecifications.colorfront == "Green")drawing_rawmaterial_frontcolor = "Green";
-  if(manufacturingspecifications.colorfront == "Blue")drawing_rawmaterial_frontcolor = "Blue";
-  if(manufacturingspecifications.colorfront == "Orange")drawing_rawmaterial_frontcolor = "Orange";
-  if(manufacturingspecifications.colorfront == "Brown")drawing_rawmaterial_frontcolor = "Brown";
-  if(manufacturingspecifications.colorfront == "Yellow")drawing_rawmaterial_frontcolor = "Yellow";
-  if(manufacturingspecifications.colorfront == "Transparent")drawing_rawmaterial_frontcolor = undefined;
-  if(manufacturingspecifications.colorfront == "White040")drawing_rawmaterial_frontcolor = undefined;
-
-  if(manufacturingspecifications.colorback == "White")drawing_rawmaterial_backcolor = "White";
-  if(manufacturingspecifications.colorback == "Black")drawing_rawmaterial_backcolor = "Black";
-  if(manufacturingspecifications.colorback == "Red")drawing_rawmaterial_backcolor = "Red";
-  if(manufacturingspecifications.colorback == "Green")drawing_rawmaterial_backcolor = "Green";
-  if(manufacturingspecifications.colorback == "Blue")drawing_rawmaterial_backcolor = "Blue";
-  if(manufacturingspecifications.colorback == "Orange")drawing_rawmaterial_backcolor = "Orange";
-  if(manufacturingspecifications.colorback == "Brown")drawing_rawmaterial_backcolor = "Brown";
-  if(manufacturingspecifications.colorback == "Yellow")drawing_rawmaterial_backcolor = "Yellow";
-  if(manufacturingspecifications.colorback == "Transparent")drawing_rawmaterial_backcolor = undefined;
-  if(manufacturingspecifications.colorback == "White040")drawing_rawmaterial_backcolor = undefined;
-  Draw();
-}
-
-function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
-{
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", url, false);
-  xhr.onload = function (oEvent)
-  {
-    var data = new Uint8Array(new TextEncoder().encode(xhr.responseText));
-    var memory = _malloc(data.length);
-    HEAPU8.set(data, memory);
-
-    console.log("return = " + _LoadDXF(memory, data.length));
-    _free(memory);
-
-    drawingobject[slot] = new DesignObject();
-    var address = _GETdrawing();
-    drawingobject[slot].length =  _GETdrawinglength();
-    drawingobject[slot].drawing = new Array(drawingobject[slot].length);
-    for (var i = 0; i < drawingobject[slot].length; i++) 
-    {
-      drawingobject[slot].drawing[i] = new Line;
-      drawingobject[slot].drawing[i].p = new Point;
-      drawingobject[slot].drawing[i].q = new Point;
-      drawingobject[slot].drawing[i].p.x = HEAPF64[address / 8 + 0];
-      drawingobject[slot].drawing[i].p.y = HEAPF64[address / 8 + 1];
-      drawingobject[slot].drawing[i].q.x = HEAPF64[address / 8 + 2];
-      drawingobject[slot].drawing[i].q.y = HEAPF64[address / 8 + 3];
-
-      address += 32;
-    }
-    for (var i = 0; i < drawingobject[slot].length; i++) 
-    {
-      drawingobject[slot].drawing[i].p.x *= scale;
-      drawingobject[slot].drawing[i].p.y *= scale;
-      drawingobject[slot].drawing[i].q.x *= scale;
-      drawingobject[slot].drawing[i].q.y *= scale;
-
-      var cosangle = Math.cos(angle);
-      var sinangle = Math.sin(angle);
-
-      var px = drawingobject[slot].drawing[i].p.x;
-      var py = drawingobject[slot].drawing[i].p.y;
-      var qx = drawingobject[slot].drawing[i].q.x;
-      var qy = drawingobject[slot].drawing[i].q.y;
-
-      drawingobject[slot].drawing[i].p.x = px * cosangle - py * sinangle;
-      drawingobject[slot].drawing[i].p.y = px * sinangle + py * cosangle;
-      drawingobject[slot].drawing[i].q.x = qx * cosangle - qy * sinangle;
-      drawingobject[slot].drawing[i].q.y = qx * sinangle + qy * cosangle;
-
-      drawingobject[slot].drawing[i].p.x += offsetx;
-      drawingobject[slot].drawing[i].p.y += offsety;
-      drawingobject[slot].drawing[i].q.x += offsetx;
-      drawingobject[slot].drawing[i].q.y += offsety;
-    } 
-  };  
-  xhr.send(null);
-} 
-</script>
-
-<script>  
+  document.querySelectorAll(".shop-designelements-tray")[2].innerHTML = `
+  <div style=" width: 100%;box-sizing: border-box;">
+    <h3><b>Add Design Elements</b></h3>
+  </div>
+  `;
   for(var i=1;i<=32;i++)
   {
     document.querySelectorAll(".shop-designelements-tray")[2].innerHTML += `
@@ -1509,7 +1550,6 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
         if(_design.name == url.get("design"))
         {
           var _manufacturingspecifications = _design;
-          console.log(_manufacturingspecifications);
           document.querySelector(".dimensions-length").value = _manufacturingspecifications.dimensionsx;
           document.querySelector(".dimensions-width").value = _manufacturingspecifications.dimensionsy;
           SetSizeOptions();
@@ -1545,14 +1585,20 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
           manufacturingspecifications = _manufacturingspecifications;
           LoadRawMaterial(manufacturingspecifications.dimensionsx, manufacturingspecifications.dimensionsy);
           DesignLoad();
-          }      
-      }   
+        }      
+      }
+      if(typeof PopulateCost == 'function')PopulateCost();   
     }
   };  
 
   function DesignLoad()
   {
-    document.querySelectorAll(".shop-designelements-tray")[1].innerHTML = "";
+    document.querySelectorAll(".shop-designelements-tray")[1].innerHTML = `
+    <div style=" width: 100%;box-sizing: border-box;">
+      <h3><b>Design Elements In Design</b></h3>
+    </div>
+    `;
+    
     for(var i=0;i<Object.keys(manufacturingspecifications.designelement).length;i++)
     {
       LoadDXFOnSlot(i,
@@ -1679,8 +1725,6 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
   {
 
     manufacturingspecifications.name = "UserCustomDesign";
-    console.log(manufacturingspecifications);
-
     const designjsonstring = JSON.stringify(manufacturingspecifications,null,2);
     const blob = new Blob([designjsonstring], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -1706,7 +1750,6 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
       reader.onload = e => 
       {
         var _manufacturingspecifications = JSON.parse(e.target.result);
-        console.log(_manufacturingspecifications);
         document.querySelector(".dimensions-length").value = _manufacturingspecifications.dimensionsx;
         document.querySelector(".dimensions-width").value = _manufacturingspecifications.dimensionsy;
         SetSizeOptions();
@@ -1748,7 +1791,28 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
 
     fileInput.click();
   }
+</script>
 
+<script>
+  function PopulateCost()
+  {
+    document.querySelector(".shop-review-specification-dimensionx").innerHTML = '<h2 style="color:blue">' + manufacturingspecifications.dimensionsx + 'mm</h2>';
+    document.querySelector(".shop-review-specification-dimensiony").innerHTML = '<h2 style="color:blue">' + manufacturingspecifications.dimensionsy + 'mm</h2>';
+    document.querySelector(".shop-review-specification-size").innerHTML = '<h2 style="color:blue">' + manufacturingspecifications.size + '</h2>';
+    document.querySelector(".shop-review-specification-construction").innerHTML = '<h2 style="color:blue">' + manufacturingspecifications.construction + '</h2>';
+    document.querySelector(".shop-review-specification-process").innerHTML = '<h2 style="color:blue">' + manufacturingspecifications.process + '</h2>';
+    document.querySelector(".shop-review-specification-materialfront").innerHTML = '<h2 style="color:blue">' + manufacturingspecifications.materialfront + '</h2>';
+    document.querySelector(".shop-review-specification-materialback").innerHTML = '<h2 style="color:blue">' + manufacturingspecifications.materialback + '</h2>';
+    document.querySelector(".shop-review-specification-thicknessfront").innerHTML = '<h2 style="color:blue">' + manufacturingspecifications.thicknessfront + '</h2>';
+    document.querySelector(".shop-review-specification-thicknessback").innerHTML = '<h2 style="color:blue">' + manufacturingspecifications.thicknessback + '</h2>';
+    document.querySelector(".shop-review-specification-colorfront").innerHTML = '<h2 style="color:blue">' + manufacturingspecifications.colorfront + '</h2>';
+    document.querySelector(".shop-review-specification-colorback").innerHTML = '<h2 style="color:blue">' + manufacturingspecifications.colorback + '</h2>';
+    document.querySelector(".shop-review-specification-cuttingdepth").innerHTML = '<h2 style="color:blue">' + manufacturingspecifications.cuttingdepth + '</h2>';
+
+    document.querySelector(".shop-review").querySelectorAll("div").forEach(element => {
+      if(element.innerHTML == '<h2 style="color:blue">undefined</h2>')element.innerHTML = '<h2 style="color:rgb(141, 0, 0);">Not Applicable</h2>';
+    });
+  }
 </script>
 
 <style>
@@ -1877,7 +1941,7 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
 {
   display: inline-block;
   margin: 10px;
-  width: 520px;
+  width: 600px;
   height: 50px;
 
   border-radius: 20px;
@@ -1951,5 +2015,12 @@ function LoadDXFOnSlot(slot,url,scale,angle,offsetx,offsety)
   border-radius: 10px;
   border-color: black;
   vertical-align: middle;
+}
+
+.shop-review-grid
+{
+  display: grid;
+  grid-template-columns:300px 1fr 1fr;
+  gap: 10px;  
 }
 </style>
