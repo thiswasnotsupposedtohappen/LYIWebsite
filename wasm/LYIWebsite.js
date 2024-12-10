@@ -4343,6 +4343,7 @@ var wasmExports = createWasm();
 var ___wasm_call_ctors = createExportWrapper('__wasm_call_ctors', 0);
 var ___original_main = Module['___original_main'] = createExportWrapper('__original_main', 0);
 var _LoadDXF = Module['_LoadDXF'] = createExportWrapper('LoadDXF', 2);
+var _GenerateLoops = Module['_GenerateLoops'] = createExportWrapper('GenerateLoops', 0);
 var _GETdrawing = Module['_GETdrawing'] = createExportWrapper('GETdrawing', 0);
 var _GETdrawinglength = Module['_GETdrawinglength'] = createExportWrapper('GETdrawinglength', 0);
 var _main = Module['_main'] = createExportWrapper('main', 2);

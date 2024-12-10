@@ -1398,33 +1398,70 @@ function Draw()
     {
       if(manufacturingspecifications.designobject[i] != undefined && manufacturingspecifications.designobject[i].drawing != undefined)
       {
-        var p = manufacturingspecifications.designobject[i].drawing[0].p;
-        var q = p;
-        for(var j=0;j<manufacturingspecifications.designobject[i].drawinglength;j++)
+        var p = new Point();
+        var q = new Point();
+        var p_ut = new Point();
+        var q_ut = new Point();
+        var pnext_ut = new Point();
+        var startpoint = new Point();
+        Object.assign(startpoint, manufacturingspecifications.designobject[i].drawing[0].p);
+        p=TransformPoint(startpoint,
+        manufacturingspecifications.designobject[i].offsetx,
+        manufacturingspecifications.designobject[i].offsety,
+        manufacturingspecifications.designobject[i].angle,
+        manufacturingspecifications.designobject[i].scale);
+        ctx.beginPath();
+        ctx.moveTo((p.x * zoom + mousex),(p.y * zoom + mousey));
+        for(var j=0;j< manufacturingspecifications.designobject[i].drawinglength - 1;j++)
         {
-          if(FloatCompare(p.x-q.x) && FloatCompare(p.y-q.y))
-          {
-            ctx.beginPath();          
-            p=TransformPoint(manufacturingspecifications.designobject[i].drawing[j].p,
-              manufacturingspecifications.designobject[i].offsetx,
-              manufacturingspecifications.designobject[i].offsety,
-              manufacturingspecifications.designobject[i].angle,
-              manufacturingspecifications.designobject[i].scale);
-            ctx.moveTo((p.x * zoom + mousex),(p.y * zoom + mousey));
-          }      
+          Object.assign(p_ut, manufacturingspecifications.designobject[i].drawing[j].p);
+          Object.assign(q_ut, manufacturingspecifications.designobject[i].drawing[j].q);
+          Object.assign(pnext_ut, manufacturingspecifications.designobject[i].drawing[j+1].p);
           q=TransformPoint(manufacturingspecifications.designobject[i].drawing[j].q,
             manufacturingspecifications.designobject[i].offsetx,
             manufacturingspecifications.designobject[i].offsety,
             manufacturingspecifications.designobject[i].angle,
             manufacturingspecifications.designobject[i].scale);
           ctx.lineTo((q.x * zoom + mousex),(q.y * zoom + mousey));   
-          if(FloatCompare(p.x-q.x) && FloatCompare(p.y-q.y))
+
+
+          if(q_ut.x == startpoint.x && q_ut.y == startpoint.y)
           {
             ctx.fill();
             ctx.stroke();
-            p=q;
-          }    
+            Object.assign(startpoint, pnext_ut);
+            p=TransformPoint(startpoint,
+            manufacturingspecifications.designobject[i].offsetx,
+            manufacturingspecifications.designobject[i].offsety,
+            manufacturingspecifications.designobject[i].angle,
+            manufacturingspecifications.designobject[i].scale);
+            ctx.beginPath();
+            ctx.moveTo((p.x * zoom + mousex),(p.y * zoom + mousey));
+          }
+          if(pnext_ut.x != q_ut.x || pnext_ut.y != q_ut.y)
+          {
+            ctx.stroke();
+            Object.assign(startpoint, pnext_ut);
+            p=TransformPoint(startpoint,
+            manufacturingspecifications.designobject[i].offsetx,
+            manufacturingspecifications.designobject[i].offsety,
+            manufacturingspecifications.designobject[i].angle,
+            manufacturingspecifications.designobject[i].scale);
+            ctx.beginPath();
+            ctx.moveTo((p.x * zoom + mousex),(p.y * zoom + mousey));
+          }
         }
+        Object.assign(p_ut, manufacturingspecifications.designobject[i].drawing[manufacturingspecifications.designobject[i].drawinglength - 1].p);
+        Object.assign(q_ut, manufacturingspecifications.designobject[i].drawing[manufacturingspecifications.designobject[i].drawinglength - 1].q);
+        q=TransformPoint(manufacturingspecifications.designobject[i].drawing[manufacturingspecifications.designobject[i].drawinglength - 1].q,
+          manufacturingspecifications.designobject[i].offsetx,
+          manufacturingspecifications.designobject[i].offsety,
+          manufacturingspecifications.designobject[i].angle,
+          manufacturingspecifications.designobject[i].scale);
+        ctx.lineTo((q.x * zoom + mousex),(q.y * zoom + mousey));   
+        ctx.stroke();
+        if(q_ut.x == startpoint.x && q_ut.y == startpoint.y)
+          ctx.fill();
       }
     }
   }
@@ -1495,9 +1532,7 @@ function LoadDXFOnSlot(slot,url)
   };  
   xhr.send(null);
 } 
-</script>
-
-<script>  
+ 
 document.querySelectorAll(".shop-designelements-tray")[2].innerHTML = `
 <div style=" width: 100%;box-sizing: border-box;">
   <h3><b>Add Design Elements</b></h3>
@@ -1825,45 +1860,64 @@ function DesignUpload()
     const reader = new FileReader();
     reader.onload = e => 
     {
-      // if (manufacturingspecifications == undefined) 
-      //   manufacturingspecifications = new ManufacturingSpecifications();
-      // if (manufacturingspecifications.designobject == undefined) 
-      //     manufacturingspecifications.designobject = [];
-      // var _designobject = new DesignObject();
-      // _designobject.dxfurl = "dxf/Mandir Jali Objects/"+index+".dxf";
-      // _designobject.thumbnailurl = "dxf/Mandir Jali Objects/"+index+".jpg";
-      // _designobject.offsetx = 0;
-      // _designobject.offsety = 0;
-      // _designobject.angle = 0;
-      // _designobject.scale = 1;
+      if (manufacturingspecifications == undefined) 
+        manufacturingspecifications = new ManufacturingSpecifications();
+      if (manufacturingspecifications.designobject == undefined) 
+          manufacturingspecifications.designobject = [];
+      var _designobject = new DesignObject();
+      _designobject.dxfurl = undefined;
+      _designobject.thumbnailurl = "images/customdxf.png";
+      _designobject.offsetx = 0;
+      _designobject.offsety = 0;
+      _designobject.angle = 0;
+      _designobject.scale = 1;
+      manufacturingspecifications.designobject.push(_designobject);
+      manufacturingspecifications.designobjectlength++;
 
-      // manufacturingspecifications.designobject.push(_designobject);
-      // manufacturingspecifications.designobjectlength++;
-      // DesignLoad();
-      // DesignEditSelect(manufacturingspecifications.designobjectlength - 1);
+      var data = new Uint8Array(new TextEncoder().encode(e.target.result));
+      var memory = _malloc(data.length);
+      HEAPU8.set(data, memory);
+      console.log("return = " + _LoadDXF(memory, data.length));
+      _free(memory);
+      var address = _GETdrawing();
+      manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawinglength =  _GETdrawinglength();
+      manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing = new Array(manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawinglength);
+      for (var i = 0; i < manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawinglength; i++) 
+      {
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing[i] = new Line;
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing[i].p = new Point;
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing[i].q = new Point;
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing[i].p.x = HEAPF64[address / 8 + 0];
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing[i].p.y = HEAPF64[address / 8 + 1];
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing[i].q.x = HEAPF64[address / 8 + 2];
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing[i].q.y = HEAPF64[address / 8 + 3];
 
-      // var data = new Uint8Array(new TextEncoder().encode(e.target.result));
-      // var memory = _malloc(data.length);
-      // HEAPU8.set(data, memory);
+        address += 32;
+      }
 
-      // console.log("return = " + _LoadDXF(memory, data.length));
-      // _free(memory);
+      TransformDesignObject(manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1],
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].offsetx,
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].offsety,
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].angle, 
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].scale);
 
-      // var address = _GETdrawing();
-      // manufacturingspecifications.designobject[slot].drawinglength =  _GETdrawinglength();
-      // manufacturingspecifications.designobject[slot].drawing = new Array(manufacturingspecifications.designobject[slot].drawinglength);
-      // for (var i = 0; i < manufacturingspecifications.designobject[slot].drawinglength; i++) 
-      // {
-      //   manufacturingspecifications.designobject[slot].drawing[i] = new Line;
-      //   manufacturingspecifications.designobject[slot].drawing[i].p = new Point;
-      //   manufacturingspecifications.designobject[slot].drawing[i].q = new Point;
-      //   manufacturingspecifications.designobject[slot].drawing[i].p.x = HEAPF64[address / 8 + 0];
-      //   manufacturingspecifications.designobject[slot].drawing[i].p.y = HEAPF64[address / 8 + 1];
-      //   manufacturingspecifications.designobject[slot].drawing[i].q.x = HEAPF64[address / 8 + 2];
-      //   manufacturingspecifications.designobject[slot].drawing[i].q.y = HEAPF64[address / 8 + 3];
-
-      //   address += 32;
-      // }
+      document.querySelectorAll(".shop-designelements-tray")[1].innerHTML = `
+      <div style=" width: 100%;box-sizing: border-box;">
+        <h3><b>Design Elements In Design</b></h3>
+      </div>
+      `;
+      for(var i=0;i<manufacturingspecifications.designobjectlength;i++)
+      {
+        document.querySelectorAll(".shop-designelements-tray")[1].innerHTML += `
+        <div class="shop-designelements-tray-item">
+          <img src="`+ manufacturingspecifications.designobject[i].thumbnailurl +`" class="shop-designelements-tray-item-img">
+          <button class="shop-designelements-tray-item-button" onclick="DesignEditSelect(`+ i +`)" style="bottom: 5px;left:35px; background-color: rgb(61, 213, 255);"><span class="material-symbols-outlined">build</span></button>
+          <button class="shop-designelements-tray-item-button" onclick="DesignRemove(`+ i +`)" style="bottom: 5px;left:145px;background-color: rgb(255, 0, 0);"><span class="material-symbols-outlined">delete_forever</span></button>
+        </div>
+        `;
+      }
+      Draw();  
+      DesignEditSelect(manufacturingspecifications.designobjectlength - 1);
     };
     reader.readAsText(file);
   };
@@ -1871,7 +1925,6 @@ function DesignUpload()
   fileInput.click();
 }
 </script>
-
 
 <style>
 .editorribbon
