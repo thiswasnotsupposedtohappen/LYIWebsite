@@ -307,13 +307,75 @@ struct LinkedList
 		}
 		count++;
 	}
-	void Remove()
+	bool RemoveAndMoveRight()
 	{
 		count--;
-		if (current->left)current->left->right = current->right;
-		if (current->right)current->right->left = current->left;
-		delete current;
-		current = 0;
+		if (count == 0)
+		{
+			delete current;
+			head = 0;
+			tail = 0;
+			current = 0;
+			return false;
+		}
+		if (current->left)
+			current->left->right = current->right;
+		else
+			current->right->left = 0;
+		if (current->right)
+			current->right->left = current->left;
+		else
+			current->left->right = 0;
+		Element* currentoriginal = current;
+
+		if (current->right)
+		{
+			if (head == current)
+				head = current->right;
+			current = current->right;
+			delete currentoriginal;
+			return true;
+		}			
+		else
+		{
+			delete currentoriginal;
+			return false;
+		}
+	}
+	bool RemoveAndMoveLeft()
+	{
+		count--;
+		if (count == 0)
+		{
+			delete current;
+			head = 0;
+			tail = 0;
+			current = 0;
+			return false;
+		}
+		if (current->left)
+			current->left->right = current->right;
+		else
+			current->right->left = 0;
+		if (current->right)
+			current->right->left = current->left;
+		else
+			current->left->right = 0;
+		Element* currentoriginal = current;
+
+		if (current->left)
+		{
+			if (tail == current)
+				tail = current->left;
+			current = current->left;
+			delete currentoriginal;
+			return true;
+		}
+		else
+		{
+			delete currentoriginal;
+			return false;
+		}
 	}
 	void PushTail(DataType data)
 	{
@@ -414,6 +476,10 @@ struct LinkedList
 			return false;
 		return true;
 	}
+	void Unlink()
+	{
+		ZeroMemory(this, sizeof(LinkedList));
+	}
 	void Release()
 	{
 		current = head;
@@ -476,6 +542,15 @@ struct Heap
 		delete[] data;
 		data = newdata;
 		size += _size;
+	}
+	void Splice(uint32 _index, uint32 _size)
+	{
+		DataType* newdata = new DataType[size - _size];
+		MemoryCopy(newdata, data, sizeof(DataType) * _index);
+		MemoryCopy(&newdata[_index], &data[_index + _size], sizeof(DataType) * (size - _index - _size));
+		delete[] data;
+		data = newdata;
+		size -= _size;
 	}
 	DataType& operator[](uint32 index)
 	{

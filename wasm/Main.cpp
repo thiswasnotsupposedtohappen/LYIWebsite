@@ -8,6 +8,16 @@
 #define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
 #define FAULT __debugbreak();
+//#define TESTFILE "debugspline.dxf"
+//#define TESTFILE "All Jali Designs.dxf"
+//#define TESTFILE "lwpoly.dxf"
+//#define TESTFILE "Ellipse.dxf"
+//#define TESTFILE "Lasercutting Cargo 2mm MS with material.dxf"
+#define TESTFILE "Om Jali.dxf"
+//#define TESTFILE "spline.dxf"
+//#define TESTFILE "Test2.dxf"
+//#define TESTFILE "Test.dxf"
+//#define TESTFILE "Loop.dxf"
 #endif
 #include <iostream>
 #include <fstream>
@@ -22,8 +32,8 @@ using namespace std;
 
 struct Line
 {
-	float64x2 p0;
-	float64x2 p1;
+	float64x2 p;
+	float64x2 q;
 };
 struct Block
 {
@@ -35,6 +45,9 @@ LinkedList<Line> drawing;
 LinkedList<Line> *drawingcurrentblock = &drawing;
 Heap<Line> drawingexport;
 Heap<LinkedList<Line>> loop;
+Heap<LinkedList<Line>> link;
+Heap<Heap<Line>> loopexport;
+Heap<Heap<Line>> linkexport;
 
 EMSCRIPTEN_KEEPALIVE int32 main()
 {
@@ -43,16 +56,16 @@ EMSCRIPTEN_KEEPALIVE int32 main()
 #ifndef EMS
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	int32 LoadDXF(char* file, uint32 length);
-	LoadDXF((char*)"intermediated.txt", 0);
-
+	int32 GenerateLoops();
+	if (LoadDXF((char*)"intermediated.txt", 0))return -1;
+	if (GenerateLoops())return -2;
 #endif
-
 	return 0;
 }
 
 EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 {
-	//cout << "LoadDXF In" << endl;
+	cout << "LoadDXF In" << endl;
 	block.Release();
 	static Block* _block = 0;
 
@@ -116,10 +129,10 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 		void addLine(const DRW_Line& data) override
 		{
 			Line _line;
-			_line.p0.x = data.basePoint.x;
-			_line.p0.y = data.basePoint.y;
-			_line.p1.x = data.secPoint.x;
-			_line.p1.y = data.secPoint.y;
+			_line.p.x = data.basePoint.x;
+			_line.p.y = data.basePoint.y;
+			_line.q.x = data.secPoint.x;
+			_line.q.y = data.secPoint.y;
 			*drawingcurrentblock << _line;
 			return;
 		}
@@ -154,17 +167,17 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 					anglestart += 2 * pi;
 			}
 
-			_line.p0.x = data.basePoint.x + data.radious * cos(anglestart);
-			_line.p0.y = data.basePoint.y + data.radious * sin(anglestart);
+			_line.p.x = data.basePoint.x + data.radious * cos(anglestart);
+			_line.p.y = data.basePoint.y + data.radious * sin(anglestart);
 			for (float64 i = (anglestart + inc); i <= angleend; i += inc)
 			{
-				_line.p1.x = data.basePoint.x + data.radious * cos((i));
-				_line.p1.y = data.basePoint.y + data.radious * sin((i));
+				_line.q.x = data.basePoint.x + data.radious * cos((i));
+				_line.q.y = data.basePoint.y + data.radious * sin((i));
 				_drawing << _line;
-				_line.p0 = _line.p1;
+				_line.p = _line.q;
 			}
-			_drawing.tail->data.p1.x = data.basePoint.x + data.radious * cos(angleend);
-			_drawing.tail->data.p1.y = data.basePoint.y + data.radious * sin(angleend);
+			_drawing.tail->data.q.x = data.basePoint.x + data.radious * cos(angleend);
+			_drawing.tail->data.q.y = data.basePoint.y + data.radious * sin(angleend);
 			drawingcurrentblock->Append(_drawing);
 			return;
 		}
@@ -172,18 +185,18 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 		{
 			LinkedList<Line> _drawing;
 			Line _line;
-			_line.p0.x = data.basePoint.x + data.radious * cos(0);
-			_line.p0.y = data.basePoint.y + data.radious * sin(0);
+			_line.p.x = data.basePoint.x + data.radious * cos(0);
+			_line.p.y = data.basePoint.y + data.radious * sin(0);
 			float64 inc = 0.5 / data.radious;
 			for (float64 i = inc; i <= 2 * pi; i += inc)
 			{
-				_line.p1.x = data.basePoint.x + data.radious * cos((i));
-				_line.p1.y = data.basePoint.y + data.radious * sin((i));
+				_line.q.x = data.basePoint.x + data.radious * cos((i));
+				_line.q.y = data.basePoint.y + data.radious * sin((i));
 				_drawing << _line;
-				_line.p0 = _line.p1;
+				_line.p = _line.q;
 			}
-			_drawing.tail->data.p1.x = data.basePoint.x + data.radious * cos(2 * pi);
-			_drawing.tail->data.p1.y = data.basePoint.y + data.radious * sin(2 * pi);
+			_drawing.tail->data.q.x = data.basePoint.x + data.radious * cos(2 * pi);
+			_drawing.tail->data.q.y = data.basePoint.y + data.radious * sin(2 * pi);
 			drawingcurrentblock->Append(_drawing);
 			return;
 		}
@@ -223,59 +236,36 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 				inc *= -1;
 				if (anglestart < angleend)
 					anglestart += 2 * pi;
-			}
-			//for (float64 i = (anglestart + inc); i <= angleend; i += inc)
-			//{
-			//	_line.p0.x = radius * cos((i - inc));
-			//	_line.p0.y = radius * sin((i - inc)) * ratio;
-			//	_line.p1.x = radius * cos((i));
-			//	_line.p1.y = radius * sin((i)) * ratio;
-			//
-			//	float64 p0x = _line.p0.x;
-			//	float64 p0y = _line.p0.y;
-			//	float64 p1x = _line.p1.x;
-			//	float64 p1y = _line.p1.y;
-			//
-			//	_line.p0.x = p0x * cos(angle) - p0y * sin(angle);
-			//	_line.p0.y = p0x * sin(angle) + p0y * cos(angle);
-			//	_line.p1.x = p1x * cos(angle) - p1y * sin(angle);
-			//	_line.p1.y = p1x * sin(angle) + p1y * cos(angle);
-			//
-			//	_line.p0 = _line.p0 + centre;
-			//	_line.p1 = _line.p1 + centre;
-			//
-			//	_drawing << _line;
-			//}
-			
-			_line.p0.x = radius * cos(anglestart);
-			_line.p0.y = radius * sin(anglestart) * ratio;
-			float64 p0x = _line.p0.x;
-			float64 p0y = _line.p0.y;
-			float64 p1x;
-			float64 p1y;
-			_line.p0.x = p0x * cos(angle) - p0y * sin(angle);
-			_line.p0.y = p0x * sin(angle) + p0y * cos(angle);
-			_line.p0 = _line.p0 + centre;
+			}		
+			_line.p.x = radius * cos(anglestart);
+			_line.p.y = radius * sin(anglestart) * ratio;
+			float64 px = _line.p.x;
+			float64 py = _line.p.y;
+			float64 qx;
+			float64 qy;
+			_line.p.x = px * cos(angle) - py * sin(angle);
+			_line.p.y = px * sin(angle) + py * cos(angle);
+			_line.p = _line.p + centre;
 			for (float64 i = (anglestart + inc); i <= angleend; i += inc)
 			{
-				_line.p1.x = radius * cos((i));
-				_line.p1.y = radius * sin((i)) * ratio;
+				_line.q.x = radius * cos((i));
+				_line.q.y = radius * sin((i)) * ratio;
 
-				float64 p1x = _line.p1.x;
-				float64 p1y = _line.p1.y;
+				float64 qx = _line.q.x;
+				float64 qy = _line.q.y;
 
-				_line.p1.x = p1x * cos(angle) - p1y * sin(angle);
-				_line.p1.y = p1x * sin(angle) + p1y * cos(angle);
+				_line.q.x = qx * cos(angle) - qy * sin(angle);
+				_line.q.y = qx * sin(angle) + qy * cos(angle);
 
-				_line.p1 = _line.p1 + centre;
+				_line.q = _line.q + centre;
 
 				_drawing << _line;
-				_line.p0 = _line.p1;
+				_line.p = _line.q;
 			}
 			if (Absolute(anglestart - (angleend - (2 * pi))) < 0.0001)
 			{
-				_line.p0 = _line.p1;
-				_line.p1 = _drawing.head->data.p0;
+				_line.p = _line.q;
+				_line.q = _drawing.head->data.p;
 				_drawing << _line;
 			}
 			drawingcurrentblock->Append(_drawing);
@@ -285,13 +275,13 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 		{
 			struct CustomCalculator
 			{
-				int32 CalculateCentre(float64x2 p1, float64x2 p2, float64 r,float64x2* c1, float64x2* c2)
+				int32 CalculateCentre(float64x2 q, float64x2 p2, float64 r,float64x2* c1, float64x2* c2)
 				{
 					float64x2 centre;
 
 					// Calculate the distance between the two points
-					double dx = p2.x - p1.x;
-					double dy = p2.y - p1.y;
+					double dx = p2.x - q.x;
+					double dy = p2.y - q.y;
 					double d_sq = dx * dx + dy * dy;
 					double d = std::sqrt(d_sq);
 
@@ -301,10 +291,10 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 						return -1;
 					}
 
-					// Compute the midpoint between p1 and p2
+					// Compute the midpoint between q and p2
 					float64x2 mid;
-					mid.x = (p1.x + p2.x) / 2.0;
-					mid.y = (p1.y + p2.y) / 2.0;
+					mid.x = (q.x + p2.x) / 2.0;
+					mid.y = (q.y + p2.y) / 2.0;
 
 					// Calculate the distance from the midpoint to the circle centers
 					double h = sqrt(r * r - (d / 2.0) * (d / 2.0));
@@ -323,13 +313,13 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 					return 0;
 				}
 			
-				float64 CheckSide(float64x2 p1, float64x2 p2, float64x2 c)
+				float64 CheckSide(float64x2 q, float64x2 p2, float64x2 c)
 				{
 					float64x2 v1, v2;
-					v1.x = p2.x - p1.x;
-					v1.y = p2.y - p1.y;
-					v2.x = c.x - p1.x;
-					v2.y = c.y - p1.y;
+					v1.x = p2.x - q.x;
+					v1.y = p2.y - q.y;
+					v2.x = c.x - q.x;
+					v2.y = c.y - q.y;
 					return (v1.x * v2.y - v1.y * v2.x);
 				}
 			}customcalculator;
@@ -349,37 +339,37 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 			if (data.flags)
 			{
 				i = 0;
-				_line.p0.x = data.vertex->x;
-				_line.p0.y = data.vertex->y;
+				_line.p.x = data.vertex->x;
+				_line.p.y = data.vertex->y;
 			}
 			else
 			{
 				i = 1;
-				_line.p0.x = data.vertlist[0]->x;
-				_line.p0.y = data.vertlist[0]->y;
+				_line.p.x = data.vertlist[0]->x;
+				_line.p.y = data.vertlist[0]->y;
 			}
 
 			for (; i < data.vertexnum; i++)
 			{
-				_line.p1.x = data.vertlist[i]->x;
-				_line.p1.y = data.vertlist[i]->y;
+				_line.q.x = data.vertlist[i]->x;
+				_line.q.y = data.vertlist[i]->y;
 				if (i == 0)
 					b = data.vertex->bulge;
 				else
 					b = data.vertlist[i-1]->bulge;
 				if (b)
 				{
-					d = Distance(_line.p0, _line.p1);
+					d = Distance(_line.p, _line.q);
 					b = b * d / 2;
 					r = (d*d + 4*Absolute(b)* Absolute(b)) / (8* Absolute(b));
-					customcalculator.CalculateCentre(_line.p0, _line.p1, r, &c1, &c2);
+					customcalculator.CalculateCentre(_line.p, _line.q, r, &c1, &c2);
 					inc = 0.5 / r;
 
 					float64 side;
-					side = customcalculator.CheckSide(_line.p0, _line.p1, c1);
+					side = customcalculator.CheckSide(_line.p, _line.q, c1);
 					if (data.vertlist[i-1]->bulge > 0)
 					{
-						if (customcalculator.CheckSide(_line.p0, _line.p1, c1) > 0)
+						if (customcalculator.CheckSide(_line.p, _line.q, c1) > 0)
 						{
 							inc *= 1;
 							if (data.vertlist[i-1]->bulge <= 1)
@@ -398,7 +388,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 					}
 					else
 					{
-						if (customcalculator.CheckSide(_line.p0, _line.p1, c1) > 0)
+						if (customcalculator.CheckSide(_line.p, _line.q, c1) > 0)
 						{
 							inc *= -1;
 							if (data.vertlist[i-1]->bulge >= -1)
@@ -419,33 +409,33 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 
 					if (inc > 0)
 					{
-						anglestart = atan2(_line.p0.y - centre.y, _line.p0.x - centre.x);
-						angleend = atan2(_line.p1.y - centre.y, _line.p1.x - centre.x);
+						anglestart = atan2(_line.p.y - centre.y, _line.p.x - centre.x);
+						angleend = atan2(_line.q.y - centre.y, _line.q.x - centre.x);
 						if (angleend < anglestart)angleend += 2 * pi;
 					}
 					else
 					{
-						anglestart = atan2(_line.p0.y - centre.y, _line.p0.x - centre.x);
-						angleend = atan2(_line.p1.y - centre.y, _line.p1.x - centre.x);
+						anglestart = atan2(_line.p.y - centre.y, _line.p.x - centre.x);
+						angleend = atan2(_line.q.y - centre.y, _line.q.x - centre.x);
 						if (angleend > anglestart)angleend -= 2 * pi;
 					}
 
 					for (float64 i = (anglestart + inc); Absolute(i - angleend) > Absolute(inc); i += inc)
 					{
-						_line.p1.x = centre.x + r * cos((i));
-						_line.p1.y = centre.y + r * sin((i));
+						_line.q.x = centre.x + r * cos((i));
+						_line.q.y = centre.y + r * sin((i));
 						_drawing << _line;
-						_line.p0 = _line.p1;
+						_line.p = _line.q;
 					}
-					_drawing.tail->data.p1.x = data.vertlist[i]->x;
-					_drawing.tail->data.p1.y = data.vertlist[i]->y;
-					_line.p0.x = data.vertlist[i]->x;
-					_line.p0.y = data.vertlist[i]->y;
+					_drawing.tail->data.q.x = data.vertlist[i]->x;
+					_drawing.tail->data.q.y = data.vertlist[i]->y;
+					_line.p.x = data.vertlist[i]->x;
+					_line.p.y = data.vertlist[i]->y;
 				}
 				else
 				{
 					_drawing << _line;
-					_line.p0 = _line.p1;
+					_line.p = _line.q;
 				}
 			}
 			drawingcurrentblock->Append(_drawing);
@@ -455,17 +445,17 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 		{
 			LinkedList<Line> _drawing;
 			Line _line;
-			_line.p0.x = data.vertlist[0]->basePoint.x;
-			_line.p0.y = data.vertlist[0]->basePoint.y;
-			_line.p1.x = data.vertlist[1]->basePoint.x;
-			_line.p1.y = data.vertlist[1]->basePoint.y;
+			_line.p.x = data.vertlist[0]->basePoint.x;
+			_line.p.y = data.vertlist[0]->basePoint.y;
+			_line.q.x = data.vertlist[1]->basePoint.x;
+			_line.q.y = data.vertlist[1]->basePoint.y;
 			_drawing << _line;
 			for (uint32 i = 2; i < data.vertlist.size(); i++)
 			{
-				_line.p0.x = data.vertlist[i - 1]->basePoint.x;
-				_line.p0.y = data.vertlist[i - 1]->basePoint.y;
-				_line.p1.x = data.vertlist[i - 0]->basePoint.x;
-				_line.p1.y = data.vertlist[i - 0]->basePoint.y;
+				_line.p.x = data.vertlist[i - 1]->basePoint.x;
+				_line.p.y = data.vertlist[i - 1]->basePoint.y;
+				_line.q.x = data.vertlist[i - 0]->basePoint.x;
+				_line.q.y = data.vertlist[i - 0]->basePoint.y;
 				_drawing << _line;
 			}
 			drawingcurrentblock->Append(_drawing);
@@ -631,7 +621,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 			float64x2 w;
 			float64 previousu = 0;
 			p = spline.InterpolateSpline(0, degree, controlpoints, data->ncontrol, knots);
-			_line.p0 = p;
+			_line.p = p;
 			float64 inc = 0.1 / length;
 			for (float64 u = 0; u <= 1.001; u+= inc)
 			{
@@ -641,8 +631,8 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 				w = spline.InterpolateSpline((previousu + u)/2, degree, controlpoints, data->ncontrol, knots);
 				if (DistanceOfaPointFromLine(w,p,q) < 0.001)
 					continue;
-				_line.p0 = p;
-				_line.p1 = q;
+				_line.p = p;
+				_line.q = q;
 				_drawing << _line;
 				p = q;
 				previousu = u;
@@ -651,11 +641,11 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 			{
 				q.x = controlpoints[data->ncontrol - 1].x;
 				q.y = controlpoints[data->ncontrol - 1].y;
-				_line.p1 = q;
+				_line.q = q;
 				_drawing << _line;
 			}
-			_drawing.tail->data.p1.x = controlpoints[data->ncontrol - 1].x;
-			_drawing.tail->data.p1.y = controlpoints[data->ncontrol - 1].y;
+			_drawing.tail->data.q.x = controlpoints[data->ncontrol - 1].x;
+			_drawing.tail->data.q.y = controlpoints[data->ncontrol - 1].y;
 			drawingcurrentblock->Append(_drawing);
 			delete[] controlpoints;
 			delete[] knots;
@@ -681,28 +671,28 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 					for (j = 0, block.current->data.blockdata.GotoHead(); j < block.current->data.blockdata.count;j++, block.current->data.blockdata.MoveRight())
 					{
 						Line line = block.current->data.blockdata.current->data;
-						line.p0.x *= data.xscale;
-						line.p0.y *= data.yscale;
-						line.p1.x *= data.xscale;
-						line.p1.y *= data.yscale;
+						line.p.x *= data.xscale;
+						line.p.y *= data.yscale;
+						line.q.x *= data.xscale;
+						line.q.y *= data.yscale;
 
 						float64 cosangle = cos(data.angle);
 						float64 sinangle = sin(data.angle);
 
-						float64 p0x = line.p0.x;
-						float64 p0y = line.p0.y;
-						float64 p1x = line.p1.x;
-						float64 p1y = line.p1.y;
+						float64 px = line.p.x;
+						float64 py = line.p.y;
+						float64 qx = line.q.x;
+						float64 qy = line.q.y;
 
-						line.p0.x = p0x * cosangle - p0y * sinangle;
-						line.p0.y = p0x * sinangle + p0y * cosangle;
-						line.p1.x = p1x * cosangle - p1y * sinangle;
-						line.p1.y = p1x * sinangle + p1y * cosangle;
+						line.p.x = px * cosangle - py * sinangle;
+						line.p.y = px * sinangle + py * cosangle;
+						line.q.x = qx * cosangle - qy * sinangle;
+						line.q.y = qx * sinangle + qy * cosangle;
 
-						line.p0.x += data.basePoint.x;
-						line.p0.y += data.basePoint.y;
-						line.p1.x += data.basePoint.x;
-						line.p1.y += data.basePoint.y;
+						line.p.x += data.basePoint.x;
+						line.p.y += data.basePoint.y;
+						line.q.x += data.basePoint.x;
+						line.q.y += data.basePoint.y;
 
 						_drawing << line;
 					}
@@ -842,15 +832,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 
 	dxfRW dxf("intermediated.txt");
 #else
-	//dxfRW dxf("debugspline.dxf");
-	//dxfRW dxf("All Jali Designs.dxf");
-	//dxfRW dxf("lwpoly.dxf");
-	dxfRW dxf("Ellipse.dxf");
-	//dxfRW dxf("Lasercutting Cargo 2mm MS with material.dxf");
-	//dxfRW dxf("Om Jali.dxf");
-	//dxfRW dxf("spline.dxf");
-	//dxfRW dxf("Test2.dxf");
-	//dxfRW dxf("Test.dxf");
+	dxfRW dxf(TESTFILE);
 #endif
 	if (!dxf.read(&reader, false)) { return -1; }
 
@@ -868,22 +850,181 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 
 	//cout << "drawing = " << (uint32)(void*)drawingexport.data << endl;
 	//cout << "drawinglength = "<< drawingexport.size << endl;
-	//cout << "LoadDXF Out" << endl;
+	cout << "LoadDXF Out" << endl;
 	return 0;
 }
 
 EMSATTRIBUTE int32 GenerateLoops()
 {
-	LinkedList<Line> _loop;
-	uint32 linecount=0;
-	while(linecount != drawing.count)
-	{
-		drawing.GotoHead();
-		Line p = drawing.Get();
+	cout << "GenerateLoops In" << endl;
 
-		linecount = drawing.count;
+	{
+		LinkedList<Line> chain;
+		uint32 linecountprevious = drawing.count;
+		while (drawing.count)
+		{
+			drawing.GotoHead();
+			chain << drawing.Get();
+			if (drawing.RemoveAndMoveRight() == false)
+			{
+				link << chain;
+				chain.Unlink();
+				break;
+			}
+			float64x2 startpoint = chain.current->data.p;
+			drawing.GotoHead();
+			while (1)
+			{
+				if (chain.current->data.q == drawing.current->data.p)
+				{
+					chain << drawing.Get();
+					if (drawing.RemoveAndMoveRight() == false)
+					{
+						if (linecountprevious == drawing.count)
+						{
+							link << chain;
+							chain.Unlink();
+							break;
+						}
+						else
+						{
+							drawing.GotoHead();
+							linecountprevious = drawing.count;
+						}
+					}
+					if (chain.tail->data.q == startpoint)
+					{
+						loop << chain;
+						chain.Unlink();
+						break;
+					}
+				}
+				else
+				{
+					if (drawing.MoveRight() == false)
+					{
+						if (linecountprevious == drawing.count)
+						{
+							link << chain;
+							chain.Unlink();
+							break;
+						}
+						else
+						{
+							drawing.GotoHead();
+							linecountprevious = drawing.count;
+						}
+					}
+				}
+			}
+		}
 	}
+
+	{
+		RESTART:
+		for (uint32 i = 0; i < link.size; i++)
+		{
+			for (uint32 j = i + 1; j < link.size; j++)
+			{
+				if (link[i].head->data.p == link[j].tail->data.q)
+				{
+					link[i].Append(link[j]);
+					link.Splice(j, 1);
+					goto RESTART;
+				}
+			}
+		}
+	}
+
+	for (uint32 i = 0; i < loop.size; i++)
+	{
+		Heap<Line> _loop;
+		loop[i].GotoHead();
+		while (1)
+		{
+			_loop << loop[i].Get();
+			if (loop[i].RemoveAndMoveRight() == false)
+				break;
+		}
+		loopexport << _loop;
+		_loop.Release();
+	}
+	for (uint32 i = 0; i < link.size; i++)
+	{
+		Heap<Line> _link;
+		link[i].GotoHead();
+		while (1)
+		{
+			_link << link[i].Get();
+			if (link[i].RemoveAndMoveRight() == false)
+				break;
+		}
+		linkexport << _link;
+		_link.Release();
+	}
+	drawing.Release();
+	loop.Release();
+	link.Release();
+	cout << "GenerateLoops Out" << endl;
+
+	//Leak Test
+	//for (uint32 i = 0; i < loopexport.size; i++)
+	//	loopexport[i].Release();
+	//loopexport.Release();
+	//for (uint32 i = 0; i < linkexport.size; i++)
+	//	linkexport[i].Release();
+	//linkexport.Release();
+
 	return 0;
+}
+
+EMSATTRIBUTE int32 GET_loopcount()
+{
+	return loopexport.size;
+}
+EMSATTRIBUTE int32 GET_linkcount()
+{
+	return linkexport.size;
+}
+EMSATTRIBUTE int32 GET_looplinecount(uint32 index)
+{
+	return loopexport[index].size;
+}
+EMSATTRIBUTE int32 GET_linklinecount(uint32 index)
+{
+	return linkexport[index].size;
+}
+EMSATTRIBUTE float64 GET_loop_px(uint32 loopindex,uint32 lineindex)
+{
+	return linkexport[loopindex].data[lineindex].p.x;
+}
+EMSATTRIBUTE float64 GET_loop_py(uint32 loopindex, uint32 lineindex)
+{
+	return linkexport[loopindex].data[lineindex].p.y;
+}
+EMSATTRIBUTE float64 GET_loop_qx(uint32 loopindex, uint32 lineindex)
+{
+	return linkexport[loopindex].data[lineindex].q.x;
+}
+EMSATTRIBUTE float64 GET_loop_qy(uint32 loopindex, uint32 lineindex)
+{
+	return linkexport[loopindex].data[lineindex].q.y;
+}
+EMSATTRIBUTE float64 GET_link_px(uint32 linkindex, uint32 lineindex)
+{
+	return linkexport[linkindex].data[lineindex].p.x;
+}
+EMSATTRIBUTE float64 GET_link_py(uint32 linkindex, uint32 lineindex)
+{
+	return linkexport[linkindex].data[lineindex].p.y;
+}
+EMSATTRIBUTE float64 GET_link_qx(uint32 linkindex, uint32 lineindex)
+{
+	return linkexport[linkindex].data[lineindex].q.x;
+}
+EMSATTRIBUTE float64 GET_link_qy(uint32 linkindex, uint32 lineindex)
+{
+	return linkexport[linkindex].data[lineindex].q.y;
 }
 
 EMSATTRIBUTE void* GETdrawing()
