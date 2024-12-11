@@ -18,7 +18,8 @@
 //#define TESTFILE "Test2.dxf"
 //#define TESTFILE "Test.dxf"
 //#define TESTFILE "Loop.dxf"
-#define TESTFILE "LoopDepthTest.dxf"
+//#define TESTFILE "LoopDepthTest.dxf"
+#define TESTFILE "22.dxf"
 #endif
 #include <iostream>
 #include <fstream>
@@ -50,6 +51,7 @@ Heap<LinkedList<LineSegment>> linkll;
 Heap<Heap<LineSegment>> loop;
 Heap<Heap<LineSegment>> link;
 Heap<int32> loopdepth;
+uint32 maxloopdepth = 0;
 
 EMSCRIPTEN_KEEPALIVE int32 main()
 {
@@ -121,6 +123,8 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 		{
 			if (_block->blockdata.count)
 				block << *_block;
+			else
+				delete _block;
 			_block = 0;
 			drawingllcurrentblock = &drawingll;
 		}
@@ -860,6 +864,15 @@ EMSATTRIBUTE int32 GenerateLoops()
 {
 	cout << "GenerateLoops In" << endl;
 
+	for (uint32 i = 0; i < loop.count; i++)
+		loop.data[i].Release();
+	loop.Release();
+	for (uint32 i = 0; i < link.count; i++)
+		link.data[i].Release();
+	link.Release();
+	loopdepth.Release();
+	maxloopdepth = 0;
+
 	{
 		LinkedList<LineSegment> chain;
 		uint32 linecountprevious = drawingll.count;
@@ -922,21 +935,21 @@ EMSATTRIBUTE int32 GenerateLoops()
 		}
 	}
 
-	{
-		RESTART:
-		for (uint32 i = 0; i < linkll.count; i++)
-		{
-			for (uint32 j = i + 1; j < linkll.count; j++)
-			{
-				if (linkll[i].head->data.p == linkll[j].tail->data.q)
-				{
-					linkll[i].Append(linkll[j]);
-					linkll.Splice(j, 1);
-					goto RESTART;
-				}
-			}
-		}
-	}
+	//{
+	//	RESTART:
+	//	for (uint32 i = 0; i < linkll.count; i++)
+	//	{
+	//		for (uint32 j = i + 1; j < linkll.count; j++)
+	//		{
+	//			if (linkll[i].head->data.p == linkll[j].tail->data.q)
+	//			{
+	//				linkll[i].Append(linkll[j]);
+	//				linkll.Splice(j, 1);
+	//				goto RESTART;
+	//			}
+	//		}
+	//	}
+	//}
 
 	for (uint32 i = 0; i < loopll.count; i++)
 	{
@@ -1013,22 +1026,29 @@ EMSATTRIBUTE int32 GenerateLoops()
 			uint32 depth = 0;
 			RayIntersection rayintersection;
 			uint32 intersectioncount = rayintersection.RayLoopIntersectionCount(loop[i].data[0].p, j);
-			if (intersectioncount % 2)
-			{
-				
+			if (intersectioncount % 2)				
 				loopdepth.data[i]++;
-			}
 		}
 	}
+
+	for (uint32 i = 0; i < loop.count; i++)
+	{
+		if (loopdepth.data[i] > maxloopdepth)
+			maxloopdepth = loopdepth.data[i];
+	}
+
+	drawing.Release();
+
 	cout << "GenerateLoops Out" << endl;
 
-	//Leak Test
+	////Leak Test
 	//for (uint32 i = 0; i < loop.count; i++)
 	//	loop[i].Release();
 	//loop.Release();
 	//for (uint32 i = 0; i < link.count; i++)
 	//	link[i].Release();
 	//link.Release();
+	//loopdepth.Release();
 
 	return 0;
 }
@@ -1053,21 +1073,25 @@ EMSATTRIBUTE int32 GET_loopdepth(uint32 index)
 {
 	return loopdepth[index];
 }
+EMSATTRIBUTE int32 GET_maxloopdepth()
+{
+	return maxloopdepth;
+}
 EMSATTRIBUTE float64 GET_loop_px(uint32 loopindex,uint32 lineindex)
 {
-	return link[loopindex].data[lineindex].p.x;
+	return loop[loopindex].data[lineindex].p.x;
 }
 EMSATTRIBUTE float64 GET_loop_py(uint32 loopindex, uint32 lineindex)
 {
-	return link[loopindex].data[lineindex].p.y;
+	return loop[loopindex].data[lineindex].p.y;
 }
 EMSATTRIBUTE float64 GET_loop_qx(uint32 loopindex, uint32 lineindex)
 {
-	return link[loopindex].data[lineindex].q.x;
+	return loop[loopindex].data[lineindex].q.x;
 }
 EMSATTRIBUTE float64 GET_loop_qy(uint32 loopindex, uint32 lineindex)
 {
-	return link[loopindex].data[lineindex].q.y;
+	return loop[loopindex].data[lineindex].q.y;
 }
 EMSATTRIBUTE float64 GET_link_px(uint32 linkindex, uint32 lineindex)
 {

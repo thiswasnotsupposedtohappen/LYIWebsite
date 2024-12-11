@@ -1291,6 +1291,34 @@ class Line
     this.q=undefined;
   }
 };
+class Loop
+{
+  constructor()
+  {
+    this.line = [];
+    this.linecount = 0;
+  }
+}
+class Link
+{
+  constructor()
+  {
+    this.line = [];
+    this.linecount = 0;
+  }
+}
+class Drawing
+{
+  constructor()
+  {
+    this.loop = [];
+    this.loopcount = 0;
+    this.link = [];
+    this.linkcount = 0;
+    this.loopdepth = [];
+    this.maxloopdepth = 0;
+  }
+}
 class DesignObject
 {
   constructor()
@@ -1370,7 +1398,7 @@ function Draw()
   ctx.lineTo(mousex,-(canvas.height/2));    
   ctx.stroke();
 
-  ctx.strokeStyle = "black";
+  ctx.strokeStyle = "black";  
 
   if(manufacturingspecifications != undefined)
   {
@@ -1389,79 +1417,55 @@ function Draw()
         ctx.stroke();
       }
     }
-    ctx.strokeStyle = "black";
-    if(manufacturingspecifications.colorback != undefined)
-      ctx.fillStyle = manufacturingspecifications.colorback;
-    else
-      ctx.fillStyle = "white";
-    for(var i=0;i<manufacturingspecifications.designobjectlength;i++)
+
+    for(var mdo=0;mdo<manufacturingspecifications.designobjectlength;mdo++)
     {
-      if(manufacturingspecifications.designobject[i] != undefined && manufacturingspecifications.designobject[i].drawing != undefined)
+      if(manufacturingspecifications.designobject[mdo] != undefined && manufacturingspecifications.designobject[mdo].drawing != undefined)
       {
-        var p = new Point();
-        var q = new Point();
-        var p_ut = new Point();
-        var q_ut = new Point();
-        var pnext_ut = new Point();
-        var startpoint = new Point();
-        Object.assign(startpoint, manufacturingspecifications.designobject[i].drawing[0].p);
-        p=TransformPoint(startpoint,
-        manufacturingspecifications.designobject[i].offsetx,
-        manufacturingspecifications.designobject[i].offsety,
-        manufacturingspecifications.designobject[i].angle,
-        manufacturingspecifications.designobject[i].scale);
-        ctx.beginPath();
-        ctx.moveTo((p.x * zoom + mousex),(p.y * zoom + mousey));
-        for(var j=0;j< manufacturingspecifications.designobject[i].drawinglength - 1;j++)
+        for(var ld=0;ld<=manufacturingspecifications.designobject[mdo].drawing.maxloopdepth;ld++)
         {
-          Object.assign(p_ut, manufacturingspecifications.designobject[i].drawing[j].p);
-          Object.assign(q_ut, manufacturingspecifications.designobject[i].drawing[j].q);
-          Object.assign(pnext_ut, manufacturingspecifications.designobject[i].drawing[j+1].p);
-          q=TransformPoint(manufacturingspecifications.designobject[i].drawing[j].q,
-            manufacturingspecifications.designobject[i].offsetx,
-            manufacturingspecifications.designobject[i].offsety,
-            manufacturingspecifications.designobject[i].angle,
-            manufacturingspecifications.designobject[i].scale);
-          ctx.lineTo((q.x * zoom + mousex),(q.y * zoom + mousey));   
-
-
-          if(q_ut.x == startpoint.x && q_ut.y == startpoint.y)
+          if(ld % 2 == 0)
           {
-            ctx.fill();
-            ctx.stroke();
-            Object.assign(startpoint, pnext_ut);
-            p=TransformPoint(startpoint,
-            manufacturingspecifications.designobject[i].offsetx,
-            manufacturingspecifications.designobject[i].offsety,
-            manufacturingspecifications.designobject[i].angle,
-            manufacturingspecifications.designobject[i].scale);
-            ctx.beginPath();
-            ctx.moveTo((p.x * zoom + mousex),(p.y * zoom + mousey));
+            if(manufacturingspecifications.colorfront != undefined)
+              ctx.fillStyle = manufacturingspecifications.colorfront;
+            else
+              ctx.fillStyle = "white";
           }
-          if(pnext_ut.x != q_ut.x || pnext_ut.y != q_ut.y)
+          else
           {
-            ctx.stroke();
-            Object.assign(startpoint, pnext_ut);
-            p=TransformPoint(startpoint,
-            manufacturingspecifications.designobject[i].offsetx,
-            manufacturingspecifications.designobject[i].offsety,
-            manufacturingspecifications.designobject[i].angle,
-            manufacturingspecifications.designobject[i].scale);
-            ctx.beginPath();
-            ctx.moveTo((p.x * zoom + mousex),(p.y * zoom + mousey));
+            if(manufacturingspecifications.colorback != undefined)
+              ctx.fillStyle = manufacturingspecifications.colorback;
+            else
+              ctx.fillStyle = "white";
+          }
+          for(var l=0;l<manufacturingspecifications.designobject[mdo].drawing.loopcount;l++)
+          {
+            if(manufacturingspecifications.designobject[mdo].drawing.loopdepth[l] == ld)
+            {
+              var p = new Point();
+              var q = new Point();
+              p=TransformPoint(manufacturingspecifications.designobject[mdo].drawing.loop[l].line[0].p,
+                manufacturingspecifications.designobject[mdo].offsetx,
+                manufacturingspecifications.designobject[mdo].offsety,
+                manufacturingspecifications.designobject[mdo].angle,
+                manufacturingspecifications.designobject[mdo].scale);
+              ctx.beginPath();
+              ctx.moveTo((p.x * zoom + mousex),(p.y * zoom + mousey));
+              for(var i=0;i<manufacturingspecifications.designobject[mdo].drawing.loop[l].linecount;i++)
+              {
+                q=TransformPoint(manufacturingspecifications.designobject[mdo].drawing.loop[l].line[i].q,
+                  manufacturingspecifications.designobject[mdo].offsetx,
+                  manufacturingspecifications.designobject[mdo].offsety,
+                  manufacturingspecifications.designobject[mdo].angle,
+                  manufacturingspecifications.designobject[mdo].scale);
+                ctx.lineTo((q.x * zoom + mousex),(q.y * zoom + mousey));   
+              }
+              ctx.closePath();
+              ctx.fill();
+              ctx.stroke();
+            }
           }
         }
-        Object.assign(p_ut, manufacturingspecifications.designobject[i].drawing[manufacturingspecifications.designobject[i].drawinglength - 1].p);
-        Object.assign(q_ut, manufacturingspecifications.designobject[i].drawing[manufacturingspecifications.designobject[i].drawinglength - 1].q);
-        q=TransformPoint(manufacturingspecifications.designobject[i].drawing[manufacturingspecifications.designobject[i].drawinglength - 1].q,
-          manufacturingspecifications.designobject[i].offsetx,
-          manufacturingspecifications.designobject[i].offsety,
-          manufacturingspecifications.designobject[i].angle,
-          manufacturingspecifications.designobject[i].scale);
-        ctx.lineTo((q.x * zoom + mousex),(q.y * zoom + mousey));   
-        ctx.stroke();
-        if(q_ut.x == startpoint.x && q_ut.y == startpoint.y)
-          ctx.fill();
       }
     }
   }
@@ -1510,25 +1514,65 @@ function LoadDXFOnSlot(slot,url)
     var data = new Uint8Array(new TextEncoder().encode(xhr.responseText));
     var memory = _malloc(data.length);
     HEAPU8.set(data, memory);
-
     console.log("return = " + _LoadDXF(memory, data.length));
+    console.log("return = " + _GenerateLoops());
     _free(memory);
-
-    var address = _GETdrawing();
-    manufacturingspecifications.designobject[slot].drawinglength =  _GETdrawinglength();
-    manufacturingspecifications.designobject[slot].drawing = new Array(manufacturingspecifications.designobject[slot].drawinglength);
-    for (var i = 0; i < manufacturingspecifications.designobject[slot].drawinglength; i++) 
+      
+    manufacturingspecifications.designobject[slot].drawing = new Drawing();
+    manufacturingspecifications.designobject[slot].drawing.maxloopdepth = _GET_maxloopdepth() + 1;
+    
+    manufacturingspecifications.designobject[slot].drawing.loopcount = _GET_loopcount();
+    var loopcount = manufacturingspecifications.designobject[slot].drawing.loopcount;
+    for(var i=0;i<loopcount;i++)
     {
-      manufacturingspecifications.designobject[slot].drawing[i] = new Line;
-      manufacturingspecifications.designobject[slot].drawing[i].p = new Point;
-      manufacturingspecifications.designobject[slot].drawing[i].q = new Point;
-      manufacturingspecifications.designobject[slot].drawing[i].p.x = HEAPF64[address / 8 + 0];
-      manufacturingspecifications.designobject[slot].drawing[i].p.y = HEAPF64[address / 8 + 1];
-      manufacturingspecifications.designobject[slot].drawing[i].q.x = HEAPF64[address / 8 + 2];
-      manufacturingspecifications.designobject[slot].drawing[i].q.y = HEAPF64[address / 8 + 3];
-
-      address += 32;
+      manufacturingspecifications.designobject[slot].drawing.loop[i] = new Loop();
+      manufacturingspecifications.designobject[slot].drawing.loop[i].linecount = _GET_looplinecount(i);
+      manufacturingspecifications.designobject[slot].drawing.loopdepth[i] = _GET_loopdepth(i) + 1;
+      var looplinecount = manufacturingspecifications.designobject[slot].drawing.loop[i].linecount;
+      for(var j=0;j<looplinecount;j++)
+      {
+        manufacturingspecifications.designobject[slot].drawing.loop[i].line[j] = new Line();
+        manufacturingspecifications.designobject[slot].drawing.loop[i].line[j].p = new Point;
+        manufacturingspecifications.designobject[slot].drawing.loop[i].line[j].q = new Point;
+        manufacturingspecifications.designobject[slot].drawing.loop[i].line[j].p.x = _GET_loop_px(i,j);
+        manufacturingspecifications.designobject[slot].drawing.loop[i].line[j].p.y = _GET_loop_py(i,j);
+        manufacturingspecifications.designobject[slot].drawing.loop[i].line[j].q.x = _GET_loop_qx(i,j);
+        manufacturingspecifications.designobject[slot].drawing.loop[i].line[j].q.y = _GET_loop_qy(i,j);
+      }
     }
+    manufacturingspecifications.designobject[slot].drawing.linkcount = _GET_linkcount();
+    var linkcount = manufacturingspecifications.designobject[slot].drawing.linkcount;
+    for(var i=0;i<linkcount;i++)
+    {
+
+      manufacturingspecifications.designobject[slot].drawing.link[i] = new Link();
+      manufacturingspecifications.designobject[slot].drawing.link[i].linecount = _GET_linklinecount(i);
+      var linklinecount = manufacturingspecifications.designobject[slot].drawing.link[i].linecount;
+      for(var j=0;j<linklinecount;j++)
+      {
+        manufacturingspecifications.designobject[slot].drawing.link[i].line[j] = new Line();
+        manufacturingspecifications.designobject[slot].drawing.link[i].line[j].p = new Point;
+        manufacturingspecifications.designobject[slot].drawing.link[i].line[j].q = new Point;
+        manufacturingspecifications.designobject[slot].drawing.link[i].line[j].p.x = _GET_link_px(i,j);
+        manufacturingspecifications.designobject[slot].drawing.link[i].line[j].p.y = _GET_link_py(i,j);
+        manufacturingspecifications.designobject[slot].drawing.link[i].line[j].q.x = _GET_link_qx(i,j);
+        manufacturingspecifications.designobject[slot].drawing.link[i].line[j].q.y = _GET_link_qy(i,j);
+      }
+    }
+    // manufacturingspecifications.designobject[slot].drawinglength =  _GETdrawinglength();
+    // manufacturingspecifications.designobject[slot].drawing = new Array(manufacturingspecifications.designobject[slot].drawinglength);
+    // for (var i = 0; i < manufacturingspecifications.designobject[slot].drawinglength; i++) 
+    // {
+    //   manufacturingspecifications.designobject[slot].drawing[i] = new Line;
+    //   manufacturingspecifications.designobject[slot].drawing[i].p = new Point;
+    //   manufacturingspecifications.designobject[slot].drawing[i].q = new Point;
+    //   manufacturingspecifications.designobject[slot].drawing[i].p.x = HEAPF64[address / 8 + 0];
+    //   manufacturingspecifications.designobject[slot].drawing[i].p.y = HEAPF64[address / 8 + 1];
+    //   manufacturingspecifications.designobject[slot].drawing[i].q.x = HEAPF64[address / 8 + 2];
+    //   manufacturingspecifications.designobject[slot].drawing[i].q.y = HEAPF64[address / 8 + 3];
+
+    //   address += 32;
+    // }
   };  
   xhr.send(null);
 } 
@@ -1878,21 +1922,49 @@ function DesignUpload()
       var memory = _malloc(data.length);
       HEAPU8.set(data, memory);
       console.log("return = " + _LoadDXF(memory, data.length));
+      console.log("return = " + _GenerateLoops());
       _free(memory);
-      var address = _GETdrawing();
-      manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawinglength =  _GETdrawinglength();
-      manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing = new Array(manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawinglength);
-      for (var i = 0; i < manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawinglength; i++) 
-      {
-        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing[i] = new Line;
-        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing[i].p = new Point;
-        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing[i].q = new Point;
-        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing[i].p.x = HEAPF64[address / 8 + 0];
-        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing[i].p.y = HEAPF64[address / 8 + 1];
-        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing[i].q.x = HEAPF64[address / 8 + 2];
-        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing[i].q.y = HEAPF64[address / 8 + 3];
+        
+      manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing = new Drawing();
+      manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.maxloopdepth = _GET_maxloopdepth();
 
-        address += 32;
+      manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.loopcount = _GET_loopcount();
+      var loopcount = manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.loopcount;
+      for(var i=0;i<loopcount;i++)
+      {
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.loop[i] = new Loop();
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.loop[i].linecount = _GET_looplinecount(i);
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.loopdepth[i] = _GET_loopdepth(i);
+        var looplinecount = manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.loop[i].linecount;
+        for(var j=0;j<looplinecount;j++)
+        {
+          manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.loop[i].line[j] = new Line();
+          manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.loop[i].line[j].p = new Point;
+          manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.loop[i].line[j].q = new Point;
+          manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.loop[i].line[j].p.x = _GET_loop_px(i,j);
+          manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.loop[i].line[j].p.y = _GET_loop_py(i,j);
+          manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.loop[i].line[j].q.x = _GET_loop_qx(i,j);
+          manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.loop[i].line[j].q.y = _GET_loop_qy(i,j);
+        }
+      }
+      manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.linkcount = _GET_linkcount();
+      var linkcount = manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.linkcount;
+      for(var i=0;i<linkcount;i++)
+      {
+
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.link[i] = new Link();
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.link[i].linecount = _GET_linklinecount(i);
+        var linklinecount = manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.link[i].linecount;
+        for(var j=0;j<linklinecount;j++)
+        {
+          manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.link[i].line[j] = new Line();
+          manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.link[i].line[j].p = new Point;
+          manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.link[i].line[j].q = new Point;
+          manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.link[i].line[j].p.x = _GET_link_px(i,j);
+          manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.link[i].line[j].p.y = _GET_link_py(i,j);
+          manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.link[i].line[j].q.x = _GET_link_qx(i,j);
+          manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing.link[i].line[j].q.y = _GET_link_qy(i,j);
+        }
       }
 
       TransformDesignObject(manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1],
