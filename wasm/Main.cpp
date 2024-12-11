@@ -13,11 +13,12 @@
 //#define TESTFILE "lwpoly.dxf"
 //#define TESTFILE "Ellipse.dxf"
 //#define TESTFILE "Lasercutting Cargo 2mm MS with material.dxf"
-#define TESTFILE "Om Jali.dxf"
+//#define TESTFILE "Om Jali.dxf"
 //#define TESTFILE "spline.dxf"
 //#define TESTFILE "Test2.dxf"
 //#define TESTFILE "Test.dxf"
 //#define TESTFILE "Loop.dxf"
+#define TESTFILE "LoopDepthTest.dxf"
 #endif
 #include <iostream>
 #include <fstream>
@@ -30,7 +31,7 @@ using namespace std;
 #include "PoMath.h"
 #include "libdxfrw.h"
 
-struct Line
+struct LineSegment
 {
 	float64x2 p;
 	float64x2 q;
@@ -38,16 +39,17 @@ struct Line
 struct Block
 {
 	char name[240];
-	LinkedList<Line> blockdata;
+	LinkedList<LineSegment> blockdata;
 };
 LinkedList<Block> block;
-LinkedList<Line> drawing;
-LinkedList<Line> *drawingcurrentblock = &drawing;
-Heap<Line> drawingexport;
-Heap<LinkedList<Line>> loop;
-Heap<LinkedList<Line>> link;
-Heap<Heap<Line>> loopexport;
-Heap<Heap<Line>> linkexport;
+LinkedList<LineSegment> drawingll;
+LinkedList<LineSegment> *drawingllcurrentblock = &drawingll;
+Heap<LineSegment> drawing;
+Heap<LinkedList<LineSegment>> loopll;
+Heap<LinkedList<LineSegment>> linkll;
+Heap<Heap<LineSegment>> loop;
+Heap<Heap<LineSegment>> link;
+Heap<int32> loopdepth;
 
 EMSCRIPTEN_KEEPALIVE int32 main()
 {
@@ -69,7 +71,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 	block.Release();
 	static Block* _block = 0;
 
-	drawing.Release();
+	drawingll.Release();
 
 	class DXFReader : public DRW_Interface
 	{
@@ -109,7 +111,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 			for(uint32 i=0;i<data.name.size();i++)
 				_block->name[i] = data.name[i];
 			_block->name[data.name.size()] = 0;
-			drawingcurrentblock = &_block->blockdata;
+			drawingllcurrentblock = &_block->blockdata;
 		}
 		void setBlock(const int handle) override
 		{
@@ -120,7 +122,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 			if (_block->blockdata.count)
 				block << *_block;
 			_block = 0;
-			drawingcurrentblock = &drawing;
+			drawingllcurrentblock = &drawingll;
 		}
 		void addPoint(const DRW_Point& data) override
 		{
@@ -128,12 +130,12 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 		}
 		void addLine(const DRW_Line& data) override
 		{
-			Line _line;
+			LineSegment _line;
 			_line.p.x = data.basePoint.x;
 			_line.p.y = data.basePoint.y;
 			_line.q.x = data.secPoint.x;
 			_line.q.y = data.secPoint.y;
-			*drawingcurrentblock << _line;
+			*drawingllcurrentblock << _line;
 			return;
 		}
 		void addRay(const DRW_Ray& data) override
@@ -146,8 +148,8 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 		}
 		void addArc(const DRW_Arc& data) override
 		{
-			LinkedList<Line> _drawing;
-			Line _line;
+			LinkedList<LineSegment> _drawing;
+			LineSegment _line;
 			float64 anglestart = data.staangle;
 			float64 angleend = data.endangle;
 			float64 inc = 0.5 / data.radious;
@@ -178,13 +180,13 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 			}
 			_drawing.tail->data.q.x = data.basePoint.x + data.radious * cos(angleend);
 			_drawing.tail->data.q.y = data.basePoint.y + data.radious * sin(angleend);
-			drawingcurrentblock->Append(_drawing);
+			drawingllcurrentblock->Append(_drawing);
 			return;
 		}
 		void addCircle(const DRW_Circle& data) override
 		{
-			LinkedList<Line> _drawing;
-			Line _line;
+			LinkedList<LineSegment> _drawing;
+			LineSegment _line;
 			_line.p.x = data.basePoint.x + data.radious * cos(0);
 			_line.p.y = data.basePoint.y + data.radious * sin(0);
 			float64 inc = 0.5 / data.radious;
@@ -197,13 +199,13 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 			}
 			_drawing.tail->data.q.x = data.basePoint.x + data.radious * cos(2 * pi);
 			_drawing.tail->data.q.y = data.basePoint.y + data.radious * sin(2 * pi);
-			drawingcurrentblock->Append(_drawing);
+			drawingllcurrentblock->Append(_drawing);
 			return;
 		}
 		void addEllipse(const DRW_Ellipse& data) override
 		{
-			LinkedList<Line> _drawing;
-			Line _line;
+			LinkedList<LineSegment> _drawing;
+			LineSegment _line;
 			float64x2 centre;
 			float64x2 startpoint;
 			float64 radius;
@@ -268,7 +270,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 				_line.q = _drawing.head->data.p;
 				_drawing << _line;
 			}
-			drawingcurrentblock->Append(_drawing);
+			drawingllcurrentblock->Append(_drawing);
 			return;
 		}
 		void addLWPolyline(const DRW_LWPolyline& data) override
@@ -313,18 +315,18 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 					return 0;
 				}
 			
-				float64 CheckSide(float64x2 q, float64x2 p2, float64x2 c)
+				float64 CheckSide(float64x2 p, float64x2 q, float64x2 c)
 				{
 					float64x2 v1, v2;
-					v1.x = p2.x - q.x;
-					v1.y = p2.y - q.y;
-					v2.x = c.x - q.x;
-					v2.y = c.y - q.y;
+					v1.x = q.x - p.x;
+					v1.y = q.y -p.y;
+					v2.x = c.x - p.x;
+					v2.y = c.y - p.y;
 					return (v1.x * v2.y - v1.y * v2.x);
 				}
 			}customcalculator;
-			LinkedList<Line> _drawing;
-			Line _line;
+			LinkedList<LineSegment> _drawing;
+			LineSegment _line;
 			float64x2 c1;
 			float64x2 c2;
 			float64x2 centre;
@@ -438,13 +440,13 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 					_line.p = _line.q;
 				}
 			}
-			drawingcurrentblock->Append(_drawing);
+			drawingllcurrentblock->Append(_drawing);
 			return;
 		}
 		void addPolyline(const DRW_Polyline& data) override
 		{
-			LinkedList<Line> _drawing;
-			Line _line;
+			LinkedList<LineSegment> _drawing;
+			LineSegment _line;
 			_line.p.x = data.vertlist[0]->basePoint.x;
 			_line.p.y = data.vertlist[0]->basePoint.y;
 			_line.q.x = data.vertlist[1]->basePoint.x;
@@ -458,7 +460,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 				_line.q.y = data.vertlist[i - 0]->basePoint.y;
 				_drawing << _line;
 			}
-			drawingcurrentblock->Append(_drawing);
+			drawingllcurrentblock->Append(_drawing);
 			return;
 		}
 		void addSpline(const DRW_Spline* data) override
@@ -613,8 +615,8 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 				length += Distance(controlpoints[i - 1], controlpoints[i]);
 			}
 
-			LinkedList<Line> _drawing;
-			Line _line;
+			LinkedList<LineSegment> _drawing;
+			LineSegment _line;
 
 			float64x2 p;
 			float64x2 q;
@@ -646,7 +648,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 			}
 			_drawing.tail->data.q.x = controlpoints[data->ncontrol - 1].x;
 			_drawing.tail->data.q.y = controlpoints[data->ncontrol - 1].y;
-			drawingcurrentblock->Append(_drawing);
+			drawingllcurrentblock->Append(_drawing);
 			delete[] controlpoints;
 			delete[] knots;
 			return;		
@@ -657,7 +659,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 		}
 		void addInsert(const DRW_Insert& data) override
 		{
-			LinkedList<Line> _drawing;
+			LinkedList<LineSegment> _drawing;
 			char blockname[256];
 			for (uint32 i = 0; i < data.name.size(); i++)
 				blockname[i] = data.name[i];
@@ -670,7 +672,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 				{
 					for (j = 0, block.current->data.blockdata.GotoHead(); j < block.current->data.blockdata.count;j++, block.current->data.blockdata.MoveRight())
 					{
-						Line line = block.current->data.blockdata.current->data;
+						LineSegment line = block.current->data.blockdata.current->data;
 						line.p.x *= data.xscale;
 						line.p.y *= data.yscale;
 						line.q.x *= data.xscale;
@@ -698,7 +700,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 					}
 				}
 			}
-			drawing.Append(_drawing);
+			drawingll.Append(_drawing);
 		}
 		void addTrace(const DRW_Trace& data) override
 		{
@@ -837,19 +839,19 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 	if (!dxf.read(&reader, false)) { return -1; }
 
 	//cout << "Exporting Drawing" << endl;
-	drawingexport.Release();
-	drawingexport.data = new Line[drawing.count];
-	drawingexport.size = drawing.count;
+	drawing.Release();
+	drawing.data = new LineSegment[drawingll.count];
+	drawing.count = drawingll.count;
 	uint32 i;
-	for (i = 0, drawing.GotoHead(); i < drawing.count; i++, drawing.MoveRight())
-		drawingexport.data[i] = drawing.Get();		
+	for (i = 0, drawingll.GotoHead(); i < drawingll.count; i++, drawingll.MoveRight())
+		drawing.data[i] = drawingll.Get();		
 
 	for (i = 0, block.GotoHead(); i < block.count; i++, block.MoveRight())
 		block.current->data.blockdata.Release();
 	block.Release();	
 
-	//cout << "drawing = " << (uint32)(void*)drawingexport.data << endl;
-	//cout << "drawinglength = "<< drawingexport.size << endl;
+	//cout << "drawingll = " << (uint32)(void*)drawing.data << endl;
+	//cout << "drawinglength = "<< drawing.count << endl;
 	cout << "LoadDXF Out" << endl;
 	return 0;
 }
@@ -859,60 +861,60 @@ EMSATTRIBUTE int32 GenerateLoops()
 	cout << "GenerateLoops In" << endl;
 
 	{
-		LinkedList<Line> chain;
-		uint32 linecountprevious = drawing.count;
-		while (drawing.count)
+		LinkedList<LineSegment> chain;
+		uint32 linecountprevious = drawingll.count;
+		while (drawingll.count)
 		{
-			drawing.GotoHead();
-			chain << drawing.Get();
-			if (drawing.RemoveAndMoveRight() == false)
+			drawingll.GotoHead();
+			chain << drawingll.Get();
+			if (drawingll.RemoveAndMoveRight() == false)
 			{
-				link << chain;
+				linkll << chain;
 				chain.Unlink();
 				break;
 			}
 			float64x2 startpoint = chain.current->data.p;
-			drawing.GotoHead();
+			drawingll.GotoHead();
 			while (1)
 			{
-				if (chain.current->data.q == drawing.current->data.p)
+				if (chain.current->data.q == drawingll.current->data.p)
 				{
-					chain << drawing.Get();
-					if (drawing.RemoveAndMoveRight() == false)
+					chain << drawingll.Get();
+					if (drawingll.RemoveAndMoveRight() == false)
 					{
-						if (linecountprevious == drawing.count)
+						if (linecountprevious == drawingll.count)
 						{
-							link << chain;
+							linkll << chain;
 							chain.Unlink();
 							break;
 						}
 						else
 						{
-							drawing.GotoHead();
-							linecountprevious = drawing.count;
+							drawingll.GotoHead();
+							linecountprevious = drawingll.count;
 						}
 					}
 					if (chain.tail->data.q == startpoint)
 					{
-						loop << chain;
+						loopll << chain;
 						chain.Unlink();
 						break;
 					}
 				}
 				else
 				{
-					if (drawing.MoveRight() == false)
+					if (drawingll.MoveRight() == false)
 					{
-						if (linecountprevious == drawing.count)
+						if (linecountprevious == drawingll.count)
 						{
-							link << chain;
+							linkll << chain;
 							chain.Unlink();
 							break;
 						}
 						else
 						{
-							drawing.GotoHead();
-							linecountprevious = drawing.count;
+							drawingll.GotoHead();
+							linecountprevious = drawingll.count;
 						}
 					}
 				}
@@ -922,117 +924,174 @@ EMSATTRIBUTE int32 GenerateLoops()
 
 	{
 		RESTART:
-		for (uint32 i = 0; i < link.size; i++)
+		for (uint32 i = 0; i < linkll.count; i++)
 		{
-			for (uint32 j = i + 1; j < link.size; j++)
+			for (uint32 j = i + 1; j < linkll.count; j++)
 			{
-				if (link[i].head->data.p == link[j].tail->data.q)
+				if (linkll[i].head->data.p == linkll[j].tail->data.q)
 				{
-					link[i].Append(link[j]);
-					link.Splice(j, 1);
+					linkll[i].Append(linkll[j]);
+					linkll.Splice(j, 1);
 					goto RESTART;
 				}
 			}
 		}
 	}
 
-	for (uint32 i = 0; i < loop.size; i++)
+	for (uint32 i = 0; i < loopll.count; i++)
 	{
-		Heap<Line> _loop;
-		loop[i].GotoHead();
+		Heap<LineSegment> _loop;
+		loopll[i].GotoHead();
 		while (1)
 		{
-			_loop << loop[i].Get();
-			if (loop[i].RemoveAndMoveRight() == false)
+			_loop << loopll[i].Get();
+			if (loopll[i].RemoveAndMoveRight() == false)
 				break;
 		}
-		loopexport << _loop;
+		loop << _loop;
+		loopdepth << 0;
 		_loop.Release();
 	}
-	for (uint32 i = 0; i < link.size; i++)
+	for (uint32 i = 0; i < linkll.count; i++)
 	{
-		Heap<Line> _link;
-		link[i].GotoHead();
+		Heap<LineSegment> _link;
+		linkll[i].GotoHead();
 		while (1)
 		{
-			_link << link[i].Get();
-			if (link[i].RemoveAndMoveRight() == false)
+			_link << linkll[i].Get();
+			if (linkll[i].RemoveAndMoveRight() == false)
 				break;
 		}
-		linkexport << _link;
+		link << _link;
 		_link.Release();
 	}
-	drawing.Release();
-	loop.Release();
-	link.Release();
+	drawingll.Release();
+	loopll.Release();
+	linkll.Release();
+
+	struct RayIntersection
+	{
+		uint32 RayLoopIntersectionCount(float64x2 point, uint32 loopindex)
+		{
+			uint32 intersectioncount = 0;
+			for (uint32 i = 0; i < loop[loopindex].count; i++)
+			{
+				float64 px = loop.data[loopindex].data[i].p.x;
+				float64 qx = loop.data[loopindex].data[i].q.x;
+				if (px > qx)
+				{
+					px = loop.data[loopindex].data[i].q.x;
+					qx = loop.data[loopindex].data[i].p.x;
+				}
+                if ((point.x > px) && (point.x < qx))
+				{
+					Line line(loop.data[loopindex].data[i].p, loop.data[loopindex].data[i].q);
+					float64x2 intersection = line.IntersectionWithVerticalLine(point.x);
+					if (intersection.y > point.y)
+						intersectioncount++;
+				}
+				if ((point.x == px) || (point.x == qx))
+				{
+					if(i==0)
+						continue;
+					if (loop.data[loopindex].data[i].p.y > point.y)
+					{
+						intersectioncount++;
+						i++;
+					}
+				}
+			}
+			return intersectioncount;
+		}
+	};
+
+	for (uint32 i = 0; i < loop.count; i++)
+	{
+		for (uint32 j = 0; j < loop.count; j++)
+		{
+			if (i == j)continue;
+			uint32 depth = 0;
+			RayIntersection rayintersection;
+			uint32 intersectioncount = rayintersection.RayLoopIntersectionCount(loop[i].data[0].p, j);
+			if (intersectioncount % 2)
+			{
+				
+				loopdepth.data[i]++;
+			}
+		}
+	}
 	cout << "GenerateLoops Out" << endl;
 
 	//Leak Test
-	//for (uint32 i = 0; i < loopexport.size; i++)
-	//	loopexport[i].Release();
-	//loopexport.Release();
-	//for (uint32 i = 0; i < linkexport.size; i++)
-	//	linkexport[i].Release();
-	//linkexport.Release();
+	//for (uint32 i = 0; i < loop.count; i++)
+	//	loop[i].Release();
+	//loop.Release();
+	//for (uint32 i = 0; i < link.count; i++)
+	//	link[i].Release();
+	//link.Release();
 
 	return 0;
 }
 
 EMSATTRIBUTE int32 GET_loopcount()
 {
-	return loopexport.size;
+	return loop.count;
 }
 EMSATTRIBUTE int32 GET_linkcount()
 {
-	return linkexport.size;
+	return link.count;
 }
 EMSATTRIBUTE int32 GET_looplinecount(uint32 index)
 {
-	return loopexport[index].size;
+	return loop[index].count;
 }
 EMSATTRIBUTE int32 GET_linklinecount(uint32 index)
 {
-	return linkexport[index].size;
+	return link[index].count;
+}
+EMSATTRIBUTE int32 GET_loopdepth(uint32 index)
+{
+	return loopdepth[index];
 }
 EMSATTRIBUTE float64 GET_loop_px(uint32 loopindex,uint32 lineindex)
 {
-	return linkexport[loopindex].data[lineindex].p.x;
+	return link[loopindex].data[lineindex].p.x;
 }
 EMSATTRIBUTE float64 GET_loop_py(uint32 loopindex, uint32 lineindex)
 {
-	return linkexport[loopindex].data[lineindex].p.y;
+	return link[loopindex].data[lineindex].p.y;
 }
 EMSATTRIBUTE float64 GET_loop_qx(uint32 loopindex, uint32 lineindex)
 {
-	return linkexport[loopindex].data[lineindex].q.x;
+	return link[loopindex].data[lineindex].q.x;
 }
 EMSATTRIBUTE float64 GET_loop_qy(uint32 loopindex, uint32 lineindex)
 {
-	return linkexport[loopindex].data[lineindex].q.y;
+	return link[loopindex].data[lineindex].q.y;
 }
 EMSATTRIBUTE float64 GET_link_px(uint32 linkindex, uint32 lineindex)
 {
-	return linkexport[linkindex].data[lineindex].p.x;
+	return link[linkindex].data[lineindex].p.x;
 }
 EMSATTRIBUTE float64 GET_link_py(uint32 linkindex, uint32 lineindex)
 {
-	return linkexport[linkindex].data[lineindex].p.y;
+	return link[linkindex].data[lineindex].p.y;
 }
 EMSATTRIBUTE float64 GET_link_qx(uint32 linkindex, uint32 lineindex)
 {
-	return linkexport[linkindex].data[lineindex].q.x;
+	return link[linkindex].data[lineindex].q.x;
 }
 EMSATTRIBUTE float64 GET_link_qy(uint32 linkindex, uint32 lineindex)
 {
-	return linkexport[linkindex].data[lineindex].q.y;
+	return link[linkindex].data[lineindex].q.y;
 }
 
 EMSATTRIBUTE void* GETdrawing()
 {
-	return (void*)drawingexport.data;
+	return (void*)drawing.data;
 }
 
 EMSATTRIBUTE uint32 GETdrawinglength()
 {
-	return drawingexport.size;
+	return drawing.count;
 }	

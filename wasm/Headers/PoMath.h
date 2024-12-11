@@ -1424,6 +1424,60 @@ float64 DistanceOfaPointFromLine(float64x3 P, float64x3 L1, float64x3 L2)
 	return Distance(Cross(P - L1, P - L2), float64x3(0, 0, 0)) / Distance(L2 - L1, float64x3(0, 0, 0));
 }
 
+float64 CheckSide(float64x2 p, float64x2 q, float64x2 c)
+{
+	float64x2 v1, v2;
+	v1.x = q.x - p.x;
+	v1.y = q.y - p.y;
+	v2.x = c.x - p.x;
+	v2.y = c.y - p.y;
+	return (v1.x * v2.y - v1.y * v2.x);
+}
+
+struct Line
+{
+	float64 m;
+	float64 c;
+	Line()
+	{
+		ZeroMemory(this, sizeof(Line));
+	};
+	Line(float64 _m, float64 _c)
+	{
+		m = _m;
+		c = _c;
+	}
+	Line(float64x2 p, float64x2 q)
+	{
+		m = (q.y - p.y) / (q.x - p.x);
+		c = p.y - m * p.x;
+	}
+	float64 y(float64 x)
+	{
+		return m * x + c;
+	}
+	float64 x(float64 y)
+	{
+		return (y - c) / m;
+	}
+	float64x2 Intersection(Line l)
+	{
+		float64 x = (l.c - c) / (m - l.m);
+		float64 y = m * x + c;
+		return float64x2(x, y);
+	}
+	float64x2 IntersectionWithVerticalLine(float64 x)
+	{
+		float64 y = m * x + c;
+		return float64x2(x, y);
+	}
+	float64x2 IntersctionWithHorizontalLine(float64 y)
+	{
+		float64 x = (y - c) / m;
+		return float64x2(x, y);
+	}
+};
+
 struct Kinematics
 {
 	float64 S(float64 u, float64 v, float64 a)

@@ -4348,6 +4348,7 @@ var _GET_loopcount = Module['_GET_loopcount'] = createExportWrapper('GET_loopcou
 var _GET_linkcount = Module['_GET_linkcount'] = createExportWrapper('GET_linkcount', 0);
 var _GET_looplinecount = Module['_GET_looplinecount'] = createExportWrapper('GET_looplinecount', 1);
 var _GET_linklinecount = Module['_GET_linklinecount'] = createExportWrapper('GET_linklinecount', 1);
+var _GET_loopdepth = Module['_GET_loopdepth'] = createExportWrapper('GET_loopdepth', 1);
 var _GET_loop_px = Module['_GET_loop_px'] = createExportWrapper('GET_loop_px', 2);
 var _GET_loop_py = Module['_GET_loop_py'] = createExportWrapper('GET_loop_py', 2);
 var _GET_loop_qx = Module['_GET_loop_qx'] = createExportWrapper('GET_loop_qx', 2);

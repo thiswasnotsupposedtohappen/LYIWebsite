@@ -501,56 +501,56 @@ template <typename DataType>
 struct Heap
 {
 	DataType* data;
-	uint32 size;
+	uint32 count;
 	Heap()
 	{
 		ZeroMemory(this, sizeof(Heap));
 	}
 	~Heap()
 	{
-		//if(size)
+		//if(count)
 		//	delete[] data;
 		//ZeroMemory(this, sizeof(Heap));
 	};
 	Heap(const Heap& _heap)
 	{
-		data = new DataType[_heap.size];
-		MemoryCopy(data, _heap.data, sizeof(DataType) * _heap.size);
-		size = _heap.size;
+		data = new DataType[_heap.count];
+		MemoryCopy(data, _heap.data, sizeof(DataType) * _heap.count);
+		count = _heap.count;
 	}
 	void operator = (const Heap& _heap)
 	{
 		delete[] data;
-		data = new DataType[_heap.size];
-		MemoryCopy(data, _heap.data, sizeof(DataType) * _heap.size);
-		size = _heap.size;
+		data = new DataType[_heap.count];
+		MemoryCopy(data, _heap.data, sizeof(DataType) * _heap.count);
+		count = _heap.count;
 	}
 	void operator << (DataType _data)
 	{
-		DataType* newdata = new DataType[size + 1];
-		MemoryCopy(newdata, data, sizeof(DataType) * size);
-		newdata[size] = _data;
+		DataType* newdata = new DataType[count + 1];
+		MemoryCopy(newdata, data, sizeof(DataType) * count);
+		newdata[count] = _data;
 		delete[] data;
 		data = newdata;
-		size++;
+		count++;
 	}
 	void Append(DataType* _data, uint32 _size)
 	{
-		DataType* newdata = new DataType[size + _size];
-		MemoryCopy(newdata, data, sizeof(DataType) * size);
-		MemoryCopy(&newdata[size], _data, sizeof(DataType) * _size);
+		DataType* newdata = new DataType[count + _size];
+		MemoryCopy(newdata, data, sizeof(DataType) * count);
+		MemoryCopy(&newdata[count], _data, sizeof(DataType) * _size);
 		delete[] data;
 		data = newdata;
-		size += _size;
+		count += _size;
 	}
 	void Splice(uint32 _index, uint32 _size)
 	{
-		DataType* newdata = new DataType[size - _size];
+		DataType* newdata = new DataType[count - _size];
 		MemoryCopy(newdata, data, sizeof(DataType) * _index);
-		MemoryCopy(&newdata[_index], &data[_index + _size], sizeof(DataType) * (size - _index - _size));
+		MemoryCopy(&newdata[_index], &data[_index + _size], sizeof(DataType) * (count - _index - _size));
 		delete[] data;
 		data = newdata;
-		size -= _size;
+		count -= _size;
 	}
 	DataType& operator[](uint32 index)
 	{
@@ -562,7 +562,7 @@ struct Heap
 	}
 	void Release()
 	{
-		if (size)
+		if (count)
 			delete[] data;
 		ZeroMemory(this, sizeof(Heap));
 	}
