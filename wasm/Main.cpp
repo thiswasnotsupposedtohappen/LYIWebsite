@@ -8,7 +8,7 @@
 #define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
 #define FAULT __debugbreak();
-//#define TESTFILE "debugspline.dxf"
+#define TESTFILE "debugspline.dxf"
 //#define TESTFILE "All Jali Designs.dxf"
 //#define TESTFILE "lwpoly.dxf"
 //#define TESTFILE "Ellipse.dxf"
@@ -19,7 +19,7 @@
 //#define TESTFILE "Test.dxf"
 //#define TESTFILE "Loop.dxf"
 //#define TESTFILE "LoopDepthTest.dxf"
-#define TESTFILE "22.dxf"
+//#define TESTFILE "22.dxf"
 #endif
 #include <iostream>
 #include <fstream>
@@ -982,35 +982,48 @@ EMSATTRIBUTE int32 GenerateLoops()
 	loopll.Release();
 	linkll.Release();
 
+	static uint32 i,j,k;
 	struct RayIntersection
 	{
 		uint32 RayLoopIntersectionCount(float64x2 point, uint32 loopindex)
 		{
 			uint32 intersectioncount = 0;
-			for (uint32 i = 0; i < loop[loopindex].count; i++)
+			for (k = 0; k < loop[loopindex].count; k++)
 			{
-				float64 px = loop.data[loopindex].data[i].p.x;
-				float64 qx = loop.data[loopindex].data[i].q.x;
+				float64 px = loop.data[loopindex].data[k].p.x;
+				float64 qx = loop.data[loopindex].data[k].q.x;
 				if (px > qx)
 				{
-					px = loop.data[loopindex].data[i].q.x;
-					qx = loop.data[loopindex].data[i].p.x;
+					px = loop.data[loopindex].data[k].q.x;
+					qx = loop.data[loopindex].data[k].p.x;
 				}
                 if ((point.x > px) && (point.x < qx))
 				{
-					Line line(loop.data[loopindex].data[i].p, loop.data[loopindex].data[i].q);
+					Line line(loop.data[loopindex].data[k].p, loop.data[loopindex].data[k].q);
 					float64x2 intersection = line.IntersectionWithVerticalLine(point.x);
 					if (intersection.y > point.y)
 						intersectioncount++;
 				}
 				if ((point.x == px) || (point.x == qx))
 				{
-					if(i==0)
-						continue;
-					if (loop.data[loopindex].data[i].p.y > point.y)
+					if (point.x == 149.51120000000000)
+						int32 test = 0;
+					if (loop.data[loopindex].data[k].p.y > point.y)
 					{
+						if (k == 0)
+							continue;
+						else if (k == (loop[loopindex].count - 1))
+						{
+							if (intersectioncount%2==0)
+								continue;
+							else
+							{
+								intersectioncount++;
+								break;
+							}								
+						}
 						intersectioncount++;
-						i++;
+						k++;
 					}
 				}
 			}
@@ -1018,9 +1031,9 @@ EMSATTRIBUTE int32 GenerateLoops()
 		}
 	};
 
-	for (uint32 i = 0; i < loop.count; i++)
+	for (i = 0; i < loop.count; i++)
 	{
-		for (uint32 j = 0; j < loop.count; j++)
+		for (j = 0; j < loop.count; j++)
 		{
 			if (i == j)continue;
 			uint32 depth = 0;

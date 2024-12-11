@@ -1823,7 +1823,6 @@ function DesignSave()
   _manufacturingspecifications.designobject.forEach(function(_designobject)
   {
     _designobject.drawing = undefined;
-    _designobject.drawinglength = 0;
   });
   const designjsonstring = JSON.stringify(_manufacturingspecifications,null,2);
   const blob = new Blob([designjsonstring], { type: 'application/json' });
