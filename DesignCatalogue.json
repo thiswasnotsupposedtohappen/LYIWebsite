@@ -133,6 +133,144 @@
           "scale": 0.5
         }
       ]
+    },
+    {
+      "name": "PartitionDesign-1",
+      "dimensionsx": 2440,
+      "dimensionsy": 1220,
+      "size": "8ft x 4ft",
+      "supplier": "LightYear",
+      "construction": "Standalone",
+      "process": "CNC Router 6mm",
+      "materialfront": "Acrylic",
+      "thicknessfront": "10mm",
+      "colorfront": "Red",
+      "designobjectlength" : 1,
+      "designobject": [
+        {
+          "dxfurl": "dxf/Partition Jali Objects/1.dxf",
+          "thumbnailurl": "dxf/Partition Jali Objects/1.jpg",
+          "offsetx": 0,
+          "offsety": 0,
+          "angle": 0,
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "name": "PartitionDesign-2",
+      "dimensionsx": 2440,
+      "dimensionsy": 1220,
+      "size": "8ft x 4ft",
+      "supplier": "LightYear",
+      "construction": "Standalone",
+      "process": "CNC Router 6mm",
+      "materialfront": "Acrylic",
+      "thicknessfront": "10mm",
+      "colorfront": "Red",
+      "designobjectlength" : 1,
+      "designobject": [
+        {
+          "dxfurl": "dxf/Partition Jali Objects/2.dxf",
+          "thumbnailurl": "dxf/Partition Jali Objects/2.jpg",
+          "offsetx": 0,
+          "offsety": 0,
+          "angle": 0,
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "name": "PartitionDesign-3",
+      "dimensionsx": 2440,
+      "dimensionsy": 1220,
+      "size": "8ft x 4ft",
+      "supplier": "LightYear",
+      "construction": "Standalone",
+      "process": "CNC Router 6mm",
+      "materialfront": "Acrylic",
+      "thicknessfront": "10mm",
+      "colorfront": "Red",
+      "designobjectlength" : 1,
+      "designobject": [
+        {
+          "dxfurl": "dxf/Partition Jali Objects/3.dxf",
+          "thumbnailurl": "dxf/Partition Jali Objects/3.jpg",
+          "offsetx": 0,
+          "offsety": 0,
+          "angle": 0,
+          "scale": 1
+        }
+      ]
+    },    
+    {
+      "name": "PartitionDesign-4",
+      "dimensionsx": 2440,
+      "dimensionsy": 1220,
+      "size": "8ft x 4ft",
+      "supplier": "LightYear",
+      "construction": "Standalone",
+      "process": "CNC Router 6mm",
+      "materialfront": "Acrylic",
+      "thicknessfront": "10mm",
+      "colorfront": "Red",
+      "designobjectlength" : 1,
+      "designobject": [
+        {
+          "dxfurl": "dxf/Partition Jali Objects/4.dxf",
+          "thumbnailurl": "dxf/Partition Jali Objects/4.jpg",
+          "offsetx": 0,
+          "offsety": 0,
+          "angle": 0,
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "name": "PartitionDesign-5",
+      "dimensionsx": 2440,
+      "dimensionsy": 1220,
+      "size": "8ft x 4ft",
+      "supplier": "LightYear",
+      "construction": "Standalone",
+      "process": "CNC Router 6mm",
+      "materialfront": "Acrylic",
+      "thicknessfront": "10mm",
+      "colorfront": "Red",
+      "designobjectlength" : 1,
+      "designobject": [
+        {
+          "dxfurl": "dxf/Partition Jali Objects/5.dxf",
+          "thumbnailurl": "dxf/Partition Jali Objects/5.jpg",
+          "offsetx": 0,
+          "offsety": 0,
+          "angle": 0,
+          "scale": 1
+        }
+      ]
+    },
+    {
+      "name": "PartitionDesign-6",
+      "dimensionsx": 2440,
+      "dimensionsy": 1220,
+      "size": "8ft x 4ft",
+      "supplier": "LightYear",
+      "construction": "Standalone",
+      "process": "CNC Router 6mm",
+      "materialfront": "Acrylic",
+      "thicknessfront": "Red",
+      "colorfront": "10mm",
+      "designobjectlength" : 1,
+      "designobject": [
+        {
+          "dxfurl": "dxf/Partition Jali Objects/6.dxf",
+          "thumbnailurl": "dxf/Partition Jali Objects/6.jpg",
+          "offsetx": 0,
+          "offsety": 0,
+          "angle": 0,
+          "scale": 1
+        }
+      ]
     }
   ]
 }
