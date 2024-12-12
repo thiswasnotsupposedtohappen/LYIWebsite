@@ -412,8 +412,8 @@ document.addEventListener('mousemove', function(event)
 {
   if (buttonleftmousedown) 
   {
-    mousex += event.movementX;
-    mousey -= event.movementY;
+    mousex += event.movementX / zoom;
+    mousey -= event.movementY / zoom;
     Draw();
   }
 });
@@ -722,7 +722,6 @@ function OnClickConstruction(type)
     manufacturingspecifications.materialback = undefined;
     manufacturingspecifications.thicknessback = undefined;
     manufacturingspecifications.colorback = undefined;
-    manufacturingspecifications.designrawmaterial_backcolor = "white";
   }
   if(type=='Back-Supported')
   {
@@ -1388,14 +1387,14 @@ function Draw()
   ctx.strokeStyle = "red";
   ctx.lineWidth = 1;
   ctx.beginPath();
-  ctx.moveTo(mousex,mousey);
-  ctx.lineTo((canvas.width/2),mousey);
-  ctx.moveTo(mousex,mousey);
-  ctx.lineTo(mousex,(canvas.height/2));    
-  ctx.moveTo(mousex,mousey);
-  ctx.lineTo(-(canvas.width/2),mousey);
-  ctx.moveTo(mousex,mousey);
-  ctx.lineTo(mousex,-(canvas.height/2));    
+  ctx.moveTo(mousex * zoom,mousey * zoom);
+  ctx.lineTo((100000) * zoom,mousey * zoom);
+  ctx.moveTo(mousex * zoom,mousey * zoom);
+  ctx.lineTo(mousex * zoom ,(100000) * zoom);    
+  ctx.moveTo(mousex * zoom,mousey * zoom);
+  ctx.lineTo(-(100000) * zoom,mousey * zoom);
+  ctx.moveTo(mousex * zoom,mousey * zoom);
+  ctx.lineTo(mousex * zoom,-(100000) * zoom);    
   ctx.stroke();
 
   ctx.strokeStyle = "black";  
@@ -1408,11 +1407,11 @@ function Draw()
       if(manufacturingspecifications.designrawmaterial != undefined)
       {
         ctx.beginPath();
-        ctx.moveTo((manufacturingspecifications.designrawmaterial[0].p.x * zoom + mousex),(manufacturingspecifications.designrawmaterial[0].p.y * zoom + mousey));
-        ctx.lineTo((manufacturingspecifications.designrawmaterial[0].q.x * zoom + mousex),(manufacturingspecifications.designrawmaterial[0].q.y * zoom + mousey));   
-        ctx.lineTo((manufacturingspecifications.designrawmaterial[1].q.x * zoom + mousex),(manufacturingspecifications.designrawmaterial[1].q.y * zoom + mousey));   
-        ctx.lineTo((manufacturingspecifications.designrawmaterial[2].q.x * zoom + mousex),(manufacturingspecifications.designrawmaterial[2].q.y * zoom + mousey));
-        ctx.lineTo((manufacturingspecifications.designrawmaterial[3].q.x * zoom + mousex),(manufacturingspecifications.designrawmaterial[3].q.y * zoom + mousey));    
+        ctx.moveTo(((manufacturingspecifications.designrawmaterial[0].p.x + mousex) * zoom),((manufacturingspecifications.designrawmaterial[0].p.y + mousey) * zoom));
+        ctx.lineTo(((manufacturingspecifications.designrawmaterial[0].q.x + mousex) * zoom),((manufacturingspecifications.designrawmaterial[0].q.y + mousey) * zoom));   
+        ctx.lineTo(((manufacturingspecifications.designrawmaterial[1].q.x + mousex) * zoom),((manufacturingspecifications.designrawmaterial[1].q.y + mousey) * zoom));   
+        ctx.lineTo(((manufacturingspecifications.designrawmaterial[2].q.x + mousex) * zoom),((manufacturingspecifications.designrawmaterial[2].q.y + mousey) * zoom));
+        ctx.lineTo(((manufacturingspecifications.designrawmaterial[3].q.x + mousex) * zoom),((manufacturingspecifications.designrawmaterial[3].q.y + mousey) * zoom));    
         ctx.fill();
         ctx.stroke();
       }
@@ -1450,7 +1449,7 @@ function Draw()
                 manufacturingspecifications.designobject[mdo].angle,
                 manufacturingspecifications.designobject[mdo].scale);
               ctx.beginPath();
-              ctx.moveTo((p.x * zoom + mousex),(p.y * zoom + mousey));
+              ctx.moveTo(((p.x + mousex) * zoom),((p.y + mousey) * zoom));
               for(var i=0;i<manufacturingspecifications.designobject[mdo].drawing.loop[l].linecount;i++)
               {
                 q=TransformPoint(manufacturingspecifications.designobject[mdo].drawing.loop[l].line[i].q,
@@ -1458,7 +1457,7 @@ function Draw()
                   manufacturingspecifications.designobject[mdo].offsety,
                   manufacturingspecifications.designobject[mdo].angle,
                   manufacturingspecifications.designobject[mdo].scale);
-                ctx.lineTo((q.x * zoom + mousex),(q.y * zoom + mousey));   
+                ctx.lineTo(((q.x + mousex) * zoom),((q.y + mousey) * zoom));
               }
               ctx.closePath();
               ctx.fill();
@@ -1471,28 +1470,27 @@ function Draw()
         else
           ctx.strokeStyle = "white"; 
         for(var l=0;l<manufacturingspecifications.designobject[mdo].drawing.linkcount;l++)
+        {
+          var p = new Point();
+          var q = new Point();
+          p=TransformPoint(manufacturingspecifications.designobject[mdo].drawing.link[l].line[0].p,
+            manufacturingspecifications.designobject[mdo].offsetx,
+            manufacturingspecifications.designobject[mdo].offsety,
+            manufacturingspecifications.designobject[mdo].angle,
+            manufacturingspecifications.designobject[mdo].scale);
+          ctx.beginPath();
+          ctx.moveTo(((p.x + mousex) * zoom),((p.y + mousey) * zoom));
+          for(var i=0;i<manufacturingspecifications.designobject[mdo].drawing.link[l].linecount;i++)
           {
-            var p = new Point();
-            var q = new Point();
-            p=TransformPoint(manufacturingspecifications.designobject[mdo].drawing.link[l].line[0].p,
+            q=TransformPoint(manufacturingspecifications.designobject[mdo].drawing.link[l].line[i].q,
               manufacturingspecifications.designobject[mdo].offsetx,
               manufacturingspecifications.designobject[mdo].offsety,
               manufacturingspecifications.designobject[mdo].angle,
               manufacturingspecifications.designobject[mdo].scale);
-            ctx.beginPath();
-            ctx.moveTo((p.x * zoom + mousex),(p.y * zoom + mousey));
-            for(var i=0;i<manufacturingspecifications.designobject[mdo].drawing.link[l].linecount;i++)
-            {
-              q=TransformPoint(manufacturingspecifications.designobject[mdo].drawing.link[l].line[i].q,
-                manufacturingspecifications.designobject[mdo].offsetx,
-                manufacturingspecifications.designobject[mdo].offsety,
-                manufacturingspecifications.designobject[mdo].angle,
-                manufacturingspecifications.designobject[mdo].scale);
-              ctx.lineTo((q.x * zoom + mousex),(q.y * zoom + mousey));   
-            }
-            ctx.stroke();
+            ctx.lineTo(((q.x + mousex) * zoom),((q.y + mousey) * zoom));  
           }
-
+          ctx.stroke();
+        }
       }
     }
   }
@@ -1864,11 +1862,11 @@ function DesignSave()
 }
 function DesignOpen() 
 {
-  const fileInput = document.createElement('input');
-  fileInput.type = 'file';
-  fileInput.accept = '.json';
+  const fileinput = document.createElement('input');
+  fileinput.type = 'file';
+  fileinput.accept = '.json';
 
-  fileInput.onchange = event => 
+  fileinput.onchange = event => 
   {
     const file = event.target.files[0];
     if (!file) return;
@@ -1915,15 +1913,15 @@ function DesignOpen()
     reader.readAsText(file);
   };
 
-  fileInput.click();
+  fileinput.click();
 }
 function DesignUpload()
 {
-  const fileInput = document.createElement('input');
-  fileInput.type = 'file';
-  fileInput.accept = '.dxf';
+  const fileinput = document.createElement('input');
+  fileinput.type = 'file';
+  fileinput.accept = '.dxf';
 
-  fileInput.onchange = event => 
+  fileinput.onchange = event => 
   {
     const file = event.target.files[0];
     if (!file) return;
@@ -2035,7 +2033,7 @@ function DesignUpload()
     reader.readAsText(file);
   };
 
-  fileInput.click();
+  fileinput.click();
 }
 </script>
 
