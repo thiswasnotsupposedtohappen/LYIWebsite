@@ -1466,6 +1466,33 @@ function Draw()
             }
           }
         }
+        if(manufacturingspecifications.colorfront != "Black")
+          ctx.strokeStyle = "Black"; 
+        else
+          ctx.strokeStyle = "white"; 
+        for(var l=0;l<manufacturingspecifications.designobject[mdo].drawing.linkcount;l++)
+          {
+            var p = new Point();
+            var q = new Point();
+            p=TransformPoint(manufacturingspecifications.designobject[mdo].drawing.link[l].line[0].p,
+              manufacturingspecifications.designobject[mdo].offsetx,
+              manufacturingspecifications.designobject[mdo].offsety,
+              manufacturingspecifications.designobject[mdo].angle,
+              manufacturingspecifications.designobject[mdo].scale);
+            ctx.beginPath();
+            ctx.moveTo((p.x * zoom + mousex),(p.y * zoom + mousey));
+            for(var i=0;i<manufacturingspecifications.designobject[mdo].drawing.link[l].linecount;i++)
+            {
+              q=TransformPoint(manufacturingspecifications.designobject[mdo].drawing.link[l].line[i].q,
+                manufacturingspecifications.designobject[mdo].offsetx,
+                manufacturingspecifications.designobject[mdo].offsety,
+                manufacturingspecifications.designobject[mdo].angle,
+                manufacturingspecifications.designobject[mdo].scale);
+              ctx.lineTo((q.x * zoom + mousex),(q.y * zoom + mousey));   
+            }
+            ctx.stroke();
+          }
+
       }
     }
   }
