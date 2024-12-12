@@ -402,6 +402,217 @@
   </div>
 </body>
 </html>
+<style>
+  .editorribbon
+  {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+  
+    height: 180px;
+    align-items: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    column-gap: 10px;
+  
+    background-color: #FFFFFF;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+  .editorribbonbutton
+  {  
+    margin-top: 100px;
+    display: flex;
+    height: 50px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+  
+  .shop-basepellete
+  {
+    background-color: rgb(124,85,59);
+    border-radius: 30px;
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  .shop-containerpellete
+  {
+    background-color: rgb(228, 228, 228);
+    border-radius: 10px;
+    border-style: solid;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  
+    display: grid;
+    grid-template-columns: 220px 1fr;
+  }
+  .shop-containerpellete-specifications
+  {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+  }
+  .shop-containerpellete-designfile
+  {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .shop-manufacturingconfig-options
+  {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .shop-manufacturingconfig-input
+  {
+    width: 213px;
+    height: 50px;
+    text-align: center;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: black;
+  
+    font-size: 20px;
+  }
+  .shop-manufacturingconfig-button
+  {
+    width: 220px;
+    height: 50px;
+    text-align: center;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: black;
+    vertical-align: middle;
+  
+    position: relative;
+  }
+  .shop-manufacturingconfig-button-colorpatch
+  {
+    position: absolute;
+    top: 8px;
+    right: 6px;
+  
+    width: 40px;
+    height: 30px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: black;
+  }
+  
+  .shop-designelements-tray
+  {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  
+    position: relative;
+  }
+  .shop-designelements-tray-editor
+  {
+    display: inline-block;
+    margin: 10px;
+    width: 600px;
+    height: 50px;
+  
+    border-radius: 20px;
+    border-style: solid;
+    text-align: left;  
+  
+    padding-left: 20px;
+    padding-bottom: 10px;
+    margin-right: 100px;
+  
+    position: relative;
+  }
+  .shop-designelements-tray-item
+  {
+    display: block;
+    height: 250px;
+    position: relative;
+  }
+  .shop-designelements-tray-editor-input
+  {
+    display: inline-flex;
+    width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 30px;
+    text-align: center;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: black;
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  .shop-designelements-tray-item-button
+  {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 25px;
+    border-color: rgb(0, 0, 0);
+    vertical-align: middle;
+    justify-content: center;  
+  }
+  .shop-designelements-tray-item-button:hover
+  {
+    color: rgb(255, 115, 0);
+  }
+  .shop-designelements-tray-item-img
+  {
+    margin: 10px;;
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 2px;
+  }
+  
+  .shop-designfile
+  {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .shop-designfile-button
+  {
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    border-color: black;
+    vertical-align: middle;
+  }
+  
+  .shop-review-grid
+  {
+    display: grid;
+    grid-template-columns:300px 1fr 1fr;
+    gap: 10px;  
+  }
+</style>
 
 <script src="wasm/LYIWebsite.js"></script>  
 <script>
@@ -2066,29 +2277,6 @@ function DesignUpload()
   fileinput.click();
 }
 
-document.querySelectorAll(".shop-designelements-tray")[2].innerHTML = `
-<div style=" width: 100%;box-sizing: border-box;">
-  <h3><b>Add Design Elements</b></h3>
-</div>
-`;
-for(var i=1;i<=32;i++)
-{
-  document.querySelectorAll(".shop-designelements-tray")[2].innerHTML += `
-  <div class="shop-designelements-tray-item">
-    <img src="dxf/Mandir Jali Objects/`+i+`.jpg" class="shop-designelements-tray-item-img">
-    <button class="shop-designelements-tray-item-button" onclick="DesignAdd('dxf/Mandir Jali Objects/',`+ i +`)" style="bottom: 5px;left:85px;background-color: rgb(30, 255, 0);"><span class="material-symbols-outlined">add</span></button>
-  </div>
-  `;
-}   
-for(var i=1;i<=184;i++)
-{
-  document.querySelectorAll(".shop-designelements-tray")[2].innerHTML += `
-  <div class="shop-designelements-tray-item">
-    <img src="dxf/Partition Jali Objects/`+i+`.jpg" class="shop-designelements-tray-item-img">
-    <button class="shop-designelements-tray-item-button" onclick="DesignAdd('dxf/Partition Jali Objects/',`+ i +`)" style="bottom: 5px;left:85px;background-color: rgb(30, 255, 0);"><span class="material-symbols-outlined">add</span></button>
-  </div>
-  `;
-}
 var designelementeditindex = undefined;
 const url = new URLSearchParams(window.location.search);
 if(url.size == 0)
@@ -2115,6 +2303,20 @@ Module.onRuntimeInitialized = function()
     var _manufacturingspecifications = new ManufacturingSpecifications();
     if(url.get("type") == "Mandir")
     {
+      document.querySelectorAll(".shop-designelements-tray")[2].innerHTML = `
+      <div style=" width: 100%;box-sizing: border-box;">
+        <h3><b>Add Design Elements</b></h3>
+      </div>
+      `;
+      for(var i=1;i<=32;i++)
+      {
+        document.querySelectorAll(".shop-designelements-tray")[2].innerHTML += `
+        <div class="shop-designelements-tray-item">
+          <img src="dxf/Mandir Jali Objects/`+i+`.jpg" class="shop-designelements-tray-item-img">
+          <button class="shop-designelements-tray-item-button" onclick="DesignAdd('dxf/Mandir Jali Objects/',`+ i +`)" style="bottom: 5px;left:85px;background-color: rgb(30, 255, 0);"><span class="material-symbols-outlined">add</span></button>
+        </div>
+        `;
+      }  
       zoom = 1.0;
       _manufacturingspecifications.dimensionsx = 300;
       _manufacturingspecifications.dimensionsy = 500;
@@ -2131,6 +2333,20 @@ Module.onRuntimeInitialized = function()
     }
     if(url.get("type") == "Partition")
     {
+      document.querySelectorAll(".shop-designelements-tray")[2].innerHTML = `
+      <div style=" width: 100%;box-sizing: border-box;">
+        <h3><b>Add Design Elements</b></h3>
+      </div>
+      `;
+      for(var i=1;i<=184;i++)
+      {
+        document.querySelectorAll(".shop-designelements-tray")[2].innerHTML += `
+        <div class="shop-designelements-tray-item">
+          <img src="dxf/Partition Jali Objects/`+i+`.jpg" class="shop-designelements-tray-item-img">
+          <button class="shop-designelements-tray-item-button" onclick="DesignAdd('dxf/Partition Jali Objects/',`+ i +`)" style="bottom: 5px;left:85px;background-color: rgb(30, 255, 0);"><span class="material-symbols-outlined">add</span></button>
+        </div>
+        `;
+      }
       zoom = 0.5;
       _manufacturingspecifications.dimensionsx = 2440;
       _manufacturingspecifications.dimensionsy = 1220;
@@ -2233,214 +2449,3 @@ Module.onRuntimeInitialized = function()
 
 </script>
 
-<style>
-.editorribbon
-{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
-
-  height: 180px;
-  align-items: center;
-  padding-left: 50px;
-  padding-right: 50px;
-  column-gap: 10px;
-
-  background-color: #FFFFFF;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-.editorribbonbutton
-{  
-  margin-top: 100px;
-  display: flex;
-  height: 50px;
-  border-radius: 10px;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-
-  text-decoration: none;
-  font-size: 25px;
-  font-weight: 600;
-  color: #1a1a1a;
-}
-
-.shop-basepellete
-{
-  background-color: rgb(124,85,59);
-  border-radius: 30px;
-  padding: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
-.shop-containerpellete
-{
-  background-color: rgb(228, 228, 228);
-  border-radius: 10px;
-  border-style: solid;
-  padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-
-  display: grid;
-  grid-template-columns: 220px 1fr;
-}
-.shop-containerpellete-specifications
-{
-  display: grid;
-  grid-template-columns: 220px 1fr;
-}
-.shop-containerpellete-designfile
-{
-  width: 100%;
-  box-sizing: border-box;
-}
-.shop-manufacturingconfig-options
-{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.shop-manufacturingconfig-input
-{
-  width: 213px;
-  height: 50px;
-  text-align: center;
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 10px;
-  border-color: black;
-
-  font-size: 20px;
-}
-.shop-manufacturingconfig-button
-{
-  width: 220px;
-  height: 50px;
-  text-align: center;
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 10px;
-  border-color: black;
-  vertical-align: middle;
-
-  position: relative;
-}
-.shop-manufacturingconfig-button-colorpatch
-{
-  position: absolute;
-  top: 8px;
-  right: 6px;
-
-  width: 40px;
-  height: 30px;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 5px;
-  border-color: black;
-}
-
-.shop-designelements-tray
-{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-
-  position: relative;
-}
-.shop-designelements-tray-editor
-{
-  display: inline-block;
-  margin: 10px;
-  width: 600px;
-  height: 50px;
-
-  border-radius: 20px;
-  border-style: solid;
-  text-align: left;  
-
-  padding-left: 20px;
-  padding-bottom: 10px;
-  margin-right: 100px;
-
-  position: relative;
-}
-.shop-designelements-tray-item
-{
-  display: block;
-  height: 250px;
-  position: relative;
-}
-.shop-designelements-tray-editor-input
-{
-  display: inline-flex;
-  width: 200px;
-  margin-left: auto;
-  margin-right: auto;
-  height: 30px;
-  text-align: center;
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 10px;
-  border-color: black;
-  font-size: 20px;
-  margin-top: 10px;
-}
-.shop-designelements-tray-item-button
-{
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  text-align: center;
-  border-style: solid;
-  border-width: 3px;
-  border-radius: 25px;
-  border-color: rgb(0, 0, 0);
-  vertical-align: middle;
-  justify-content: center;  
-}
-.shop-designelements-tray-item-button:hover
-{
-  color: rgb(255, 115, 0);
-}
-.shop-designelements-tray-item-img
-{
-  margin: 10px;;
-  width: 200px;
-  height: 200px;
-  border-radius: 20px;
-  border-style: solid;
-  border-width: 2px;
-}
-
-.shop-designfile
-{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-.shop-designfile-button
-{
-  width: 200px;
-  height: 50px;
-  text-align: center;
-  border-style: solid;
-  border-width: 2px;
-  border-radius: 10px;
-  border-color: black;
-  vertical-align: middle;
-}
-
-.shop-review-grid
-{
-  display: grid;
-  grid-template-columns:300px 1fr 1fr;
-  gap: 10px;  
-}
-</style>
