@@ -8,11 +8,11 @@
 #define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
 #define FAULT __debugbreak();
-#define TESTFILE "debugspline.dxf"
+//#define TESTFILE "debugspline.dxf"
 //#define TESTFILE "All Jali Designs.dxf"
 //#define TESTFILE "lwpoly.dxf"
 //#define TESTFILE "Ellipse.dxf"
-//#define TESTFILE "Lasercutting Cargo 2mm MS with material.dxf"
+#define TESTFILE "Lasercutting Cargo 2mm MS with material.dxf"
 //#define TESTFILE "Om Jali.dxf"
 //#define TESTFILE "spline.dxf"
 //#define TESTFILE "Test2.dxf"
@@ -60,9 +60,9 @@ EMSCRIPTEN_KEEPALIVE int32 main()
 #ifndef EMS
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	int32 LoadDXF(char* file, uint32 length);
-	int32 GenerateLoops();
+	int32 GenerateLoops(float64);
 	if (LoadDXF((char*)"intermediated.txt", 0))return -1;
-	if (GenerateLoops())return -2;
+	if (GenerateLoops(0.001))return -2;
 #endif
 	return 0;
 }
@@ -860,7 +860,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 	return 0;
 }
 
-EMSATTRIBUTE int32 GenerateLoops()
+EMSATTRIBUTE int32 GenerateLoops(float64 autoclosethreshold)
 {
 	cout << "GenerateLoops In" << endl;
 
@@ -886,13 +886,19 @@ EMSATTRIBUTE int32 GenerateLoops()
 				chain.Unlink();
 				break;
 			}
-			float64x2 startpoint = chain.current->data.p;
 			drawingll.GotoHead();
 			while (1)
 			{
-				if (chain.current->data.q == drawingll.current->data.p)
+				//chain.current->data.q == drawingll.current->data.p
+				if ((Absolute(chain.tail->data.q.x - drawingll.current->data.p.x) <= autoclosethreshold) &&
+					(Absolute(chain.tail->data.q.y - drawingll.current->data.p.y) <= autoclosethreshold))
 				{
-					chain << drawingll.Get();
+					LineSegment _line;
+					_line.p.x = drawingll.current->data.p.x;
+					_line.p.y = drawingll.current->data.p.y;
+					_line.q.x = drawingll.current->data.q.x;
+					_line.q.y = drawingll.current->data.q.y;
+					chain.PushTail(_line);
 					if (drawingll.RemoveAndMoveRight() == false)
 					{
 						if (linecountprevious == drawingll.count)
@@ -907,13 +913,109 @@ EMSATTRIBUTE int32 GenerateLoops()
 							linecountprevious = drawingll.count;
 						}
 					}
-					if (chain.tail->data.q == startpoint)
+					if (chain.tail->data.q == chain.head->data.p)
 					{
 						loopll << chain;
 						chain.Unlink();
 						break;
 					}
 				}
+				//chain.current->data.q == drawingll.current->data.q
+				else
+				if ((Absolute(chain.tail->data.q.x - drawingll.current->data.q.x) <= autoclosethreshold) &&
+					(Absolute(chain.tail->data.q.y - drawingll.current->data.q.y) <= autoclosethreshold))
+				{
+					LineSegment _line;
+					_line.p.x = drawingll.current->data.q.x;
+					_line.p.y = drawingll.current->data.q.y;
+					_line.q.x = drawingll.current->data.p.x;
+					_line.q.y = drawingll.current->data.p.y;
+					chain.PushTail(_line);
+					if (drawingll.RemoveAndMoveRight() == false)
+					{
+						if (linecountprevious == drawingll.count)
+						{
+							linkll << chain;
+							chain.Unlink();
+							break;
+						}
+						else
+						{
+							drawingll.GotoHead();
+							linecountprevious = drawingll.count;
+						}
+					}
+					if (chain.tail->data.q == chain.head->data.p)
+					{
+						loopll << chain;
+						chain.Unlink();
+						break;
+					}
+				}
+				//else if (chain.current->data.p == drawingll.current->data.q)
+				else 
+				if ((Absolute(chain.head->data.p.x - drawingll.current->data.q.x) <= autoclosethreshold)&&
+					(Absolute(chain.head->data.p.y - drawingll.current->data.q.y) <= autoclosethreshold))
+				{
+					LineSegment _line;
+					_line.p.x = drawingll.current->data.p.x;
+					_line.p.y = drawingll.current->data.p.y;
+					_line.q.x = drawingll.current->data.q.x;
+					_line.q.y = drawingll.current->data.q.y;
+					chain.PushHead(_line);
+					if (drawingll.RemoveAndMoveRight() == false)
+					{
+						if (linecountprevious == drawingll.count)
+						{
+							linkll << chain;
+							chain.Unlink();
+							break;
+						}
+						else
+						{
+							drawingll.GotoHead();
+							linecountprevious = drawingll.count;
+						}
+					}
+					if (chain.tail->data.q == chain.head->data.p)
+					{
+						loopll << chain;
+						chain.Unlink();
+						break;
+					}
+				}
+				//else if (chain.current->data.p == drawingll.current->data.p)
+				else
+					if ((Absolute(chain.head->data.p.x - drawingll.current->data.p.x) <= autoclosethreshold) &&
+						(Absolute(chain.head->data.p.y - drawingll.current->data.p.y) <= autoclosethreshold))
+					{
+						LineSegment _line;
+						_line.p.x = drawingll.current->data.q.x;
+						_line.p.y = drawingll.current->data.q.y;
+						_line.q.x = drawingll.current->data.p.x;
+						_line.q.y = drawingll.current->data.p.y;
+						chain.PushHead(_line);
+						if (drawingll.RemoveAndMoveRight() == false)
+						{
+							if (linecountprevious == drawingll.count)
+							{
+								linkll << chain;
+								chain.Unlink();
+								break;
+							}
+							else
+							{
+								drawingll.GotoHead();
+								linecountprevious = drawingll.count;
+							}
+						}
+						if (chain.tail->data.q == chain.head->data.p)
+						{
+							loopll << chain;
+							chain.Unlink();
+							break;
+						}
+					}
 				else
 				{
 					if (drawingll.MoveRight() == false)
@@ -935,21 +1037,21 @@ EMSATTRIBUTE int32 GenerateLoops()
 		}
 	}
 
-	//{
-	//	RESTART:
-	//	for (uint32 i = 0; i < linkll.count; i++)
-	//	{
-	//		for (uint32 j = i + 1; j < linkll.count; j++)
-	//		{
-	//			if (linkll[i].head->data.p == linkll[j].tail->data.q)
-	//			{
-	//				linkll[i].Append(linkll[j]);
-	//				linkll.Splice(j, 1);
-	//				goto RESTART;
-	//			}
-	//		}
-	//	}
-	//}
+	{
+		RESTART:
+		for (uint32 i = 0; i < linkll.count; i++)
+		{
+			for (uint32 j = i + 1; j < linkll.count; j++)
+			{
+				if (linkll[i].head->data.p == linkll[j].tail->data.q)
+				{
+					linkll[i].Append(linkll[j]);
+					linkll.Splice(j, 1);
+					goto RESTART;
+				}
+			}
+		}
+	}
 
 	for (uint32 i = 0; i < loopll.count; i++)
 	{

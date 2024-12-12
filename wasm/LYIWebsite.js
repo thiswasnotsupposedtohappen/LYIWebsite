@@ -4343,7 +4343,7 @@ var wasmExports = createWasm();
 var ___wasm_call_ctors = createExportWrapper('__wasm_call_ctors', 0);
 var ___original_main = Module['___original_main'] = createExportWrapper('__original_main', 0);
 var _LoadDXF = Module['_LoadDXF'] = createExportWrapper('LoadDXF', 2);
-var _GenerateLoops = Module['_GenerateLoops'] = createExportWrapper('GenerateLoops', 0);
+var _GenerateLoops = Module['_GenerateLoops'] = createExportWrapper('GenerateLoops', 1);
 var _GET_loopcount = Module['_GET_loopcount'] = createExportWrapper('GET_loopcount', 0);
 var _GET_linkcount = Module['_GET_linkcount'] = createExportWrapper('GET_linkcount', 0);
 var _GET_looplinecount = Module['_GET_looplinecount'] = createExportWrapper('GET_looplinecount', 1);

@@ -400,6 +400,29 @@ struct LinkedList
 		count++;
 		current = tail;
 	}
+	void PushHead(DataType data)
+	{
+		if (head)
+		{
+			Element* newhead = new Element;
+			newhead->data = data;
+			newhead->right = head;
+			newhead->left = 0;
+			head->left = newhead;
+			head = newhead;
+		}
+		else
+		{
+			head = new Element;
+			head->data = data;
+			head->left = 0;
+			head->right = 0;
+			tail = head;
+			current = head;
+		}
+		count++;
+		current = head;
+	}
 	DataType PopHead()
 	{
 		DataType returndata;

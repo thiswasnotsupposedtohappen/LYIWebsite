@@ -1515,7 +1515,7 @@ function LoadDXFOnSlot(slot,url)
     var memory = _malloc(data.length);
     HEAPU8.set(data, memory);
     console.log("return = " + _LoadDXF(memory, data.length));
-    console.log("return = " + _GenerateLoops());
+    console.log("return = " + _GenerateLoops(0.001));
     _free(memory);
       
     manufacturingspecifications.designobject[slot].drawing = new Drawing();
@@ -1917,11 +1917,26 @@ function DesignUpload()
       manufacturingspecifications.designobject.push(_designobject);
       manufacturingspecifications.designobjectlength++;
 
+      manufacturingspecifications.supplier = "LightYear";
+      OnClickSupplier(manufacturingspecifications.supplier);
+      manufacturingspecifications.construction = "Back-Supported";
+      OnClickConstruction(manufacturingspecifications.construction);
+      manufacturingspecifications.process = "CNC Laser 0.5mm";
+      OnClickProcess(manufacturingspecifications.process);
+      manufacturingspecifications.materialfront = "Acrylic";
+      OnClickMaterialFront(manufacturingspecifications.materialfront);
+      manufacturingspecifications.thicknessfront = "5mm";
+      OnClickThicknessFront(manufacturingspecifications.thicknessfront);
+      manufacturingspecifications.colorfront = "Red";
+      OnClickColorFront(manufacturingspecifications.colorfront);
+      manufacturingspecifications.colorback = "White"; 
+      OnClickColorBack(manufacturingspecifications.colorback);
+
       var data = new Uint8Array(new TextEncoder().encode(e.target.result));
       var memory = _malloc(data.length);
       HEAPU8.set(data, memory);
       console.log("return = " + _LoadDXF(memory, data.length));
-      console.log("return = " + _GenerateLoops());
+      console.log("return = " + _GenerateLoops(0.001));
       _free(memory);
         
       manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing = new Drawing();
