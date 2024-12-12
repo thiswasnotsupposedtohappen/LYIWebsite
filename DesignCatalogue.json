@@ -12,6 +12,10 @@
       "materialfront": "Acrylic",
       "thicknessfront": "5mm",
       "colorfront": "Black",
+      "spantop" : 230,
+      "spanbottom" : -230,
+      "spanleft" : -130,
+      "spanright" : 130,
       "designobjectlength" : 5,
       "designobject": [
         {
@@ -67,6 +71,10 @@
       "materialfront": "Acrylic",
       "thicknessfront": "5mm",
       "colorfront": "Black",
+      "spantop" : 230,
+      "spanbottom" : -230,
+      "spanleft" : -130,
+      "spanright" : 130,
       "designobjectlength" : 5,
       "designobject": [
         {
@@ -122,6 +130,10 @@
       "materialfront": "Acrylic",
       "thicknessfront": "5mm",
       "colorfront": "Black",
+      "spantop" : 230,
+      "spanbottom" : -230,
+      "spanleft" : -130,
+      "spanright" : 130,
       "designobjectlength" : 1,
       "designobject": [
         {
@@ -145,6 +157,10 @@
       "materialfront": "Acrylic",
       "thicknessfront": "10mm",
       "colorfront": "Red",
+      "spantop" : 590,
+      "spanbottom" : -590,
+      "spanleft" : -1200,
+      "spanright" : 1200,
       "designobjectlength" : 1,
       "designobject": [
         {
@@ -168,6 +184,10 @@
       "materialfront": "Acrylic",
       "thicknessfront": "10mm",
       "colorfront": "Red",
+      "spantop" : 590,
+      "spanbottom" : -590,
+      "spanleft" : -1200,
+      "spanright" : 1200,
       "designobjectlength" : 1,
       "designobject": [
         {
@@ -191,6 +211,10 @@
       "materialfront": "Acrylic",
       "thicknessfront": "10mm",
       "colorfront": "Red",
+      "spantop" : 590,
+      "spanbottom" : -590,
+      "spanleft" : -1200,
+      "spanright" : 1200,
       "designobjectlength" : 1,
       "designobject": [
         {
@@ -214,6 +238,10 @@
       "materialfront": "Acrylic",
       "thicknessfront": "10mm",
       "colorfront": "Red",
+      "spantop" : 590,
+      "spanbottom" : -590,
+      "spanleft" : -1200,
+      "spanright" : 1200,
       "designobjectlength" : 1,
       "designobject": [
         {
@@ -237,6 +265,10 @@
       "materialfront": "Acrylic",
       "thicknessfront": "10mm",
       "colorfront": "Red",
+      "spantop" : 590,
+      "spanbottom" : -590,
+      "spanleft" : -1200,
+      "spanright" : 1200,
       "designobjectlength" : 1,
       "designobject": [
         {
@@ -258,8 +290,12 @@
       "construction": "Standalone",
       "process": "CNC Router 6mm",
       "materialfront": "Acrylic",
-      "thicknessfront": "Red",
-      "colorfront": "10mm",
+      "thicknessfront": "10mm",
+      "colorfront": "Red",
+      "spantop" : 590,
+      "spanbottom" : -590,
+      "spanleft" : -1200,
+      "spanright" : 1200,
       "designobjectlength" : 1,
       "designobject": [
         {

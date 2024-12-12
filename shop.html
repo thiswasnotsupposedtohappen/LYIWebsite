@@ -83,11 +83,20 @@
     }
     if(category == 'customised_partition')
     {
+      for(var i=0;i<1;i++)
+      {
+        document.querySelector('.shop-menu').innerHTML += `
+        <div class="shop-menu-items">
+          <a href="shop-customised.html?design=BlankDesign&type=Partition"><img class="shop-menu-items-img" src="images/BlackDesign.png"></a><br>
+          <h2>Blank Design</h2>
+        </div>
+        `;
+      } 
       for(var i=1;i<=280;i++)
       {
         document.querySelector('.shop-menu').innerHTML += `
         <div class="shop-menu-items">
-          <a href="shop-customised.html?design=PartitionDesign-`+i+`"><img class="shop-menu-items-img" src="images/Decorative Jali/Jali/`+i+`.jpg"></a><br>
+          <a href="shop-customised.html?design=PartitionDesign-`+i+`&type=Partition"><img class="shop-menu-items-img" src="images/Decorative Jali/Jali/`+i+`.jpg"></a><br>
           <h2>PartitionDesign-`+i+`</h2>
         </div>
         `;
@@ -99,7 +108,7 @@
       {
         document.querySelector('.shop-menu').innerHTML += `
         <div class="shop-menu-items">
-          <a href="shop-customised.html?design=BlankDesign"><img class="shop-menu-items-img" src="images/BlackDesign.png"></a><br>
+          <a href="shop-customised.html?design=BlankDesign&type=Mandir"><img class="shop-menu-items-img" src="images/BlackDesign.png"></a><br>
           <h2>Blank Design</h2>
         </div>
         `;
@@ -108,7 +117,7 @@
       {
         document.querySelector('.shop-menu').innerHTML += `
         <div class="shop-menu-items">
-          <a href="shop-customised.html?design=MandirDesign-`+i+`"><img class="shop-menu-items-img" src="images/Decorative Jali/Mandir Back/`+i+`.jpg"></a><br>
+          <a href="shop-customised.html?design=MandirDesign-`+i+`&type=Mandir"><img class="shop-menu-items-img" src="images/Decorative Jali/Mandir Back/`+i+`.jpg"></a><br>
           <h2>MandirDesign-`+i+`</h2>
         </div>
         `;
@@ -117,7 +126,7 @@
       {
         document.querySelector('.shop-menu').innerHTML += `
         <div class="shop-menu-items">
-          <a href="shop-customised.html?design=MandirSide-`+i+`"><img class="shop-menu-items-img" src="images/Decorative Jali/Mandir side/`+i+`.jpg"></a><br>
+          <a href="shop-customised.html?design=MandirSide-`+i+`&type=Mandir"><img class="shop-menu-items-img" src="images/Decorative Jali/Mandir side/`+i+`.jpg"></a><br>
           <h2>MandirSide-`+i+`</h2>
         </div>
         `;

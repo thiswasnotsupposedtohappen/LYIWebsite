@@ -32,14 +32,16 @@
   <div class="shop-manufacturingspecification shop-basepellete">
 
     <div class="shop-manufacturingconfig shop-containerpellete shop-containerpellete-specifications">
-      <div style="text-align: end;"><h3>Dimensions:</h3></div>   
+      <div style="text-align: end;"><h3 style="line-height: 50px;">Dimensions:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <input type="number" class="shop-manufacturingconfig-input dimensions-length" style="width: 100px" onchange="OnChangeDimensionsLength(this)" onclick="OnChangeDimensionsLength(this)"></input>
         <h2 style="line-height: 50px;">X</h2>
         <input type="number" class="shop-manufacturingconfig-input dimensions-width"  style="width: 100px" onchange="OnChangeDimensionsWidth(this)"  onclick="OnChangeDimensionsWidth(this)" ></input>
         <button class="shop-manufacturingconfig-button unselected dimensions-mm" onclick="OnClickUnit('mm')"><h2>mm</h2></button>
+        <!--
         <button class="shop-manufacturingconfig-button unselected dimensions-inches" onclick="OnClickUnit('inches') "><h2>inches</h2></button>
         <button class="shop-manufacturingconfig-button unselected dimensions-feet" onclick="OnClickUnit('feet') "><h2>feet</h2></button>
+        -->
       </div>
 
       <div style="height: 30px;"></div><div></div>
@@ -49,7 +51,7 @@
     </div>
 
     <div class="shop-manufacturingconfig shop-containerpellete shop-containerpellete-specifications">
-      <div style="text-align: end;"><h3>Size-Option:</h3></div>   
+      <div style="text-align: end;"><h3 style="line-height: 50px;">Size-Option:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button disabled size-1x1"><h2>1ft x 1ft <span style="color: green;">S</span></h2></button>
         <button class="shop-manufacturingconfig-button disabled size-2x1"><h2>2ft x 1ft <span style="color: green;">S</span></h2></button>
@@ -74,7 +76,7 @@
     </div>
 
     <div class="shop-manufacturingconfig shop-containerpellete shop-containerpellete-specifications">
-      <div style="text-align: end;"><h3>Raw-Material by:</h3></div>   
+      <div style="text-align: end;"><h3 style="line-height: 50px;">Raw-Material by:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button unselected rawmaterial-lyi" onclick="OnClickSupplier('LightYear')"><h2>LightYear</h2></button>
         <button class="shop-manufacturingconfig-button unselected rawmaterial-customer" onclick="OnClickSupplier('Customer') "><h2>Customer</h2></button>
@@ -87,7 +89,7 @@
     </div>
 
     <div  class="shop-manufacturingconfig shop-containerpellete shop-containerpellete-specifications">
-      <div style="text-align: end;"><h3>Construction:</h3></div>   
+      <div style="text-align: end;"><h3 style="line-height: 50px;">Construction:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button unselected construction-standalone" onclick="OnClickConstruction('Standalone')"><h2>Standalone</h2></button>
         <button class="shop-manufacturingconfig-button unselected construction-backsupported" onclick="OnClickConstruction('Back-Supported')"><h2>Back-Supported</h2></button>
@@ -103,7 +105,7 @@
     </div>
 
     <div class="shop-manufacturingconfig shop-containerpellete shop-containerpellete-specifications">
-      <div style="text-align: end;"><h3>Process:</h3></div>   
+      <div style="text-align: end;"><h3 style="line-height: 50px;">Process:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button unselected process-laser" onclick="OnClickProcess('CNC Laser 0.5mm')"><h2>CNC Laser 0.5mm</h2></button>
         <button class="shop-manufacturingconfig-button unselected process-router3mm" onclick="OnClickProcess('CNC Router 3mm')"><h2>CNC Router 3mm</h2></button>
@@ -119,7 +121,7 @@
     </div>
 
     <div class="shop-manufacturingconfig shop-containerpellete shop-manufacturingconfig-materialfront shop-containerpellete-specifications">
-      <div style="text-align: end;"><h3>Front Material:</h3></div>   
+      <div style="text-align: end;"><h3 style="line-height: 50px;">Front Material:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button disabled front-acrylic" onclick="OnClickMaterialFront('Acrylic')"><h2>Acrylic</h2></button>
         <button class="shop-manufacturingconfig-button disabled front-corian" onclick="OnClickMaterialFront('Corian')"><h2>Corian</h2></button>
@@ -132,7 +134,7 @@
 
       <div style="height: 30px;"></div><div></div>
 
-      <div style="text-align: end;"><h3>Thickness:</h3></div>   
+      <div style="text-align: end;"><h3 style="line-height: 50px;">Thickness:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button disabled front-1mm" onclick="OnClickThicknessFront('1mm')"><h2>1mm</h2></button>
         <button class="shop-manufacturingconfig-button disabled front-2mm" onclick="OnClickThicknessFront('2mm')"><h2>2mm</h2></button>
@@ -151,7 +153,7 @@
 
       <div style="height: 30px;"></div><div></div>
 
-      <div style="text-align: end;"><h3>Color:</h3></div>   
+      <div style="text-align: end;"><h3 style="line-height: 50px;">Color:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button disabled front-white" onclick="OnClickColorFront('White')"><h2>White</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: white;"></div></button>
         <button class="shop-manufacturingconfig-button disabled front-black" onclick="OnClickColorFront('Black')"><h2>Black</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: black;"></div></button>
@@ -168,7 +170,7 @@
     </div>
 
     <div class="shop-manufacturingconfig shop-containerpellete shop-manufacturingconfig-materialback shop-containerpellete-specifications">
-      <div style="text-align: end;"><h3>Back Material:</h3></div>   
+      <div style="text-align: end;"><h3 style="line-height: 50px;">Back Material:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button unselected back-acrylic" onclick="OnClickMaterialBack('Acrylic')"><h2>Acrylic</h2></button>
         <button class="shop-manufacturingconfig-button unselected back-corian" onclick="OnClickMaterialBack('Corian')"><h2>Corian</h2></button>
@@ -181,7 +183,7 @@
 
       <div style="height: 30px;"></div><div></div>
 
-      <div style="text-align: end;"><h3>Thickness:</h3></div>   
+      <div style="text-align: end;"><h3 style="line-height: 50px;">Thickness:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button disabled back-1mm" onclick="OnClickThicknessBack('1mm')"><h2>1mm</h2></button>
         <button class="shop-manufacturingconfig-button disabled back-2mm" onclick="OnClickThicknessBack('2mm')"><h2>2mm</h2></button>
@@ -200,7 +202,7 @@
 
       <div style="height: 30px;"></div><div></div>
 
-      <div style="text-align: end;"><h3>Color:</h3></div>   
+      <div style="text-align: end;"><h3 style="line-height: 50px;">Color:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button disabled back-white" onclick="OnClickColorBack('White')"><h2>White</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: white;"></div></button>
         <button class="shop-manufacturingconfig-button disabled back-black" onclick="OnClickColorBack('Black')"><h2>Black</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: black;"></div></button>
@@ -217,7 +219,7 @@
     </div>
 
     <div class="shop-manufacturingconfig shop-containerpellete shop-manufacturingconfig-materialhalfdepth shop-containerpellete-specifications">
-      <div style="text-align: end;"><h3>Material:</h3></div>   
+      <div style="text-align: end;"><h3 style="line-height: 50px;">Material:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button disabled front-acrylic" onclick="OnClickMaterialFront('Acrylic');OnClickMaterialBack('Acrylic');"><h2>Acrylic</h2></button>
         <button class="shop-manufacturingconfig-button disabled front-corian" onclick="OnClickMaterialFront('Corian');OnClickMaterialBack('Corian');""><h2>Corian</h2></button>
@@ -230,7 +232,7 @@
 
       <div style="height: 30px;"></div><div></div>
 
-      <div style="text-align: end;"><h3>Total Thickness:</h3></div>   
+      <div style="text-align: end;"><h3 style="line-height: 50px;">Total Thickness:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button disabled front-1mm" onclick="OnClickThicknessFront('1mm')"><h2>1mm</h2></button>
         <button class="shop-manufacturingconfig-button disabled front-2mm" onclick="OnClickThicknessFront('2mm')"><h2>2mm</h2></button>
@@ -249,14 +251,14 @@
 
       <div style="height: 30px;"></div><div></div>
 
-      <div style="text-align: end;"><h3>Cutting Depth:</h3></div>   
+      <div style="text-align: end;"><h3 style="line-height: 50px;">Cutting Depth:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <input type="number" class="shop-manufacturingconfig-input halfdepth" onchange="OnChangeCuttingDepth(this)"><h2 style="line-height: 50px;">mm</h2></input>
       </div>
 
       <div style="height: 30px;"></div><div></div>
 
-      <div style="text-align: end;"><h3>Color:</h3></div>   
+      <div style="text-align: end;"><h3 style="line-height: 50px;">Color:</h3></div>   
       <div class="shop-manufacturingconfig-options">
         <button class="shop-manufacturingconfig-button disabled front-white" onclick="OnClickColorFront('White');OnClickColorBack('White');"><h2>White</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: white;"></div></button>
         <button class="shop-manufacturingconfig-button disabled front-black" onclick="OnClickColorFront('Black');OnClickColorBack('Black');"><h2>Black</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: black;"></div></button>
@@ -271,6 +273,42 @@
         <button class="shop-manufacturingconfig-button disabled front-raw" onclick="OnClickColorFront('RAW')"><h2>RAW</h2></button>
       </div>
     </div>
+  
+    <div class="shop-manufacturingconfig shop-containerpellete shop-containerpellete-specifications">
+      <div style="text-align: end;"><h3 style="line-height: 50px;">Border Top:</h3></div>   
+      <div class="shop-manufacturingconfig-options">
+        <input type="number" class="shop-manufacturingconfig-input" style="width: 100px" onchange="OnChangeBorder()" onclick="OnChangeBorder()" value = 0></input>
+        <h3>mm</h3>
+      </div>
+
+      <div style="height: 30px;"></div><div></div>
+
+      <div style="text-align: end;"><h3 style="line-height: 50px;">Border Bottom:</h3></div>   
+      <div class="shop-manufacturingconfig-options">
+        <input type="number" class="shop-manufacturingconfig-input" style="width: 100px" onchange="OnChangeBorder()" onclick="OnChangeBorder()" value = 0></input>
+        <h3>mm</h3>
+      </div>
+
+      <div style="height: 30px;"></div><div></div>
+      
+      <div style="text-align: end;"><h3 style="line-height: 50px;">Border Left:</h3></div>   
+      <div class="shop-manufacturingconfig-options">
+        <input type="number" class="shop-manufacturingconfig-input" style="width: 100px" onchange="OnChangeBorder()" onclick="OnChangeBorder()" value = 0></input>
+        <h3>mm</h3>
+      </div>
+            
+      <div style="height: 30px;"></div><div></div>
+      
+      <div style="text-align: end;"><h3 style="line-height: 50px;">Border Right:</h3></div>   
+      <div class="shop-manufacturingconfig-options">
+        <input type="number" class="shop-manufacturingconfig-input" style="width: 100px" onchange="OnChangeBorder()" onclick="OnChangeBorder()" value = 0></input>
+        <h3>mm</h3>
+      </div>
+
+      <div style="height: 30px;"></div><div></div>
+      <div style="text-align: end;"><b>Border:</b></div><div>Minumum border width recommended to be 20mm</div>
+    </div>
+  
   </div>
 
   <div class="shop-designelements shop-basepellete">
@@ -534,9 +572,9 @@ function OnChangeDimensionsLength(input)
 }
 function OnChangeDimensionsWidth(input)
 {
-  if(dimensionsunit == 'mm')if(input.value > 1220)input.value = 1220;
-  if(dimensionsunit == 'inches')if(input.value > 48.031)input.value = 48.031;
-  if(dimensionsunit == 'feet')if(input.value > 4.003)input.value = 4.003;
+  if(dimensionsunit == 'mm')if(input.value > 2440)input.value = 2440;
+  if(dimensionsunit == 'inches')if(input.value > 96.063)input.value = 96.063;
+  if(dimensionsunit == 'feet')if(input.value > 8.005)input.value = 8.005;
   SetSizeOptions();
 }
 function SetSizeOptions()
@@ -620,6 +658,8 @@ function SetSizeOptions()
   if(lengthinfeet == 8 && widthinfeet == 2){EnableButton(document.querySelector(".size-8x2"));OnClickSize('8ft x 2ft');}
   if(lengthinfeet == 8 && widthinfeet == 3){EnableButton(document.querySelector(".size-8x4"));OnClickSize('8ft x 4ft');}
   if(lengthinfeet == 8 && widthinfeet == 4){EnableButton(document.querySelector(".size-8x4"));OnClickSize('8ft x 4ft');}
+
+  OnChangeBorder();
 }
 function OnClickUnit(type)
 {
@@ -744,7 +784,7 @@ function OnClickConstruction(type)
   for(var i=4;i<document.querySelectorAll(".shop-manufacturingconfig-options").length;i++)
     SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[i], -1);  
 
-  for(var i=5;i<document.querySelectorAll(".shop-manufacturingconfig-options").length;i++)
+  for(var i=5;i<document.querySelectorAll(".shop-manufacturingconfig-options").length - 1;i++)
     DisableButtons(document.querySelectorAll(".shop-manufacturingconfig-options")[i]);  
 }
 
@@ -766,7 +806,7 @@ function OnClickProcess(type)
   if(type == 'CNC Router 8mm')index = 4;
   SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[4], index);
 
-  for(var i=5;i<document.querySelectorAll(".shop-manufacturingconfig-options").length;i++)
+  for(var i=5;i<document.querySelectorAll(".shop-manufacturingconfig-options").length - 1;i++)
     SelectButton(document.querySelectorAll(".shop-manufacturingconfig-options")[i], -1);    
 
   EnableButtons(document.querySelectorAll(".shop-manufacturingconfig-options")[5]);
@@ -1250,6 +1290,33 @@ function OnChangeCuttingDepth(input)
   manufacturingspecifications.cuttingepth = input.value;
 }
 
+function OnChangeBorder()
+{
+  if((manufacturingspecifications.dimensionsx >= 1) && (manufacturingspecifications.dimensionsy >= 1))
+  {
+    var bordertop = parseFloat(document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[0].value);
+    var borderbottom = parseFloat(document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[1].value);
+    var borderleft = parseFloat(document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[2].value);
+    var borderright = parseFloat(document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[3].value);
+
+    manufacturingspecifications.spanbottom = -(manufacturingspecifications.dimensionsy/2 - borderbottom);
+    manufacturingspecifications.spantop = +(manufacturingspecifications.dimensionsy/2 - bordertop);
+    manufacturingspecifications.spanleft = -(manufacturingspecifications.dimensionsx/2 - borderleft);
+    manufacturingspecifications.spanright = +(manufacturingspecifications.dimensionsx/2 - borderright);
+
+    if(manufacturingspecifications.spanbottom > 0)manufacturingspecifications.spanbottom = 0;
+    if(manufacturingspecifications.spantop < 0)manufacturingspecifications.spantop = 0;
+    if(manufacturingspecifications.spanleft > 0)manufacturingspecifications.spanleft = 0;
+    if(manufacturingspecifications.spanright < 0)manufacturingspecifications.spanright = 0;
+
+    document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[0].value = (manufacturingspecifications.dimensionsy/2) - manufacturingspecifications.spantop;
+    document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[1].value = (manufacturingspecifications.dimensionsy/2) + manufacturingspecifications.spanbottom; 
+    document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[2].value = (manufacturingspecifications.dimensionsx/2) + manufacturingspecifications.spanleft;
+    document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[3].value = (manufacturingspecifications.dimensionsx/2) - manufacturingspecifications.spanright;
+    Draw();
+  }
+}
+
 function PopulateCost()
 {
   document.querySelector(".shop-review-specification-dimensionx").innerHTML = '<h2 style="color:blue">' + manufacturingspecifications.dimensionsx + 'mm</h2>';
@@ -1324,25 +1391,25 @@ class DesignObject
   {
     this.drawing = undefined;
     this.drawinglength = 0;
-    this.dxfurl = undefined;
-    this.thumbnailurl = undefined;
-    this.offsetx = undefined;
-    this.offsety = undefined;
-    this.angle = undefined;
-    this.scale = undefined;
+    this.dxfurl = "";
+    this.thumbnailurl = "";
+    this.offsetx = 0;
+    this.offsety = 0;
+    this.angle = 0;
+    this.scale = 1;
   }
 }
 class ManufacturingSpecifications
 {
   constructor()
   {
-    this.name = undefined;
-    this.dimensionsx = undefined;
-    this.dimensionsy = undefined;
+    this.name = "";
+    this.dimensionsx = 0;
+    this.dimensionsy = 0;
     this.size = undefined;
-    this.supplier = undefined;
-    this.construction = undefined;
-    this.process = undefined;
+    this.supplier = "LightYear";
+    this.construction = "Standalone";
+    this.process = "CNC Laser 0.5mm";
     this.materialfront = undefined;
     this.materialback = undefined;
     this.thicknessfront = undefined;
@@ -1351,6 +1418,10 @@ class ManufacturingSpecifications
     this.colorback = undefined;
     this.cuttingepth = undefined;
     this.designrawmaterial = undefined;
+    this.spantop = 0;
+    this.spanbottom = 0;
+    this.spanleft = 0;
+    this.spanright = 0;
     this.designobject = [];
     this.designobjectlength = 0;
   }
@@ -1379,23 +1450,47 @@ function TransformDesignObject(designobject,_offsetx, _offsety, _angle, _scale)
 }
 var manufacturingspecifications = new ManufacturingSpecifications();
 
-Draw();
+function FrontMaterialTypeToColor(type)
+{
+  if(type == 'Transparent')return "rgba(255,255,255,0)";
+  if(type == 'White040')return "rgba(255,255,255,100)";
+  if(type == 'RAW')
+  {
+    if(manufacturingspecifications.materialfront == 'Laminated Plywood')return "rgba(239, 222, 168,255)";
+    if(manufacturingspecifications.materialfront == 'MDF')return "rgba(223, 147, 163,255)";
+    if(manufacturingspecifications.materialfront == 'Cement Sheet')return "rgba(194, 194, 194)";
+  }
+  return type;
+}
+function BackMaterialTypeToColor(type)
+{
+  if(type == 'Transparent')return "rgba(255,255,255,0)";
+  if(type == 'White040')return "rgba(255,255,255,100)";
+  if(type == 'RAW')
+  {
+    if(manufacturingspecifications.materialback == 'Laminated Plywood')return "rgba(239, 222, 168,255)";
+    if(manufacturingspecifications.materialback == 'MDF')return "rgba(223, 147, 163,255)";
+    if(manufacturingspecifications.materialback == 'Cement Sheet')return "rgba(194, 194, 194)";
+  }
+  return type;
+}
 function Draw()
 {
+  ctx.save();
   ctx.clearRect(-canvas.width/2,-canvas.height/2,canvas.width,canvas.height);
 
-  ctx.strokeStyle = "red";
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(mousex * zoom,mousey * zoom);
-  ctx.lineTo((100000) * zoom,mousey * zoom);
-  ctx.moveTo(mousex * zoom,mousey * zoom);
-  ctx.lineTo(mousex * zoom ,(100000) * zoom);    
-  ctx.moveTo(mousex * zoom,mousey * zoom);
-  ctx.lineTo(-(100000) * zoom,mousey * zoom);
-  ctx.moveTo(mousex * zoom,mousey * zoom);
-  ctx.lineTo(mousex * zoom,-(100000) * zoom);    
-  ctx.stroke();
+  // ctx.strokeStyle = "red";
+  // ctx.lineWidth = 1;
+  // ctx.beginPath();
+  // ctx.moveTo(mousex * zoom,mousey * zoom);
+  // ctx.lineTo((100000) * zoom,mousey * zoom);
+  // ctx.moveTo(mousex * zoom,mousey * zoom);
+  // ctx.lineTo(mousex * zoom ,(100000) * zoom);    
+  // ctx.moveTo(mousex * zoom,mousey * zoom);
+  // ctx.lineTo(-(100000) * zoom,mousey * zoom);
+  // ctx.moveTo(mousex * zoom,mousey * zoom);
+  // ctx.lineTo(mousex * zoom,-(100000) * zoom);    
+  // ctx.stroke();
 
   ctx.strokeStyle = "black";  
 
@@ -1403,7 +1498,7 @@ function Draw()
   {
     if(manufacturingspecifications.colorfront != undefined)
     {
-      ctx.fillStyle = manufacturingspecifications.colorfront;
+      ctx.fillStyle = FrontMaterialTypeToColor(manufacturingspecifications.colorfront);
       if(manufacturingspecifications.designrawmaterial != undefined)
       {
         ctx.beginPath();
@@ -1417,6 +1512,17 @@ function Draw()
       }
     }
 
+    if((manufacturingspecifications.spantop!=0 || manufacturingspecifications.spanbottom!=0 || manufacturingspecifications.spanleft!=0 || manufacturingspecifications.spanright!=0))
+    {
+      ctx.beginPath();
+      ctx.moveTo(((manufacturingspecifications.spanleft + mousex) * zoom),((manufacturingspecifications.spantop + mousey) * zoom));
+      ctx.lineTo(((manufacturingspecifications.spanright + mousex) * zoom),((manufacturingspecifications.spantop + mousey) * zoom));
+      ctx.lineTo(((manufacturingspecifications.spanright + mousex) * zoom),((manufacturingspecifications.spanbottom + mousey) * zoom));
+      ctx.lineTo(((manufacturingspecifications.spanleft + mousex) * zoom),((manufacturingspecifications.spanbottom + mousey) * zoom));
+      ctx.lineTo(((manufacturingspecifications.spanleft + mousex) * zoom),((manufacturingspecifications.spantop + mousey) * zoom));
+      ctx.clip();      
+    }
+
     for(var mdo=0;mdo<manufacturingspecifications.designobjectlength;mdo++)
     {
       if(manufacturingspecifications.designobject[mdo] != undefined && manufacturingspecifications.designobject[mdo].drawing != undefined)
@@ -1426,16 +1532,16 @@ function Draw()
           if(ld % 2 == 0)
           {
             if(manufacturingspecifications.colorfront != undefined)
-              ctx.fillStyle = manufacturingspecifications.colorfront;
+              ctx.fillStyle = FrontMaterialTypeToColor(manufacturingspecifications.colorfront);
             else
-              ctx.fillStyle = "white";
+              ctx.fillStyle = FrontMaterialTypeToColor("White");
           }
           else
           {
             if(manufacturingspecifications.colorback != undefined)
-              ctx.fillStyle = manufacturingspecifications.colorback;
+              ctx.fillStyle = BackMaterialTypeToColor(manufacturingspecifications.colorback);
             else
-              ctx.fillStyle = "white";
+              ctx.fillStyle = BackMaterialTypeToColor("White");
           }
           for(var l=0;l<manufacturingspecifications.designobject[mdo].drawing.loopcount;l++)
           {
@@ -1494,8 +1600,8 @@ function Draw()
       }
     }
   }
+  ctx.restore();
 } 
-
 function LoadRawMaterial(length,width)
 {
   manufacturingspecifications.designrawmaterial = new Array(4);
@@ -1529,7 +1635,6 @@ function LoadRawMaterial(length,width)
   manufacturingspecifications.designrawmaterial[3].q.y = -width/2;  
   Draw();
 }
-
 function LoadDXFOnSlot(slot,url)
 {
   var xhr = new XMLHttpRequest();
@@ -1601,8 +1706,7 @@ function LoadDXFOnSlot(slot,url)
   };  
   xhr.send(null);
 } 
- 
-function DesignLoad()
+ function DesignLoad()
 {
   document.querySelectorAll(".shop-designelements-tray")[1].innerHTML = `
   <div style=" width: 100%;box-sizing: border-box;">
@@ -1629,15 +1733,15 @@ function DesignLoad()
   }
   Draw();  
 }
-function DesignAdd(index)
+function DesignAdd(folder,index)
 {
   if (manufacturingspecifications == undefined) 
     manufacturingspecifications = new ManufacturingSpecifications();
   if (manufacturingspecifications.designobject == undefined) 
       manufacturingspecifications.designobject = [];
   var _designobject = new DesignObject();
-  _designobject.dxfurl = "dxf/Mandir Jali Objects/"+index+".dxf";
-  _designobject.thumbnailurl = "dxf/Mandir Jali Objects/"+index+".jpg";
+  _designobject.dxfurl = folder+index+".dxf";
+  _designobject.thumbnailurl = folder+index+".jpg";
   _designobject.offsetx = 0;
   _designobject.offsety = 0;
   _designobject.angle = 0;
@@ -1740,6 +1844,7 @@ function DesignEditUpdate(action)
 }
 function DesignRemove(element_index)
 {
+  DesignEditApply();
   manufacturingspecifications.designobject.splice(element_index, 1);
   manufacturingspecifications.designobjectlength--;
   document.querySelectorAll(".shop-designelements-tray")[1].innerHTML = `
@@ -1825,6 +1930,12 @@ function DesignOpen()
         if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
         if(_manufacturingspecifications.cuttingepth != undefined)OnChangeCuttingDepth(_manufacturingspecifications.cuttingepth);
       }
+
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[0].value = (_manufacturingspecifications.dimensionsy/2) - _manufacturingspecifications.spantop;
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[1].value = (_manufacturingspecifications.dimensionsy/2) + _manufacturingspecifications.spanbottom; 
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[2].value = (_manufacturingspecifications.dimensionsx/2) + _manufacturingspecifications.spanleft;
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[3].value = (_manufacturingspecifications.dimensionsx/2) - _manufacturingspecifications.spanright;
+
       manufacturingspecifications = _manufacturingspecifications;
       LoadRawMaterial(manufacturingspecifications.dimensionsx, manufacturingspecifications.dimensionsy);
       DesignLoad();
@@ -1965,10 +2076,19 @@ for(var i=1;i<=32;i++)
   document.querySelectorAll(".shop-designelements-tray")[2].innerHTML += `
   <div class="shop-designelements-tray-item">
     <img src="dxf/Mandir Jali Objects/`+i+`.jpg" class="shop-designelements-tray-item-img">
-    <button class="shop-designelements-tray-item-button" onclick="DesignAdd(`+ i +`)" style="bottom: 5px;left:85px;background-color: rgb(30, 255, 0);"><span class="material-symbols-outlined">add</span></button>
+    <button class="shop-designelements-tray-item-button" onclick="DesignAdd('dxf/Mandir Jali Objects/',`+ i +`)" style="bottom: 5px;left:85px;background-color: rgb(30, 255, 0);"><span class="material-symbols-outlined">add</span></button>
   </div>
   `;
 }   
+for(var i=1;i<=184;i++)
+{
+  document.querySelectorAll(".shop-designelements-tray")[2].innerHTML += `
+  <div class="shop-designelements-tray-item">
+    <img src="dxf/Partition Jali Objects/`+i+`.jpg" class="shop-designelements-tray-item-img">
+    <button class="shop-designelements-tray-item-button" onclick="DesignAdd('dxf/Partition Jali Objects/',`+ i +`)" style="bottom: 5px;left:85px;background-color: rgb(30, 255, 0);"><span class="material-symbols-outlined">add</span></button>
+  </div>
+  `;
+}
 var designelementeditindex = undefined;
 const url = new URLSearchParams(window.location.search);
 if(url.size == 0)
@@ -1985,7 +2105,83 @@ xhr.onload = function (oEvent)
 xhr.send(null);
 Module.onRuntimeInitialized = function() 
 {
-  if(url.get("design") == "BlankDesign");
+  if(url.get("design") == "BlankDesign")
+  {
+    if (manufacturingspecifications == undefined) 
+      manufacturingspecifications = new ManufacturingSpecifications();
+    if (manufacturingspecifications.designobject == undefined) 
+        manufacturingspecifications.designobject = [];
+
+    var _manufacturingspecifications = new ManufacturingSpecifications();
+    if(url.get("type") == "Mandir")
+    {
+      zoom = 1.0;
+      _manufacturingspecifications.dimensionsx = 300;
+      _manufacturingspecifications.dimensionsy = 500;
+      _manufacturingspecifications.supplier = "LightYear";
+      _manufacturingspecifications.construction = "Standalone";
+      _manufacturingspecifications.process = "CNC Laser 0.5mm";
+      _manufacturingspecifications.materialfront = "Acrylic";
+      _manufacturingspecifications.thicknessfront = "5mm";
+      _manufacturingspecifications.colorfront = "Black";      
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[0].value = 20;
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[1].value = 20; 
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[2].value = 20;
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[3].value = 20;
+    }
+    if(url.get("type") == "Partition")
+    {
+      zoom = 0.5;
+      _manufacturingspecifications.dimensionsx = 2440;
+      _manufacturingspecifications.dimensionsy = 1220;
+      _manufacturingspecifications.supplier = "LightYear";
+      _manufacturingspecifications.construction = "Standalone";
+      _manufacturingspecifications.process = "CNC Router 6mm";
+      _manufacturingspecifications.materialfront = "MDF";
+      _manufacturingspecifications.thicknessfront = "18mm";
+      _manufacturingspecifications.colorfront = "RAW";  
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[0].value = 40;
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[1].value = 40; 
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[2].value = 40;
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[3].value = 40;
+    }    
+    document.querySelector(".dimensions-length").value = _manufacturingspecifications.dimensionsx;
+    document.querySelector(".dimensions-width").value = _manufacturingspecifications.dimensionsy;
+    SetSizeOptions();
+    OnClickUnit('mm');
+    OnClickSupplier(_manufacturingspecifications.supplier);
+    OnClickConstruction(_manufacturingspecifications.construction);
+    if(_manufacturingspecifications.construction == "Standalone")
+    {            
+      if(_manufacturingspecifications.process != undefined)OnClickProcess(_manufacturingspecifications.process);
+      if(_manufacturingspecifications.materialfront != undefined)OnClickMaterialFront(_manufacturingspecifications.materialfront);
+      if(_manufacturingspecifications.thicknessfront != undefined)OnClickThicknessFront(_manufacturingspecifications.thicknessfront);
+      if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
+    }
+    if(manufacturingspecifications.construction == "Back-Supported")
+    {
+      if(_manufacturingspecifications.process != undefined)OnClickProcess(_manufacturingspecifications.process);
+      if(_manufacturingspecifications.materialfront != undefined)OnClickMaterialFront(_manufacturingspecifications.materialfront);
+      if(_manufacturingspecifications.thicknessfront != undefined)OnClickThicknessFront(_manufacturingspecifications.thicknessfront);
+      if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
+      if(_manufacturingspecifications.materialback != undefined)OnClickMaterialBack(_manufacturingspecifications.materialback);
+      if(_manufacturingspecifications.thicknessback != undefined)OnClickThicknessBack(_manufacturingspecifications.thicknessback);
+      if(_manufacturingspecifications.colorback != undefined)OnClickColorBack(_manufacturingspecifications.colorback);
+    }
+    if(_manufacturingspecifications.construction == "Half-Depth")
+    {
+      if(_manufacturingspecifications.process != undefined)OnClickProcess(_manufacturingspecifications.process);
+      if(_manufacturingspecifications.materialfront != undefined)OnClickMaterialFront(_manufacturingspecifications.materialfront);
+      if(_manufacturingspecifications.thicknessfront != undefined)OnClickThicknessFront(_manufacturingspecifications.thicknessfront);
+      if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
+      if(_manufacturingspecifications.cuttingepth != undefined)OnChangeCuttingDepth(_manufacturingspecifications.cuttingepth);
+    }
+    manufacturingspecifications = _manufacturingspecifications;
+    OnChangeBorder();
+    
+    LoadRawMaterial(manufacturingspecifications.dimensionsx, manufacturingspecifications.dimensionsy);
+    DesignLoad();
+  }
   else
   {
     designcatalogue.designcatalogue.forEach(function(_design)
@@ -2024,6 +2220,7 @@ Module.onRuntimeInitialized = function()
           if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
           if(_manufacturingspecifications.cuttingepth != undefined)OnChangeCuttingDepth(_manufacturingspecifications.cuttingepth);
         }
+        OnChangeBorder();
         manufacturingspecifications = _manufacturingspecifications;
         
         LoadRawMaterial(manufacturingspecifications.dimensionsx, manufacturingspecifications.dimensionsy);
