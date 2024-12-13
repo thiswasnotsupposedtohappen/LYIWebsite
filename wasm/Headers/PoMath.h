@@ -1413,11 +1413,17 @@ float64 DistanceOfaPointFromLine(float64x2 P, float64x2 L1, float64x2 L2)
 	float64 A = L2.y - L1.y;
 	float64 B = L1.x - L2.x;
 	float64 C = L2.x * L1.y - L1.x * L2.y;
-	return abs(A * P.x + B * P.y + C) / sqrt(A * A + B * B);
-	//float64 A = -((L2.y - L1.y));
-	//float64 B = -((L2.x - L1.x));
-	//float64 C = -(L1.x * (L2.y - L1.y)) - (L1.y * (L2.x - L1.x));
-	//return abs((A * P.x + B * P.y + C) / sqrt(A * A + B * B));
+	float64 D = sqrt(A * A + B * B);
+	return abs(A * P.x + B * P.y + C) / D;
+}
+float64 DistanceOfaPointFromLine(float64x2 P, float64x2 L1, float64x2 L2,float64 floor)
+{
+	float64 A = L2.y - L1.y;
+	float64 B = L1.x - L2.x;
+	float64 C = L2.x * L1.y - L1.x * L2.y;
+	float64 D = sqrt(A * A + B * B);
+	if (D < floor)return 0;
+	return abs(A * P.x + B * P.y + C) / D;
 }
 float64 DistanceOfaPointFromLine(float64x3 P, float64x3 L1, float64x3 L2)
 {

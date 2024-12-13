@@ -214,7 +214,7 @@
         <button class="shop-manufacturingconfig-button disabled back-yellow" onclick="OnClickColorBack('Yellow')"><h2>Yellow</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: yellow;"></div></button>
         <button class="shop-manufacturingconfig-button disabled back-transparent" onclick="OnClickColorBack('Transparent')"><h2>Transparent</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: transparent;"></div></button>
         <button class="shop-manufacturingconfig-button disabled back-white040" onclick="OnClickColorBack('White040')"><h2>White 40%</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: rgba(255, 255, 255, 0.4);"></div></button>
-        <button class="shop-manufacturingconfig-button disabled back-raw" onclick="OnClickColorFront('RAW')"><h2>RAW</h2></button>
+        <button class="shop-manufacturingconfig-button disabled back-raw" onclick="OnClickColorBack('RAW')"><h2>RAW</h2></button>
       </div>
     </div>
 
@@ -528,7 +528,7 @@
   {
     display: inline-block;
     margin: 10px;
-    width: 600px;
+    width: 630px;
     height: 50px;
   
     border-radius: 20px;
@@ -1462,6 +1462,8 @@ function OnClickColorFront(type)
     manufacturingspecifications.colorback = type;
     if(manufacturingspecifications.materialfront == "Laminated Plywood")
       manufacturingspecifications.colorback = "RAW";
+      if(manufacturingspecifications.materialfront == "ACP")
+      manufacturingspecifications.colorback = "Black";
   }
   var index = undefined;
   if(type == 'White')index = 0;
@@ -1666,7 +1668,8 @@ function TransformDesignObject(designobject,_offsetx, _offsety, _angle, _scale)
   designobject.scale = _scale;
 }
 var manufacturingspecifications = new ManufacturingSpecifications();
-const autoclosethreshold = 0.05;
+const autoclosethreshold = 0.001;
+const minimumstep = 0.01;
 
 function FrontMaterialTypeToColor(type)
 {
@@ -1866,7 +1869,7 @@ function LoadDXFOnSlot(slot,url)
     var data = new Uint8Array(new TextEncoder().encode(xhr.responseText));
     var memory = _malloc(data.length);
     HEAPU8.set(data, memory);
-    console.log("return = " + _LoadDXF(memory, data.length));
+    console.log("return = " + _LoadDXF(memory, data.length,minimumstep));
     console.log("return = " + _GenerateLoops(autoclosethreshold));
     _free(memory);
       
@@ -2198,7 +2201,7 @@ function DesignUpload()
       var data = new Uint8Array(new TextEncoder().encode(e.target.result));
       var memory = _malloc(data.length);
       HEAPU8.set(data, memory);
-      console.log("return = " + _LoadDXF(memory, data.length));
+      console.log("return = " + _LoadDXF(memory, data.length,minimumstep));
       console.log("return = " + _GenerateLoops(autoclosethreshold));
       _free(memory);
         
@@ -2353,10 +2356,10 @@ Module.onRuntimeInitialized = function()
       _manufacturingspecifications.materialfront = "MDF";
       _manufacturingspecifications.thicknessfront = "18mm";
       _manufacturingspecifications.colorfront = "RAW";  
-      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[0].value = 40;
-      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[1].value = 40; 
-      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[2].value = 40;
-      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[3].value = 40;
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[0].value = 18;
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[1].value = 18; 
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[2].value = 18;
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[3].value = 18;
     }    
     document.querySelector(".dimensions-length").value = _manufacturingspecifications.dimensionsx;
     document.querySelector(".dimensions-width").value = _manufacturingspecifications.dimensionsy;

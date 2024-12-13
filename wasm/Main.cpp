@@ -19,7 +19,7 @@
 //#define TESTFILE "Test.dxf"
 //#define TESTFILE "Loop.dxf"
 //#define TESTFILE "LoopDepthTest.dxf"
-#define TESTFILE "20.dxf"
+#define TESTFILE "107.dxf"
 #endif
 #include <iostream>
 #include <fstream>
@@ -59,20 +59,21 @@ EMSCRIPTEN_KEEPALIVE int32 main()
 
 #ifndef EMS
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	int32 LoadDXF(char* file, uint32 length);
+	int32 LoadDXF(char*, uint32, float64);
 	int32 GenerateLoops(float64);
-	if (LoadDXF((char*)"intermediated.txt", 0))return -1;
-	if (GenerateLoops(0.05))return -2;
+	if (LoadDXF((char*)"intermediated.txt", 0,0.01))return -1;
+	if (GenerateLoops(0.001))return -2;
 #endif
 	return 0;
 }
 
-EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
+EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length, float64 _minimumstep)
 {
 	cout << "LoadDXF In" << endl;
 	block.Release();
 	static Block* _block = 0;
 
+	static float64 minimumstep = _minimumstep;
 	drawingll.Release();
 
 	class DXFReader : public DRW_Interface
@@ -621,7 +622,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 
 			LinkedList<LineSegment> _drawing;
 			LineSegment _line;
-
+				
 			float64x2 p;
 			float64x2 q;
 			float64x2 w;
@@ -632,10 +633,13 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 			for (float64 u = 0; u <= 1.001; u+= inc)
 			{
 				q = spline.InterpolateSpline(u, degree, controlpoints, data->ncontrol, knots);
-				if (p == q)
+				if (Absolute(q.x - p.x) < minimumstep && Absolute(q.y - p.y) < minimumstep)
+				{
+					previousu = u;
 					continue;
+				}					
 				w = spline.InterpolateSpline((previousu + u)/2, degree, controlpoints, data->ncontrol, knots);
-				if (DistanceOfaPointFromLine(w,p,q) < 0.001)
+				if (DistanceOfaPointFromLine(w,p,q,0.000001) < 0.001)
 					continue;
 				_line.p = p;
 				_line.q = q;
@@ -643,6 +647,7 @@ EMSATTRIBUTE int32 LoadDXF(char* file, uint32 length)
 				p = q;
 				previousu = u;
 			}
+
 			if (_drawing.count == 0)
 			{
 				q.x = controlpoints[data->ncontrol - 1].x;
