@@ -1457,6 +1457,7 @@ function OnClickThicknessBack(type)
 function OnClickColorFront(type)
 {
   manufacturingspecifications.colorfront = type;
+  if(manufacturingspecifications.construction == 'Half-Depth')manufacturingspecifications.colorback = type;
   var index = undefined;
   if(type == 'White')index = 0;
   if(type == 'Black')index = 1;
@@ -1708,19 +1709,19 @@ function Draw()
   if(manufacturingspecifications != undefined)
   {
     if(manufacturingspecifications.colorfront != undefined)
-    {
       ctx.fillStyle = FrontMaterialTypeToColor(manufacturingspecifications.colorfront);
-      if(manufacturingspecifications.designrawmaterial != undefined)
-      {
-        ctx.beginPath();
-        ctx.moveTo(((manufacturingspecifications.designrawmaterial[0].p.x + mousex) * zoom),((manufacturingspecifications.designrawmaterial[0].p.y + mousey) * zoom));
-        ctx.lineTo(((manufacturingspecifications.designrawmaterial[0].q.x + mousex) * zoom),((manufacturingspecifications.designrawmaterial[0].q.y + mousey) * zoom));   
-        ctx.lineTo(((manufacturingspecifications.designrawmaterial[1].q.x + mousex) * zoom),((manufacturingspecifications.designrawmaterial[1].q.y + mousey) * zoom));   
-        ctx.lineTo(((manufacturingspecifications.designrawmaterial[2].q.x + mousex) * zoom),((manufacturingspecifications.designrawmaterial[2].q.y + mousey) * zoom));
-        ctx.lineTo(((manufacturingspecifications.designrawmaterial[3].q.x + mousex) * zoom),((manufacturingspecifications.designrawmaterial[3].q.y + mousey) * zoom));    
-        ctx.fill();
-        ctx.stroke();
-      }
+    else
+      ctx.fillStyle = FrontMaterialTypeToColor("Transparent");
+    if(manufacturingspecifications.designrawmaterial != undefined)
+    {
+      ctx.beginPath();
+      ctx.moveTo(((manufacturingspecifications.designrawmaterial[0].p.x + mousex) * zoom),((manufacturingspecifications.designrawmaterial[0].p.y + mousey) * zoom));
+      ctx.lineTo(((manufacturingspecifications.designrawmaterial[0].q.x + mousex) * zoom),((manufacturingspecifications.designrawmaterial[0].q.y + mousey) * zoom));   
+      ctx.lineTo(((manufacturingspecifications.designrawmaterial[1].q.x + mousex) * zoom),((manufacturingspecifications.designrawmaterial[1].q.y + mousey) * zoom));   
+      ctx.lineTo(((manufacturingspecifications.designrawmaterial[2].q.x + mousex) * zoom),((manufacturingspecifications.designrawmaterial[2].q.y + mousey) * zoom));
+      ctx.lineTo(((manufacturingspecifications.designrawmaterial[3].q.x + mousex) * zoom),((manufacturingspecifications.designrawmaterial[3].q.y + mousey) * zoom));    
+      ctx.fill();
+      ctx.stroke();
     }
 
     if((manufacturingspecifications.spantop!=0 || manufacturingspecifications.spanbottom!=0 || manufacturingspecifications.spanleft!=0 || manufacturingspecifications.spanright!=0))
@@ -1738,7 +1739,11 @@ function Draw()
     {
       if(manufacturingspecifications.designobject[mdo] != undefined && manufacturingspecifications.designobject[mdo].drawing != undefined)
       {
-        for(var ld=0;ld<=manufacturingspecifications.designobject[mdo].drawing.maxloopdepth;ld++)
+        var maxdepth = manufacturingspecifications.designobject[mdo].drawing.maxloopdepth;
+        if(manufacturingspecifications.construction == "Standalone")
+        if(manufacturingspecifications.process!= "CNC Laser 0.5mm")
+          maxdepth = 1;
+        for(var ld=0;ld<=maxdepth;ld++)
         {
           if(ld % 2 == 0)
           {
