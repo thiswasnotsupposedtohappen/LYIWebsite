@@ -1504,7 +1504,7 @@ function OnClickColorBack(type)
 function OnChangeCuttingDepth(input)
 {
   if(input.value > parseInt(manufacturingspecifications.thicknessfront))input.value = parseInt(manufacturingspecifications.thicknessfront) -2;
-  manufacturingspecifications.cuttingepth = input.value;
+  manufacturingspecifications.cuttingdepth = input.value;
 }
 
 function OnChangeBorder()
@@ -1547,7 +1547,7 @@ function PopulateCost()
   document.querySelector(".shop-review-specification-thicknessback").innerHTML = '<h2 style="color:blue">' + manufacturingspecifications.thicknessback + '</h2>';
   document.querySelector(".shop-review-specification-colorfront").innerHTML = '<h2 style="color:blue">' + manufacturingspecifications.colorfront + '</h2>';
   document.querySelector(".shop-review-specification-colorback").innerHTML = '<h2 style="color:blue">' + manufacturingspecifications.colorback + '</h2>';
-  document.querySelector(".shop-review-specification-cuttingdepth").innerHTML = '<h2 style="color:blue">' + manufacturingspecifications.cuttingdepth + '</h2>';
+  document.querySelector(".shop-review-specification-cuttingdepth").innerHTML = '<h2 style="color:blue">' + manufacturingspecifications.cuttingdepth + 'mm</h2>';
 
   document.querySelector(".shop-review").querySelectorAll("div").forEach(element => {
     if(element.innerHTML == '<h2 style="color:blue">undefined</h2>')element.innerHTML = '<h2 style="color:rgb(141, 0, 0);">Not Applicable</h2>';
@@ -1633,7 +1633,7 @@ class ManufacturingSpecifications
     this.thicknessback = undefined;
     this.colorfront = undefined;
     this.colorback = undefined;
-    this.cuttingepth = undefined;
+    this.cuttingdepth = undefined;
     this.designrawmaterial = undefined;
     this.spantop = 0;
     this.spanbottom = 0;
@@ -2149,7 +2149,7 @@ function DesignOpen()
         if(_manufacturingspecifications.materialfront != undefined)OnClickMaterialFront(_manufacturingspecifications.materialfront);
         if(_manufacturingspecifications.thicknessfront != undefined)OnClickThicknessFront(_manufacturingspecifications.thicknessfront);
         if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
-        if(_manufacturingspecifications.cuttingepth != undefined)OnChangeCuttingDepth(_manufacturingspecifications.cuttingepth);
+        if(_manufacturingspecifications.cuttingdepth != undefined)OnChangeCuttingDepth(_manufacturingspecifications.cuttingdepth);
       }
 
       document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[0].value = (_manufacturingspecifications.dimensionsy/2) - _manufacturingspecifications.spantop;
@@ -2400,7 +2400,7 @@ Module.onRuntimeInitialized = function()
       if(_manufacturingspecifications.materialfront != undefined)OnClickMaterialFront(_manufacturingspecifications.materialfront);
       if(_manufacturingspecifications.thicknessfront != undefined)OnClickThicknessFront(_manufacturingspecifications.thicknessfront);
       if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
-      if(_manufacturingspecifications.cuttingepth != undefined)OnChangeCuttingDepth(_manufacturingspecifications.cuttingepth);
+      if(_manufacturingspecifications.cuttingdepth != undefined)OnChangeCuttingDepth(_manufacturingspecifications.cuttingdepth);
     }
     manufacturingspecifications = _manufacturingspecifications;
     OnChangeBorder();
@@ -2444,7 +2444,7 @@ Module.onRuntimeInitialized = function()
           if(_manufacturingspecifications.materialfront != undefined)OnClickMaterialFront(_manufacturingspecifications.materialfront);
           if(_manufacturingspecifications.thicknessfront != undefined)OnClickThicknessFront(_manufacturingspecifications.thicknessfront);
           if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
-          if(_manufacturingspecifications.cuttingepth != undefined)OnChangeCuttingDepth(_manufacturingspecifications.cuttingepth);
+          if(_manufacturingspecifications.cuttingdepth != undefined)OnChangeCuttingDepth(_manufacturingspecifications.cuttingdepth);
         }
         OnChangeBorder();
         manufacturingspecifications = _manufacturingspecifications;
