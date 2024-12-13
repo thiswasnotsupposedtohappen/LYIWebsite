@@ -12,14 +12,14 @@
 //#define TESTFILE "All Jali Designs.dxf"
 //#define TESTFILE "lwpoly.dxf"
 //#define TESTFILE "Ellipse.dxf"
-#define TESTFILE "Lasercutting Cargo 2mm MS with material.dxf"
+//#define TESTFILE "Lasercutting Cargo 2mm MS with material.dxf"
 //#define TESTFILE "Om Jali.dxf"
 //#define TESTFILE "spline.dxf"
 //#define TESTFILE "Test2.dxf"
 //#define TESTFILE "Test.dxf"
 //#define TESTFILE "Loop.dxf"
 //#define TESTFILE "LoopDepthTest.dxf"
-//#define TESTFILE "22.dxf"
+#define TESTFILE "20.dxf"
 #endif
 #include <iostream>
 #include <fstream>
@@ -62,7 +62,7 @@ EMSCRIPTEN_KEEPALIVE int32 main()
 	int32 LoadDXF(char* file, uint32 length);
 	int32 GenerateLoops(float64);
 	if (LoadDXF((char*)"intermediated.txt", 0))return -1;
-	if (GenerateLoops(0.001))return -2;
+	if (GenerateLoops(0.05))return -2;
 #endif
 	return 0;
 }
@@ -887,7 +887,7 @@ EMSATTRIBUTE int32 GenerateLoops(float64 autoclosethreshold)
 				break;
 			}
 			drawingll.GotoHead();
-			while (1)
+			while (drawingll.count)
 			{
 				//chain.current->data.q == drawingll.current->data.p
 				if ((Absolute(chain.tail->data.q.x - drawingll.current->data.p.x) <= autoclosethreshold) &&
@@ -913,7 +913,8 @@ EMSATTRIBUTE int32 GenerateLoops(float64 autoclosethreshold)
 							linecountprevious = drawingll.count;
 						}
 					}
-					if (chain.tail->data.q == chain.head->data.p)
+					if ((Absolute(chain.tail->data.q.x - chain.head->data.p.x) <= autoclosethreshold)&&
+						(Absolute(chain.tail->data.q.y - chain.head->data.p.y) <= autoclosethreshold))
 					{
 						loopll << chain;
 						chain.Unlink();
@@ -945,7 +946,8 @@ EMSATTRIBUTE int32 GenerateLoops(float64 autoclosethreshold)
 							linecountprevious = drawingll.count;
 						}
 					}
-					if (chain.tail->data.q == chain.head->data.p)
+					if ((Absolute(chain.tail->data.q.x - chain.head->data.p.x) <= autoclosethreshold) &&
+						(Absolute(chain.tail->data.q.y - chain.head->data.p.y) <= autoclosethreshold))
 					{
 						loopll << chain;
 						chain.Unlink();
@@ -977,7 +979,8 @@ EMSATTRIBUTE int32 GenerateLoops(float64 autoclosethreshold)
 							linecountprevious = drawingll.count;
 						}
 					}
-					if (chain.tail->data.q == chain.head->data.p)
+					if ((Absolute(chain.tail->data.q.x - chain.head->data.p.x) <= autoclosethreshold) &&
+						(Absolute(chain.tail->data.q.y - chain.head->data.p.y) <= autoclosethreshold))
 					{
 						loopll << chain;
 						chain.Unlink();
@@ -986,36 +989,37 @@ EMSATTRIBUTE int32 GenerateLoops(float64 autoclosethreshold)
 				}
 				//else if (chain.current->data.p == drawingll.current->data.p)
 				else
-					if ((Absolute(chain.head->data.p.x - drawingll.current->data.p.x) <= autoclosethreshold) &&
-						(Absolute(chain.head->data.p.y - drawingll.current->data.p.y) <= autoclosethreshold))
+				if ((Absolute(chain.head->data.p.x - drawingll.current->data.p.x) <= autoclosethreshold) &&
+					(Absolute(chain.head->data.p.y - drawingll.current->data.p.y) <= autoclosethreshold))
+				{
+					LineSegment _line;
+					_line.p.x = drawingll.current->data.q.x;
+					_line.p.y = drawingll.current->data.q.y;
+					_line.q.x = drawingll.current->data.p.x;
+					_line.q.y = drawingll.current->data.p.y;
+					chain.PushHead(_line);
+					if (drawingll.RemoveAndMoveRight() == false)
 					{
-						LineSegment _line;
-						_line.p.x = drawingll.current->data.q.x;
-						_line.p.y = drawingll.current->data.q.y;
-						_line.q.x = drawingll.current->data.p.x;
-						_line.q.y = drawingll.current->data.p.y;
-						chain.PushHead(_line);
-						if (drawingll.RemoveAndMoveRight() == false)
+						if (linecountprevious == drawingll.count)
 						{
-							if (linecountprevious == drawingll.count)
-							{
-								linkll << chain;
-								chain.Unlink();
-								break;
-							}
-							else
-							{
-								drawingll.GotoHead();
-								linecountprevious = drawingll.count;
-							}
-						}
-						if (chain.tail->data.q == chain.head->data.p)
-						{
-							loopll << chain;
+							linkll << chain;
 							chain.Unlink();
 							break;
 						}
+						else
+						{
+							drawingll.GotoHead();
+							linecountprevious = drawingll.count;
+						}
 					}
+					if ((Absolute(chain.tail->data.q.x - chain.head->data.p.x) <= autoclosethreshold) &&
+						(Absolute(chain.tail->data.q.y - chain.head->data.p.y) <= autoclosethreshold))
+					{
+						loopll << chain;
+						chain.Unlink();
+						break;
+					}
+				}
 				else
 				{
 					if (drawingll.MoveRight() == false)
@@ -1092,40 +1096,28 @@ EMSATTRIBUTE int32 GenerateLoops(float64 autoclosethreshold)
 			uint32 intersectioncount = 0;
 			for (k = 0; k < loop[loopindex].count; k++)
 			{
-				float64 px = loop.data[loopindex].data[k].p.x;
-				float64 qx = loop.data[loopindex].data[k].q.x;
-				if (px > qx)
-				{
-					px = loop.data[loopindex].data[k].q.x;
-					qx = loop.data[loopindex].data[k].p.x;
-				}
-                if ((point.x > px) && (point.x < qx))
+                if ((point.x > loop.data[loopindex].data[k].p.x) && (point.x < loop.data[loopindex].data[k].q.x)||
+					(point.x < loop.data[loopindex].data[k].p.x) && (point.x > loop.data[loopindex].data[k].q.x))
 				{
 					Line line(loop.data[loopindex].data[k].p, loop.data[loopindex].data[k].q);
 					float64x2 intersection = line.IntersectionWithVerticalLine(point.x);
 					if (intersection.y > point.y)
 						intersectioncount++;
 				}
-				if ((point.x == px) || (point.x == qx))
+				if (point.x == loop.data[loopindex].data[k].q.x)
 				{
-					if (point.x == 149.51120000000000)
-						int32 test = 0;
 					if (loop.data[loopindex].data[k].p.y > point.y)
 					{
-						if (k == 0)
-							continue;
-						else if (k == (loop[loopindex].count - 1))
+						uint32 kp0 = k;
+						uint32 kp1 = k + 1;
+						if (kp1 == loop[loopindex].count)
+							kp1 = 0;
+
+						if ((loop.data[loopindex].data[kp0].p.x < point.x) && (loop.data[loopindex].data[kp1].q.x > point.x)||
+							(loop.data[loopindex].data[kp0].p.x > point.x) && (loop.data[loopindex].data[kp1].q.x < point.x))
 						{
-							if (intersectioncount%2==0)
-								continue;
-							else
-							{
-								intersectioncount++;
-								break;
-							}								
-						}
-						intersectioncount++;
-						k++;
+							intersectioncount++;
+						}						
 					}
 				}
 			}

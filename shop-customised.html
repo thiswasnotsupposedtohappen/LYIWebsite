@@ -1666,6 +1666,7 @@ function TransformDesignObject(designobject,_offsetx, _offsety, _angle, _scale)
   designobject.scale = _scale;
 }
 var manufacturingspecifications = new ManufacturingSpecifications();
+const autoclosethreshold = 0.05;
 
 function FrontMaterialTypeToColor(type)
 {
@@ -1866,7 +1867,7 @@ function LoadDXFOnSlot(slot,url)
     var memory = _malloc(data.length);
     HEAPU8.set(data, memory);
     console.log("return = " + _LoadDXF(memory, data.length));
-    console.log("return = " + _GenerateLoops(0.001));
+    console.log("return = " + _GenerateLoops(autoclosethreshold));
     _free(memory);
       
     manufacturingspecifications.designobject[slot].drawing = new Drawing();
@@ -1910,20 +1911,6 @@ function LoadDXFOnSlot(slot,url)
         manufacturingspecifications.designobject[slot].drawing.link[i].line[j].q.y = _GET_link_qy(i,j);
       }
     }
-    // manufacturingspecifications.designobject[slot].drawinglength =  _GETdrawinglength();
-    // manufacturingspecifications.designobject[slot].drawing = new Array(manufacturingspecifications.designobject[slot].drawinglength);
-    // for (var i = 0; i < manufacturingspecifications.designobject[slot].drawinglength; i++) 
-    // {
-    //   manufacturingspecifications.designobject[slot].drawing[i] = new Line;
-    //   manufacturingspecifications.designobject[slot].drawing[i].p = new Point;
-    //   manufacturingspecifications.designobject[slot].drawing[i].q = new Point;
-    //   manufacturingspecifications.designobject[slot].drawing[i].p.x = HEAPF64[address / 8 + 0];
-    //   manufacturingspecifications.designobject[slot].drawing[i].p.y = HEAPF64[address / 8 + 1];
-    //   manufacturingspecifications.designobject[slot].drawing[i].q.x = HEAPF64[address / 8 + 2];
-    //   manufacturingspecifications.designobject[slot].drawing[i].q.y = HEAPF64[address / 8 + 3];
-
-    //   address += 32;
-    // }
   };  
   xhr.send(null);
 } 
@@ -2212,7 +2199,7 @@ function DesignUpload()
       var memory = _malloc(data.length);
       HEAPU8.set(data, memory);
       console.log("return = " + _LoadDXF(memory, data.length));
-      console.log("return = " + _GenerateLoops(0.001));
+      console.log("return = " + _GenerateLoops(autoclosethreshold));
       _free(memory);
         
       manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].drawing = new Drawing();
