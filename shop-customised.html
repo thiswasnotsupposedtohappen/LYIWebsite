@@ -260,16 +260,16 @@
 
       <div style="text-align: end;"><h3 style="line-height: 50px;">Color:</h3></div>   
       <div class="shop-manufacturingconfig-options">
-        <button class="shop-manufacturingconfig-button disabled front-white" onclick="OnClickColorFront('White');OnClickColorBack('White');"><h2>White</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: white;"></div></button>
-        <button class="shop-manufacturingconfig-button disabled front-black" onclick="OnClickColorFront('Black');OnClickColorBack('Black');"><h2>Black</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: black;"></div></button>
-        <button class="shop-manufacturingconfig-button disabled front-red" onclick="OnClickColorFront('Red');OnClickColorBack('Red');"><h2>Red</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: red;"></div></button>
-        <button class="shop-manufacturingconfig-button disabled front-green" onclick="OnClickColorFront('Green');OnClickColorBack('Green');"><h2>Green</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: green;"></div></button>
-        <button class="shop-manufacturingconfig-button disabled front-blue" onclick="OnClickColorFront('Blue');OnClickColorBack('Blue');"><h2>Blue</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: blue;"></div></button>
-        <button class="shop-manufacturingconfig-button disabled front-orange" onclick="OnClickColorFront('Oragne');OnClickColorBack('Oragne');"><h2>Oragne</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: orange;"></div></button>
-        <button class="shop-manufacturingconfig-button disabled front-brown" onclick="OnClickColorFront('Brown');OnClickColorBack('Brown');"><h2>Brown</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: brown;"></div></button>
-        <button class="shop-manufacturingconfig-button disabled front-yellow" onclick="OnClickColorFront('Yellow');OnClickColorBack('Yellow');"><h2>Yellow</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: yellow;"></div></button>
-        <button class="shop-manufacturingconfig-button disabled front-transparent" onclick="OnClickColorFront('Transparent');OnClickColorBack('Transparent');"><h2>Transparent</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: transparent;"></div></button>
-        <button class="shop-manufacturingconfig-button disabled front-white040" onclick="OnClickColorFront('White040');OnClickColorBack('White040');"><h2>White 40%</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: rgba(255, 255, 255, 0.4);"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-white" onclick="OnClickColorFront('White');"><h2>White</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: white;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-black" onclick="OnClickColorFront('Black');"><h2>Black</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: black;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-red" onclick="OnClickColorFront('Red');"><h2>Red</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: red;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-green" onclick="OnClickColorFront('Green');"><h2>Green</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: green;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-blue" onclick="OnClickColorFront('Blue');"><h2>Blue</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: blue;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-orange" onclick="OnClickColorFront('Oragne');"><h2>Oragne</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: orange;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-brown" onclick="OnClickColorFront('Brown');"><h2>Brown</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: brown;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-yellow" onclick="OnClickColorFront('Yellow');"><h2>Yellow</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: yellow;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-transparent" onclick="OnClickColorFront('Transparent');"><h2>Transparent</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: transparent;"></div></button>
+        <button class="shop-manufacturingconfig-button disabled front-white040" onclick="OnClickColorFront('White040');"><h2>White 40%</h2><div class="shop-manufacturingconfig-button-colorpatch" style="background-color: rgba(255, 255, 255, 0.4);"></div></button>
         <button class="shop-manufacturingconfig-button disabled front-raw" onclick="OnClickColorFront('RAW')"><h2>RAW</h2></button>
       </div>
     </div>
@@ -791,7 +791,7 @@ function OnChangeDimensionsWidth(input)
 function SetSizeOptions()
 {
   DisableButton(document.querySelector(".size-1x1"));
-  DisableButton(document.querySelector(".size-1x2"));
+  DisableButton(document.querySelector(".size-2x1"));
   DisableButton(document.querySelector(".size-2x2"));
   DisableButton(document.querySelector(".size-4x1"));
   DisableButton(document.querySelector(".size-4x2"));
@@ -1457,7 +1457,12 @@ function OnClickThicknessBack(type)
 function OnClickColorFront(type)
 {
   manufacturingspecifications.colorfront = type;
-  if(manufacturingspecifications.construction == 'Half-Depth')manufacturingspecifications.colorback = type;
+  if(manufacturingspecifications.construction == 'Half-Depth')
+  {
+    manufacturingspecifications.colorback = type;
+    if(manufacturingspecifications.materialfront == "Laminated Plywood")
+      manufacturingspecifications.colorback = "RAW";
+  }
   var index = undefined;
   if(type == 'White')index = 0;
   if(type == 'Black')index = 1;
