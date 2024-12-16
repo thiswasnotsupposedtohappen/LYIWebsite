@@ -398,8 +398,32 @@
       <div style="text-align: right;">
         <button class="shop-designfile-button unselected" onclick="DesignSave()"><h2>Save Design</h2></button>
       </div>
-    </div>
+    </div>  
   </div>
+
+  <div class="loadingscreen" style="display: flex;">
+
+    <div style="
+      position: fixed; 
+      top:0px; left:0px; right:0px; bottom:0px; 
+      width: 100%; height: 100%;
+      z-index: 999;
+      background-color: rgba(0.5,0.5,0.5,0.8);">
+
+      <div style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+      ">
+        <h8><span style = "color: white;">Loading Design...</span></h8>
+      </div>
+
+    </div>
+
+  </div>
+
 </body>
 </html>
 <style>
@@ -1622,7 +1646,6 @@ class ManufacturingSpecifications
 {
   constructor()
   {
-    this.name = "";
     this.dimensionsx = 0;
     this.dimensionsy = 0;
     this.size = undefined;
@@ -1917,7 +1940,7 @@ function LoadDXFOnSlot(slot,url)
   };  
   xhr.send(null);
 } 
- function DesignLoad()
+function DesignLoad()
 {
   document.querySelectorAll(".shop-designelements-tray")[1].innerHTML = `
   <div style=" width: 100%;box-sizing: border-box;">
@@ -1946,45 +1969,59 @@ function LoadDXFOnSlot(slot,url)
 }
 function DesignAdd(folder,index)
 {
-  if (manufacturingspecifications == undefined) 
-    manufacturingspecifications = new ManufacturingSpecifications();
-  if (manufacturingspecifications.designobject == undefined) 
-      manufacturingspecifications.designobject = [];
-  var _designobject = new DesignObject();
-  _designobject.dxfurl = folder+index+".dxf";
-  _designobject.thumbnailurl = folder+index+".jpg";
-  _designobject.offsetx = 0;
-  _designobject.offsety = 0;
-  _designobject.angle = 0;
-  _designobject.scale = 1;
-  manufacturingspecifications.designobject.push(_designobject);
-  manufacturingspecifications.designobjectlength++;
+  console.log("Loading");    
+  document.querySelector(".loadingscreen").style.display = "flex";
 
-  LoadDXFOnSlot(manufacturingspecifications.designobjectlength-1,
-    manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].dxfurl);
-  TransformDesignObject(manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1],
-    manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].offsetx,
-    manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].offsety,
-    manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].angle, 
-    manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].scale);
-
-  document.querySelectorAll(".shop-designelements-tray")[1].innerHTML = `
-  <div style=" width: 100%;box-sizing: border-box;">
-    <h3><b>Design Elements In Design</b></h3>
-  </div>
-  `;
-  for(var i=0;i<manufacturingspecifications.designobjectlength;i++)
+  setTimeout(() => 
   {
-    document.querySelectorAll(".shop-designelements-tray")[1].innerHTML += `
-    <div class="shop-designelements-tray-item">
-      <img src="`+ manufacturingspecifications.designobject[i].thumbnailurl +`" class="shop-designelements-tray-item-img">
-      <button class="shop-designelements-tray-item-button" onclick="DesignEditSelect(`+ i +`)" style="bottom: 5px;left:35px; background-color: rgb(61, 213, 255);"><span class="material-symbols-outlined">build</span></button>
-      <button class="shop-designelements-tray-item-button" onclick="DesignRemove(`+ i +`)" style="bottom: 5px;left:145px;background-color: rgb(255, 0, 0);"><span class="material-symbols-outlined">delete_forever</span></button>
-    </div>
-    `;
-  }
-  Draw();  
-  DesignEditSelect(manufacturingspecifications.designobjectlength - 1);
+    new Promise((resolve, reject) => 
+    {
+      if (manufacturingspecifications == undefined) 
+        manufacturingspecifications = new ManufacturingSpecifications();
+      if (manufacturingspecifications.designobject == undefined) 
+          manufacturingspecifications.designobject = [];
+      var _designobject = new DesignObject();
+      _designobject.dxfurl = folder+index+".dxf";
+      _designobject.thumbnailurl = folder+index+".jpg";
+      _designobject.offsetx = 0;
+      _designobject.offsety = 0;
+      _designobject.angle = 0;
+      _designobject.scale = 1;
+      manufacturingspecifications.designobject.push(_designobject);
+      manufacturingspecifications.designobjectlength++;
+
+      LoadDXFOnSlot(manufacturingspecifications.designobjectlength-1,
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].dxfurl);
+      TransformDesignObject(manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1],
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].offsetx,
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].offsety,
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].angle, 
+        manufacturingspecifications.designobject[manufacturingspecifications.designobjectlength-1].scale);
+
+      document.querySelectorAll(".shop-designelements-tray")[1].innerHTML = `
+      <div style=" width: 100%;box-sizing: border-box;">
+        <h3><b>Design Elements In Design</b></h3>
+      </div>
+      `;
+      for(var i=0;i<manufacturingspecifications.designobjectlength;i++)
+      {
+        document.querySelectorAll(".shop-designelements-tray")[1].innerHTML += `
+        <div class="shop-designelements-tray-item">
+          <img src="`+ manufacturingspecifications.designobject[i].thumbnailurl +`" class="shop-designelements-tray-item-img">
+          <button class="shop-designelements-tray-item-button" onclick="DesignEditSelect(`+ i +`)" style="bottom: 5px;left:35px; background-color: rgb(61, 213, 255);"><span class="material-symbols-outlined">build</span></button>
+          <button class="shop-designelements-tray-item-button" onclick="DesignRemove(`+ i +`)" style="bottom: 5px;left:145px;background-color: rgb(255, 0, 0);"><span class="material-symbols-outlined">delete_forever</span></button>
+        </div>
+        `;
+      }
+      Draw();  
+      DesignEditSelect(manufacturingspecifications.designobjectlength - 1);
+      resolve();
+    }).then(() => 
+    {
+      document.querySelector(".loadingscreen").style.display = "none";
+      console.log("Loaded");
+    });
+  });
 }
 function DesignEditSelect(element_index)
 {
@@ -2283,12 +2320,12 @@ if(url.size == 0)
 {
   window.location.href = "shop.html";
 }  
-var designcatalogue = undefined;
+var catalogue = undefined;
 var xhr = new XMLHttpRequest();
-xhr.open("GET", "DesignCatalogue.json", false);
+xhr.open("GET", "Catalogue.json", false);
 xhr.onload = function (oEvent)
 {
-  designcatalogue = JSON.parse(xhr.responseText);
+  catalogue = JSON.parse(xhr.responseText);
 };
 xhr.send(null);
 Module.onRuntimeInitialized = function() 
@@ -2301,7 +2338,7 @@ Module.onRuntimeInitialized = function()
         manufacturingspecifications.designobject = [];
 
     var _manufacturingspecifications = new ManufacturingSpecifications();
-    if(url.get("type") == "Mandir")
+    if(url.get("category") == "Mandir")
     {
       document.querySelectorAll(".shop-designelements-tray")[2].innerHTML = `
       <div style=" width: 100%;box-sizing: border-box;">
@@ -2331,7 +2368,7 @@ Module.onRuntimeInitialized = function()
       document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[2].value = 20;
       document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[3].value = 20;
     }
-    if(url.get("type") == "Partition")
+    if(url.get("category") == "Partition")
     {
       document.querySelectorAll(".shop-designelements-tray")[2].innerHTML = `
       <div style=" width: 100%;box-sizing: border-box;">
@@ -2398,53 +2435,116 @@ Module.onRuntimeInitialized = function()
     LoadRawMaterial(manufacturingspecifications.dimensionsx, manufacturingspecifications.dimensionsy);
     DesignLoad();
   }
-  else
+  else if(url.get("design") != undefined)
   {
-    designcatalogue.designcatalogue.forEach(function(_design)
+    catalogue = JSON.parse(xhr.responseText);
+    var catalogueitem = undefined;
+
+    for(var i=0;i<catalogue.catalogue_customised_decorative_jali.length;i++)
     {
-      if(_design.name == url.get("design"))
+      if(catalogue.catalogue_customised_decorative_jali[i].name == url.get("design"))
       {
-        var _manufacturingspecifications = _design;
-        document.querySelector(".dimensions-length").value = _manufacturingspecifications.dimensionsx;
-        document.querySelector(".dimensions-width").value = _manufacturingspecifications.dimensionsy;
-        SetSizeOptions();
-        OnClickUnit('mm');
-        OnClickSupplier(_manufacturingspecifications.supplier);
-        OnClickConstruction(_manufacturingspecifications.construction);
-        if(_manufacturingspecifications.construction == "Standalone")
-        {            
-          if(_manufacturingspecifications.process != undefined)OnClickProcess(_manufacturingspecifications.process);
-          if(_manufacturingspecifications.materialfront != undefined)OnClickMaterialFront(_manufacturingspecifications.materialfront);
-          if(_manufacturingspecifications.thicknessfront != undefined)OnClickThicknessFront(_manufacturingspecifications.thicknessfront);
-          if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
-        }
-        if(manufacturingspecifications.construction == "Back-Supported")
+        catalogueitem = catalogue.catalogue_customised_decorative_jali[i];
+        break;
+      }
+    }
+    for(var i=0;i<catalogue.catalogue_customised_mandir_centre.length;i++)
+    {
+      if(catalogue.catalogue_customised_mandir_centre[i].name == url.get("design"))
+      {
+        catalogueitem = catalogue.catalogue_customised_mandir_centre[i];
+        break;
+      }
+    }
+    
+    if(catalogueitem != undefined)
+    {
+      var _manufacturingspecifications = new ManufacturingSpecifications();
+      Object.assign(_manufacturingspecifications, catalogueitem.manufacturingspecifications);
+      if(url.get("category") == "Mandir")
+      {
+        document.querySelectorAll(".shop-designelements-tray")[2].innerHTML = `
+        <div style=" width: 100%;box-sizing: border-box;">
+          <h3><b>Add Design Elements</b></h3>
+        </div>
+        `;
+        for(var i=1;i<=32;i++)
         {
-          if(_manufacturingspecifications.process != undefined)OnClickProcess(_manufacturingspecifications.process);
-          if(_manufacturingspecifications.materialfront != undefined)OnClickMaterialFront(_manufacturingspecifications.materialfront);
-          if(_manufacturingspecifications.thicknessfront != undefined)OnClickThicknessFront(_manufacturingspecifications.thicknessfront);
-          if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
-          if(_manufacturingspecifications.materialback != undefined)OnClickMaterialBack(_manufacturingspecifications.materialback);
-          if(_manufacturingspecifications.thicknessback != undefined)OnClickThicknessBack(_manufacturingspecifications.thicknessback);
-          if(_manufacturingspecifications.colorback != undefined)OnClickColorBack(_manufacturingspecifications.colorback);
-        }
-        if(_manufacturingspecifications.construction == "Half-Depth")
+          document.querySelectorAll(".shop-designelements-tray")[2].innerHTML += `
+          <div class="shop-designelements-tray-item">
+            <img src="dxf/Mandir Jali Objects/`+i+`.jpg" class="shop-designelements-tray-item-img">
+            <button class="shop-designelements-tray-item-button" onclick="DesignAdd('dxf/Mandir Jali Objects/',`+ i +`)" style="bottom: 5px;left:85px;background-color: rgb(30, 255, 0);"><span class="material-symbols-outlined">add</span></button>
+          </div>
+          `;
+        }  
+        zoom = 1.0;   
+      }
+      if(url.get("category") == "Partition")
+      {
+        document.querySelectorAll(".shop-designelements-tray")[2].innerHTML = `
+        <div style=" width: 100%;box-sizing: border-box;">
+          <h3><b>Add Design Elements</b></h3>
+        </div>
+        `;
+        for(var i=1;i<=184;i++)
         {
-          if(_manufacturingspecifications.process != undefined)OnClickProcess(_manufacturingspecifications.process);
-          if(_manufacturingspecifications.materialfront != undefined)OnClickMaterialFront(_manufacturingspecifications.materialfront);
-          if(_manufacturingspecifications.thicknessfront != undefined)OnClickThicknessFront(_manufacturingspecifications.thicknessfront);
-          if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
-          if(_manufacturingspecifications.cuttingdepth != undefined)OnChangeCuttingDepth(_manufacturingspecifications.cuttingdepth);
+          document.querySelectorAll(".shop-designelements-tray")[2].innerHTML += `
+          <div class="shop-designelements-tray-item">
+            <img src="dxf/Partition Jali Objects/`+i+`.jpg" class="shop-designelements-tray-item-img">
+            <button class="shop-designelements-tray-item-button" onclick="DesignAdd('dxf/Partition Jali Objects/',`+ i +`)" style="bottom: 5px;left:85px;background-color: rgb(30, 255, 0);"><span class="material-symbols-outlined">add</span></button>
+          </div>
+          `;
         }
-        OnChangeBorder();
-        manufacturingspecifications = _manufacturingspecifications;
-        
-        LoadRawMaterial(manufacturingspecifications.dimensionsx, manufacturingspecifications.dimensionsy);
-        DesignLoad();
-      }      
-    });
-    if(typeof PopulateCost == 'function')PopulateCost();   
+        zoom = 0.5;
+      }    
+      document.querySelector(".dimensions-length").value = _manufacturingspecifications.dimensionsx;
+      document.querySelector(".dimensions-width").value = _manufacturingspecifications.dimensionsy;
+      SetSizeOptions();
+      OnClickUnit('mm');
+      OnClickSupplier(_manufacturingspecifications.supplier);
+      OnClickConstruction(_manufacturingspecifications.construction);
+      if(_manufacturingspecifications.construction == "Standalone")
+      {            
+        if(_manufacturingspecifications.process != undefined)OnClickProcess(_manufacturingspecifications.process);
+        if(_manufacturingspecifications.materialfront != undefined)OnClickMaterialFront(_manufacturingspecifications.materialfront);
+        if(_manufacturingspecifications.thicknessfront != undefined)OnClickThicknessFront(_manufacturingspecifications.thicknessfront);
+        if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
+      }
+      if(manufacturingspecifications.construction == "Back-Supported")
+      {
+        if(_manufacturingspecifications.process != undefined)OnClickProcess(_manufacturingspecifications.process);
+        if(_manufacturingspecifications.materialfront != undefined)OnClickMaterialFront(_manufacturingspecifications.materialfront);
+        if(_manufacturingspecifications.thicknessfront != undefined)OnClickThicknessFront(_manufacturingspecifications.thicknessfront);
+        if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
+        if(_manufacturingspecifications.materialback != undefined)OnClickMaterialBack(_manufacturingspecifications.materialback);
+        if(_manufacturingspecifications.thicknessback != undefined)OnClickThicknessBack(_manufacturingspecifications.thicknessback);
+        if(_manufacturingspecifications.colorback != undefined)OnClickColorBack(_manufacturingspecifications.colorback);
+      }
+      if(_manufacturingspecifications.construction == "Half-Depth")
+      {
+        if(_manufacturingspecifications.process != undefined)OnClickProcess(_manufacturingspecifications.process);
+        if(_manufacturingspecifications.materialfront != undefined)OnClickMaterialFront(_manufacturingspecifications.materialfront);
+        if(_manufacturingspecifications.thicknessfront != undefined)OnClickThicknessFront(_manufacturingspecifications.thicknessfront);
+        if(_manufacturingspecifications.colorfront != undefined)OnClickColorFront(_manufacturingspecifications.colorfront);
+        if(_manufacturingspecifications.cuttingdepth != undefined)OnChangeCuttingDepth(_manufacturingspecifications.cuttingdepth);
+      }
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[0].value = (_manufacturingspecifications.dimensionsy/2) - _manufacturingspecifications.spantop;
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[1].value = (_manufacturingspecifications.dimensionsy/2) + _manufacturingspecifications.spanbottom; 
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[2].value = (_manufacturingspecifications.dimensionsx/2) + _manufacturingspecifications.spanleft;
+      document.querySelectorAll(".shop-manufacturingconfig")[8].querySelectorAll("input")[3].value = (_manufacturingspecifications.dimensionsx/2) - _manufacturingspecifications.spanright;
+      Object.assign(manufacturingspecifications, _manufacturingspecifications);
+      
+      LoadRawMaterial(manufacturingspecifications.dimensionsx, manufacturingspecifications.dimensionsy);
+      DesignLoad();
+      if(typeof PopulateCost == 'function')PopulateCost();  
+    }      
+    else
+    {
+      console.log("Design Not Found");
+    }  
   }
+
+  document.querySelector(".loadingscreen").style.display = "none";
 };  
 
 </script>

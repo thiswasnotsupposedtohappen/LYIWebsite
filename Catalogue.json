@@ -1,0 +1,537 @@
+{
+  "catalogue_door" :
+  [
+    {
+      "name": "Door-1",
+      "thumbnailurl": "images/Doors/1.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-2",
+      "thumbnailurl": "images/Doors/2.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-3",
+      "thumbnailurl": "images/Doors/3.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-4",
+      "thumbnailurl": "images/Doors/4.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-5",
+      "thumbnailurl": "images/Doors/5.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-6",
+      "thumbnailurl": "images/Doors/6.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-7",
+      "thumbnailurl": "images/Doors/7.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-8",
+      "thumbnailurl": "images/Doors/8.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-9",
+      "thumbnailurl": "images/Doors/9.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-10",
+      "thumbnailurl": "images/Doors/10.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-11",
+      "thumbnailurl": "images/Doors/11.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-12",
+      "thumbnailurl": "images/Doors/12.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-13",
+      "thumbnailurl": "images/Doors/13.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-14",
+      "thumbnailurl": "images/Doors/14.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-15",
+      "thumbnailurl": "images/Doors/15.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-16",
+      "thumbnailurl": "images/Doors/16.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-17",
+      "thumbnailurl": "images/Doors/17.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-18",
+      "thumbnailurl": "images/Doors/18.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-19",
+      "thumbnailurl": "images/Doors/19.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-20",
+      "thumbnailurl": "images/Doors/20.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-21",
+      "thumbnailurl": "images/Doors/21.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-22",
+      "thumbnailurl": "images/Doors/22.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-23",
+      "thumbnailurl": "images/Doors/23.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-24",
+      "thumbnailurl": "images/Doors/24.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-25",
+      "thumbnailurl": "images/Doors/25.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-26",
+      "thumbnailurl": "images/Doors/26.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-27",
+      "thumbnailurl": "images/Doors/27.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-28",
+      "thumbnailurl": "images/Doors/28.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-29",
+      "thumbnailurl": "images/Doors/29.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-30",
+      "thumbnailurl": "images/Doors/30.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-31",
+      "thumbnailurl": "images/Doors/31.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-32",
+      "thumbnailurl": "images/Doors/32.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-33",
+      "thumbnailurl": "images/Doors/33.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-34",
+      "thumbnailurl": "images/Doors/34.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-35",
+      "thumbnailurl": "images/Doors/35.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-36",
+      "thumbnailurl": "images/Doors/36.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-37",
+      "thumbnailurl": "images/Doors/37.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-38",
+      "thumbnailurl": "images/Doors/38.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-39",
+      "thumbnailurl": "images/Doors/39.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-40",
+      "thumbnailurl": "images/Doors/40.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-41",
+      "thumbnailurl": "images/Doors/41.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-42",
+      "thumbnailurl": "images/Doors/42.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-43",
+      "thumbnailurl": "images/Doors/43.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-44",
+      "thumbnailurl": "images/Doors/44.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-45",
+      "thumbnailurl": "images/Doors/45.jpg",
+      "rate": 1200
+    },
+    {
+      "name": "Door-46",
+      "thumbnailurl": "images/Doors/46.jpg",
+      "rate": 1200
+    }
+  ],
+  "catalogue_mandir" :
+  [
+    {
+      "name": "Mandir-1",
+      "thumbnailurl": "images/Mandir/1.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-2",
+      "thumbnailurl": "images/Mandir/2.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-3",
+      "thumbnailurl": "images/Mandir/3.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-4",
+      "thumbnailurl": "images/Mandir/4.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-5",
+      "thumbnailurl": "images/Mandir/5.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-6",
+      "thumbnailurl": "images/Mandir/6.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-7",
+      "thumbnailurl": "images/Mandir/7.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-8",
+      "thumbnailurl": "images/Mandir/8.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-9",
+      "thumbnailurl": "images/Mandir/9.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-10",
+      "thumbnailurl": "images/Mandir/10.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-11",
+      "thumbnailurl": "images/Mandir/11.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-12",
+      "thumbnailurl": "images/Mandir/12.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-13",
+      "thumbnailurl": "images/Mandir/13.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-14",
+      "thumbnailurl": "images/Mandir/14.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-15",
+      "thumbnailurl": "images/Mandir/15.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-16",
+      "thumbnailurl": "images/Mandir/16.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-17",
+      "thumbnailurl": "images/Mandir/17.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-18",
+      "thumbnailurl": "images/Mandir/18.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-19",
+      "thumbnailurl": "images/Mandir/19.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-20",
+      "thumbnailurl": "images/Mandir/20.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-21",
+      "thumbnailurl": "images/Mandir/21.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-22",
+      "thumbnailurl": "images/Mandir/22.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-23",
+      "thumbnailurl": "images/Mandir/23.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-24",
+      "thumbnailurl": "images/Mandir/24.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-25",
+      "thumbnailurl": "images/Mandir/25.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-26",
+      "thumbnailurl": "images/Mandir/26.jpg",
+      "rate": 2000
+    },
+    {
+      "name": "Mandir-27",
+      "thumbnailurl": "images/Mandir/27.jpg",
+      "rate": 2000
+    }    
+  ],
+  "catalogue_customised_decorative_jali":
+  [
+    {
+      "name": "PartitionDesign-1",
+      "thumbnailurl": "images/Customised Decorative Jali/1.jpg",
+      "manufacturingspecifications":
+      {
+        "dimensionsx": 2440,
+        "dimensionsy": 1220,
+        "size": "8ft x 4ft",
+        "supplier": "LightYear",
+        "construction": "Standalone",
+        "process": "CNC Router 6mm",
+        "materialfront": "Acrylic",
+        "thicknessfront": "10mm",
+        "colorfront": "Red",
+        "spantop" : 592,
+        "spanbottom" : -592,
+        "spanleft" : -1202,
+        "spanright" : 1202,
+        "designobjectlength" : 1,
+        "designobject": [
+          {
+            "dxfurl": "dxf/Partition Jali Objects/1.dxf",
+            "thumbnailurl": "dxf/Partition Jali Objects/1.jpg",
+            "offsetx": 0,
+            "offsety": 0,
+            "angle": 0,
+            "scale": 1
+          }
+        ]
+      }  
+    }
+  ],
+  "catalogue_customised_mandir_centre":
+  [
+    {
+      "name": "MandirDesign-1",
+      "thumbnailurl": "images/Customised Mandir Centre/1.jpg",
+      "manufacturingspecifications":
+      {        
+        "dimensionsx": 300,
+        "dimensionsy": 500,
+        "size": "2ft x 1ft",
+        "supplier": "LightYear",
+        "construction": "Standalone",
+        "process": "CNC Laser 0.5mm",
+        "materialfront": "Acrylic",
+        "thicknessfront": "5mm",
+        "colorfront": "Black",
+        "spantop" : 230,
+        "spanbottom" : -230,
+        "spanleft" : -130,
+        "spanright" : 130,
+        "designobjectlength" : 5,
+        "designobject": [
+          {
+            "dxfurl": "dxf/Mandir Jali Objects/30.dxf",
+            "thumbnailurl": "dxf/Mandir Jali Objects/30.jpg",
+            "offsetx": 0,
+            "offsety": 190,
+            "angle": 0,
+            "scale": 0.5
+          },
+          {
+            "dxfurl": "dxf/Mandir Jali Objects/32.dxf",
+            "thumbnailurl": "dxf/Mandir Jali Objects/32.jpg",
+            "offsetx": 0,
+            "offsety": 190,
+            "angle": 0,
+            "scale": 0.5
+          },
+          {
+            "dxfurl": "dxf/Mandir Jali Objects/20.dxf",
+            "thumbnailurl": "dxf/Mandir Jali Objects/20.jpg",
+            "offsetx": -90,
+            "offsety": -130,
+            "angle": 0,
+            "scale": 0.4
+          },
+          {
+            "dxfurl": "dxf/Mandir Jali Objects/20.dxf",
+            "thumbnailurl": "dxf/Mandir Jali Objects/20.jpg",
+            "offsetx": 90,
+            "offsety": -130,
+            "angle": 0,
+            "scale": 0.4
+          },
+          {
+            "dxfurl": "dxf/Mandir Jali Objects/23.dxf",
+            "thumbnailurl": "dxf/Mandir Jali Objects/23.jpg",
+            "offsetx": 0,
+            "offsety": 30,
+            "angle": 0,
+            "scale": 0.7
+          }
+        ]  
+      }
+    },
+    {
+      "name": "MandirDesign-2",
+      "thumbnailurl": "images/Customised Mandir Centre/2.jpg",
+      "manufacturingspecifications":
+      {
+        "dimensionsx": 300,
+        "dimensionsy": 500,
+        "size": "2ft x 1ft",
+        "supplier": "LightYear",
+        "construction": "Standalone",
+        "process": "CNC Laser 0.5mm",
+        "materialfront": "Acrylic",
+        "thicknessfront": "5mm",
+        "colorfront": "Black",
+        "spantop" : 230,
+        "spanbottom" : -230,
+        "spanleft" : -130,
+        "spanright" : 130,
+        "designobjectlength" : 5,
+        "designobject": [
+          {
+            "dxfurl": "dxf/Mandir Jali Objects/9.dxf",
+            "thumbnailurl": "dxf/Mandir Jali Objects/9.jpg",
+            "offsetx": -110,
+            "offsety": 150,
+            "angle": 0,
+            "scale": 0.5
+          },
+          {
+            "dxfurl": "dxf/Mandir Jali Objects/9.dxf",
+            "thumbnailurl": "dxf/Mandir Jali Objects/9.jpg",
+            "offsetx": 110,
+            "offsety": 150,
+            "angle": 0,
+            "scale": 0.5
+          },
+          {
+            "dxfurl": "dxf/Mandir Jali Objects/17.dxf",
+            "thumbnailurl": "dxf/Mandir Jali Objects/17.jpg",
+            "offsetx": 110,
+            "offsety": -150,
+            "angle": 0,
+            "scale": 0.7
+          },
+          {
+            "dxfurl": "dxf/Mandir Jali Objects/17.dxf",
+            "thumbnailurl": "dxf/Mandir Jali Objects/17.jpg",
+            "offsetx": -110,
+            "offsety": -150,
+            "angle": 0,
+            "scale": 0.7
+          },
+          {
+            "dxfurl": "dxf/Mandir Jali Objects/21.dxf",
+            "thumbnailurl": "dxf/Mandir Jali Objects/21.jpg",
+            "offsetx": 0,
+            "offsety": 0,
+            "angle": 0,
+            "scale": 0.5
+          }
+        ]
+      }  
+    }
+
+  ]
+}
