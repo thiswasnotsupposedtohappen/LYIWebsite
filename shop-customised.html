@@ -16,7 +16,7 @@
     <div><a class="TopRibbonText" href="index.html">Home</a></div>
     <div><a class="TopRibbonText" href="shop.html">Shop</a></div>
     <div><a class="TopRibbonText" href="career.html">Career</a></div>
-    <div><a class="TopRibbonText" href="contact.html">Contact Us</a></div>
+    <div><a class="TopRibbonText" href="contact.html">Contact</a></div>
     <div><a class="TopRibbonText" href="cart.html"><span class="material-symbols-outlined" style="width: 100px; font-size: 50px;">shopping_cart</span></a></div>
   </div>
   <div class="editorribbon">
@@ -423,7 +423,6 @@
     </div>
 
   </div>
-
 </body>
 </html>
 <style>
@@ -717,8 +716,8 @@ document.addEventListener('touchmove', function(event)
 {
   if (buttonleftmousedown && event.touches.length === 1) 
   {
-    mousex += event.touches[0].clientX - touchxp;
-    mousey -= event.touches[0].clientY - touchyp;
+    mousex += (event.touches[0].clientX - touchxp) / zoom;
+    mousey -= (event.touches[0].clientY - touchyp) / zoom;
     touchxp = event.touches[0].clientX;
     touchyp = event.touches[0].clientY;
     Draw();
@@ -732,7 +731,7 @@ document.addEventListener('touchmove', function(event)
     var touchy1 = event.touches[1].clientY;
 
     var newsqueeze = Math.sqrt((touchx1-touchx0)*(touchx1-touchx0) + (touchy1-touchy0)*(touchy1-touchy0));
-    zoom += (newsqueeze - squeeze)/1000;
+    zoom += zoom * (newsqueeze - squeeze)/1000;
     if(zoom < 0.1)
       zoom = 0.1;
     Draw();
