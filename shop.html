@@ -31,17 +31,39 @@
 
     <div class="shop-item-description">
       <div class="shop-item-description-name"></div>
-      <div class="shop-item-description-size">
-        <div>Width:</div><div class="shop-item-description-size-width" style="color: blue;"></div>
-        <div>Height:</div><div class="shop-item-description-size-heigth"style="color: blue;"></div>
-        <div>Depth:</div><div class="shop-item-description-size-depth"style="color: blue;"></div>
+      <div class="shop-item-description-mandir-size">
+        <div>Width:</div><div class="shop-item-description-mandir-size-x" style="color: blue;"></div>
+        <div>Height:</div><div class="shop-item-description-mandir-size-y"style="color: blue;"></div>
+        <div>Depth:</div><div class="shop-item-description-mandir-size-z"style="color: blue;"></div>
+      </div>
+      <div class="shop-item-description-door-size">
+        <div>Width:</div><input class="shop-item-description-door-size-input shop-item-description-door-size-input-x" style="color: blue;" onchange="OnDoorChange('X');"onclick="OnDoorChange('X');">
+        <div>Height:</div><input class="shop-item-description-door-size-input shop-item-description-door-size-input-y"style="color: blue;" onchange="OnDoorChange('Y');"onclick="OnDoorChange('Y');">
+        <div>Thickness:</div><input class="shop-item-description-door-size-input shop-item-description-door-size-input-z"style="color: blue;" onchange="OnDoorChange('Z');"onclick="OnDoorChange('Z');">
+      </div>
+      <div class="shop-item-description-material">
+        <div class="shop-item-description-material-title">Material</div>
+        <div class="shop-item-description-material-selection">
+          <button class="shop-item-description-material-selection-button unselected" onclick="OnDoorChange('TeakWood');">Teak Wood</button>
+          <button class="shop-item-description-material-selection-button unselected" onclick="OnDoorChange('PineWood');">Pine Wood</button>
+          <button class="shop-item-description-material-selection-button unselected" onclick="OnDoorChange('SheeshamWood');">Sheesham Wood</button>
+          <button class="shop-item-description-material-selection-button unselected" onclick="OnDoorChange('MDF');">MDF</button>
+        </div>
+      </div>
+      <div class="shop-item-description-finish">
+        <div class="shop-item-description-finish-title">Finish</div>
+        <div class="shop-item-description-finish-selection">
+          <button class="shop-item-description-finish-selection-button unselected" onclick="OnDoorChange('RAW');">RAW</button>
+          <button class="shop-item-description-finish-selection-button unselected" onclick="OnDoorChange('DucoPaint');">Duco Paint</button>
+          <button class="shop-item-description-finish-selection-button unselected" onclick="OnDoorChange('PU Paint');">PU Paint</button>
+        </div>
       </div>
       <div class="shop-item-description-text">
       </div>
     </div>
 
     <div class="shop-item-price">
-      <span class="shop-item-price-price">₹10,000</span>
+      <span class="shop-item-price-price"></span>
       <span class="shop-item-price-gst">&nbsp&nbsp(inc. GST)</span>       
     </div>
 
@@ -126,26 +148,111 @@
   font-size: 50px;
   line-height: 80px;
   font-weight: normal;
-  background-color: rgba(174, 160, 181, 0.416);
+  background-color: rgb(225, 225, 225);
   max-width: 600px;
   border-radius: 5px;
   margin-bottom:  20px;
   padding-left: 20px;
 }
-.shop-item-description-size
+.shop-item-description-mandir-size
 {
-  display: grid;
-  grid-template-columns: 150px 1fr;
+  display: none;
+  grid-template-columns: 200px 1fr;
   font-size: 40px;
   line-height: 50px;
   font-weight: normal;
   margin-bottom: 20px;
+}
+.shop-item-description-door-size
+{
+  display: none;
+  grid-template-columns: 200px 150px;
+  font-size: 30px;
+  line-height: 50px;
+  font-weight: normal;
+  margin-top: 50px;
+}
+.shop-item-description-door-size-input
+{
+  height: 35px;
+  font-size: 25px;
+  line-height: 30px;
+  font-weight: normal;
+  border-radius: 10px;
+  border-color: black;
+  border-width: 3px;
+  padding-left: 10px;
+}
+.shop-item-description-material
+{
+  display: none;
+  flex-direction: column;
+  max-width: 600px;
+  font-size: 30px;
+  margin-top: 30px;
+}
+.shop-item-description-material-title
+{
+  margin-left: auto;
+  margin-right: auto;
+}
+.shop-item-description-material-selection
+{
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+  justify-content: center;
+}
+.shop-item-description-material-selection-button
+{
+  height: 50px;
+  width:100%;
+  font-size: 20px;
+  margin: 5px;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: black;
+}
+.shop-item-description-finish
+{
+  display: none;
+  flex-direction: column;
+  max-width: 600px;
+  font-size: 30px;
+  margin-top: 30px;
+}
+.shop-item-description-finish-title
+{
+  margin-left: auto;
+  margin-right: auto;
+}
+.shop-item-description-finish-selection
+{
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+  justify-content: center;
+}
+.shop-item-description-finish-selection-button
+{
+  height: 50px;
+  width:100%;
+  font-size: 20px;
+  margin: 5px;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: black;
 }
 .shop-item-description-text
 {
   font-size: 30px;
   line-height: 40px;
   font-weight: normal;
+  margin-top: 50px;
   margin-bottom: 20px;
 }
 .shop-item-price
@@ -197,141 +304,272 @@
 </style>
 
 <script>
-  const url = new URLSearchParams(window.location.search);
-  if(url.size == 0)
+function EnableButtons(div)
+{
+  div.querySelectorAll("button").forEach(element => {element.classList.remove("disabled");});
+  div.querySelectorAll("button").forEach(element => {element.classList.remove("selected");});
+  div.querySelectorAll("button").forEach(element => {element.classList.add("unselected");});
+}
+function DisableButtons(div)
+{
+  div.querySelectorAll("button").forEach(element => {element.classList.remove("selected");});
+  div.querySelectorAll("button").forEach(element => {element.classList.remove("unselected");});
+  div.querySelectorAll("button").forEach(element => {element.classList.add("disabled");});
+}
+function SelectButton(div, index)
+{
+  div.querySelectorAll("button").forEach(element => {element.classList.remove("selected");});
+  div.querySelectorAll("button").forEach(element => {element.classList.add("unselected");});
+  if(index != -1)div.querySelectorAll("button")[index].classList.remove("unselected");
+  if(index != -1)div.querySelectorAll("button")[index].classList.add("selected");
+  if(typeof Draw !== 'undefined')Draw();
+}
+function EnableButton(button)
+{
+  button.classList.remove("selected");
+  button.classList.remove("disabled");
+  button.classList.add("unselected");
+}
+function DisableButton(button)
+{
+  if (button) 
   {
-    document.querySelector(".shop-menu").innerHTML = `
-    <!--
-    <div class="shop-menu-items">
-      <a href="shop-cnc-manufacturing.html"><img class="shop-menu-items-img" src="images/CNC Manufacturing.jpg"></a><br>
-      <h2>CNC Manufacturing</h2>
-    </div>
-    -->
-    <div class="shop-menu-items">
-      <a href="shop.html?category=mandir"><img class="shop-menu-items-img" src="images/Mandir.JPG"></a><br>
-      <h2>Mandir</h2>
-    </div>    
-    <div class="shop-menu-items">
-      <a href="shop.html?category=doors"><img class="shop-menu-items-img" src="images/door.JPG"></a><br>
-      <h2>Doors</h2>
-    </div>
-    <div class="shop-menu-items">
-      <a href="shop.html?category=customised_partition"><img class="shop-menu-items-img" src="images/Jali.JPG"></a><br>
-      <h2>Customised Decorative Jali</h2>
-    </div>    
-        <div class="shop-menu-items">
-      <a href="shop.html?category=customised_mandircentre"><img class="shop-menu-items-img" src="images/IMG_1216.jpg"></a><br>
-      <h2>Customised Mandir Centre</h2>
-    </div>    
-    `;
+    button.classList.remove("selected");
+    button.classList.remove("unselected");
+    button.classList.add("disabled");
   }
-  else
+}
+class DoorSpecifications
+{
+  constructor(width, height, thickness, material, finish)
   {
-    var catalogue = undefined;
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "Catalogue.json", false);
-    xhr.onload = function (oEvent)
+    this.width = width;
+    this.height = height;
+    this.thickness = thickness;
+    this.material = material;
+    this.finish = finish;
+  }
+}
+var doorspecifications = undefined;
+function OnDoorChange(id)
+{
+  if(id == 'X')
+  {
+    doorspecifications.width = parseInt(document.querySelector(".shop-item-description-door-size-input-x").value);
+  }
+  if(id == 'Y')
+  {
+    doorspecifications.height = parseInt(document.querySelector(".shop-item-description-door-size-input-y").value);
+  }
+  if(id == 'Z')
+  {
+    doorspecifications.thickness = parseInt(document.querySelector(".shop-item-description-door-size-input-z").value);
+  }
+  if(id == 'TeakWood')
+  {
+    doorspecifications.material = "TeakWood";
+    EnableButtons(document.querySelector(".shop-item-description-material-selection"));
+    SelectButton(document.querySelector(".shop-item-description-material-selection"), 0);
+  }
+  if(id == 'PineWood')
+  {
+    doorspecifications.material = "PineWood";
+    EnableButtons(document.querySelector(".shop-item-description-material-selection"));
+    SelectButton(document.querySelector(".shop-item-description-material-selection"), 1);
+  }
+  if(id == 'SheeshamWood')
+  {
+    doorspecifications.material = "SheeshamWood";
+    EnableButtons(document.querySelector(".shop-item-description-material-selection"));
+    SelectButton(document.querySelector(".shop-item-description-material-selection"), 2);
+  }
+  if(id == 'MDF')
+  {
+    doorspecifications.material = "MDF";
+    EnableButtons(document.querySelector(".shop-item-description-material-selection"));
+    SelectButton(document.querySelector(".shop-item-description-material-selection"), 3);
+  }
+  if(id == 'RAW')
+  {
+    doorspecifications.finish = "RAW";
+    EnableButtons(document.querySelector(".shop-item-description-finish-selection"));
+    SelectButton(document.querySelector(".shop-item-description-finish-selection"), 0);
+  }
+  if(id == 'DucoPaint')
+  {
+    doorspecifications.finish = "DucoPaint";
+    EnableButtons(document.querySelector(".shop-item-description-finish-selection"));
+    SelectButton(document.querySelector(".shop-item-description-finish-selection"), 1);
+  }
+  if(id == 'PU Paint')
+  {
+    doorspecifications.finish = "PU Paint";
+    EnableButtons(document.querySelector(".shop-item-description-finish-selection"));
+    SelectButton(document.querySelector(".shop-item-description-finish-selection"), 2);
+  }
+}
+
+const url = new URLSearchParams(window.location.search);
+if(url.size == 0)
+{
+  document.querySelector(".shop-menu").innerHTML = `
+  <!--
+  <div class="shop-menu-items">
+    <a href="shop-cnc-manufacturing.html"><img class="shop-menu-items-img" src="images/CNC Manufacturing.jpg"></a><br>
+    <h2>CNC Manufacturing</h2>
+  </div>
+  -->
+  <div class="shop-menu-items">
+    <a href="shop.html?category=mandir"><img class="shop-menu-items-img" src="images/Mandir.JPG"></a><br>
+    <h2>Mandir</h2>
+  </div>    
+  <div class="shop-menu-items">
+    <a href="shop.html?category=doors"><img class="shop-menu-items-img" src="images/door.JPG"></a><br>
+    <h2>Doors</h2>
+  </div>
+  <div class="shop-menu-items">
+    <a href="shop.html?category=customised_partition"><img class="shop-menu-items-img" src="images/Jali.JPG"></a><br>
+    <h2>Customised Decorative Jali</h2>
+  </div>    
+      <div class="shop-menu-items">
+    <a href="shop.html?category=customised_mandircentre"><img class="shop-menu-items-img" src="images/IMG_1216.jpg"></a><br>
+    <h2>Customised Mandir Centre</h2>
+  </div>    
+  `;
+}
+else
+{
+  var catalogue = undefined;
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "Catalogue.json", false);
+  xhr.onload = function (oEvent)
+  {
+    catalogue = JSON.parse(xhr.responseText);
+    const category = url.get('category');
+    const design = url.get('design');
+    if(category == 'mandir')
     {
-      catalogue = JSON.parse(xhr.responseText);
-      const category = url.get('category');
-      const design = url.get('design');
-      if(category == 'mandir')
+      if(design == undefined)
       {
-        if(design == undefined)
+        catalogue = catalogue.catalogue_mandir;
+        for(var i=0;i<Object.keys(catalogue).length;i++)
         {
-          catalogue = catalogue.catalogue_mandir;
-          for(var i=0;i<Object.keys(catalogue).length;i++)
-          {
-            document.querySelector(".shop-menu").innerHTML += `
-              <div class="shop-menu-items">
-                <a href="shop.html?category=mandir&design=`+catalogue[i].name+`"><img class="shop-menu-items-img" src="`+catalogue[i].thumbnailurl+`"></a><br>
-                <h2>`+catalogue[i].name+`</h2>
-              </div>
-              `;
-          }
+          document.querySelector(".shop-menu").innerHTML += `
+            <div class="shop-menu-items">
+              <a href="shop.html?category=mandir&design=`+i+`"><img class="shop-menu-items-img" src="`+catalogue[i].thumbnailurl+`"></a><br>
+              <h2>`+catalogue[i].name+`</h2>
+            </div>
+            `;
+        }
+      }
+      else
+      {
+        catalogue = catalogue.catalogue_mandir[design];
+        if(catalogue!=undefined)
+        {
+          document.querySelector(".shop-item").style.display = "grid";
+          document.querySelector(".shop-item-description-mandir-size").style.display = "grid";
+          document.querySelector(".shop-item-description-name").innerHTML = catalogue.name;
+          document.querySelector(".shop-item-img-img").src = catalogue.imageurl;
+          document.querySelector(".shop-item-description-mandir-size-x").innerHTML = catalogue.width;
+          document.querySelector(".shop-item-description-mandir-size-y").innerHTML = catalogue.height;
+          document.querySelector(".shop-item-description-mandir-size-z").innerHTML = catalogue.depth;
+          for(var i=0;i<catalogue.text.length;i++)
+            document.querySelector(".shop-item-description-text").innerHTML += "<li>"+catalogue.text[i]+"</li>";
+          document.querySelector(".shop-item-price-price").innerHTML = "₹"+catalogue.price;
         }
         else
         {
-          catalogue = catalogue.catalogue_mandir;
-          var catalogueitem = undefined;
-          catalogue.forEach(element => 
-          {
-            if(element.name == design)
-            catalogueitem = element;
-          });
-          if(catalogueitem!=undefined)
-          {
-            document.querySelector(".shop-item").style.display = "grid";
-            document.querySelector(".shop-item-description-name").innerHTML = catalogueitem.name;
-            document.querySelector(".shop-item-img-img").src = catalogueitem.thumbnailurl;
-            document.querySelector(".shop-item-description-size-width").innerHTML = catalogueitem.width;
-            document.querySelector(".shop-item-description-size-heigth").innerHTML = catalogueitem.height;
-            document.querySelector(".shop-item-description-size-depth").innerHTML = catalogueitem.depth;
-            for(var i=0;i<catalogueitem.text.length;i++)
-              document.querySelector(".shop-item-description-text").innerHTML += "<li>"+catalogueitem.text[i]+"</li>";
-            document.querySelector(".shop-item-price-price").innerHTML = "₹"+catalogueitem.price;
-          }
-          else
-          {
-            console.log("Design not found");
-            window.location.href = "shop.html?category=mandir";
-          }
+          console.log("Design not found");
+          window.location.href = "shop.html?category=mandir";
         }
       }
-      if(category == 'doors')
+    }
+    if(category == 'doors')
+    {
+      if(design == undefined)
       {
         catalogue = catalogue.catalogue_door;
         for(var i=0;i<Object.keys(catalogue).length;i++)
         {
           document.querySelector(".shop-menu").innerHTML += `
             <div class="shop-menu-items">
-              <a href="shop.html?category=doors"><img class="shop-menu-items-img" src="`+catalogue[i].thumbnailurl+`"></a><br>
+              <a href="shop.html?category=doors&design=`+i+`"><img class="shop-menu-items-img" src="`+catalogue[i].thumbnailurl+`"></a><br>
               <h2>`+catalogue[i].name+`</h2>
             </div>
             `;
         }
       }
-      if(category == 'customised_partition')
+      else
       {
-        catalogue = catalogue.catalogue_customised_decorative_jali;
-        document.querySelector(".shop-menu").innerHTML = `
-        <div class="shop-menu-items">
-          <a href="shop-customised.html?category=Partition&design=BlankDesign"><img class="shop-menu-items-img" src="images/BlackDesign.png"></a><br>
-          <h2>Blank Design</h2>
-        </div>
-        `;
-        for(var i=0;i<Object.keys(catalogue).length;i++)
+        catalogue = catalogue.catalogue_door[design];
+        if(catalogue!=undefined)
         {
-          document.querySelector(".shop-menu").innerHTML += `
-            <div class="shop-menu-items">
-              <a href="shop-customised.html?category=Partition&design=`+catalogue[i].name+`"><img class="shop-menu-items-img" src="`+catalogue[i].thumbnailurl+`"></a><br>
-              <h2>`+catalogue[i].name+`</h2>
-            </div>
-            `;
+          doorspecifications = new DoorSpecifications(catalogue.width, catalogue.height, catalogue.thickness, "MDF", "RAW");
+          document.querySelector(".shop-item").style.display = "grid";
+          document.querySelector(".shop-item-description-door-size").style.display = "grid";
+          document.querySelector(".shop-item-description-name").innerHTML = catalogue.name;
+          document.querySelector(".shop-item-img-img").src = catalogue.imageurl;
+          document.querySelector(".shop-item-description-door-size-input-x").value = catalogue.width;
+          document.querySelector(".shop-item-description-door-size-input-y").value = catalogue.height;
+          document.querySelector(".shop-item-description-door-size-input-z").value = catalogue.thickness;
+          document.querySelector(".shop-item-price-price").innerHTML = "₹"+catalogue.price;
+          document.querySelector(".shop-item-description-material").style.display = "flex";
+          document.querySelector(".shop-item-description-finish").style.display = "flex";
+          OnDoorChange('X');
+          OnDoorChange('Y');
+          OnDoorChange('Z');
+          OnDoorChange('MDF');
+          OnDoorChange('RAW');
+        }
+        else
+        {
+          console.log("Design not found");
+          window.location.href = "shop.html?category=doors";
         }
       }
-      if(category == 'customised_mandircentre')
+    }
+    if(category == 'customised_partition')
+    {
+      catalogue = catalogue.catalogue_customised_decorative_jali;
+      document.querySelector(".shop-menu").innerHTML = `
+      <div class="shop-menu-items">
+        <a href="shop-customised.html?category=Partition&design=BlankDesign"><img class="shop-menu-items-img" src="images/BlackDesign.png"></a><br>
+        <h2>Blank Design</h2>
+      </div>
+      `;
+      for(var i=0;i<Object.keys(catalogue).length;i++)
       {
-        catalogue = catalogue.catalogue_customised_mandir_centre;
-        document.querySelector(".shop-menu").innerHTML = `
-        <div class="shop-menu-items">
-          <a href="shop-customised.html?category=Mandir&design=BlankDesign"><img class="shop-menu-items-img" src="images/BlackDesign.png"></a><br>
-          <h2>Blank Design</h2>
-        </div>
-        `;
-        for(var i=0;i<Object.keys(catalogue).length;i++)
-        {
-          document.querySelector(".shop-menu").innerHTML += `
-            <div class="shop-menu-items">
-              <a href="shop-customised.html?category=Mandir&design=`+catalogue[i].name+`"><img class="shop-menu-items-img" src="`+catalogue[i].thumbnailurl+`"></a><br>
-              <h2>`+catalogue[i].name+`</h2>
-            </div>
-            `;
-        }
+        document.querySelector(".shop-menu").innerHTML += `
+          <div class="shop-menu-items">
+            <a href="shop-customised.html?category=Partition&design=`+catalogue[i].name+`"><img class="shop-menu-items-img" src="`+catalogue[i].thumbnailurl+`"></a><br>
+            <h2>`+catalogue[i].name+`</h2>
+          </div>
+          `;
       }
-    };
-    xhr.send();
-  }
+    }
+    if(category == 'customised_mandircentre')
+    {
+      catalogue = catalogue.catalogue_customised_mandir_centre;
+      document.querySelector(".shop-menu").innerHTML = `
+      <div class="shop-menu-items">
+        <a href="shop-customised.html?category=Mandir&design=BlankDesign"><img class="shop-menu-items-img" src="images/BlackDesign.png"></a><br>
+        <h2>Blank Design</h2>
+      </div>
+      `;
+      for(var i=0;i<Object.keys(catalogue).length;i++)
+      {
+        document.querySelector(".shop-menu").innerHTML += `
+          <div class="shop-menu-items">
+            <a href="shop-customised.html?category=Mandir&design=`+catalogue[i].name+`"><img class="shop-menu-items-img" src="`+catalogue[i].thumbnailurl+`"></a><br>
+            <h2>`+catalogue[i].name+`</h2>
+          </div>
+          `;
+      }
+    }
+  };
+  xhr.send();
+}
 
 </script>
 <script>
