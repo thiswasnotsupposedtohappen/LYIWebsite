@@ -291,7 +291,14 @@ function OnDoorChange(id)
 }
 function AddCartDoor()
 {
-  var item = new Item("catalogue_door",price,doorspecifications);
+  var item = new Item(
+    "catalogue_door",
+    catalogue.name,
+    catalogue.imageurl,
+    doorspecifications,
+    1,
+    price,
+    catalogue.name);
   cart.Add(item);
 }
 

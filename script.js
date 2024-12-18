@@ -36,11 +36,15 @@ function DisableButton(button)
 
 class Item
 {
-    constructor(type, price, specifications)
+    constructor(type, name, thumbnailurl, specifications, quantity ,price, description)
     {
         this.type = type;
-        this.price = price;
+        this.name = name;
+        this.thumbnailurl = thumbnailurl;
         this.specifications = specifications;
+        this.quantity = quantity;
+        this.price = price;
+        this.description = description;
     }
 }
 class Cart
@@ -76,7 +80,18 @@ class Cart
   }
   Add(item)
   {
-    this.items.push(item);
+    var found = false;
+    for(var i = 0; i < this.items.length; i++)
+    {
+      if(this.items[i].type == item.type && this.items[i].name == item.name && this.items[i].specifications == item.specifications)
+      {
+        this.items[i].quantity += item.quantity;
+        found = true;
+      }
+    }
+    if(!found)
+        this.items.push(item);
+
     localStorage.setItem('cart', JSON.stringify(this.items));
     document.querySelector(".TopRibbonTextCartQuantity").innerHTML = this.Count();
     document.querySelector(".TopRibbonTextCartQuantity").style.display = "flex";

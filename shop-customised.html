@@ -640,6 +640,7 @@
 </style>
 
 <script src="wasm/LYIWebsite.js"></script>  
+<script src="script.js"></script>
 <script>
 var zoom = 1.0;
 var buttonleftmousedown = false;
@@ -746,41 +747,6 @@ OnClickView('Specifications');
 //OnClickView('DesignElements');
 //OnClickView('ReviewCost');
 OnClickUnit('mm');
-function EnableButtons(div)
-{
-  div.querySelectorAll("button").forEach(element => {element.classList.remove("disabled");});
-  div.querySelectorAll("button").forEach(element => {element.classList.remove("selected");});
-  div.querySelectorAll("button").forEach(element => {element.classList.add("unselected");});
-}
-function DisableButtons(div)
-{
-  div.querySelectorAll("button").forEach(element => {element.classList.remove("selected");});
-  div.querySelectorAll("button").forEach(element => {element.classList.remove("unselected");});
-  div.querySelectorAll("button").forEach(element => {element.classList.add("disabled");});
-}
-function SelectButton(div, index)
-{
-  div.querySelectorAll("button").forEach(element => {element.classList.remove("selected");});
-  div.querySelectorAll("button").forEach(element => {element.classList.add("unselected");});
-  if(index != -1)div.querySelectorAll("button")[index].classList.remove("unselected");
-  if(index != -1)div.querySelectorAll("button")[index].classList.add("selected");
-  if(typeof Draw !== 'undefined')Draw();
-}
-function EnableButton(button)
-{
-  button.classList.remove("selected");
-  button.classList.remove("disabled");
-  button.classList.add("unselected");
-}
-function DisableButton(button)
-{
-  if (button) 
-  {
-    button.classList.remove("selected");
-    button.classList.remove("unselected");
-    button.classList.add("disabled");
-  }
-}
 
 function OnClickViewerZoom()
 {

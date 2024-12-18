@@ -154,7 +154,14 @@
 <script>
 function AddCartMandir()
 {
-  var item = new Item("catalogue_mandir",catalogue.price,catalogue.name);
+  var item = new Item(
+    "catalogue_mandir",
+    catalogue.name,
+    catalogue.imageurl,
+    null,
+    1,
+    catalogue.price,
+    catalogue.name);
   cart.Add(item);
 }
 
