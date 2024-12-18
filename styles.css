@@ -84,22 +84,27 @@ pre
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0px;
+  left: 0px;
+  right: 0px;
   z-index: 1000;
 
-  height: 100px;
+  height: 50px;
   align-items: center;
 
   background-color: #FFFFFF;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
+.TopRibbonLogo
+{
+  width: 125px; height: 50px; object-fit: cover;
+  padding-left: 25%;
+}
 .TopRibbonText
 {  
   margin-top: -5px;
   display: flex;
-  height: 90px;
+  height: 45px;
   border-radius: 10px;
   justify-content: center;
   align-items: center;
@@ -115,7 +120,7 @@ pre
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translate(-50%, 10%);
+  transform: translate(60%, 10%);
   width: 30px;
   height: 30px;
   border-radius: 50%;

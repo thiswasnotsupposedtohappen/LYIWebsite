@@ -9,24 +9,26 @@
   <meta name="viewport" content="user-scalable=no">
 </head>
 
-<body class="Body" style="  padding-top: 150px;padding-left: 50px;padding-right: 50px;padding-bottom: 50px;">
+<body class="Body" style="  padding-top: 70px;padding-left: 50px;padding-right: 50px;padding-bottom: 50px;">
 
   <div class="TopRibbon">    
-    <a href=""><img src="images/LYI 500x380.png" style = "width: 250px; height: 100px; object-fit: cover;"></a>
+    <div><a href="index.html"><img class = "TopRibbonLogo" src="images/LYI 500x380.png"></a></div>
     <div><a class="TopRibbonText" href="index.html">Home</a></div>
     <div><a class="TopRibbonText" href="shop.html">Shop</a></div>
     <div><a class="TopRibbonText" href="career.html">Career</a></div>
     <div><a class="TopRibbonText" href="contact.html">Contact</a></div>
-    <div><a class="TopRibbonText" href="cart.html"><span class="material-symbols-outlined" style="width: 100px; font-size: 50px;">shopping_cart</span></a></div>
+    <div><a class="TopRibbonText" href="cart.html" style=" position: relative;"><div class="TopRibbonTextCartQuantity"></div><span class="material-symbols-outlined" style="width: 100px; font-size: 50px; z-index: 1001;">shopping_cart</span></a></div>
   </div>
+
   <div class="editorribbon">
     <button class = "editorribbonbutton" onclick = "OnClickView('Specifications')">Specifications</button>
     <button class = "editorribbonbutton" onclick = "OnClickView('DesignElements')">Design Elements</button>
     <button class = "editorribbonbutton" onclick = "OnClickView('ReviewCost')">Review/Cost</button>
   </div>
 
-  <div id = "viewer" style="height: 1000px; margin-top: 50px; border-style: solid; border-width: 20px; border-radius: 30px ;border-color: rgb(124,85,59);overflow: hidden;">
+  <div id = "viewer" style="height: 500px; margin-top: 50px; border-style: solid; border-width: 20px; border-radius: 30px ;border-color: rgb(124,85,59);overflow: hidden; position: relative;">
     <canvas></canvas>
+    <button style="position: absolute; bottom: 10px; right: 10px; width:40px; height: 40px; font-size: 5px;" onclick="OnClickViewerZoom()"><span id = "viewerzoombutton" class="material-symbols-outlined">zoom_out_map</span></button>
   </div>
 
   <div class="shop-manufacturingspecification shop-basepellete">
@@ -426,220 +428,220 @@
 </body>
 </html>
 <style>
-  .editorribbon
-  {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-  
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 999;
-  
-    height: 180px;
-    align-items: center;
-    padding-left: 50px;
-    padding-right: 50px;
-    column-gap: 10px;
-  
-    background-color: #FFFFFF;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  }
-  .editorribbonbutton
-  {  
-    margin-top: 100px;
-    display: flex;
-    height: 50px;
-    border-radius: 10px;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  
-    text-decoration: none;
-    font-size: 25px;
-    font-weight: 600;
-    color: #1a1a1a;
-  }
-  
-  .shop-basepellete
-  {
-    background-color: rgb(124,85,59);
-    border-radius: 30px;
-    padding: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-top: 30px;
-    margin-bottom: 30px;
-  }
-  .shop-containerpellete
-  {
-    background-color: rgb(228, 228, 228);
-    border-radius: 10px;
-    border-style: solid;
-    padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  
-    display: grid;
-    grid-template-columns: 220px 1fr;
-  }
-  .shop-containerpellete-specifications
-  {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-  }
-  .shop-containerpellete-designfile
-  {
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .shop-manufacturingconfig-options
-  {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .shop-manufacturingconfig-input
-  {
-    width: 213px;
-    height: 50px;
-    text-align: center;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: black;
-  
-    font-size: 20px;
-  }
-  .shop-manufacturingconfig-button
-  {
-    width: 220px;
-    height: 50px;
-    text-align: center;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: black;
-    vertical-align: middle;
-  
-    position: relative;
-  }
-  .shop-manufacturingconfig-button-colorpatch
-  {
-    position: absolute;
-    top: 8px;
-    right: 6px;
-  
-    width: 40px;
-    height: 30px;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 5px;
-    border-color: black;
-  }
-  
-  .shop-designelements-tray
-  {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  
-    position: relative;
-  }
-  .shop-designelements-tray-editor
-  {
-    display: inline-block;
-    margin: 10px;
-    width: 630px;
-    height: 50px;
-  
-    border-radius: 20px;
-    border-style: solid;
-    text-align: left;  
-  
-    padding-left: 20px;
-    padding-bottom: 10px;
-    margin-right: 100px;
-  
-    position: relative;
-  }
-  .shop-designelements-tray-item
-  {
-    display: block;
-    height: 250px;
-    position: relative;
-  }
-  .shop-designelements-tray-editor-input
-  {
-    display: inline-flex;
-    width: 200px;
-    margin-left: auto;
-    margin-right: auto;
-    height: 30px;
-    text-align: center;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: black;
-    font-size: 20px;
-    margin-top: 10px;
-  }
-  .shop-designelements-tray-item-button
-  {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    border-style: solid;
-    border-width: 3px;
-    border-radius: 25px;
-    border-color: rgb(0, 0, 0);
-    vertical-align: middle;
-    justify-content: center;  
-  }
-  .shop-designelements-tray-item-button:hover
-  {
-    color: rgb(255, 115, 0);
-  }
-  .shop-designelements-tray-item-img
-  {
-    margin: 10px;;
-    width: 200px;
-    height: 200px;
-    border-radius: 20px;
-    border-style: solid;
-    border-width: 2px;
-  }
-  
-  .shop-designfile
-  {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-  .shop-designfile-button
-  {
-    width: 200px;
-    height: 50px;
-    text-align: center;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 10px;
-    border-color: black;
-    vertical-align: middle;
-  }
-  
-  .shop-review-grid
-  {
-    display: grid;
-    grid-template-columns:300px 1fr 1fr;
-    gap: 10px;  
-  }
+.editorribbon
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  position: fixed;
+  top:0px;
+  left: 0px;
+  right: 0px;
+  z-index: 999;
+
+  height: 110px;
+  align-items: center;
+  padding-left: 50px;
+  padding-right: 50px;
+  column-gap: 10px;
+
+  background-color: #FFFFFF;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.editorribbonbutton
+{  
+  margin-top: 65px;
+  margin-bottom: 5px;
+  display: flex;
+  height: 40px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  text-decoration: none;
+  font-size: 25px;
+  color: #1a1a1a;
+}
+
+.shop-basepellete
+{
+  background-color: rgb(124,85,59);
+  border-radius: 30px;
+  padding: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.shop-containerpellete
+{
+  background-color: rgb(228, 228, 228);
+  border-radius: 10px;
+  border-style: solid;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  display: grid;
+  grid-template-columns: 220px 1fr;
+}
+.shop-containerpellete-specifications
+{
+  display: grid;
+  grid-template-columns: 220px 1fr;
+}
+.shop-containerpellete-designfile
+{
+  width: 100%;
+  box-sizing: border-box;
+}
+.shop-manufacturingconfig-options
+{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.shop-manufacturingconfig-input
+{
+  width: 213px;
+  height: 50px;
+  text-align: center;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: black;
+
+  font-size: 20px;
+}
+.shop-manufacturingconfig-button
+{
+  width: 220px;
+  height: 50px;
+  text-align: center;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: black;
+  vertical-align: middle;
+
+  position: relative;
+}
+.shop-manufacturingconfig-button-colorpatch
+{
+  position: absolute;
+  top: 8px;
+  right: 6px;
+
+  width: 40px;
+  height: 30px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: black;
+}
+
+.shop-designelements-tray
+{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  position: relative;
+}
+.shop-designelements-tray-editor
+{
+  display: inline-block;
+  margin: 10px;
+  width: 630px;
+  height: 50px;
+
+  border-radius: 20px;
+  border-style: solid;
+  text-align: left;  
+
+  padding-left: 20px;
+  padding-bottom: 10px;
+  margin-right: 100px;
+
+  position: relative;
+}
+.shop-designelements-tray-item
+{
+  display: block;
+  height: 250px;
+  position: relative;
+}
+.shop-designelements-tray-editor-input
+{
+  display: inline-flex;
+  width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 30px;
+  text-align: center;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: black;
+  font-size: 20px;
+  margin-top: 10px;
+}
+.shop-designelements-tray-item-button
+{
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 25px;
+  border-color: rgb(0, 0, 0);
+  vertical-align: middle;
+  justify-content: center;  
+}
+.shop-designelements-tray-item-button:hover
+{
+  color: rgb(255, 115, 0);
+}
+.shop-designelements-tray-item-img
+{
+  margin: 10px;;
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 2px;
+}
+
+.shop-designfile
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.shop-designfile-button
+{
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: black;
+  vertical-align: middle;
+}
+
+.shop-review-grid
+{
+  display: grid;
+  grid-template-columns:300px 1fr 1fr;
+  gap: 10px;  
+}
 </style>
 
 <script src="wasm/LYIWebsite.js"></script>  
 <script>
-var zoom = 1;
+var zoom = 1.0;
 var buttonleftmousedown = false;
 var mousex = 0, mousey = 0;
 var touchxp = 0, touchyp = 0;
@@ -744,7 +746,6 @@ OnClickView('Specifications');
 //OnClickView('DesignElements');
 //OnClickView('ReviewCost');
 OnClickUnit('mm');
-
 function EnableButtons(div)
 {
   div.querySelectorAll("button").forEach(element => {element.classList.remove("disabled");});
@@ -778,6 +779,40 @@ function DisableButton(button)
     button.classList.remove("selected");
     button.classList.remove("unselected");
     button.classList.add("disabled");
+  }
+}
+
+function OnClickViewerZoom()
+{
+  OnClickViewerZoom.zoomstate = OnClickViewerZoom.zoomstate || 0;
+
+  if(OnClickViewerZoom.zoomstate == 0)
+  {
+    document.getElementById("viewer").style.height = "70vh";
+    viewer = document.getElementById("viewer");
+    canvas = document.querySelector("canvas");
+    canvas.width = viewer.clientWidth;
+    canvas.height = viewer.clientHeight;
+    ctx.resetTransform();
+    ctx.translate(canvas.width/2,canvas.height/2);
+    ctx.scale(1,-1);  
+    document.getElementById("viewerzoombutton").innerHTML = "zoom_in_map"
+    Draw();
+    OnClickViewerZoom.zoomstate = 1;
+  }
+  else
+  {
+    document.getElementById("viewer").style.height = "500px";
+    viewer = document.getElementById("viewer");
+    canvas = document.querySelector("canvas");
+    canvas.width = viewer.clientWidth;
+    canvas.height = viewer.clientHeight;
+    ctx.resetTransform();
+    ctx.translate(canvas.width/2,canvas.height/2);
+    ctx.scale(1,-1);  
+    document.getElementById("viewerzoombutton").innerHTML = "zoom_out_map"
+    Draw();
+    OnClickViewerZoom.zoomstate = 0;
   }
 }
 
@@ -1790,6 +1825,7 @@ function Draw()
             else
               ctx.fillStyle = BackMaterialTypeToColor("White");
           }
+          ctx.strokeStyle = "Black"; 
           for(var l=0;l<manufacturingspecifications.designobject[mdo].drawing.loopcount;l++)
           {
             if(manufacturingspecifications.designobject[mdo].drawing.loopdepth[l] == ld)
@@ -1818,6 +1854,7 @@ function Draw()
             }
           }
         }
+        
         if(manufacturingspecifications.colorfront != "Black")
           ctx.strokeStyle = "Black"; 
         else
@@ -2353,7 +2390,7 @@ Module.onRuntimeInitialized = function()
         </div>
         `;
       }  
-      zoom = 1.0;
+      zoom = 0.9;
       _manufacturingspecifications.dimensionsx = 300;
       _manufacturingspecifications.dimensionsy = 500;
       _manufacturingspecifications.supplier = "LightYear";
@@ -2383,7 +2420,7 @@ Module.onRuntimeInitialized = function()
         </div>
         `;
       }
-      zoom = 0.5;
+      zoom = 0.3;
       _manufacturingspecifications.dimensionsx = 2440;
       _manufacturingspecifications.dimensionsy = 1220;
       _manufacturingspecifications.supplier = "LightYear";
@@ -2476,7 +2513,7 @@ Module.onRuntimeInitialized = function()
           </div>
           `;
         }  
-        zoom = 1.0;   
+        zoom = 0.9;   
       }
       if(url.get("category") == "Partition")
       {
@@ -2494,7 +2531,7 @@ Module.onRuntimeInitialized = function()
           </div>
           `;
         }
-        zoom = 0.5;
+        zoom = 0.3;
       }    
       document.querySelector(".dimensions-length").value = _manufacturingspecifications.dimensionsx;
       document.querySelector(".dimensions-width").value = _manufacturingspecifications.dimensionsy;
