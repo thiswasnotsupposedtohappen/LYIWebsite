@@ -39,7 +39,7 @@
 
     <div class="shop-item-price">
       <span class="shop-item-price-price"></span>
-      <span class="shop-item-price-gst">&nbsp&nbsp(inc. GST)</span>       
+      <span class="shop-item-price-gst">&nbsp&nbsp(breakup in cart)</span>       
     </div>
 
     <div class="shop-item-addtocart">
@@ -161,7 +161,14 @@ function AddCartMandir()
     null,
     1,
     catalogue.price,
-    catalogue.name);
+    (catalogue.width*catalogue.height*0.0016+
+    catalogue.width*catalogue.depth*0.0016+
+    catalogue.height*catalogue.depth*0.0016),
+    (catalogue.width*catalogue.height*0.0016+
+    catalogue.width*catalogue.depth*0.0016+
+    catalogue.height*catalogue.depth*0.0016+
+    catalogue.price)*0.18,
+    "Mandir");
   cart.Add(item);
 }
 
@@ -192,12 +199,12 @@ xhr.onload = function (oEvent)
             document.querySelector(".shop-item-description-size").style.display = "grid";
             document.querySelector(".shop-item-description-name").innerHTML = catalogue.name;
             document.querySelector(".shop-item-img-img").src = catalogue.imageurl;
-            document.querySelector(".shop-item-description-size-x").innerHTML = catalogue.width;
-            document.querySelector(".shop-item-description-size-y").innerHTML = catalogue.height;
-            document.querySelector(".shop-item-description-size-z").innerHTML = catalogue.depth;
+            document.querySelector(".shop-item-description-size-x").innerHTML = catalogue.width + "mm";
+            document.querySelector(".shop-item-description-size-y").innerHTML = catalogue.height + "mm";
+            document.querySelector(".shop-item-description-size-z").innerHTML = catalogue.depth + "mm";
             for(var i=0;i<catalogue.text.length;i++)
             document.querySelector(".shop-item-description-text").innerHTML += "<li>"+catalogue.text[i]+"</li>";
-            document.querySelector(".shop-item-price-price").innerHTML = "₹"+catalogue.price;
+            document.querySelector(".shop-item-price-price").innerHTML = "₹"+(catalogue.width*catalogue.height*0.0016+catalogue.width*catalogue.depth*0.0016+catalogue.height*catalogue.depth*0.0016+catalogue.price)*1.18.toFixed(2);
         }
     }      
 };

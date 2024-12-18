@@ -56,7 +56,7 @@
 
     <div class="shop-item-price">
       <span class="shop-item-price-price"></span>
-      <span class="shop-item-price-gst">&nbsp&nbsp(inc. GST)</span>       
+      <span class="shop-item-price-gst">&nbsp&nbsp(breakup in cart)</span>       
     </div>
 
     <div class="shop-item-addtocart">
@@ -286,8 +286,11 @@ function OnDoorChange(id)
   price += ratematerial*volume;
   price += ratemachining*area;
   price += ratefinish*area;
-  price = Math.round(price);
-  document.querySelector(".shop-item-price-price").innerHTML = "₹"+price;
+  document.querySelector(".shop-item-price-price").innerHTML = "₹"+
+  ((doorspecifications.width*doorspecifications.height*0.0016+
+    doorspecifications.width*doorspecifications.thickness*0.0016+
+    doorspecifications.height*doorspecifications.thickness*0.0016+
+    price)*1.18).toFixed(2);
 }
 function AddCartDoor()
 {
@@ -298,7 +301,18 @@ function AddCartDoor()
     doorspecifications,
     1,
     price,
-    catalogue.name);
+    (doorspecifications.width*doorspecifications.height*0.0016+
+    doorspecifications.width*doorspecifications.thickness*0.0016+
+    doorspecifications.height*doorspecifications.thickness*0.0016),
+    (doorspecifications.width*doorspecifications.height*0.0016+
+    doorspecifications.width*doorspecifications.thickness*0.0016+
+    doorspecifications.height*doorspecifications.thickness*0.0016+
+    price)*0.18,
+    `Width: <span style="color:blue;">`+doorspecifications.width+`mm</span>, `+
+    `Height: <span style="color:blue;">`+doorspecifications.height+`mm</span>, `+
+    `Thickness: <span style="color:blue;">`+doorspecifications.thickness+`mm</span><br>`+
+    `Material: <span style="color:blue;">`+doorspecifications.material+`</span>, `+
+    `Finish: <span style="color:blue;">`+doorspecifications.finish+`</span>`);
   cart.Add(item);
 }
 

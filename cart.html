@@ -25,7 +25,14 @@
   <div id="cart" style="
   display: flex;
   flex-direction: column;">
+  </div>
 
+  <div style="
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  padding-top: 30px;">
+    <div style="display: flex; justify-content: end;   font-size: 50px; padding-right: 20px;">Grand Total</div>
+    <div style="display: flex; justify-content: start; font-size: 50px;">₹<span id="grandtotal">0.00</span></div>
   </div>
 
 </body>
@@ -40,8 +47,11 @@ ListCart();
 function ListCart()
 {
   document.getElementById("cart").innerHTML = "";
+  var grandtotal = 0;
   for(var i=0;i<cart.Count();i++)
   {
+    var total = ((cart.items[i].price+cart.items[i].gst+cart.items[i].packaging)*cart.items[i].quantity);
+    grandtotal += total;
     document.getElementById("cart").innerHTML += `
       <div style="
       border-style: solid;
@@ -66,11 +76,12 @@ function ListCart()
 
         <div style="
         display: flex;
-        padding-left: 10%;
-        align-items: center;
-        font-size: 40px;
+        flex-direction: column;
+        padding-left: 10%;   
+        padding-top: 10px;     
         ">
-          ` + cart.items[i].name +`
+          <div style="font-size: 40px;">` + cart.items[i].name +`</div>
+          <div style="font-size: 25px;">` + cart.items[i].description +`</div>
         </div>
 
         <div style="
@@ -100,15 +111,19 @@ function ListCart()
 
         <div style="
         display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 40px;
+        flex-direction: column;
+        row-gap: 10px;
+        padding-left: 5%;   
+        padding-top: 10px;  
         ">
-          ₹` + cart.items[i].price + `
+          <div style="font-size: 30px;">₹` + (cart.items[i].price).toFixed(2) + `<span style="font-size:20px">&nbsp(base price)</span></div>
+          <div style="font-size: 30px;">₹` + (cart.items[i].gst).toFixed(2) + `<span style="font-size:20px">&nbsp(gst)</span></div>
+          <div style="font-size: 30px;">₹` + (cart.items[i].packaging).toFixed(2) + `<span style="font-size:20px">&nbsp(packaging)</span></div>
+          <div style="font-size: 40px;">₹` + (total).toFixed(2) + `<span style="font-size:20px">&nbsp(total)</span></div>
         </div>
-
       </div> 
     `;
   }
+  document.getElementById("grandtotal").innerHTML = grandtotal.toFixed(2);
 }
 </script>
