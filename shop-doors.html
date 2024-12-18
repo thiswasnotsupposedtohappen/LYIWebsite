@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>LightYear Industries</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0&icon_names=shopping_cart" />
+  <link rel="icon" type="image/x-icon" href="images/titleicon.png" />
+  <meta name="viewport" content="user-scalable=no">
+</head>
+
+<body class="Body" style="  padding-top: 150px;padding-left: 50px;padding-right: 50px;padding-bottom: 50px;">
+
+  <div class="TopRibbon">    
+    <a href="index.html"><img src="images/LYI 500x380.png" style = "width: 250px; height: 100px; object-fit: cover;"></a>
+    <div><a class="TopRibbonText" href="index.html">Home</a></div>
+    <div><a class="TopRibbonText" href="shop.html">Shop</a></div>
+    <div><a class="TopRibbonText" href="career.html">Career</a></div>
+    <div><a class="TopRibbonText" href="contact.html">Contact</a></div>
+    <div><a class="TopRibbonText" href="cart.html" style=" position: relative;"><div class="TopRibbonTextCartQuantity"></div><span class="material-symbols-outlined" style="width: 100px; font-size: 50px; z-index: 1001;">shopping_cart</span></a></div>
+  </div>
+
+  <div class="shop-item" style="display: grid;">
+
+    <div class="shop-item-img">
+      <img class="shop-item-img-img">
+    </div>
+
+    <div class="shop-item-description">
+      <div class="shop-item-description-name"></div>
+      <div class="shop-item-description-size">
+        <div>Width:</div><input class="shop-item-description-size-input shop-item-description-size-input-x" style="color: blue;" onchange="OnDoorChange('X');"onclick="OnDoorChange('X');">
+        <div>Height:</div><input class="shop-item-description-size-input shop-item-description-size-input-y"style="color: blue;" onchange="OnDoorChange('Y');"onclick="OnDoorChange('Y');">
+        <div>Thickness:</div><input class="shop-item-description-size-input shop-item-description-size-input-z"style="color: blue;" onchange="OnDoorChange('Z');"onclick="OnDoorChange('Z');">
+      </div>
+      <div class="shop-item-description-options">
+        <div class="shop-item-description-options-title">Material</div>
+        <div class="shop-item-description-options-selection">
+          <button class="shop-item-description-options-selection-button unselected" onclick="OnDoorChange('TeakWood');">Teak Wood</button>
+          <button class="shop-item-description-options-selection-button unselected" onclick="OnDoorChange('PineWood');">Pine Wood</button>
+          <button class="shop-item-description-options-selection-button unselected" onclick="OnDoorChange('RoseWood');">Rose Wood</button>
+          <button class="shop-item-description-options-selection-button unselected" onclick="OnDoorChange('MDF');">MDF</button>
+        </div>
+      </div>
+      <div class="shop-item-description-options">
+        <div class="shop-item-description-options-title">Finish</div>
+        <div class="shop-item-description-options-selection">
+          <button class="shop-item-description-options-selection-button unselected" onclick="OnDoorChange('RAW');">RAW</button>
+          <button class="shop-item-description-options-selection-button unselected" onclick="OnDoorChange('DucoPaint');">Duco Paint</button>
+          <button class="shop-item-description-options-selection-button unselected" onclick="OnDoorChange('PU Paint');">PU Paint</button>
+        </div>
+      </div>
+      <div class="shop-item-description-text">
+      </div>
+    </div>
+
+    <div class="shop-item-price">
+      <span class="shop-item-price-price"></span>
+      <span class="shop-item-price-gst">&nbsp&nbsp(inc. GST)</span>       
+    </div>
+
+    <div class="shop-item-addtocart">
+      <input class="shop-item-addtocart-input" value="x1">
+      <button class="shop-item-addtocart-button" onclick="AddCartDoor()">Add to Cart</button>
+    </div>
+
+  </div>
+
+</body>
+</html>
+<style>
+.shop-item
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-left: 20px;
+  margin-right: 20px;
+  column-gap: 50px;
+}
+.shop-item-img
+{
+  display: flex;
+  justify-content: flex-end;
+  border-radius: 20px;
+}
+.shop-item-img-img
+{
+  object-fit: contain;
+  height: 100%;
+  border-radius:  20px;
+}
+.shop-item-description
+{
+}
+.shop-item-description-name
+{
+  font-size: 80px;
+  line-height: 80px;
+  font-weight: normal;
+  max-width: 600px;
+  border-radius: 5px;
+  margin-bottom:  20px;
+  padding-left: 20px;
+}
+.shop-item-description-size
+{
+  display: grid;
+  grid-template-columns: 200px 150px;
+  font-size: 30px;
+  line-height: 50px;
+  font-weight: normal;
+  margin-top: 50px;
+}
+.shop-item-description-size-input
+{
+  height: 35px;
+  font-size: 25px;
+  line-height: 30px;
+  font-weight: normal;
+  border-radius: 10px;
+  border-color: black;
+  border-width: 3px;
+  padding-left: 10px;
+}
+.shop-item-description-options
+{
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  font-size: 30px;
+  margin-top: 30px;
+}
+.shop-item-description-options-title
+{
+  margin-left: auto;
+  margin-right: auto;
+}
+.shop-item-description-options-selection
+{
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+  justify-content: center;
+}
+.shop-item-description-options-selection-button
+{
+  height: 50px;
+  width:100%;
+  font-size: 20px;
+  margin: 5px;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: black;
+}
+.shop-item-description-text
+{
+  font-size: 30px;
+  line-height: 40px;
+  font-weight: normal;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+.shop-item-price
+{
+  margin-top: 50px;
+  text-align: end;
+}
+.shop-item-price-price
+{
+  font-size: 70px;
+  font-weight: normal;
+}
+.shop-item-addtocart
+{
+  margin-top: 50px;
+  vertical-align: middle;
+}
+.shop-item-addtocart-input
+{
+  display: inline;
+  height: 60px;
+  width: 60px;
+  font-size: 20px;
+  justify-content: center;
+  text-align: center;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 5px;
+  border-color: black;
+}
+.shop-item-addtocart-button
+{
+  display: inline;
+  height: 80px;
+  width: 50%;
+  max-width: 400px;
+  background-color: black;
+  color: white;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+.shop-item-addtocart-button:hover
+{
+  background-color: rgb(210, 210, 210);
+  color: black;
+}
+</style>
+
+<script src="script.js"></script>
+<script>
+function OnDoorChange(id)
+{
+  if(id == 'X')
+  {
+    doorspecifications.width = parseInt(document.querySelector(".shop-item-description-size-input-x").value);
+    document.querySelector(".shop-item-description-size-input-x").value = doorspecifications.width + "mm";
+  }
+  if(id == 'Y')
+  {
+    doorspecifications.height = parseInt(document.querySelector(".shop-item-description-size-input-y").value);
+    document.querySelector(".shop-item-description-size-input-y").value = doorspecifications.height + "mm";
+  }
+  if(id == 'Z')
+  {
+    doorspecifications.thickness = parseInt(document.querySelector(".shop-item-description-size-input-z").value);
+    document.querySelector(".shop-item-description-size-input-z").value = doorspecifications.thickness + "mm";
+  }
+  if(id == 'MDF')
+  {
+    doorspecifications.material = "MDF";
+    ratematerial = 3.531e-5;
+    EnableButtons(document.querySelectorAll(".shop-item-description-options-selection")[0]);
+    SelectButton(document.querySelectorAll(".shop-item-description-options-selection")[0], 3);
+  }
+  if(id == 'PineWood')
+  {
+    doorspecifications.material = "PineWood";
+    ratematerial = 3.531e-5;
+    EnableButtons(document.querySelectorAll(".shop-item-description-options-selection")[0]);
+    SelectButton(document.querySelectorAll(".shop-item-description-options-selection")[0], 1);
+  }
+  if(id == 'TeakWood')
+  {
+    doorspecifications.material = "TeakWood";
+    ratematerial = 7.062e-5;
+    EnableButtons(document.querySelectorAll(".shop-item-description-options-selection")[0]);
+    SelectButton(document.querySelectorAll(".shop-item-description-options-selection")[0], 0);
+  }
+  if(id == 'RoseWood')
+  {
+    doorspecifications.material = "RoseWood";
+    ratematerial = 1.412e-4;
+    EnableButtons(document.querySelectorAll(".shop-item-description-options-selection")[0]);
+    SelectButton(document.querySelectorAll(".shop-item-description-options-selection")[0], 2);
+  }
+  if(id == 'RAW')
+  {
+    doorspecifications.finish = "RAW";
+    ratefinish = 0;
+    EnableButtons(document.querySelectorAll(".shop-item-description-options-selection")[1]);
+    SelectButton(document.querySelectorAll(".shop-item-description-options-selection")[1], 0);
+  }
+  if(id == 'DucoPaint')
+  {
+    doorspecifications.finish = "DucoPaint";
+    ratefinish = 0.01082063711911357340720221606648;
+    EnableButtons(document.querySelectorAll(".shop-item-description-options-selection")[1]);
+    SelectButton(document.querySelectorAll(".shop-item-description-options-selection")[1], 1);
+  }
+  if(id == 'PU Paint')
+  {
+    doorspecifications.finish = "PU Paint";
+    ratefinish = 0.00541031855955678670360110803324;
+    EnableButtons(document.querySelectorAll(".shop-item-description-options-selection")[1]);
+    SelectButton(document.querySelectorAll(".shop-item-description-options-selection")[1], 2);
+  }
+  
+  ratemachining = catalogue.rate;
+  var area = doorspecifications.width*doorspecifications.height;
+  var volume = area*doorspecifications.thickness;
+  price = 0;
+  price += ratematerial*volume;
+  price += ratemachining*area;
+  price += ratefinish*area;
+  price = Math.round(price);
+  document.querySelector(".shop-item-price-price").innerHTML = "₹"+price;
+}
+function AddCartDoor()
+{
+  var item = new Item("catalogue_door",price,doorspecifications);
+  cart.Add(item);
+}
+
+var price = 0;
+var ratemachining = 0;
+var ratematerial = 0;
+var ratefinish = 0;
+class DoorSpecifications
+{
+  constructor(width, height, thickness, material, finish)
+  {
+    this.width = width;
+    this.height = height;
+    this.thickness = thickness;
+    this.material = material;
+    this.finish = finish;
+  }
+}
+var doorspecifications = undefined;
+const url = new URLSearchParams(window.location.search);
+var catalogue = undefined;
+if(url.size == 0)
+{
+    window.location.href = "shop.html?category=doors";
+}
+else
+{  
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", "Catalogue.json", false);
+  xhr.onload = function (oEvent)
+  {
+    catalogue = JSON.parse(xhr.responseText);
+    const design = url.get('design');
+    if(design == undefined)
+    {
+        window.location.href = "shop.html?category=doors";
+    }
+    else
+    {
+        catalogue = catalogue.catalogue_door[design];
+        if(catalogue!=undefined)
+        {
+            doorspecifications = new DoorSpecifications(catalogue.width, catalogue.height, catalogue.thickness, "MDF", "RAW");
+            document.querySelector(".shop-item-description-name").innerHTML = catalogue.name;
+            document.querySelector(".shop-item-img-img").src = catalogue.imageurl;
+            document.querySelector(".shop-item-description-size-input-x").value = catalogue.width;
+            document.querySelector(".shop-item-description-size-input-y").value = catalogue.height;
+            document.querySelector(".shop-item-description-size-input-z").value = catalogue.thickness;
+            OnDoorChange('X');
+            OnDoorChange('Y');
+            OnDoorChange('Z');
+            OnDoorChange('MDF');
+            OnDoorChange('RAW');          
+        }
+    }
+  };
+  xhr.send();
+}
+</script>
