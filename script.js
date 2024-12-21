@@ -48,7 +48,7 @@ class Item
         this.packaging = packaging;
         this.description = description;
     }
-}
+};
 class Cart
 {
   constructor()
@@ -112,3 +112,88 @@ if(cart == null)
   cart = new Cart();
 }
 cart.Load();
+
+class User
+{
+  constructor()
+  {
+    this.status = undefined;
+    this.phone = "";
+    this.password = "";
+    this.name = "";
+    this.orders = [];
+  }
+  Authenticate()
+  {
+    const userdata = JSON.parse(localStorage.getItem('user'));
+    if (userdata) 
+      {
+      this.phone = userdata.phone;
+      this.password = userdata.password;
+      this.name = userdata.name;
+      this.email = userdata.email;
+      this.address = userdata.address;
+    }
+ 
+    if(this.phone != undefined && this.password != undefined)
+    {
+      const encodedcredentials = btoa(`${this.phone}:${this.password}`);
+      const url = `http://192.168.1.5/api/authenticate?credentials=${encodedcredentials}`;    
+      fetch(url).then(response => 
+      {
+        if(response.status == 200)
+        {
+          response.body.getReader().read().then(({value}) =>
+          {
+            if(value != undefined)
+            {
+              if(value[0] == 1)
+              {
+                document.querySelectorAll(".TopRibbonText")[4].innerHTML = `<span class="material-symbols-outlined" style="font-size:40px;">account_circle</span>`;
+                let namearray = new Uint8Array(value.slice(4));
+                let namestring = '';
+                for (let i = 0; i < namearray.length; i++) 
+                {
+                  if (namearray[i] === 0) break;
+                  namestring += String.fromCharCode(namearray[i]);
+                }
+                this.name = namestring;
+                this.status = true;
+              }
+              else
+              {
+                document.querySelectorAll(".TopRibbonText")[4].innerHTML = "Login";
+                this.status = false;
+              }
+            }
+          });
+        }
+      });  
+    }
+    document.querySelectorAll(".TopRibbonText")[4].innerHTML = "Login";
+  }
+  LogIn(phone, password)
+  {
+    this.phone = phone;
+    this.password = password;
+    this.status = undefined;
+    localStorage.setItem('user', JSON.stringify(this));
+    this.Authenticate();
+  }
+  LogOut()
+  {
+    document.querySelectorAll(".TopRibbonText")[4].innerHTML = "Login";
+    localStorage.removeItem('user');
+    this.status = false;
+    this.phone = "";
+    this.password = "";
+    this.name = "";
+    this.orders = [];
+  }
+};
+var user;
+if(user == null)
+{
+  user = new User();
+}
+user.Authenticate();

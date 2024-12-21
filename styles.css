@@ -81,7 +81,7 @@ pre
 .TopRibbon
 {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 100px 100px;
 
   position: fixed;
   top: 0px;

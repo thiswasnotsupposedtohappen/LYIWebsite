@@ -909,7 +909,7 @@
   [
     {
       "name": "PartitionDesign-1",
-      "thumbnailurl": "images/Customised Decorative Jali/1.jpg",
+      "thumbnailurl": "images/CustomisedDecorativeJali/1.jpg",
       "manufacturingspecifications":
       {
         "dimensionsx": 2440,
@@ -928,8 +928,8 @@
         "designobjectlength" : 1,
         "designobject": [
           {
-            "dxfurl": "dxf/Partition Jali Objects/1.dxf",
-            "thumbnailurl": "dxf/Partition Jali Objects/1.jpg",
+            "dxfurl": "dxf/PartitionJaliObjects/1.dxf",
+            "thumbnailurl": "dxf/PartitionJaliObjects/1.jpg",
             "offsetx": 0,
             "offsety": 0,
             "angle": 0,
@@ -943,7 +943,7 @@
   [
     {
       "name": "MandirDesign-1",
-      "thumbnailurl": "images/Customised Mandir Centre/1.jpg",
+      "thumbnailurl": "images/CustomisedMandirCentre/1.jpg",
       "manufacturingspecifications":
       {        
         "dimensionsx": 300,
@@ -962,40 +962,40 @@
         "designobjectlength" : 5,
         "designobject": [
           {
-            "dxfurl": "dxf/Mandir Jali Objects/30.dxf",
-            "thumbnailurl": "dxf/Mandir Jali Objects/30.jpg",
+            "dxfurl": "dxf/MandirJaliObjects/30.dxf",
+            "thumbnailurl": "dxf/MandirJaliObjects/30.jpg",
             "offsetx": 0,
             "offsety": 190,
             "angle": 0,
             "scale": 0.5
           },
           {
-            "dxfurl": "dxf/Mandir Jali Objects/32.dxf",
-            "thumbnailurl": "dxf/Mandir Jali Objects/32.jpg",
+            "dxfurl": "dxf/MandirJaliObjects/32.dxf",
+            "thumbnailurl": "dxf/MandirJaliObjects/32.jpg",
             "offsetx": 0,
             "offsety": 190,
             "angle": 0,
             "scale": 0.5
           },
           {
-            "dxfurl": "dxf/Mandir Jali Objects/20.dxf",
-            "thumbnailurl": "dxf/Mandir Jali Objects/20.jpg",
+            "dxfurl": "dxf/MandirJaliObjects/20.dxf",
+            "thumbnailurl": "dxf/MandirJaliObjects/20.jpg",
             "offsetx": -90,
             "offsety": -130,
             "angle": 0,
             "scale": 0.4
           },
           {
-            "dxfurl": "dxf/Mandir Jali Objects/20.dxf",
-            "thumbnailurl": "dxf/Mandir Jali Objects/20.jpg",
+            "dxfurl": "dxf/MandirJaliObjects/20.dxf",
+            "thumbnailurl": "dxf/MandirJaliObjects/20.jpg",
             "offsetx": 90,
             "offsety": -130,
             "angle": 0,
             "scale": 0.4
           },
           {
-            "dxfurl": "dxf/Mandir Jali Objects/23.dxf",
-            "thumbnailurl": "dxf/Mandir Jali Objects/23.jpg",
+            "dxfurl": "dxf/MandirJaliObjects/23.dxf",
+            "thumbnailurl": "dxf/MandirJaliObjects/23.jpg",
             "offsetx": 0,
             "offsety": 30,
             "angle": 0,
@@ -1006,7 +1006,7 @@
     },
     {
       "name": "MandirDesign-2",
-      "thumbnailurl": "images/Customised Mandir Centre/2.jpg",
+      "thumbnailurl": "images/CustomisedMandirCentre/2.jpg",
       "manufacturingspecifications":
       {
         "dimensionsx": 300,
@@ -1025,40 +1025,40 @@
         "designobjectlength" : 5,
         "designobject": [
           {
-            "dxfurl": "dxf/Mandir Jali Objects/9.dxf",
-            "thumbnailurl": "dxf/Mandir Jali Objects/9.jpg",
+            "dxfurl": "dxf/MandirJaliObjects/9.dxf",
+            "thumbnailurl": "dxf/MandirJaliObjects/9.jpg",
             "offsetx": -110,
             "offsety": 150,
             "angle": 0,
             "scale": 0.5
           },
           {
-            "dxfurl": "dxf/Mandir Jali Objects/9.dxf",
-            "thumbnailurl": "dxf/Mandir Jali Objects/9.jpg",
+            "dxfurl": "dxf/MandirJaliObjects/9.dxf",
+            "thumbnailurl": "dxf/MandirJaliObjects/9.jpg",
             "offsetx": 110,
             "offsety": 150,
             "angle": 0,
             "scale": 0.5
           },
           {
-            "dxfurl": "dxf/Mandir Jali Objects/17.dxf",
-            "thumbnailurl": "dxf/Mandir Jali Objects/17.jpg",
+            "dxfurl": "dxf/MandirJaliObjects/17.dxf",
+            "thumbnailurl": "dxf/MandirJaliObjects/17.jpg",
             "offsetx": 110,
             "offsety": -150,
             "angle": 0,
             "scale": 0.7
           },
           {
-            "dxfurl": "dxf/Mandir Jali Objects/17.dxf",
-            "thumbnailurl": "dxf/Mandir Jali Objects/17.jpg",
+            "dxfurl": "dxf/MandirJaliObjects/17.dxf",
+            "thumbnailurl": "dxf/MandirJaliObjects/17.jpg",
             "offsetx": -110,
             "offsety": -150,
             "angle": 0,
             "scale": 0.7
           },
           {
-            "dxfurl": "dxf/Mandir Jali Objects/21.dxf",
-            "thumbnailurl": "dxf/Mandir Jali Objects/21.jpg",
+            "dxfurl": "dxf/MandirJaliObjects/21.dxf",
+            "thumbnailurl": "dxf/MandirJaliObjects/21.jpg",
             "offsetx": 0,
             "offsety": 0,
             "angle": 0,
