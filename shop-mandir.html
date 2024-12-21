@@ -39,13 +39,18 @@
     </div>
 
     <div class="shop-item-price">
-      <span class="shop-item-price-price"></span>
-      <span class="shop-item-price-gst">&nbsp&nbsp(breakup in cart)</span>       
+      <span class="shop-item-price-price"></span>  
     </div>
 
     <div class="shop-item-addtocart">
       <input class="shop-item-addtocart-input" value="x1">
       <button class="shop-item-addtocart-button" onclick="AddCartMandir()">Add to Cart</button>
+    </div>
+
+    <div style="text-align: end;">
+      <span>+(Packaging + Shipping + GST is extra and shown in cart)</span>       
+    </div>
+    <div>
     </div>
 
   </div>
@@ -165,10 +170,7 @@ function AddCartMandir()
     (catalogue.width*catalogue.height*0.0016+
     catalogue.width*catalogue.depth*0.0016+
     catalogue.height*catalogue.depth*0.0016),
-    (catalogue.width*catalogue.height*0.0016+
-    catalogue.width*catalogue.depth*0.0016+
-    catalogue.height*catalogue.depth*0.0016+
-    catalogue.price)*0.18,
+    1000,
     "Mandir");
   cart.Add(item);
 }
@@ -205,7 +207,7 @@ xhr.onload = function (oEvent)
             document.querySelector(".shop-item-description-size-z").innerHTML = catalogue.depth + "mm";
             for(var i=0;i<catalogue.text.length;i++)
             document.querySelector(".shop-item-description-text").innerHTML += "<li>"+catalogue.text[i]+"</li>";
-            document.querySelector(".shop-item-price-price").innerHTML = "Rs."+(catalogue.width*catalogue.height*0.0016+catalogue.width*catalogue.depth*0.0016+catalogue.height*catalogue.depth*0.0016+catalogue.price)*1.18.toFixed(2);
+            document.querySelector(".shop-item-price-price").innerHTML = "Rs. "+ (catalogue.price).toFixed(2);
         }
     }      
 };

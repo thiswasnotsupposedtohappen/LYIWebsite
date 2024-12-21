@@ -28,33 +28,75 @@
   flex-direction: column;">
   </div>
 
+  <div class="shippingswitch" style="
+  display: flex;
+  flex-direction: column; align-items: end;
+  padding-top: 10px;
+  padding-right: 10px;">
+    <button onclick="ShippingSwitch(0)" class="shippingswitch-button unselected">No Pack, Pick from Warehouse</button>
+    <button onclick="ShippingSwitch(1)" class="shippingswitch-button unselected">Package, Pick from Warehouse</button>
+    <button onclick="ShippingSwitch(2)" class="shippingswitch-button unselected">Package & Ship</button>
+  </div>
+
   <div style="
   display: grid;
   grid-template-columns: 1fr 300px;
-  padding-top: 30px;">
-    <div style="display: flex; justify-content: end;   font-size: 50px; padding-right: 20px;">Grand Total</div>
-    <div style="display: flex; justify-content: start; font-size: 50px;">Rs.<span id="grandtotal">0.00</span></div>
+  padding-top: 20px;">
+    <div style="display: flex; justify-content: end;   font-size: 30px; padding-right: 20px; padding-bottom: 5px; align-items: end;">Total&nbsp&nbsp</div>
+    <div style="display: flex; justify-content: start; font-size: 50px;">Rs.&nbsp<span id="carttotal">0.00</span></div>
   </div>
-
 </body>
 
 <style>
+.shippingswitch-button
+{
+  height: 50px;
+  width:400px;
+  font-size: 20px;
+  margin: 5px;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: black;
+}
 </style>
 </html>
 
 <script src="script.js"></script>
 <script>
+var packswitch = 0.0;
+var shipswitch = 0.0;
+ShippingSwitch(2);
+function ShippingSwitch(index)
+{
+  SelectButton(document.querySelector(".shippingswitch"),index);
+  if(index==0)
+  {
+    packswitch = 0.0;
+    shipswitch = 0.0;
+  }
+  if(index==1)
+  {
+    packswitch = 1.0;
+    shipswitch = 0.0;
+  }
+  if(index==2)
+  {
+    packswitch = 1.0;
+    shipswitch = 1.0;
+  }
+  ListCart();
+}
 
-  
 ListCart();
 function ListCart()
 {
   document.getElementById("cart").innerHTML = "";
-  var grandtotal = 0;
+  var carttotal = 0;
   for(var i=0;i<cart.Count();i++)
   {
-    var total = ((cart.items[i].price+cart.items[i].gst+cart.items[i].packaging)*cart.items[i].quantity);
-    grandtotal += total;
+    var total = ((cart.items[i].price+cart.items[i].packaging*packswitch+cart.items[i].shipping*shipswitch)*(1.18)*cart.items[i].quantity);
+    carttotal += total;
     document.getElementById("cart").innerHTML += `
       <div style="
       border-style: solid;
@@ -83,8 +125,8 @@ function ListCart()
         padding-left: 10%;   
         padding-top: 10px;     
         ">
-          <div style="font-size: 40px;">` + cart.items[i].name +`</div>
-          <div style="font-size: 25px;">` + cart.items[i].description +`</div>
+          <div style="font-size: 15mm;">` + cart.items[i].name +`</div>
+          <div style="font-size: 8mm;">` + cart.items[i].description +`</div>
         </div>
 
         <div style="
@@ -119,14 +161,15 @@ function ListCart()
         padding-left: 5%;   
         padding-top: 10px;  
         ">
-          <div style="font-size: 30px;">Rs.` + (cart.items[i].price).toFixed(2) + `<span style="font-size:20px">&nbsp(base price)</span></div>
-          <div style="font-size: 30px;">Rs.` + (cart.items[i].gst).toFixed(2) + `<span style="font-size:20px">&nbsp(gst)</span></div>
-          <div style="font-size: 30px;">Rs.` + (cart.items[i].packaging).toFixed(2) + `<span style="font-size:20px">&nbsp(packaging)</span></div>
-          <div style="font-size: 40px;">Rs.` + (total).toFixed(2) + `<span style="font-size:20px">&nbsp(total)</span></div>
+          <div style="font-size: 5mm;">Rs.` + (cart.items[i].price).toFixed(2) + `<span style="font-size:3mm">&nbsp(base price)</span></div>
+          <div style="font-size: 5mm;">Rs.` + (cart.items[i].packaging*packswitch).toFixed(2) + `<span style="font-size:3mm">&nbsp(packaging)</span></div>
+          <div style="font-size: 5mm;">Rs.` + (cart.items[i].shipping*shipswitch).toFixed(2) + `<span style="font-size:3mm">&nbsp(Shipping)</span></div>
+          <div style="font-size: 5mm;">Rs.` + ((cart.items[i].price + cart.items[i].packaging*packswitch + cart.items[i].shipping*shipswitch)*0.18).toFixed(2) + `<span style="font-size:3mm">&nbsp(gst)</span></div>
+          <div style="font-size: 10mm;">Rs.` + (total).toFixed(2) + `<span style="font-size:3mm">&nbsp(total)</span></div>
         </div>
       </div> 
     `;
   }
-  document.getElementById("grandtotal").innerHTML = grandtotal.toFixed(2);
+  document.getElementById("carttotal").innerHTML = carttotal.toFixed(2);
 }
 </script>

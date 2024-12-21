@@ -36,7 +36,7 @@ function DisableButton(button)
 
 class Item
 {
-    constructor(type, name, thumbnailurl, specifications, quantity ,price ,packaging, gst, description)
+    constructor(type, name, thumbnailurl, specifications, quantity ,price ,packaging ,shipping,description)
     {
         this.type = type;
         this.name = name;
@@ -44,7 +44,7 @@ class Item
         this.specifications = specifications;
         this.quantity = quantity;
         this.price = price;
-        this.gst = gst;
+        this.shipping = shipping;
         this.packaging = packaging;
         this.description = description;
     }

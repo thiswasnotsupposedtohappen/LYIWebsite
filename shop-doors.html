@@ -56,13 +56,18 @@
     </div>
 
     <div class="shop-item-price">
-      <span class="shop-item-price-price"></span>
-      <span class="shop-item-price-gst">&nbsp&nbsp(breakup in cart)</span>       
+      <span class="shop-item-price-price"></span> 
     </div>
 
     <div class="shop-item-addtocart">
       <input class="shop-item-addtocart-input" value="x1">
       <button class="shop-item-addtocart-button" onclick="AddCartDoor()">Add to Cart</button>
+    </div>
+
+    <div style="text-align: end;">
+      <span>+(Packaging + Shipping + GST is extra and shown in cart)</span>       
+    </div>
+    <div>
     </div>
 
   </div>
@@ -287,11 +292,8 @@ function OnDoorChange(id)
   price += ratematerial*volume;
   price += ratemachining*area;
   price += ratefinish*area;
-  document.querySelector(".shop-item-price-price").innerHTML = "Rs."+
-  ((doorspecifications.width*doorspecifications.height*0.0016+
-    doorspecifications.width*doorspecifications.thickness*0.0016+
-    doorspecifications.height*doorspecifications.thickness*0.0016+
-    price)*1.18).toFixed(2);
+  document.querySelector(".shop-item-price-price").innerHTML = "Rs. "+
+  (price).toFixed(2);
 }
 function AddCartDoor()
 {
@@ -305,10 +307,7 @@ function AddCartDoor()
     (doorspecifications.width*doorspecifications.height*0.0016+
     doorspecifications.width*doorspecifications.thickness*0.0016+
     doorspecifications.height*doorspecifications.thickness*0.0016),
-    (doorspecifications.width*doorspecifications.height*0.0016+
-    doorspecifications.width*doorspecifications.thickness*0.0016+
-    doorspecifications.height*doorspecifications.thickness*0.0016+
-    price)*0.18,
+    1500,
     `Width: <span style="color:blue;">`+doorspecifications.width+`mm</span>, `+
     `Height: <span style="color:blue;">`+doorspecifications.height+`mm</span>, `+
     `Thickness: <span style="color:blue;">`+doorspecifications.thickness+`mm</span><br>`+
